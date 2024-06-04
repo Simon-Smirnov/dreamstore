@@ -1,0 +1,37 @@
+{{ header }}
+<div id="common-home">
+    <section class="main_slider">
+        <div class="container">
+            <div class="main_slider-inner">
+                <div class="swiper-wrapper swiper-wrapper_main">
+                    {% for main_banner in main_banners %}
+                        <div class="swiper-slide">
+                            {% if main_banner.link %}
+                                <a href="{{ main_banner.link }}"><img src="{{ main_banner.image }}" alt="{{ main_banner.title }}" class="img-responsive"/></a>
+                            {% else %}
+                                <img src="{{ main_banner.image }}" alt="{{ main_banner.title }}" class="img-responsive"/>
+                            {% endif %}
+                        </div>
+                    {% endfor %}  
+                </div>
+                {# <div class="main_slider-slider_prev swiper-button-prev">
+                    <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_login"></use>
+                                    </svg>
+                </div>
+                <div class="main_slider-slider_next swiper-button-next"></div> #}
+                <div class="main_slider-pagination"></div>
+            </div>
+        </div>
+    </section>
+    <section class="advantages">
+        <div class="container">
+            <div class="advantages-inner">
+                <div class="advantages-item">
+                    <h3></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{{ footer }}

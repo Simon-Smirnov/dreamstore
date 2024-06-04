@@ -1,0 +1,36 @@
+{% if categories %}
+	<nav class="menu-nav">
+		{% for category in categories %}
+			<li class="menu-item dropdown">
+				<a href="{{ category.href }}" class="menu-item_link" data-toggle="dropdown">{{ category.name }}</a>
+				<div class="dropdown-menu">
+					{# <div class="dropdown-inner"> #}
+						{# <div> #}
+							<div class="dropdown-subcategories">
+								{% if category.children %}
+									<h3 class="dropdown-menu-title">Категории</h3>
+									<ul class="dropdown-menu-list">
+										<li class="dropdown-menu-item" href="/">Все комплекты</li>
+										{% for child in category.children %}
+											<li class="dropdown-menu-item">
+												<a href="{{ child.href }}">{{ child.name }}</a>
+											</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+							<div class="dropdown-tissue">
+								<h3>Ткань</h3>
+								
+							</div>
+							<div class="dropdown-design">
+								<h3>Дизайн</h3>
+								
+							</div>
+						{# </div> #}
+					{# </div> #}
+				</div>
+			</li>
+		{% endfor %}
+	</nav>
+{% endif %}

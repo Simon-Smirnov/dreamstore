@@ -1,0 +1,28 @@
+{% if categories %}
+	<nav class="menu-nav">
+		<ul class="menu-list">
+			{% for category in categories %}
+					{% if category.children %}
+						<li class="menu-item dropdown">
+							<a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-inner">
+									{% for child in category.children %}
+										<ul>
+											<li>
+												<a href="{{ child.href }}">{{ child.name }}</a>
+											</li>
+										</ul>
+									{% endfor %}
+								</div>
+							</div>
+						</li>
+					{% else %}
+						<li class="menu-item">
+							<a href="{{ category.href }}">{{ category.name }}</a>
+						</li>
+					{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+{% endif %}
