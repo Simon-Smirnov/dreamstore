@@ -1,0 +1,28 @@
+.choice {
+  padding: 3em 0;
+  &-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+  }
+  &-link {
+    position: relative;
+    &_img {
+      display: block;
+      width: 100%;
+      filter: brightness(0.86);
+    }
+    &_title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--color-9);
+      font-weight: 500;
+      font-size: 2.2rem;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

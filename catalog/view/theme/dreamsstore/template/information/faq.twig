@@ -1,0 +1,41 @@
+{{ header }}
+<div id="information-contact">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="faq">
+        <div class="faq-block">
+            <div class="faq-block_nav">
+                <nav>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="faq-block_list">
+                <h2></h2>
+                <ul>
+                   <li>
+
+                   </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="faq-notanswer">
+                <div class="faq-notanswer_info">
+                    <h2 class="faq-notanswer_info-title">Не нашли ответа?</h2>
+                    <p class="faq-notanswer_info-text">Задайте свой вопрос нам, мы свяжемся с Вами и ответим на все вопросы</p>
+                </div>
+                <div class="faq-notanswer_btn">
+                    <a class="btn btn-primary">Задать вопрос</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

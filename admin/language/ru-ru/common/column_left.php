@@ -21,6 +21,7 @@ $_['text_download']             = 'Файлы';
 $_['text_log']                  = 'Лог ошибок';
 $_['text_event']                = 'События';
 $_['text_extension']            = 'Дополнения';
+$_['text_faq']                  = 'Частые вопросы';
 $_['text_filter']               = 'Фильтры';
 $_['text_geo_zone']             = 'Гео зоны';
 $_['text_information']          = 'Статьи';

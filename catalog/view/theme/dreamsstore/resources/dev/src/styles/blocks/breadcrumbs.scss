@@ -1,0 +1,27 @@
+.breadcrumb {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-6-dark);
+  text-align: center;
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  li {
+    position: relative;
+  }
+  li::after {
+    content: '•';
+    display: block;
+    position: absolute;
+    right: -1.2em;
+    top: 0;
+  }
+  li:last-child::after {
+    display: none;
+  }
+  li:last-child a {
+    cursor: default;
+  }
+}

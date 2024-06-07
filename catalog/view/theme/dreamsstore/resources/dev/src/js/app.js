@@ -13,5 +13,5 @@ import './classes/Hover3D.js'
 import './classes/Inputer.js'
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    console.log('11112222');
 })

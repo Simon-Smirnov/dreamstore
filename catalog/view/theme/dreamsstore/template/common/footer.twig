@@ -1,68 +1,175 @@
 <footer>
 	<div class="container">
-		<div class="row">
-			{% if informations %}
-				<div class="col-sm-3">
-					<div class="title">{{ text_information }}</div>
-					<ul class="list-unstyled">
-						{% for information in informations %}
-							<li>
-								<a href="{{ information.href }}">{{ information.title }}</a>
-							</li>
-						{% endfor %}
+		{#<div class="row">#}
+		{#	{% if informations %}#}
+		{#		<div class="col-sm-3">#}
+		{#			<div class="title">{{ text_information }}</div>#}
+		{#			<ul class="list-unstyled">#}
+		{#				{% for information in informations %}#}
+		{#					<li>#}
+		{#						<a href="{{ information.href }}">{{ information.title }}</a>#}
+		{#					</li>#}
+		{#				{% endfor %}#}
+		{#			</ul>#}
+		{#		</div>#}
+		{#	{% endif %}#}
+		{#	<div class="col-sm-3">#}
+		{#		<div class="title">{{ text_service }}</div>#}
+		{#		<ul class="list-unstyled">#}
+		{#			<li>#}
+		{#				<a href="{{ contact }}">{{ text_contact }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ return }}">{{ text_return }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ sitemap }}">{{ text_sitemap }}</a>#}
+		{#			</li>#}
+		{#		</ul>#}
+		{#	</div>#}
+		{#	<div class="col-sm-3">#}
+		{#		<div class="title">{{ text_extra }}</div>#}
+		{#		<ul class="list-unstyled">#}
+		{#			<li>#}
+		{#				<a href="{{ manufacturer }}">{{ text_manufacturer }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ voucher }}">{{ text_voucher }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ special }}">{{ text_special }}</a>#}
+		{#			</li>#}
+		{#		</ul>#}
+		{#	</div>#}
+		{#	<div class="col-sm-3">#}
+		{#		<div class="title">{{ text_account }}</div>#}
+		{#		<ul class="list-unstyled">#}
+		{#			<li>#}
+		{#				<a href="{{ account }}">{{ text_account }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ order }}">{{ text_order }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ wishlist }}">{{ text_wishlist }}</a>#}
+		{#			</li>#}
+		{#			<li>#}
+		{#				<a href="{{ newsletter }}">{{ text_newsletter }}</a>#}
+		{#			</li>#}
+		{#		</ul>#}
+		{#	</div>#}
+		{#</div>#}
+		{#<hr>#}
+		{#<p>{{ powered }}</p>#}
+		<div class="footer">
+			<div class="footer-grid">
+				<div class="footer-grid_item footer-grid_item-info">
+					<img class="footer-grid_logo" src="{{ assets }}/assets/images/logo_2.webp">
+					<ul class="footer-grid_item-list">
+						<li class="footer-grid_item-list_item">© {{ year }} Dreams Store</li>
+						<li class="footer-grid_item-list_item"><a>Карта сайта</a></li>
+						<li class="footer-grid_item-list_item"><a>Политика конфиденциальности</a></li>
+						<li class="footer-grid_item-list_item vyiatka">Разработка сайта: <a><img class="img-vyiatka" src="{{ assets }}/assets/images/vyiatka_it.webp"></a></li>
 					</ul>
 				</div>
-			{% endif %}
-			<div class="col-sm-3">
-				<div class="title">{{ text_service }}</div>
-				<ul class="list-unstyled">
-					<li>
-						<a href="{{ contact }}">{{ text_contact }}</a>
-					</li>
-					<li>
-						<a href="{{ return }}">{{ text_return }}</a>
-					</li>
-					<li>
-						<a href="{{ sitemap }}">{{ text_sitemap }}</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-sm-3">
-				<div class="title">{{ text_extra }}</div>
-				<ul class="list-unstyled">
-					<li>
-						<a href="{{ manufacturer }}">{{ text_manufacturer }}</a>
-					</li>
-					<li>
-						<a href="{{ voucher }}">{{ text_voucher }}</a>
-					</li>
-					<li>
-						<a href="{{ special }}">{{ text_special }}</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-sm-3">
-				<div class="title">{{ text_account }}</div>
-				<ul class="list-unstyled">
-					<li>
-						<a href="{{ account }}">{{ text_account }}</a>
-					</li>
-					<li>
-						<a href="{{ order }}">{{ text_order }}</a>
-					</li>
-					<li>
-						<a href="{{ wishlist }}">{{ text_wishlist }}</a>
-					</li>
-					<li>
-						<a href="{{ newsletter }}">{{ text_newsletter }}</a>
-					</li>
-				</ul>
+				<div class="footer-grid_item">
+					<h4 class="footer-grid_item-title">Покупателям</h4>
+					<ul class="footer-grid_item-list">
+						<li class="footer-grid_item-list_item"><a>Оплата и доставка</a></li>
+						<li class="footer-grid_item-list_item"><a>Гарантия и возврат</a></li>
+						<li class="footer-grid_item-list_item"><a>Как выбрать ткань</a></li>
+						<li class="footer-grid_item-list_item"><a>Частые вопросы</a></li>
+						<li class="footer-grid_item-list_item"><a>Советы по уходу</a></li>
+						<li class="footer-grid_item-list_item"><a>Отзывы</a></li>
+						<li class="footer-grid_item-list_item"><a>Блог</a></li>
+					</ul>
+				</div>
+				<div class="footer-grid_item">
+					<h4 class="footer-grid_item-title">Каталог</h4>
+					<ul class="footer-grid_item-list">
+						<li class="footer-grid_item-list_item"><a>Постельное белье</a></li>
+						<li class="footer-grid_item-list_item"><a>Подушки</a></li>
+						<li class="footer-grid_item-list_item"><a>Одеяла</a></li>
+						<li class="footer-grid_item-list_item"><a>Шторы</a></li>
+						<li class="footer-grid_item-list_item"><a>Покрывала</a></li>
+						<li class="footer-grid_item-list_item"><a>Полотенца</a></li>
+						<li class="footer-grid_item-list_item"><a>Одежда для дома</a></li>
+					</ul>
+				</div>
+				<div class="footer-grid_item">
+					<h4 class="footer-grid_item-title">Сервисы</h4>
+					<ul class="footer-grid_item-list">
+						<li class="footer-grid_item-list_item"><a>Ателье</a></li>
+						<li class="footer-grid_item-list_item"><a>Индивидуальная вышивка</a></li>
+						<li class="footer-grid_item-list_item"><a>Выезд дизайнера на дом</a></li>
+						<li class="footer-grid_item-list_item"><a>Подарочный сертификат</a></li>
+						<li class="footer-grid_item-list_item"><a>Заказать образцы ткани</a></li>
+						<li class="footer-grid_item-list_item"><a>Программа лояльности</a></li>
+					</ul>
+				</div>
+				<div class="footer-grid_item">
+					<h4 class="footer-grid_item-title">Компания</h4>
+					<ul class="footer-grid_item-list">
+						<li class="footer-grid_item-list_item">О нас</li>
+						<li class="footer-grid_item-list_item">Вакансии</li>
+						<li class="footer-grid_item-list_item">Сотрудничество</li>
+						<li class="footer-grid_item-list_item"><a href="tel:+79956686050">+7 995 668 60 50</a></li>
+						<li class="footer-grid_item-list_item"><a href="mailto:dreamsstore@mail.ru">dreamsstore@mail.ru</a></li>
+						<li class="footer-grid_item-list_item footer-grid_item-list_item-social">
+							<ul>
+								<li>
+									<a>
+										<svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+											<use xlink:href="/sprite.svg#icon_vk"></use>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="/sprite.svg#icon_telegram"></use>
+									</svg>
+								</li>
+								<li>
+									<svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="/sprite.svg#icon_whatsapp"></use>
+									</svg>
+								</li>
+								<li>
+									<svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="/sprite.svg#icon_viber"></use>
+									</svg>
+								</li>
+								<li>
+									<svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="/sprite.svg#icon_instagram"></use>
+									</svg>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-grid_item">
+					<h4 class="footer-grid_item-title">Не упустите акции!</h4>
+					<form class="footer-grid_item-form">
+						<input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+						<button class="btn btn-primary">Подписаться</button>
+						<label class="agree">
+							<input class="input-checkbox" name="agree" type="checkbox">
+							<span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+						</label>
+					</form>
+				</div>
 			</div>
 		</div>
-		<hr>
-		<p>{{ powered }}</p>
 	</div>
 </footer>
+<a class="scroll-to-top">
+	{#<div class="scroll-to-top_inner">#}
+		<svg class="scroll-to-top_svg" xmlns="http://www.w3.org/2000/svg">
+			<use xlink:href="/sprite.svg#icon_arrow_top"></use>
+		</svg>
+	{#</div>#}
+</a>
 <script src="/catalog/view/javascript/swiper-master/swiper-bundle.min.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/script.js" type="module"></script>
 
