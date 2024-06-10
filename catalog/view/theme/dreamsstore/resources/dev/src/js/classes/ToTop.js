@@ -2,7 +2,7 @@ import Helper from './Helper.js'
 
 class ToTop {
     constructor() {
-        this.button = document.querySelector('.to-top')
+        this.button = document.querySelector('.scroll-to-top')
 
         if (this.button) {
             this.button.addEventListener('click', this.toTop)

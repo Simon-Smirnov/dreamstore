@@ -84,14 +84,14 @@ class ControllerCatalogFaq extends Controller
 
     public function edit()
     {
-        $this->load->language('catalog/information');
+        $this->load->language('catalog/faq');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/information');
+        $this->load->model('catalog/faq');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_information->editInformation($this->request->get['information_id'], $this->request->post);
+            $this->model_catalog_faq->editFaq($this->request->get['faq_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -109,7 +109,7 @@ class ControllerCatalogFaq extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getForm();
@@ -150,15 +150,15 @@ class ControllerCatalogFaq extends Controller
 
     public function delete()
     {
-        $this->load->language('catalog/information');
+        $this->load->language('catalog/faq');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/information');
+        $this->load->model('catalog/faq');
 
-        if (isset($this->request->post['selected']) && $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $information_id) {
-                $this->model_catalog_information->deleteInformation($information_id);
+        if (isset($this->request->post['selected'])) {
+            foreach ($this->request->post['selected'] as $faq_id) {
+                $this->model_catalog_faq->deleteFaq($faq_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -177,7 +177,7 @@ class ControllerCatalogFaq extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getList();
@@ -223,7 +223,7 @@ class ControllerCatalogFaq extends Controller
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
-            $sort = 'id.title';
+            $sort = 'name';
         }
 
         if (isset($this->request->get['order'])) {
@@ -285,7 +285,8 @@ class ControllerCatalogFaq extends Controller
                 'faq_id' => $result['faq_id'],
                 'name' => $result['name'],
                 'sort_order' => $result['sort_order'],
-                'edit' => $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $result['faq_id'] . $url, true)
+                'change' => $this->url->link('catalog/faq/edit', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $result['faq_id'], true),
+                'edit' => $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $result['faq_id'], true)
             );
         }
 
@@ -321,7 +322,7 @@ class ControllerCatalogFaq extends Controller
             $url .= '&page=' . $this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
+        $data['sort_name'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
         $data['sort_sort_order'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
 
         $url = '';
@@ -335,14 +336,14 @@ class ControllerCatalogFaq extends Controller
         }
 
         $pagination = new Pagination();
-        $pagination->total = $information_total;
+        $pagination->total = $faq_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
-        $data['results'] = sprintf($this->language->get('text_pagination'), ($information_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($information_total - $this->config->get('config_limit_admin'))) ? $information_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $information_total, ceil($information_total / $this->config->get('config_limit_admin')));
+        $data['results'] = sprintf($this->language->get('text_pagination'), ($faq_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($faq_total - $this->config->get('config_limit_admin'))) ? $faq_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $faq_total, ceil($faq_total / $this->config->get('config_limit_admin')));
 
         $data['sort'] = $sort;
         $data['order'] = $order;
@@ -407,7 +408,7 @@ class ControllerCatalogFaq extends Controller
             'href' => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 
-        $data['add'] = $this->url->link('catalog/faq/addanswer', 'user_token=' . $this->session->data['user_token'] . $url, true);
+        $data['add'] = $this->url->link('catalog/faq/addanswer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $parent_id . $url, true);
         $data['delete'] = $this->url->link('catalog/faq/deleteanswer', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
         $data['faqs'] = array();
@@ -423,7 +424,7 @@ class ControllerCatalogFaq extends Controller
 
         $faq_answer_total = $this->model_catalog_faq->getTotalFaqAnswers($parent_id);
 
-        $results = $this->model_catalog_faq->getFaqAnswers($filter_data);
+        $results = $this->model_catalog_faq->getFaqAnswers($parent_id, $filter_data);
 
         foreach ($results as $result) {
             $data['faq_answers'][] = array(
@@ -467,8 +468,8 @@ class ControllerCatalogFaq extends Controller
             $url .= '&page=' . $this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
-        $data['sort_sort_order'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
+        $data['sort_title'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=title' . $url, true);
+        $data['sort_sort_order'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
 
         $url = '';
 
@@ -502,7 +503,6 @@ class ControllerCatalogFaq extends Controller
 
     protected function getForm()
     {
-        $data['text_form'] = !isset($this->request->get['information_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
@@ -510,28 +510,10 @@ class ControllerCatalogFaq extends Controller
             $data['error_warning'] = '';
         }
 
-        if (isset($this->error['title'])) {
-            $data['error_title'] = $this->error['title'];
+        if (isset($this->error['name'])) {
+            $data['error_name'] = $this->error['name'];
         } else {
-            $data['error_title'] = array();
-        }
-
-        if (isset($this->error['description'])) {
-            $data['error_description'] = $this->error['description'];
-        } else {
-            $data['error_description'] = array();
-        }
-
-        if (isset($this->error['meta_title'])) {
-            $data['error_meta_title'] = $this->error['meta_title'];
-        } else {
-            $data['error_meta_title'] = array();
-        }
-
-        if (isset($this->error['keyword'])) {
-            $data['error_keyword'] = $this->error['keyword'];
-        } else {
-            $data['error_keyword'] = '';
+            $data['error_name'] = array();
         }
 
         $url = '';
@@ -560,115 +542,49 @@ class ControllerCatalogFaq extends Controller
             'href' => $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 
-        if (!isset($this->request->get['information_id'])) {
-            $data['action'] = $this->url->link('catalog/information/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
+        if (!isset($this->request->get['faq_id'])) {
+            $data['action'] = $this->url->link('catalog/faq/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
         } else {
-            $data['action'] = $this->url->link('catalog/information/edit', 'user_token=' . $this->session->data['user_token'] . '&information_id=' . $this->request->get['information_id'] . $url, true);
+            $data['action'] = $this->url->link('catalog/faq/edit', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $this->request->get['faq_id'] . $url, true);
         }
 
-        $data['cancel'] = $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url, true);
+        $data['cancel'] = $this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
-        if (isset($this->request->get['information_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-            $information_info = $this->model_catalog_information->getInformation($this->request->get['information_id']);
+        if (isset($this->request->get['faq_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+            $faq_info = $this->model_catalog_faq->getFaq($this->request->get['faq_id']);
         }
 
         $data['user_token'] = $this->session->data['user_token'];
 
-        $this->load->model('localisation/language');
-
-        $data['languages'] = $this->model_localisation_language->getLanguages();
-
-        if (isset($this->request->post['information_description'])) {
-            $data['information_description'] = $this->request->post['information_description'];
-        } elseif (isset($this->request->get['information_id'])) {
-            $data['information_description'] = $this->model_catalog_information->getInformationDescriptions($this->request->get['information_id']);
+        if (isset($this->request->post['name'])) {
+            $data['name'] = $this->request->post['name'];
+        } elseif (!empty($faq_info)) {
+            $data['name'] = $faq_info['name'];
         } else {
-            $data['information_description'] = array();
-        }
-
-        $this->load->model('setting/store');
-
-        $data['stores'] = array();
-
-        $data['stores'][] = array(
-            'store_id' => 0,
-            'name' => $this->language->get('text_default')
-        );
-
-        $stores = $this->model_setting_store->getStores();
-
-        foreach ($stores as $store) {
-            $data['stores'][] = array(
-                'store_id' => $store['store_id'],
-                'name' => $store['name']
-            );
-        }
-
-        if (isset($this->request->post['information_store'])) {
-            $data['information_store'] = $this->request->post['information_store'];
-        } elseif (isset($this->request->get['information_id'])) {
-            $data['information_store'] = $this->model_catalog_information->getInformationStores($this->request->get['information_id']);
-        } else {
-            $data['information_store'] = array(0);
-        }
-
-        if (isset($this->request->post['bottom'])) {
-            $data['bottom'] = $this->request->post['bottom'];
-        } elseif (!empty($information_info)) {
-            $data['bottom'] = $information_info['bottom'];
-        } else {
-            $data['bottom'] = 0;
+            $data['name'] = '';
         }
 
         if (isset($this->request->post['status'])) {
             $data['status'] = $this->request->post['status'];
-        } elseif (!empty($information_info)) {
-            $data['status'] = $information_info['status'];
+        } elseif (!empty($faq_info)) {
+            $data['status'] = $faq_info['status'];
         } else {
             $data['status'] = true;
         }
 
         if (isset($this->request->post['sort_order'])) {
             $data['sort_order'] = $this->request->post['sort_order'];
-        } elseif (!empty($information_info)) {
-            $data['sort_order'] = $information_info['sort_order'];
+        } elseif (!empty($faq_info)) {
+            $data['sort_order'] = $faq_info['sort_order'];
         } else {
             $data['sort_order'] = '';
         }
-
-        if (isset($this->request->post['no_index'])) {
-            $data['no_index'] = $this->request->post['no_index'];
-        } elseif (isset($information_info['no_index'])) {
-            $data['no_index'] = $information_info['no_index'];
-        } else {
-            $data['no_index'] = 0;
-        }
-
-        if (isset($this->request->post['information_seo_url'])) {
-            $data['information_seo_url'] = $this->request->post['information_seo_url'];
-        } elseif (isset($this->request->get['information_id'])) {
-            $data['information_seo_url'] = $this->model_catalog_information->getInformationSeoUrls($this->request->get['information_id']);
-        } else {
-            $data['information_seo_url'] = array();
-        }
-
-        if (isset($this->request->post['information_layout'])) {
-            $data['information_layout'] = $this->request->post['information_layout'];
-        } elseif (isset($this->request->get['information_id'])) {
-            $data['information_layout'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
-        } else {
-            $data['information_layout'] = array();
-        }
-
-        $this->load->model('design/layout');
-
-        $data['layouts'] = $this->model_design_layout->getLayouts();
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('catalog/information_form', $data));
+        $this->response->setOutput($this->load->view('catalog/faq_form', $data));
     }
 
     protected function getFormAnswer()
@@ -705,6 +621,11 @@ class ControllerCatalogFaq extends Controller
 
         if (isset($this->request->get['page'])) {
             $url .= '&page=' . $this->request->get['page'];
+        }
+
+        $data['faq_id'] = '0';
+        if (isset($this->request->get['faq_id'])) {
+            $data['faq_id'] = $this->request->get['faq_id'];
         }
 
         $data['breadcrumbs'] = array();

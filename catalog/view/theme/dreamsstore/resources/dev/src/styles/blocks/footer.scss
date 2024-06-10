@@ -3,15 +3,18 @@ footer {
   padding-top: 3em;
   padding-bottom: 3em;
 }
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 0.5em;
+
   &_logo {
     width: 12em;
     margin-top: 0.6em;
     margin-bottom: 1.7em;
   }
+
   &_item {
     &-title {
       color: var(--color-4-dark);
@@ -19,15 +22,18 @@ footer {
       font-size: 1.2rem;
       margin-bottom: 1em;
     }
+
     &-list {
       &_item {
         color: var(--color-5-dark);
         font-size: 0.9rem;
       }
+
       &_item + &_item {
         margin-top: 0.8em;
       }
     }
+
     &-form {
       button {
         width: 100%;
@@ -35,13 +41,16 @@ footer {
         padding-bottom: 0.7em;
         margin-top: 0.7em;
       }
+
       .agree {
         display: block;
         margin-top: 0.5em;
+
         span {
           font-size: 0.75rem;
           color: var(--color-6-dark);
           font-weight: 400;
+
           a {
             text-decoration: underline;
           }
@@ -50,17 +59,21 @@ footer {
     }
   }
 }
+
 .footer-grid_item-info .footer-grid_item-list_item + .footer-grid_item-list_item {
   margin-top: 1.3em;
 }
+
 .footer-grid_item-list_item.vyiatka {
   display: flex;
-  gap:1em;
+  gap: 1em;
+
   .img-vyiatka {
     position: relative;
     top: -0.4em;
   }
 }
+
 .footer-grid_item-list_item-social {
   ul {
     display: flex;
@@ -68,11 +81,13 @@ footer {
     gap: 0.8em;
   }
 }
+
 .icon-svg-footer {
   width: 1.4em;
   height: 1.4em;
   fill: var(--color-4-dark)
 }
+
 .scroll-to-top {
   width: 3.6em;
   height: 3.6em;
@@ -81,12 +96,45 @@ footer {
   bottom: 9em;
   background-color: var(--color-6-dark);
   border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.scroll-to-top.active {
+  display: flex;
+}
+
+.scroll-to-top_svg {
+  fill: var(--color-9);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-svg-footer {
+  width: 1.4em;
+  height: 1.4em;
+  fill: var(--color-4-dark)
+}
+
+.footer-buttons_message {
+  width: 3.6em;
+  height: 3.6em;
+  position: fixed;
+  right: 3em;
+  bottom: 4.5em;
+  background-color: var(--color-6-dark);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
-.scroll-to-top_svg {
-  fill: var(--color-9);
+
+.footer-buttons_message_svg {
+  fill: none;
+  stroke: var(--color-9);
   width: 1.5rem;
   height: 1.5rem;
 }

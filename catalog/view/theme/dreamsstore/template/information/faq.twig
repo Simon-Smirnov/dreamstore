@@ -8,28 +8,69 @@
         </ul>
     </div>
     <div class="faq">
-        <div class="faq-block">
-            <div class="faq-block_nav">
-                <nav>
-                    <ul>
-                        <li></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="faq-block_list">
-                <h2></h2>
-                <ul>
-                   <li>
-
-                   </li>
-                </ul>
+        <div class="container">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="faq-block">
+                <div class="faq-block_nav">
+                    <nav>
+                        <ul class="faq-block_nav-list">
+                            {% for faq in faqs %}
+                                <li class="faq-block_nav-list_item {% if faq.id == '0' %}active{% endif %}">
+                                    <a class="faq-block_nav-list_item-link">{{ faq.name }}</a>
+                                    <div class="faq-content">
+                                        <h2 class="faq-content_title"
+                                        >{{ faq.name }}</h2>
+                                        <ul class="faq-content_list">
+                                            {% for child in faq.children %}
+                                                <li class="faq-content_list-item">
+                                                    <h4 class="faq-content_list-item_title">
+                                                        <span>{{ child.title }}</span>
+                                                        <span class="faq-content_list-item_title-svg">
+                                                            <svg class="faq-svg"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </h4>
+                                                    <p class="faq-content_list-item_answer">{{ child.answer }}</p>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="faq-block_list">
+                    <div class="faq-content open">
+                        <h2 class="faq-content_title">{{ faqs.0.name }}</h2>
+                        <ul class="faq-content_list">
+                            {% for child in faqs.0.children %}
+                                <li class="faq-content_list-item">
+                                    <h4 class="faq-content_list-item_title">
+                                        <span>{{ child.title }}</span>
+                                        <span class="faq-content_list-item_title-svg">
+                                            <svg class="faq-svg"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
+                                        </span>
+                                    </h4>
+                                    <p class="faq-content_list-item_answer">{{ child.answer }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
             <div class="faq-notanswer">
                 <div class="faq-notanswer_info">
                     <h2 class="faq-notanswer_info-title">Не нашли ответа?</h2>
-                    <p class="faq-notanswer_info-text">Задайте свой вопрос нам, мы свяжемся с Вами и ответим на все вопросы</p>
+                    <p class="faq-notanswer_info-text">Задайте свой вопрос нам, мы свяжемся с Вами и ответим на все
+                        вопросы</p>
                 </div>
                 <div class="faq-notanswer_btn">
                     <a class="btn btn-primary">Задать вопрос</a>

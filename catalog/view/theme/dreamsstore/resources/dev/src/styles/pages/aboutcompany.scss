@@ -1,0 +1,16 @@
+.information-aboutcompany .section-title {
+  text-align: center;
+}
+
+.advatagesToBuy {
+  padding: 4em 0;
+  background-image: url("./../assets/images/advantages/bg-advantages.webp");
+
+  &_inner-grid {
+    margin-top: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5em;
+  }
+}
+

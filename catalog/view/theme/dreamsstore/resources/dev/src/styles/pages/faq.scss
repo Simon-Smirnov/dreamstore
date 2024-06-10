@@ -1,5 +1,102 @@
 .faq {
   padding-bottom: 3em;
+
+  &-block {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 3em;
+    align-items: start;
+    margin-top: 3em;
+
+    &_nav {
+      background-color: var(--white);
+      box-shadow: 0px 0px 24px 0px #00000005;
+      border-radius: 0.3em;
+      padding: 2.1em;
+
+      &-list_item + &-list_item {
+        margin-top: 1em;
+      }
+
+      &-list_item {
+        font-size: 1.2rem;
+        color: var(--color-6-dark);
+        font-weight: 500;
+
+        &-link {
+          cursor: pointer;
+          width: fit-content;
+        }
+      }
+
+      &-list_item:hover {
+        color: var(--color-4-dark);
+      }
+
+      &-list_item.active {
+        color: var(--color-4-dark);
+      }
+    }
+  }
+
+  &-content {
+    display: none;
+
+    &_title {
+      font-size: 2em;
+      font-weight: 500;
+      color: var(--color-4-dark);
+      margin-bottom: 1em;
+    }
+
+    &_list {
+      border-bottom: 1px solid var(--libe);
+
+      &-item {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        border-top: 1px solid var(--libe);
+        cursor: pointer;
+
+        &_title {
+          font-weight: 600;
+          font-size: 1.1rem;
+          color: var(--color-4-dark);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &-svg {
+            position: relative;
+            top: 2px;
+            transform: rotate(90deg);
+          }
+
+          &-svg.open {
+            transform: rotate(-90deg);
+          }
+        }
+
+        &_answer {
+          margin-top: 1em;
+          font-weight: 500;
+          font-size: 1.1rem;
+          color: var(--color-4-dark);
+          line-height: 1.4;
+          display: none;
+        }
+
+        &_answer.open {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &-content.open {
+    display: block;
+  }
+
   &-notanswer {
     margin-top: 3em;
     display: -ms-grid;
@@ -13,12 +110,14 @@
     padding: 1em 3em;
     border-radius: 1em;
     margin-bottom: 3em;
+
     &_info {
       &-title {
         font-size: 2em;
         font-weight: 500;
         color: var(--color-4-dark);
       }
+
       &-text {
         font-size: 1.2em;
         font-weight: 500;
@@ -27,6 +126,7 @@
         margin-top: 0.6em;
       }
     }
+
     &_btn {
       a {
         margin-left: auto;
@@ -36,5 +136,12 @@
         width: fit-content;
       }
     }
+  }
+
+  &-svg {
+    fill: none;
+    stroke: var(--color-5-dark);
+    width: 1em;
+    height: 1em;
   }
 }
