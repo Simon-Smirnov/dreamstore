@@ -7994,3 +7994,216 @@
 2024-06-10 14:20:50 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
 2024-06-10 14:20:50 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
 2024-06-10 14:20:50 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:10:41 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:10:41 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:10:41 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:10:41 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:10:41 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:10:41 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:10:41 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:12:33 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:12:33 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:12:33 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:12:33 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:12:33 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:12:33 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:12:33 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:12:45 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:12:45 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:12:45 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:12:45 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:12:45 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:12:45 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:12:45 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:33 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 6:13:34 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b3\b31778ddbf66511bf2ca14fc2702c0ce60c23a262d2345745974a8081b94d01c.php on line 41
+2024-06-11 6:13:34 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b9\b9770e09a601082bc0ebd8da39c70069e4f2f88aa64064910a8b9247fef7a47e.php on line 41
+2024-06-11 6:14:04 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:14:04 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:14:04 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:14:04 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:14:04 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:14:04 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:14:04 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:15:22 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:15:22 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:15:22 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:15:22 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:15:22 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:15:22 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:15:22 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:18:11 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:18:11 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:18:11 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:18:11 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:18:11 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:18:11 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:18:11 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:20:59 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:20:59 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:20:59 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:20:59 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:20:59 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:20:59 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:20:59 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:21:11 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:21:11 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:21:11 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:21:11 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:21:11 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:21:11 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:21:11 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:22:46 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:22:46 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:22:46 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:22:46 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:22:46 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:22:46 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:22:46 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:22:54 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:22:54 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:22:54 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:22:54 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:22:54 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:22:54 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:22:54 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:23:23 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:23:23 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:23:23 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:23:23 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:23:23 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:23:23 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:23:23 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:24:23 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:24:23 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:24:23 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:24:23 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:24:23 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:24:23 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:24:23 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:25:09 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:25:09 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:25:09 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:25:09 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:25:09 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:25:09 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:25:09 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:25:19 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:25:19 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:25:19 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:25:19 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:25:19 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:25:19 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:25:19 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:25:51 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 23
+2024-06-11 6:25:51 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 27
+2024-06-11 6:25:51 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:25:51 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 31
+2024-06-11 6:25:51 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:25:51 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 38
+2024-06-11 6:25:51 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 41
+2024-06-11 6:28:00 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:28:00 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:28:00 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 33
+2024-06-11 6:28:00 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 36
+2024-06-11 6:28:00 - PHP Notice:  Undefined variable: information_id in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 37
+2024-06-11 6:28:00 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 43
+2024-06-11 6:28:00 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 46
+2024-06-11 6:28:24 - PHP Notice:  Undefined variable: information_info in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 28
+2024-06-11 6:28:24 - PHP Notice:  Undefined index: meta_description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 32
+2024-06-11 6:28:24 - PHP Notice:  Undefined index: meta_keyword in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 33
+2024-06-11 6:28:24 - PHP Notice:  Undefined index: title in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 39
+2024-06-11 6:28:24 - PHP Notice:  Undefined index: description in C:\OpenServer\domains\dreamsstore\catalog\controller\information\aboutcompany.php on line 42
+2024-06-11 6:57:17 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b9\b9770e09a601082bc0ebd8da39c70069e4f2f88aa64064910a8b9247fef7a47e.php on line 41
+2024-06-11 7:34:52 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 7:39:35 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 7:41:21 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 7:41:22 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 7:41:52 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 7:42:02 - PHP Warning:  Invalid argument supplied for foreach() in C:\OpenServer\domains\dreamsstore\system\storage\modification\system\engine\loader.php on line 83
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 11:24:49 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b3\b31778ddbf66511bf2ca14fc2702c0ce60c23a262d2345745974a8081b94d01c.php on line 41
+2024-06-11 11:24:49 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b9\b9770e09a601082bc0ebd8da39c70069e4f2f88aa64064910a8b9247fef7a47e.php on line 41
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:50:41 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:51:43 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 12:55:21 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\98\9819eeffc0c786ef86b8d68d8743bd317a276940e7b399c41fc81c689bd42ac5.php on line 144
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:33:08 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b3\b31778ddbf66511bf2ca14fc2702c0ce60c23a262d2345745974a8081b94d01c.php on line 41
+2024-06-11 13:33:08 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b9\b9770e09a601082bc0ebd8da39c70069e4f2f88aa64064910a8b9247fef7a47e.php on line 41
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Undefined variable: setting in C:\OpenServer\domains\dreamsstore\catalog\controller\common\home.php on line 27
+2024-06-11 13:43:31 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b3\b31778ddbf66511bf2ca14fc2702c0ce60c23a262d2345745974a8081b94d01c.php on line 41
+2024-06-11 13:43:31 - PHP Notice:  Array to string conversion in C:\OpenServer\domains\dreamsstore\system\storage\cache\template\b9\b9770e09a601082bc0ebd8da39c70069e4f2f88aa64064910a8b9247fef7a47e.php on line 41

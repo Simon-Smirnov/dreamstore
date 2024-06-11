@@ -25,14 +25,13 @@
                             нам двигаться дальше и становиться лучше. Мы не просто предлагаем качественный и красивый
                             домашний текстиль, но и хотим быть уверены, что вы получаете высокий уровень сервиса,
                             наслаждаетесь каждой мелочью и всегда делитесь мнением, которое мы слышим и ценим.</p>
-                        <a class="about_company-inner_block-btn btn btn-primary">Подробнее о компании</a>
                     </div>
                     <div class="about_company-inner_images">
                         <div class="about_company-inner_images-one">
-                            <img src="/catalog/view/theme/dreamsstore/resources/dev/assets/images/aboutcompany/aboutcompany_1.webp">
+                            <img src="/catalog/view/theme/dreamsstore/resources/dev/assets/images/aboutcompany/aboutcompany_4.webp">
                         </div>
                         <div class="about_company-inner_images-two">
-                            <img src="/catalog/view/theme/dreamsstore/resources/dev/assets/images/aboutcompany/aboutcompany_2.webp">
+                            <img src="/catalog/view/theme/dreamsstore/resources/dev/assets/images/aboutcompany/aboutcompany_3.webp">
                         </div>
                     </div>
                 </div>
@@ -104,6 +103,47 @@
                                 порадовать красивым и качественным бельем не только себя, но и своих родных и близких.
                                 Комплект белья будет упакован в фирменную подарочную коробку.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if categories %}
+            <section class="catalog">
+                <div class="container">
+                    <div class="catalog-inner">
+                        <h2 class="section-title">Наш ассортимент</h2>
+                        <nav>
+                            <ul class="catalog-inner_grid">
+                                {% for category in categories %}
+                                    <li class="catalog-inner_item">
+                                        <a class="catalog-inner_link" href="{{ category.href }}">
+                                            <picture>
+                                                <source srcset="{{ category.image.webp }}">
+                                                <img class="catalog-inner_link-img" src="{{ category.image.default }}"
+                                                     loading="lazy">
+                                            </picture>
+                                            <h4 class="catalog-inner_link-title">{{ category.name }}</h4>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <section class="fabric-samples">
+            <div class="container">
+                <div class="fabric-samples-inner">
+                    <div class="fabric-samples-inner_block">
+                        <h2 class="fabric-samples-inner_block-title">Образцы ткани бесплатно</h2>
+                        <p class="fabric-samples-inner_block-text">Чтобы быть уверенным в том, что цветовая гамма
+                            постельного белья будет идеально подходить под ваш интерьер, мы рады предложить вам оформить
+                            заказ на образцы используемых тканей со всей выборкой расцветок бесплатно в любую точку
+                            России</p>
+                    </div>
+                    <div class="fabric-samples-inner_btn">
+                        <a class="btn btn-primary">Оставить заявку</a>
                     </div>
                 </div>
             </div>

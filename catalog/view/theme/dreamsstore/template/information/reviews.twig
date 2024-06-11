@@ -1,0 +1,152 @@
+{{ header }}
+<div id="information-reviews">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="reviews">
+        <div class="container">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="reviews_inner" data-tabs-parent>
+                <div class="reviews_inner-tabs">
+                    <ul class="reviews_inner-tabs_list">
+                        <li class="reviews_inner-tabs_item grow right"><a class="reviews_inner-tabs_item-link active"
+                                                                          data-content="site" data-tab-target="tab-1">С
+                                сайта</a></li>
+                        <li class="reviews_inner-tabs_item middle" data-content="yandex"><a
+                                    class="reviews_inner-tabs_item-link" data-content="yandex" data-tab-target="tab-2">С
+                                яндекса</a></li>
+                        <li class="reviews_inner-tabs_item grow left" data-content="social"><a
+                                    class="reviews_inner-tabs_item-link" data-content="social" data-tab-target="tab-3">Из
+                                соцсетей</a></li>
+                    </ul>
+                </div>
+                <div class="reviews_inner-content">
+                    <ul>
+                        <li class="reviews_inner-content_item open" data-content="site" data-tab="tab-1">
+                            <div class="reviews_site">
+                                <ul class="reviews_site-list">
+                                    {% for review in reviews %}
+                                        <li class="reviews_site-list_item">
+                                            <div class="reviews_site-list_item-title">
+                                                <div class="reviews_site-list_item-title_initial">{{ review.initial }}</div>
+                                                <div class="reviews_site-list_item-title_block">
+                                                    <h4 class="reviews_site-list_item-title_block-name">{{ review.name }}</h4>
+                                                    <ul class="reviews_site-list_item-title_block-grade">
+                                                        {% for grade in review.grades %}
+                                                            <li>
+                                                                <svg class="icon-svg-star {{ grade }}"
+                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                                                </svg>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                <div class="reviews_site-list_item-title_date">
+                                                    {{ review.date }}
+                                                </div>
+                                            </div>
+                                            <div class="reviews_site-list_item-text">{{ review.text }}</div>
+                                            <div class="reviews_site-list_item-images">
+                                                {% for image in review.images %}
+                                                    <picture>
+                                                        <source srcset="{{ image.webp }}">
+                                                        <img class="catalog-inner_link-img"
+                                                             src="{{ image.default }}" loading="lazy">
+                                                    </picture>
+                                                {% endfor %}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="reviews_site-block">
+                                    <div class="reviews_site-block_grade">
+                                        <div class="reviews_site-block_grade-average">
+                                            <h4>{{ annual_grade }}</h4>
+                                            <p>На основании<br>{{ count_reviews }} отзывов</p>
+                                        </div>
+                                        <ul class="reviews_site-block_grade-lines">
+                                            {% for key, general_grade in general_grades %}
+                                                <li class="reviews_site-block_grade-lines_item">
+                                                    <div class="reviews_site-block_grade-lines_number">{{ key }}</div>
+                                                    <div class="reviews_site-block_grade-lines_line {{ count }}">
+                                                        <div class="reviews_site-block_grade-lines_line-empty">
+                                                            <div class="reviews_site-block_grade-lines_line-full"
+                                                                 style="width: {{ general_grade.percent }}%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="reviews_site-block_grade-lines_percent">{{ general_grade.percent }}
+                                                        %
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="reviews_site-block_btn">
+                                        <a class="btn btn-primary" data-modal="review">Оставить отзыв</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="reviews_inner-content_item" data-content="yandex" data-tab="tab-2"></li>
+                        <li class="reviews_inner-content_item" data-content="social" data-tab="tab-3"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" data-modal-type="review" hidden>
+        <div class="modal__content">
+            <div class="modal__box">
+                <button class="modal__close modal__close--fixed"></button>
+                <span class="modal__title">Оставить отзыв</span>
+                <form class="review_form">
+                    <input name="name" type="text" placeholder="Имя">
+                    <input name="phone" type="text" placeholder="Телефон">
+                    <input name="email" type="email" placeholder="Email">
+                    <textarea name="review" type="text" placeholder="Текст отзыва"></textarea>
+                    <div>
+                        <input name="file" type="file" placeholder="Прикрепить файл">
+                        <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб</span>
+                        <div class="images">
+                            <img src="">
+                        </div>
+                    </div>
+                    <div>
+                        <span>Ваша оценка</span>
+                        <span>
+                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_star"></use>
+                            </svg>
+                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_star"></use>
+                            </svg>
+                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_star"></use>
+                            </svg>
+                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_star"></use>
+                            </svg>
+                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_star"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div>
+                        <label class="agree">
+                            <input class="input-checkbox" name="agree" type="checkbox">
+                            <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                        </label>
+                    </div>
+                </form>
+
+                <button class="btn btn--primary">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
