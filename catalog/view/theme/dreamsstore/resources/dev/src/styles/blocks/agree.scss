@@ -1,0 +1,16 @@
+.agree {
+  display: flex;
+  gap: 0.5em;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+
+  input {
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: var(--color-6-dark);
+  }
+}

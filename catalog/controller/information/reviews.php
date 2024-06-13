@@ -3,6 +3,8 @@
 class ControllerInformationReviews extends Controller
 {
 
+    public $errors = [];
+
     public function index()
     {
         $this->load->language('information/reviews');
@@ -70,7 +72,7 @@ class ControllerInformationReviews extends Controller
                     $images[] = $this->model_tool_image->resize('placeholder.png', 60 * 2);
                 }
             }
-            
+
             $dateString = $review['date_added'];
             $date = new DateTime($dateString);
             setlocale(LC_TIME, 'ru_RU.UTF-8');
@@ -124,5 +126,58 @@ class ControllerInformationReviews extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         $this->response->setOutput($this->load->view('information/reviews', $data));
+    }
+
+    public function add()
+    {
+        $json = array();
+
+        if (isset($this->request->post['name']) && isset($this->request->post['phone']) && isset($this->request->post['email']) && isset($this->request->post['review']) && isset($this->request->post['grade']) && $this->validate()) {
+            $data = [];
+            $data['author'] = $this->request->post['name'];
+            $data['phone'] = $this->request->post['phone'];
+            $data['email'] = $this->request->post['email'];
+            $data['text'] = $this->request->post['review'];
+            $data['rating'] = $this->request->post['grade'];
+            $this->load->model('information/reviews');
+            $this->model_information_reviews->addReview($data);
+            $json['success'] = 'Спасибо за ваш отзыв! После проверки администратором он будет добавлен на сайт.';
+        } else {
+            $json['errors'] = $this->errors;
+        }
+
+        if (isset($this->request->files['image'])) {
+            $files = $this->request->files['image'];
+            //var_dump($files);
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    private function validate()
+    {
+
+        if ((utf8_strlen(trim($this->request->post['name']))) < 2 || (utf8_strlen(trim($this->request->post['name']))) > 64) {
+            $this->errors['name'] = 'Поле Имя должно содержать от 2 до 64 символов';
+        }
+
+        if ((utf8_strlen(trim($this->request->post['phone']))) < 9 || (utf8_strlen(trim($this->request->post['phone']))) > 15) {
+            $this->errors['phone'] = 'Поле Телефон должен содержать от 9 до 15 символов';
+        }
+
+        if ((utf8_strlen(trim($this->request->post['email']))) < 4 || (utf8_strlen(trim($this->request->post['email']))) > 96) {
+            $this->errors['email'] = 'Электронная почта должна содержать от 4 до 96 символов';
+        }
+
+        if ((utf8_strlen(trim($this->request->post['review']))) < 10) {
+            $this->errors['review'] = 'Отзыв должен быть минимум 10 символов';
+        }
+
+        if (!isset($this->request->post['agree'])) {
+            $this->errors['agree'] = 'Вы должны дать согласие на обработку персональных данных';
+        }
+
+        return !$this->errors;
     }
 }

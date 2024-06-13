@@ -103,48 +103,81 @@
         <div class="modal__content">
             <div class="modal__box">
                 <button class="modal__close modal__close--fixed"></button>
-                <span class="modal__title">Оставить отзыв</span>
+                <h3 class="modal__title">Оставить отзыв</h3>
                 <form class="review_form">
-                    <input name="name" type="text" placeholder="Имя">
-                    <input name="phone" type="text" placeholder="Телефон">
-                    <input name="email" type="email" placeholder="Email">
-                    <textarea name="review" type="text" placeholder="Текст отзыва"></textarea>
-                    <div>
-                        <input name="file" type="file" placeholder="Прикрепить файл">
-                        <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб</span>
-                        <div class="images">
-                            <img src="">
-                        </div>
+                    <div class="review_form-item">
+                        <input class="input-text" name="name" type="text" placeholder="Имя">
+                        <div class="name-error error"></div>
                     </div>
-                    <div>
-                        <span>Ваша оценка</span>
-                        <span>
-                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_star"></use>
+                    <div class="review_form-item">
+                        <input class="input-text" name="phone" type="text" placeholder="Телефон">
+                        <div class="phone-error error"></div>
+                    </div>
+                    <div class="review_form-item">
+                        <input class="input-text" name="email" type="email" placeholder="Email">
+                        <div class="email-error error"></div>
+                    </div>
+                    <div class="review_form-item">
+                        <textarea class="input-text" name="review" type="text" placeholder="Текст отзыва"></textarea>
+                        <div class="review-error error"></div>
+                    </div>
+                    <label class="modal__attach">
+                        <div>
+                            <input class="modal__attach_input" name="image[]" data-num="1" type="file">
+                            <svg xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_download"></use>
                             </svg>
-                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_star"></use>
-                            </svg>
-                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_star"></use>
-                            </svg>
-                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_star"></use>
-                            </svg>
-                            <svg class="icon-svg-star fill" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_star"></use>
-                            </svg>
+                        </div>
+                        <p>Прикрепить файл</p>
+                    </label>
+                    <div class="modal__size">
+                        <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб</span>
+                        <div class="modal__size-images"></div>
+                    </div>
+                    <div class="modal_grade">
+                        <span class="modal_grade-title">Ваша оценка</span>
+                        <span class="modal_grade-stars stars_grade">
+                            <label class="star">
+                                <input class="" name="grade" type="radio" value="1">
+                                <svg class="fill" data-grade="1" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                </svg>
+                            </label>
+                            <label class="star">
+                                <input class="" name="grade" type="radio" value="2">
+                                <svg class="fill" data-grade="2" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                </svg>
+                            </label>
+                            <label class="star">
+                                <input class="" name="grade" type="radio" value="3">
+                                <svg class="fill" data-grade="3" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                </svg>
+                            </label>
+                            <label class="star">
+                                <input class="" name="grade" type="radio" value="4">
+                                <svg class="fill" data-grade="4" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                </svg>
+                            </label>
+                            <label class="star">
+                                <input class="" name="grade" type="radio" value="5" checked>
+                                <svg class="fill" data-grade="5" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_star"></use>
+                                </svg>
+                            </label>
                         </span>
                     </div>
                     <div>
                         <label class="agree">
                             <input class="input-checkbox" name="agree" type="checkbox">
-                            <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                            <span>Даю согласие на <a>обработку персональных данных</a></span>
                         </label>
+                        <div class="agree-error error"></div>
                     </div>
+                    <button class="modal__btn btn btn-primary">Отправить</button>
                 </form>
-
-                <button class="btn btn--primary">Отправить</button>
             </div>
         </div>
     </div>
