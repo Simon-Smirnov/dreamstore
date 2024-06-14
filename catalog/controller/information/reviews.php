@@ -139,16 +139,81 @@ class ControllerInformationReviews extends Controller
             $data['email'] = $this->request->post['email'];
             $data['text'] = $this->request->post['review'];
             $data['rating'] = $this->request->post['grade'];
-            $this->load->model('information/reviews');
-            $this->model_information_reviews->addReview($data);
-            $json['success'] = 'Спасибо за ваш отзыв! После проверки администратором он будет добавлен на сайт.';
+
+            if (isset($this->request->files['image']) && !empty($this->request->files['image']['name']) && count($this->request->files['image']['name']) > 1) {
+
+                unset($this->request->files['image']['name'][0]);
+                unset($this->request->files['image']['type'][0]);
+                unset($this->request->files['image']['tmp_name'][0]);
+                unset($this->request->files['image']['error'][0]);
+                unset($this->request->files['image']['size'][0]);
+
+                foreach ($this->request->files['image']['tmp_name'] as $image) {
+                    if (!is_file($image)) {
+                        $this->errors['image'] = 'Файл не существует';
+                    }
+
+                    $content = file_get_contents($image);
+
+                    if (preg_match('/\<\?php/i', $content)) {
+                        $this->errors['image'] = 'Нельзя использовать PHP в изображении';
+                    }
+                }
+
+                $filetypes = ['jpg', 'jpeg', 'png'];
+
+                foreach ($this->request->files['image']['name'] as $image) {
+                    // Sanitize the filename
+                    $filename = basename(html_entity_decode($image, ENT_QUOTES, 'UTF-8'));
+
+                    if (!is_file($image)) {
+                        if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $filetypes)) {
+                            $this->errors['image'] = 'Неверный тип файла';
+                        }
+                    }
+                }
+
+                $mime_allowed = ['image/png', 'image/jpeg'];//'video/quicktime'
+
+                foreach ($this->request->files['image']['type'] as $image_type) {
+                    if (!in_array($image_type, $mime_allowed)) {
+                        $this->errors['image'] = 'Неверный тип файла';
+                    }
+                }
+
+                foreach ($this->request->files['image']['error'] as $image_error) {
+                    if ($image_error != UPLOAD_ERR_OK) {
+                        $this->errors['image'] = 'Ошибка загрузки файла';
+                    }
+                }
+
+                foreach ($this->request->files['image']['size'] as $image_size) {
+                    if ($image_size > 5000000) {
+                        $this->errors['image'] = 'Файл должен весить не более 5мб';
+                    }
+                }
+            }
+
+            if (!isset($this->errors['image'])) {
+                foreach ($this->request->files['image']['name'] as $key => $image) {
+                    $filename = basename(html_entity_decode($image, ENT_QUOTES, 'UTF-8'));
+                    if ((utf8_strlen($filename) > 128)) {
+                        $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                    }
+                    $file = token(32) . '.' . $filename;
+
+                    move_uploaded_file($this->request->files['image']['tmp_name'][$key], DIR_IMAGE . 'catalog/reviews/' . $file);
+                    $data['images'][] = 'catalog/reviews/' . $file;
+                }
+
+                $this->load->model('information/reviews');
+                $this->model_information_reviews->addReview($data);
+                $json['success'] = 'Спасибо за ваш отзыв! После проверки администратором он будет добавлен на сайт.';
+            } else {
+                $json['errors'] = $this->errors;
+            }
         } else {
             $json['errors'] = $this->errors;
-        }
-
-        if (isset($this->request->files['image'])) {
-            $files = $this->request->files['image'];
-            //var_dump($files);
         }
 
         $this->response->addHeader('Content-Type: application/json');

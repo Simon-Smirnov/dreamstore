@@ -136,6 +136,23 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => array()
                 );
             }
+            
+            if ($this->user->hasPermission('access', 'catalog/blog')) {
+                $catalog[] = array(
+                    'name' => $this->language->get('text_blog'),
+                    'href' => $this->url->link('catalog/blog', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
+
+            if ($this->user->hasPermission('access', 'catalog/vacancies')) {
+                $catalog[] = array(
+                    'name' => $this->language->get('text_vacancies'),
+                    'href' => $this->url->link('catalog/vacancies', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
+
 
             if ($catalog) {
                 $data['menus'][] = array(

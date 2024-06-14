@@ -1,107 +1,113 @@
 <?php
-class ControllerInformationInformation extends Controller {
-	public function index() {
-		$this->load->language('information/information');
 
-		$this->load->model('catalog/information');
+class ControllerInformationInformation extends Controller
+{
+    public function index()
+    {
+        $this->load->language('information/information');
 
-		$data['breadcrumbs'] = array();
+        $this->load->model('catalog/information');
 
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
+        $data['breadcrumbs'] = array();
 
-		if (isset($this->request->get['information_id'])) {
-			$information_id = (int)$this->request->get['information_id'];
-		} else {
-			$information_id = 0;
-		}
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/home')
+        );
 
-		$information_info = $this->model_catalog_information->getInformation($information_id);
+        if (isset($this->request->get['information_id'])) {
+            $information_id = (int)$this->request->get['information_id'];
+        } else {
+            $information_id = 0;
+        }
 
-		if ($information_info) {
-			if (!empty($information_info['no_index'])) {
-				$this->response->addHeader('X-Robots-Tag: noindex');
-			}
-        
-			if (empty($information_info['meta_title'])) {
-				$information_info['meta_title'] = $information_info['title'];
-			}
+        $information_info = $this->model_catalog_information->getInformation($information_id);
 
-			$this->document->setTitle($information_info['meta_title']);
-			$this->document->setDescription($information_info['meta_description']);
-			$this->document->setKeywords($information_info['meta_keyword']);
+        $data['information_id'] = $information_id;
 
-			$data['breadcrumbs'][] = array(
-				'text' => $information_info['title'],
-				'href' => $this->url->link('information/information', 'information_id=' .  $information_id)
-			);
+        if ($information_info) {
+            if (!empty($information_info['no_index'])) {
+                $this->response->addHeader('X-Robots-Tag: noindex');
+            }
 
-			if (!empty($information_info['meta_h1'])) {
-				$data['heading_title'] = $information_info['meta_h1'];
-			} else {
-				$data['heading_title'] = $information_info['title'];
-			}
+            if (empty($information_info['meta_title'])) {
+                $information_info['meta_title'] = $information_info['title'];
+            }
 
-			$data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+            $this->document->setTitle($information_info['meta_title']);
+            $this->document->setDescription($information_info['meta_description']);
+            $this->document->setKeywords($information_info['meta_keyword']);
 
-			$data['continue'] = $this->url->link('common/home');
+            $data['breadcrumbs'][] = array(
+                'text' => $information_info['title'],
+                'href' => $this->url->link('information/information', 'information_id=' . $information_id)
+            );
 
-			$data['column_left'] = $this->load->controller('common/column_left');
-			$data['column_right'] = $this->load->controller('common/column_right');
-			$data['content_top'] = $this->load->controller('common/content_top');
-			$data['content_bottom'] = $this->load->controller('common/content_bottom');
-			$data['footer'] = $this->load->controller('common/footer');
-			$data['header'] = $this->load->controller('common/header');
+            if (!empty($information_info['meta_h1'])) {
+                $data['heading_title'] = $information_info['meta_h1'];
+            } else {
+                $data['heading_title'] = $information_info['title'];
+            }
 
-			$this->response->setOutput($this->load->view('information/information', $data));
-		} else {
-			$data['breadcrumbs'][] = array(
-				'text' => $this->language->get('text_error'),
-				'href' => $this->url->link('information/information', 'information_id=' . $information_id)
-			);
+            $data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
 
-			$this->document->setTitle($this->language->get('text_error'));
+            $data['continue'] = $this->url->link('common/home');
 
-			$data['heading_title'] = $this->language->get('text_error');
+            $data['column_left'] = $this->load->controller('common/column_left');
+            $data['column_right'] = $this->load->controller('common/column_right');
+            $data['content_top'] = $this->load->controller('common/content_top');
+            $data['content_bottom'] = $this->load->controller('common/content_bottom');
+            $data['footer'] = $this->load->controller('common/footer');
+            $data['header'] = $this->load->controller('common/header');
 
-			$data['text_error'] = $this->language->get('text_error');
+            $this->response->setOutput($this->load->view('information/information', $data));
+        } else {
+            $data['breadcrumbs'][] = array(
+                'text' => $this->language->get('text_error'),
+                'href' => $this->url->link('information/information', 'information_id=' . $information_id)
+            );
 
-			$data['continue'] = $this->url->link('common/home');
+            $this->document->setTitle($this->language->get('text_error'));
 
-			$this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');
+            $data['heading_title'] = $this->language->get('text_error');
 
-			$data['column_left'] = $this->load->controller('common/column_left');
-			$data['column_right'] = $this->load->controller('common/column_right');
-			$data['content_top'] = $this->load->controller('common/content_top');
-			$data['content_bottom'] = $this->load->controller('common/content_bottom');
-			$data['footer'] = $this->load->controller('common/footer');
-			$data['header'] = $this->load->controller('common/header');
+            $data['text_error'] = $this->language->get('text_error');
 
-			$this->response->setOutput($this->load->view('error/not_found', $data));
-		}
-	}
+            $data['continue'] = $this->url->link('common/home');
 
-	public function agree() {
-		$this->load->model('catalog/information');
+            $this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');
 
-		if (isset($this->request->get['information_id'])) {
-			$information_id = (int)$this->request->get['information_id'];
-		} else {
-			$information_id = 0;
-		}
+            $data['column_left'] = $this->load->controller('common/column_left');
+            $data['column_right'] = $this->load->controller('common/column_right');
+            $data['content_top'] = $this->load->controller('common/content_top');
+            $data['content_bottom'] = $this->load->controller('common/content_bottom');
+            $data['footer'] = $this->load->controller('common/footer');
+            $data['header'] = $this->load->controller('common/header');
 
-		$output = '';
+            $this->response->setOutput($this->load->view('error/not_found', $data));
+        }
+    }
 
-		$information_info = $this->model_catalog_information->getInformation($information_id);
+    public function agree()
+    {
+        $this->load->model('catalog/information');
 
-		if ($information_info) {
-			$output .= html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8') . "\n";
-		}
+        if (isset($this->request->get['information_id'])) {
+            $information_id = (int)$this->request->get['information_id'];
+        } else {
+            $information_id = 0;
+        }
 
-		$this->response->addHeader('X-Robots-Tag: noindex');
+        $output = '';
 
-		$this->response->setOutput($output);
-	}
+        $information_info = $this->model_catalog_information->getInformation($information_id);
+
+        if ($information_info) {
+            $output .= html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8') . "\n";
+        }
+
+        $this->response->addHeader('X-Robots-Tag: noindex');
+
+        $this->response->setOutput($output);
+    }
 }

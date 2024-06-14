@@ -22,7 +22,15 @@ class ModelInformationReviews extends Model
         //$this->db->query("INSERT INTO " . DB_PREFIX . "reviews SET author = '" . $this->db->escape($data['author']) . "', email = '" . $this->db->escape($data['email']) . "',  phone = '" . $this->db->escape($data['phone']) . "', customer_id = '" . (int)$this->customer->getId() . "', review = '" . $this->db->escape($data['review']) . "', rating = '" . (int)$data['rating'] . "', date_added = NOW()");
         $this->db->query("INSERT INTO " . DB_PREFIX . "reviews SET author = '" . $this->db->escape($data['author']) . "', email = '" . $this->db->escape($data['email']) . "',  phone = '" . $this->db->escape($data['phone']) . "', text = '" . $this->db->escape($data['text']) . "', rating = '" . (int)$data['rating'] . "', date_added = NOW()");
 
-        $review_id = $this->db->getLastId();
+        $reviews_id = $this->db->getLastId();
+
+        $sort_order = 0;
+        if (isset($data['images']) && !empty($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "reviews_image SET reviews_id = '" . (int)$reviews_id . "', sort_order = '" . $sort_order . "', image = '" . $image . "'");
+                $sort_order++;
+            }
+        }
 
         //if (in_array('review', (array)$this->config->get('config_mail_alert'))) {
         //    $this->load->language('mail/review');

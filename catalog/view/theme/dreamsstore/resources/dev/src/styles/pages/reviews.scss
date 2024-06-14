@@ -82,6 +82,33 @@
       justify-content: center;
       margin-top: 1.5em;
     }
+
+    .download-image {
+      position: relative;
+
+      .close_image {
+        position: absolute;
+        top: 1.3em;
+        right: 0.4em;
+        background-color: var(--white);
+        border-radius: 50%;
+        width: 1em;
+        height: 1em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 0.7em;
+          height: 0.7em;
+          stroke: var(--color-8-dark);
+          position: relative;
+          top: -0.1px;
+        }
+      }
+
+    }
   }
 }
 
