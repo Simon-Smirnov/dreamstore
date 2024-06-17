@@ -4,6 +4,11 @@
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
   align-items: baseline;
+  cursor: pointer;
+
+  a {
+    text-decoration: underline;
+  }
 
   input {
     flex-shrink: 0;

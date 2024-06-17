@@ -1,6 +1,6 @@
 <?php
 
-class ModelCatalogVacancy extends Model
+class ModelCatalogReply extends Model
 {
     public function addVacancy($data)
     {
@@ -34,20 +34,21 @@ class ModelCatalogVacancy extends Model
         return $query->row;
     }
 
-    public function getVacancies($data = array())
+    public function getReplies($data = array())
     {
-        $sql = "SELECT * FROM " . DB_PREFIX . "vacancy";
+        $sql = "SELECT * FROM " . DB_PREFIX . "reply";
 
         $sort_data = array(
-            'title',
-            'status',
-            'sort_order'
+            'name',
+            'email',
+            'message',
+            'date_added',
         );
 
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             $sql .= " ORDER BY " . $data['sort'];
         } else {
-            $sql .= " ORDER BY title";
+            $sql .= " ORDER BY date_added";
         }
 
         if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -86,9 +87,9 @@ class ModelCatalogVacancy extends Model
         return $product_filter_data;
     }
 
-    public function getTotalVacancies()
+    public function getTotalReplies()
     {
-        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "vacancy";
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "reply";
 
         $query = $this->db->query($sql);
 

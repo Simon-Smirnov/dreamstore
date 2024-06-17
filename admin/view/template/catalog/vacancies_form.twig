@@ -45,49 +45,93 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label"
                                for="input-title">{{ entry_responsibility }}</label>
                         <div class="col-sm-10">
-                            <input type="text"
-                                   name="responsibility"
-                                   value="{{ responsibility }}"
-                                   placeholder="{{ entry_responsibility }}"
-                                   id="input-title" class="form-control"/>
+                            <textarea type="text"
+                                      name="responsibility"
+                                      value=""
+                                      placeholder="{{ entry_responsibility }}"
+                                      data-toggle="summernote" data-lang="{{ summernote }}"
+                                      id="input-title" class="form-control">
+                                {{ responsibility }}
+                            </textarea>
                             {% if error_responsibility %}
                                 <div class="text-danger">{{ error_responsibility }}</div>
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label"
-                               for="input-title">{{ entry_requirements }}</label>
+                               for="input-requirements">{{ entry_requirements }}</label>
                         <div class="col-sm-10">
-                            <input type="text"
-                                   name="title"
-                                   value="{{ requirements }}"
-                                   placeholder="{{ entry_requirements }}"
-                                   id="input-title" class="form-control"/>
+                            <textarea type="text"
+                                      name="requirements"
+                                      value=""
+                                      data-toggle="summernote" data-lang="{{ summernote }}"
+                                      placeholder="{{ entry_requirements }}"
+                                      id="input-requirements" class="form-control">
+                                {{ requirements }}
+                            </textarea>
                             {% if error_requirements %}
                                 <div class="text-danger">{{ error_requirements }}</div>
                             {% endif %}
                         </div>
                     </div>
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label"
                                for="input-title">{{ entry_conditions }}</label>
                         <div class="col-sm-10">
-                            <input type="text"
-                                   name="conditions"
-                                   value="{{ conditions }}"
-                                   placeholder="{{ entry_conditions }}"
-                                   id="input-title" class="form-control"/>
+                            <textarea type="text"
+                                      name="conditions"
+                                      value=""
+                                      data-toggle="summernote" data-lang="{{ summernote }}"
+                                      placeholder="{{ entry_conditions }}"
+                                      id="input-title" class="form-control">
+                                {{ conditions }}
+                            </textarea>
                             {% if error_conditions %}
                                 <div class="text-danger">{{ error_conditions }}</div>
                             {% endif %}
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="status" id="input-status" class="form-control">
+                                {% if status %}
+                                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                                    <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                    <option value="1">{{ text_enabled }}</option>
+                                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="sort_order" value="{{ sort_order }}"
+                                   placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="input-date-modified">{{ entry_date_modified }}</label>
+                        <div class="col-sm-3">
+                            <div class="input-group date">
+                                <input type="text" name="date_modified" value="{{ date_modified }}"
+                                       placeholder="{{ entry_date_modified }}" data-date-format="YYYY-MM-DD"
+                                       id="input-date-modified" class="form-control"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i
+                                                class="fa fa-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,23 +1,20 @@
 <?php
 // Heading
-$_['heading_title'] = 'Вакансии';
+$_['heading_title'] = 'Отклики на вакансии';
 
 // Text
 $_['text_success'] = 'Данные успешно сохранены!';
-$_['text_list'] = 'Список вакансий';
+$_['text_list'] = 'Список откликов на вакансии';
 
-$_['text_add'] = 'Добавить вакансию';
-$_['text_edit'] = 'Изменить вакансию';
 $_['text_default'] = 'По умолчанию';
 
 // Column
-$_['column_title'] = 'Название вакансии';
-$_['column_responsibility'] = 'Обязанности';
-$_['column_requirements'] = 'Требования';
-$_['column_conditions'] = 'Условия';
-$_['column_status'] = 'Статус';
+$_['column_name'] = 'Имя';
+$_['column_phone'] = 'Телефон';
+$_['column_email'] = 'Email';
+$_['column_message'] = 'Сообщение';
 $_['column_order'] = 'Порядок сортировки';
-$_['column_action'] = 'Действие';
+$_['column_date_added'] = 'Дата отклика';
 
 // Entry
 $_['entry_title'] = 'Название вакансии';

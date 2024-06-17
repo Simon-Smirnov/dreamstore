@@ -1,0 +1,88 @@
+{{ header }}
+<div id="information-vacancy">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="vacancy">
+        <div class="container">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="vacancy-inner">
+                <div class="vacancy-inner_info">
+                    <div class="vacancy-inner_info-item">
+                        <h4 class="vacancy-inner_info-item_title">Oбязaнности:</h4>
+                        <div class="vacancy-inner_info-item_block">{{ responsibility }}</div>
+                    </div>
+                    <div class="vacancy-inner_info-item">
+                        <h4 class="vacancy-inner_info-item_title">Tребовaния:</h4>
+                        <div class="vacancy-inner_info-item_block">{{ requirements }}</div>
+                    </div>
+                    <div class="vacancy-inner_info-item">
+                        <h4 class="vacancy-inner_info-item_title">Уcловия:</h4>
+                        <div class="vacancy-inner_info-item_block">{{ conditions }}</div>
+                    </div>
+                    <div class="vacancy-inner_info-item">
+                        <h4 class="vacancy-inner_info-item_title">Звоните по телефону:</h4>
+                        <a class="vacancy-inner_info-item_link" href="tel:{{ telephone_for_link }}">{{ telephone }}</a>
+                    </div>
+                    <div class="vacancy-inner_info-item">
+                        <h4 class="vacancy-inner_info-item_title">Присылайте резюме на почту:</h4>
+                        <a class="vacancy-inner_info-item_link"
+                           href="mailto:{{ email_for_store }}">{{ email_for_store }}</a>
+                    </div>
+                </div>
+                <div class="vacancy-inner_form">
+                    <div class="vacancy-inner_form-block">
+                        <button class="modal__close modal__close--fixed"></button>
+                        <h3 class="vacancy-inner_form-title">Откликнуться<br>на вакансию</h3>
+                        <form class="vacancy_form">
+                            <div class="vacancy_form-item">
+                                <input class="input-text" name="name" type="text" placeholder="Ваше Имя">
+                                <div class="name-error error"></div>
+                            </div>
+                            <div class="vacancy_form-item">
+                                <input class="input-text" name="phone" type="text" placeholder="Телефон">
+                                <div class="phone-error error"></div>
+                            </div>
+                            <div class="vacancy_form-item">
+                                <input class="input-text" name="email" type="email" placeholder="E-mail">
+                                <div class="email-error error"></div>
+                            </div>
+                            <div class="vacancy_form-item">
+                                <textarea class="input-text" name="message" type="text" cols="10"
+                                          placeholder="Сообщение"></textarea>
+                                <div class="message-error error"></div>
+                            </div>
+                            <label class="modal__attach">
+                                <div>
+                                    <input class="modal__attach_input" name="image[]" data-num="1" type="file">
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_download"></use>
+                                    </svg>
+                                </div>
+                                <p>Прикрепить файлы</p>
+                            </label>
+                            <div class="modal__size">
+                                <span>Можно прикрепить до 3х файлов (DOC, DOCX, PDF)<br> Весом до 5мб.</span>
+                                <div class="modal__size-names"></div>
+                                <div class="image-error error"></div>
+                            </div>
+                            <button class="vacancy__btn btn btn-primary">Отправить</button>
+                            <div>
+                                <label class="agree">
+                                    <input class="input-checkbox" name="agree" type="checkbox">
+                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                </label>
+                                <div class="agree-error error"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

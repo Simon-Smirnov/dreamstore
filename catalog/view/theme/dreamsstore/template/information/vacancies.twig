@@ -1,0 +1,31 @@
+{{ header }}
+<div id="information-vacancies">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="vacancies">
+        <div class="container">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="vacancies-inner">
+                <nav>
+                    <ul class="vacancies-inner_list">
+                        {% for vacancy in vacancies %}
+                            <li class="vacancies-inner_list-item">
+                                <div>
+                                    <h4 class="vacancies-inner_list-item_title">{{ vacancy.title }}</h4>
+                                    <div class="vacancies-inner_list-item_text">{{ vacancy.responsibility }}</div>
+                                </div>
+                                <a class="vacancies-inner_list-item_link btn btn-second" href="{{ vacancy.href }}">Подробнее</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

@@ -136,7 +136,7 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => array()
                 );
             }
-            
+
             if ($this->user->hasPermission('access', 'catalog/blog')) {
                 $catalog[] = array(
                     'name' => $this->language->get('text_blog'),
@@ -153,6 +153,13 @@ class ControllerCommonColumnLeft extends Controller
                 );
             }
 
+            if ($this->user->hasPermission('access', 'catalog/replies')) {
+                $catalog[] = array(
+                    'name' => $this->language->get('text_replies'),
+                    'href' => $this->url->link('catalog/replies', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
 
             if ($catalog) {
                 $data['menus'][] = array(
