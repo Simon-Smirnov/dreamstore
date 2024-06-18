@@ -14,6 +14,7 @@ $_['column_phone'] = 'Телефон';
 $_['column_email'] = 'Email';
 $_['column_message'] = 'Сообщение';
 $_['column_order'] = 'Порядок сортировки';
+$_['column_vacancy'] = 'Вакансия';
 $_['column_date_added'] = 'Дата отклика';
 
 // Entry

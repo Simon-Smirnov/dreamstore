@@ -76,7 +76,7 @@ class ControllerCatalogFaq extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $this->request->post['parent_id'] . $url, true));
         }
 
         $this->getFormAnswer();
@@ -142,7 +142,7 @@ class ControllerCatalogFaq extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/faq', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $this->request->post['parent_id'] . $url, true));
         }
 
         $this->getFormAnswer();
@@ -432,7 +432,7 @@ class ControllerCatalogFaq extends Controller
                 'title' => $result['title'],
                 'answer' => $result['answer'],
                 'sort_order' => $result['sort_order'],
-                'edit' => $this->url->link('catalog/faq/editanswer', 'user_token=' . $this->session->data['user_token'] . '&faq_answer_id=' . $result['faq_answer_id'] . $url, true)
+                'edit' => $this->url->link('catalog/faq/editanswer', 'user_token=' . $this->session->data['user_token'] . '&faq_answer_id=' . $result['faq_answer_id'] . '&faq_id=' . $parent_id . $url, true)
             );
         }
 
@@ -468,8 +468,8 @@ class ControllerCatalogFaq extends Controller
             $url .= '&page=' . $this->request->get['page'];
         }
 
-        $data['sort_title'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=title' . $url, true);
-        $data['sort_sort_order'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order' . $url, true);
+        $data['sort_title'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=title&faq_id=' . $parent_id . $url, true);
+        $data['sort_sort_order'] = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&sort=sort_order&faq_id=' . $parent_id . $url, true);
 
         $url = '';
 
@@ -482,14 +482,14 @@ class ControllerCatalogFaq extends Controller
         }
 
         $pagination = new Pagination();
-        $pagination->total = $information_total;
+        $pagination->total = $faq_answer_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('catalog/information', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('catalog/faq/answer', 'user_token=' . $this->session->data['user_token'] . '&faq_id=' . $parent_id . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 
-        $data['results'] = sprintf($this->language->get('text_pagination'), ($information_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($information_total - $this->config->get('config_limit_admin'))) ? $information_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $information_total, ceil($information_total / $this->config->get('config_limit_admin')));
+        $data['results'] = sprintf($this->language->get('text_pagination'), ($faq_answer_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($faq_answer_total - $this->config->get('config_limit_admin'))) ? $faq_answer_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $faq_answer_total, ceil($faq_answer_total / $this->config->get('config_limit_admin')));
 
         $data['sort'] = $sort;
         $data['order'] = $order;

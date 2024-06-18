@@ -1,0 +1,70 @@
+{{ header }}
+<div id="information-advices">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="faq">
+        <div class="container">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="faq-block">
+                <div class="faq-block_nav">
+                    <nav>
+                        <ul class="faq-block_nav-list">
+                            {% for advice in advices %}
+                                <li class="faq-block_nav-list_item {% if advice.id == '0' %}active{% endif %}">
+                                    <a class="faq-block_nav-list_item-link">{{ advice.name }}</a>
+                                    <div class="faq-content">
+                                        <h2 class="faq-content_title"
+                                        >{{ advice.name }}</h2>
+                                        <ul class="faq-content_list">
+                                            {% for child in advice.children %}
+                                                <li class="faq-content_list-item">
+                                                    <h4 class="faq-content_list-item_title">
+                                                        <span>{{ child.title }}</span>
+                                                        <span class="faq-content_list-item_title-svg">
+                                                            <svg class="faq-svg"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                                            </svg>
+                                                        </span>
+                                                    </h4>
+                                                    <p class="faq-content_list-item_answer">{{ child.answer }}</p>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="faq-block_list">
+                    <div class="faq-content open">
+                        <h2 class="faq-content_title">{{ advices.0.name }}</h2>
+                        <ul class="faq-content_list">
+                            {% for child in advices.0.children %}
+                                <li class="faq-content_list-item">
+                                    <h4 class="faq-content_list-item_title">
+                                        <span>{{ child.title }}</span>
+                                        <span class="faq-content_list-item_title-svg">
+                                            <svg class="faq-svg"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
+                                        </span>
+                                    </h4>
+                                    <p class="faq-content_list-item_answer">{{ child.answer }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

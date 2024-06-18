@@ -34,6 +34,17 @@ class ModelCatalogVacancy extends Model
         return $query->row;
     }
 
+    public function getVacancyName($vacancy_id)
+    {
+        $query = $this->db->query("SELECT `title` FROM " . DB_PREFIX . "vacancy WHERE vacancy_id = '" . (int)$vacancy_id . "'");
+
+        if (!empty($query->row) && isset($query->row['title'])) {
+            return $query->row['title'];
+        } else {
+            return 'Вакансии нет или она была удалена';
+        }
+    }
+
     public function getVacancies($data = array())
     {
         $sql = "SELECT * FROM " . DB_PREFIX . "vacancy";

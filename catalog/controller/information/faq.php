@@ -20,7 +20,7 @@ class ControllerInformationFaq extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('breadcrumbs_title'),
-            'href' => $this->url->link('information/contact')
+            'href' => $this->url->link('information/faq')
         );
 
         $this->load->model('information/faq');

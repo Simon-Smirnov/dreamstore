@@ -3,6 +3,7 @@ import './classes/Select.js'
 import './classes/Fancybox.js'
 import Faq from './classes/Faq.js'
 import Reviews from './classes/Reviews.js'
+import Replies from './classes/Replies.js'
 import Stars from './classes/Stars.js'
 import './classes/Mask.js'
 import './classes/Slider.js'
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new Faq('.faq-block');
     new Stars('.stars_grade');
     new Reviews('.review_form');
+    new Replies('.vacancy_form');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

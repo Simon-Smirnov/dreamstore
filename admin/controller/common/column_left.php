@@ -161,6 +161,14 @@ class ControllerCommonColumnLeft extends Controller
                 );
             }
 
+            if ($this->user->hasPermission('access', 'catalog/advices')) {
+                $catalog[] = array(
+                    'name' => $this->language->get('text_advices'),
+                    'href' => $this->url->link('catalog/advices', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
+
             if ($catalog) {
                 $data['menus'][] = array(
                     'id' => 'menu-catalog',
@@ -170,7 +178,7 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => $catalog
                 );
             }
-
+            
             // Extension
             $marketplace = array();
 

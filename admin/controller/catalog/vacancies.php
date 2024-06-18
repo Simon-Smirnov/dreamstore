@@ -116,7 +116,7 @@ class ControllerCatalogVacancies extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url, true)
+            'href' => $this->url->link('catalog/vacancies', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 
         $data['add'] = $this->url->link('catalog/vacancies/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
@@ -208,7 +208,7 @@ class ControllerCatalogVacancies extends Controller
         $pagination->total = $vacancies_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('catalog/vacancies', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 

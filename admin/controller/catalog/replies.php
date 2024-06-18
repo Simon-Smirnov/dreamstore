@@ -17,15 +17,15 @@ class ControllerCatalogReplies extends Controller
 
     public function delete()
     {
-        $this->load->language('catalog/vacancies');
+        $this->load->language('catalog/replies');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/vacancy');
+        $this->load->model('catalog/reply');
 
-        if (isset($this->request->post['selected']) && $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $vacancy_id) {
-                $this->model_catalog_vacancy->deleteVacancy($vacancy_id);
+        if (isset($this->request->post['selected'])) {
+            foreach ($this->request->post['selected'] as $reply_id) {
+                $this->model_catalog_reply->deleteReply($reply_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -57,13 +57,13 @@ class ControllerCatalogReplies extends Controller
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
-            $sort = 'email';
+            $sort = 'date_added';
         }
 
         if (isset($this->request->get['order'])) {
             $order = $this->request->get['order'];
         } else {
-            $order = 'ASC';
+            $order = 'DESC';
         }
 
         if (isset($this->request->get['page'])) {
@@ -83,13 +83,13 @@ class ControllerCatalogReplies extends Controller
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url, true)
+            'href' => $this->url->link('catalog/replies', 'user_token=' . $this->session->data['user_token'] . $url, true)
         );
 
         $data['add'] = $this->url->link('catalog/replies/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
         $data['delete'] = $this->url->link('catalog/replies/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
-        $data['products'] = array();
+        $data['replies'] = array();
 
         $filter_data = array(
             'sort' => $sort,
@@ -100,28 +100,28 @@ class ControllerCatalogReplies extends Controller
 
         $category_by_id = array();
 
-        $this->load->model('tool/image');
-        $this->load->model('catalog/category');
-
         $replies_total = $this->model_catalog_reply->getTotalReplies($filter_data);
 
         $results = $this->model_catalog_reply->getReplies($filter_data);
 
-        echo "<pre>";
-        var_dump($results);
-        echo "</pre>";
-
         $data['replies'] = [];
 
+        $this->load->model('catalog/vacancy');
+
         foreach ($results as $result) {
+
+            $vacancyName = $this->model_catalog_vacancy->getVacancyName($result['vacancy_id']);
+            $files = $this->model_catalog_reply->getReplyFiles($result['reply_id']);
+
             $data['replies'][] = [
                 'reply_id' => $result['reply_id'],
-                'vacancy_id' => $result['vacancy_id'],
+                'vacancy' => $vacancyName,
                 'name' => $result['name'],
                 'phone' => $result['phone'],
                 'email' => $result['email'],
                 'message' => $result['message'],
-                'date_added' => $result['date_added']
+                'date_added' => $result['date_added'],
+                'files' => $files
             ];
         }
 
@@ -180,7 +180,7 @@ class ControllerCatalogReplies extends Controller
         $pagination->total = $replies_total;
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('catalog/product', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+        $pagination->url = $this->url->link('catalog/replies', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
 

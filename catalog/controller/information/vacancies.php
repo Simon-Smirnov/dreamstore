@@ -3,6 +3,8 @@
 class ControllerInformationVacancies extends Controller
 {
 
+    public $errors = [];
+
     public function index()
     {
         $this->load->language('information/vacancies');
@@ -62,6 +64,7 @@ class ControllerInformationVacancies extends Controller
         $result = $this->model_information_vacancy->getVacancy($this->request->get['vacancy_id']);
 
         $data['title'] = $result['title'];
+        $data['vacancy_id'] = $result['vacancy_id'];
 
         $this->document->setTitle($result['title']);
 
@@ -100,5 +103,119 @@ class ControllerInformationVacancies extends Controller
         $data['header'] = $this->load->controller('common/header');
 
         $this->response->setOutput($this->load->view('information/vacancy', $data));
+    }
+
+    public function addReply()
+    {
+        $json = array();
+
+        if (isset($this->request->post['name']) && isset($this->request->post['phone']) && isset($this->request->post['email']) && isset($this->request->post['message']) && $this->validate()) {
+            $data = [];
+            $data['name'] = $this->request->post['name'];
+            $data['phone'] = $this->request->post['phone'];
+            $data['email'] = $this->request->post['email'];
+            $data['message'] = $this->request->post['message'];
+            $data['vacancy_id'] = $this->request->post['vacancy_id'];
+
+            if (isset($this->request->files['file']) && !empty($this->request->files['file']['name']) && count($this->request->files['file']['name']) > 1) {
+
+                unset($this->request->files['file']['name'][0]);
+                unset($this->request->files['file']['type'][0]);
+                unset($this->request->files['file']['tmp_name'][0]);
+                unset($this->request->files['file']['error'][0]);
+                unset($this->request->files['file']['size'][0]);
+
+                foreach ($this->request->files['file']['tmp_name'] as $file) {
+                    if (!is_file($file)) {
+                        $this->errors['file'] = 'Файл не существует';
+                    }
+
+                    $content = file_get_contents($file);
+
+                    if (preg_match('/\<\?php/i', $content)) {
+                        $this->errors['file'] = 'Нельзя использовать PHP в файле';
+                    }
+                }
+
+                $filetypes = ['pdf', 'odt', 'doc', 'docx'];
+
+                foreach ($this->request->files['file']['name'] as $file) {
+                    // Sanitize the filename
+                    $filename = basename(html_entity_decode($file, ENT_QUOTES, 'UTF-8'));
+
+                    if (!is_file($file)) {
+                        if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $filetypes)) {
+                            $this->errors['file'] = 'Неверный тип файла';
+                        }
+                    }
+                }
+
+                $mime_allowed = ['application/vnd.oasis.opendocument.text', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+
+                foreach ($this->request->files['file']['type'] as $file_type) {
+                    if (!in_array($file_type, $mime_allowed)) {
+                        $this->errors['file'] = 'Неверный тип файла';
+                    }
+                }
+
+                foreach ($this->request->files['file']['error'] as $file_error) {
+                    if ($file_error != UPLOAD_ERR_OK) {
+                        $this->errors['file'] = 'Ошибка загрузки файла';
+                    }
+                }
+
+                foreach ($this->request->files['file']['size'] as $file_size) {
+                    if ($file_size > 1000000) {
+                        $this->errors['file'] = 'Файл должен весить не более 1мб';
+                    }
+                }
+            }
+
+            if (!isset($this->errors['file'])) {
+                foreach ($this->request->files['file']['name'] as $key => $fileMessage) {
+                    $filename = basename(html_entity_decode($fileMessage, ENT_QUOTES, 'UTF-8'));
+                    if ((utf8_strlen($filename) > 128)) {
+                        $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                    }
+                    $file = token(32) . '.' . $filename;
+
+                    move_uploaded_file($this->request->files['file']['tmp_name'][$key], DIR_IMAGE . 'catalog/replies/' . $file);
+                    $data['files'][] = 'catalog/replies/' . $file;
+                }
+
+                $this->load->model('information/reply');
+                $this->model_information_reply->addReply($data);
+                $json['success'] = 'Спасибо. Мы получили ваши данные и скоро свяжемся с вами.';
+            } else {
+                $json['errors'] = $this->errors;
+            }
+        } else {
+            $json['errors'] = $this->errors;
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    private function validate()
+    {
+
+        if ((utf8_strlen(trim($this->request->post['name']))) < 2 || (utf8_strlen(trim($this->request->post['name']))) > 64) {
+            $this->errors['name'] = 'Поле Имя должно содержать от 2 до 64 символов';
+        }
+
+        if ((utf8_strlen(trim($this->request->post['phone']))) < 9 || (utf8_strlen(trim($this->request->post['phone']))) > 15) {
+            $this->errors['phone'] = 'Поле Телефон должен содержать от 9 до 15 символов';
+        }
+
+        if ((utf8_strlen(trim($this->request->post['email']))) < 4 || (utf8_strlen(trim($this->request->post['email']))) > 96) {
+            $this->errors['email'] = 'Электронная почта должна содержать от 4 до 96 символов';
+        }
+
+        if (!isset($this->request->post['agree'])) {
+            $this->errors['agree'] = 'Вы должны дать согласие на обработку персональных данных';
+        }
+
+        return !$this->errors;
     }
 }

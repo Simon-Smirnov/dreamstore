@@ -2,34 +2,17 @@
 
 class ModelCatalogReply extends Model
 {
-    public function addVacancy($data)
+
+    public function deleteReply($reply_id)
     {
-        $this->db->query("INSERT INTO " . DB_PREFIX . "vacancy SET title = '" . $this->db->escape($data['title']) . "', responsibility = '" . $this->db->escape($data['responsibility']) . "', requirements = '" . $this->db->escape($data['requirements']) . "', conditions = '" . $this->db->escape($data['conditions']) . "', date_modified = '" . $this->db->escape($data['date_modified']) . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "reply WHERE reply_id = '" . (int)$reply_id . "'");
 
-        $vacancy_id = $this->db->getLastId();
-
-        $this->cache->delete('vacancy');
-
-        return $vacancy_id;
+        $this->cache->delete('reply');
     }
 
-    public function editVacancy($vacancy_id, $data)
+    public function getReply($reply_id)
     {
-        $this->db->query("UPDATE " . DB_PREFIX . "vacancy SET title = '" . $this->db->escape($data['title']) . "', responsibility = '" . $this->db->escape($data['responsibility']) . "', requirements = '" . $this->db->escape($data['requirements']) . "', conditions = '" . $this->db->escape($data['conditions']) . "', date_modified = '" . $this->db->escape($data['date_modified']) . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "' WHERE vacancy_id = '" . (int)$vacancy_id . "'");
-
-        $this->cache->delete('vacancy');
-    }
-
-    public function deleteVacancy($vacancy_id)
-    {
-        $this->db->query("DELETE FROM " . DB_PREFIX . "vacancy WHERE vacancy_id = '" . (int)$vacancy_id . "'");
-
-        $this->cache->delete('vacancy');
-    }
-
-    public function getVacancy($vacancy_id)
-    {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "vacancy WHERE vacancy_id = '" . (int)$vacancy_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "reply WHERE reply_id = '" . (int)$reply_id . "'");
 
         return $query->row;
     }
@@ -74,19 +57,6 @@ class ModelCatalogReply extends Model
         return $query->rows;
     }
 
-    public function getProductFilters($product_id)
-    {
-        $product_filter_data = array();
-
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_filter WHERE product_id = '" . (int)$product_id . "'");
-
-        foreach ($query->rows as $result) {
-            $product_filter_data[] = $result['filter_id'];
-        }
-
-        return $product_filter_data;
-    }
-
     public function getTotalReplies()
     {
         $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "reply";
@@ -95,4 +65,14 @@ class ModelCatalogReply extends Model
 
         return $query->row['total'];
     }
+
+    public function getReplyFiles($reply_id)
+    {
+        $sql = "SELECT * FROM " . DB_PREFIX . "reply_files WHERE reply_id = '" . (int)$reply_id . "' ORDER BY sort_order";
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
 }

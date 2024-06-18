@@ -39,6 +39,7 @@
                         <button class="modal__close modal__close--fixed"></button>
                         <h3 class="vacancy-inner_form-title">Откликнуться<br>на вакансию</h3>
                         <form class="vacancy_form">
+                            <input name="vacancy_id" type="hidden" value="{{ vacancy_id }}">
                             <div class="vacancy_form-item">
                                 <input class="input-text" name="name" type="text" placeholder="Ваше Имя">
                                 <div class="name-error error"></div>
@@ -58,7 +59,7 @@
                             </div>
                             <label class="modal__attach">
                                 <div>
-                                    <input class="modal__attach_input" name="image[]" data-num="1" type="file">
+                                    <input class="modal__attach_input" name="file[]" data-num="1" type="file">
                                     <svg xmlns="http://www.w3.org/2000/svg">
                                         <use xlink:href="/sprite.svg#icon_download"></use>
                                     </svg>
@@ -66,9 +67,9 @@
                                 <p>Прикрепить файлы</p>
                             </label>
                             <div class="modal__size">
-                                <span>Можно прикрепить до 3х файлов (DOC, DOCX, PDF)<br> Весом до 5мб.</span>
+                                <span>Можно прикрепить до 3х файлов (PDF, DOC, DOCX, ODS)<br> Весом до 1мб.</span>
                                 <div class="modal__size-names"></div>
-                                <div class="image-error error"></div>
+                                <div class="file-error error"></div>
                             </div>
                             <button class="vacancy__btn btn btn-primary">Отправить</button>
                             <div>
