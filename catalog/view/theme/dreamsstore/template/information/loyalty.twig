@@ -1,0 +1,53 @@
+{{ header }}
+<div id="information-information">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content" class="loyalty">
+        <div class="container"><h1 class="page-title">{{ heading_title }}</h1></div>
+        <section class="loyalty_announcement">
+            <div class="container">
+                <div class="loyalty_announcement-inner">
+                    <ul class="loyalty_announcement-list">
+                        <li>1. Совершайте покупки на нашем сайте.</li>
+                        <li>2. Получаете на свой счет #% бонусов от суммы покупки.</li>
+                        <li>3. Оплачивайте бонусами при совершении следующих покупок.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="loyalty-answers">
+            <div class="container">
+                <div class="loyalty-answers_inner">
+                    <h2 class="section-title">Частые вопросы о бонусной системе</h2>
+                    <ul class="faq-content_list loyalty-answers_list dropdown-list">
+                        {% for loyalty in loyalties %}
+                            <li class="faq-content_list-item dropdown-list-item">
+                                <h4 class="faq-content_list-item_title loyalty-answers_list-item_title">
+                                    <span>{{ loyalty.title }}</span>
+                                    <span class="faq-content_list-item_title-svg  loyalty-answers_list-item_title-svg">
+                                        <svg class="faq-svg"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                        </svg>
+                                    </span>
+                                </h4>
+                                <div class="faq-content_list-item_answer loyalty-answers_list-item_answer dropdown-list-description">{{ loyalty.description }}</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        {#            {{ column_right }} #}
+        {#            {{ column_left }} #}
+        {#            {{ content_bottom }} #}
+        {#            {{ content_top }} #}
+    </div>
+</div>
+{{ footer }}

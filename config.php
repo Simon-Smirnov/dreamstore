@@ -6,6 +6,7 @@ define('HTTP_SERVER', 'http://dreamsstore/');
 define('HTTPS_SERVER', 'http://dreamsstore/');
 
 // DIR
+define('DIR_MAIN', 'C:/OpenServer/domains/dreamsstore/');
 define('DIR_APPLICATION', 'C:/OpenServer/domains/dreamsstore/catalog/');
 define('DIR_SYSTEM', 'C:/OpenServer/domains/dreamsstore/system/');
 define('DIR_IMAGE', 'C:/OpenServer/domains/dreamsstore/image/');

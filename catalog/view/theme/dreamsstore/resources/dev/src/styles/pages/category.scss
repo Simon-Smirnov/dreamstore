@@ -1,0 +1,195 @@
+.category {
+    padding-bottom: 4em;
+
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    &_getFree {
+        text-align: center;
+        padding: 1em 0;
+        border: 1px solid var(--libe);
+        border-radius: 0.4em;
+        font-weight: 500;
+        font-size: 1.1rem;
+
+        &-text {
+            color: var(--color-5-dark);
+        }
+
+        &-link {
+            color: var(--color-6-dark);
+        }
+    }
+
+    &_underCategories {
+        margin-top: 2.5em;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+        gap: 1em;
+
+        &-item {
+            background-color: var(--white);
+            border-radius: 0.4em;
+            padding: 0.5em;
+            width: 100%;
+            box-shadow: 0px 0px 24px 0px #00000005;
+        }
+
+        &-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+
+            picture {
+                flex-shrink: 0;
+            }
+
+            img {
+                width: 100%;
+                max-width: 4em;
+            }
+
+            span {
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-4-dark);
+            }
+        }
+    }
+
+    &_block {
+        display: flex;
+        gap: 1em;
+        margin-top: 3em;
+    }
+
+    &_other {
+        width: 25%;
+
+        &-choice {
+            background-color: var(--bg-light-60);
+            font-size: 1.3rem;
+            color: var(--color-4-dark);
+            border-radius: 0.2em;
+            padding: 1em 1.2em;
+        }
+
+        &-underCategories {
+            margin-top: 1em;
+            background-color: var(--white);
+            border-radius: 0.5em;
+            padding: 1.5em 1.2em;
+
+            &_toMainCategory {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--color-4-dark);
+                display: flex;
+                align-items: center;
+                gap: 0.3em;
+
+                svg {
+                    stroke: var(--color-4-dark);
+                    width: 0.8em;
+                    height: 0.8em;
+                    fill: none;
+                    transform: rotate(180deg);
+                }
+            }
+
+            &_list {
+                padding-left: 1.8em;
+            }
+
+            &_item {
+                margin-top: 0.6em;
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-4-dark);
+            }
+        }
+
+        &-filter {
+            margin-top: 1em;
+            background-color: var(--white);
+            padding: 1.5em 1.2em;
+            border-radius: 0.3em;
+
+            button {
+                display: block;
+                max-width: 100%;
+                width: 100%;
+                margin-top: 1em;
+            }
+        }
+    }
+
+    &_main {
+        width: 75%;
+
+        &-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &_sort {
+                font-weight: 500;
+                font-size: 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.3em;
+
+                p {
+                    color: var(--color-6-dark);
+                    margin-right: 0.3em;
+                }
+
+                //select {
+                //    color: var(--color-4-dark);
+                //}
+            }
+
+            &_structure {
+                display: flex;
+                gap: 1.5em;
+                align-items: center;
+
+                svg {
+                    width: 1.2em;
+                    height: 1.2em;
+                    fill: none;
+                    stroke: var(--color-6-dark);
+                }
+
+                svg:hover {
+                    stroke: var(--color-4-dark);
+                }
+            }
+        }
+
+        &-products {
+            margin-top: 1.5em;
+        }
+    }
+
+    &_pagination {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: fit-content;
+    }
+
+    &_more {
+        margin-top: 1em;
+
+        button {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            max-width: none;
+            background-color: transparent;
+        }
+    }
+    
+}

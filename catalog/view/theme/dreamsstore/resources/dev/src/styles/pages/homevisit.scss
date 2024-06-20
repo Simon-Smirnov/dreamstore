@@ -1,0 +1,210 @@
+.homevisit {
+
+    &_main {
+        padding: 4em 0;
+
+        &-content {
+            &_description {
+                color: var(--color-5-dark);
+                font-weight: 500;
+                font-size: 1.2rem;
+                line-height: 1.4;
+                text-align: center;
+
+                p + p {
+                    margin-top: 1em;
+                }
+            }
+
+            &_img {
+                margin-top: 3em;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &_stages {
+        padding: 4em 0;
+
+        &-inner {
+            margin-top: 1.5em;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5em;
+        }
+
+        &-item {
+            &_block {
+                display: flex;
+                gap: 1em;
+                align-items: center;
+            }
+
+            &_num {
+                font-weight: 500;
+                font-size: 1.2rem;
+                color: var(--color-6-dark)
+            }
+
+            &_line {
+                width: 100%;
+                border-top: 1px dashed var(--libe);
+            }
+
+            &_title, &_text {
+                font-weight: 500;
+                color: var(--color-5-dark);
+                line-height: 1.4;
+                margin-top: 0.8em;
+            }
+
+            &_title {
+                font-size: 1.3rem;
+            }
+
+            &_text {
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    &_service {
+        padding: 4em 0;
+
+        &-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            &_item {
+                &-title {
+                    font-weight: 500;
+                    color: var(--color-4-dark);
+                    font-size: 2rem;
+                    margin-bottom: 0.3em;
+                }
+
+                &-list {
+                    padding-left: 1em;
+
+                    li {
+                        position: relative;
+                        padding-left: 1em;
+                    }
+
+                    li::before {
+                        content: '•';
+                        font-size: 0.8rem;
+                        color: var(--color-5-dark);
+                        position: absolute;
+                        left: 0;
+                        top: 1em;
+                        transform: translateY(-50%);
+                    }
+                }
+
+                &-text, &-list {
+                    font-weight: 500;
+                    color: var(--color-5-dark);
+                    font-size: 1.2rem;
+                    line-height: 1.4;
+                }
+            }
+
+            &_item + &_item {
+                margin-top: 1.2em;
+            }
+        }
+    }
+
+    &_images {
+        padding: 4em 0;
+
+        &-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1em;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    &_form {
+        padding: 4em 0;
+
+        &-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5em;
+            background-color: var(--white);
+            border-radius: 0.3em;
+        }
+
+        &-image {
+            img {
+                width: 100%;
+            }
+        }
+
+        &-form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            form {
+                max-width: 31em;
+                width: 100%;
+            }
+        }
+
+        &-title {
+            text-align: center;
+        }
+
+        &-description {
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-5-dark);
+            line-height: 1.4;
+            margin-top: 0.8em;
+            margin-bottom: 1.2em;
+        }
+
+        &-item {
+            input, textarea {
+                max-width: none;
+            }
+
+            textarea {
+                min-height: 6em;
+            }
+        }
+
+        &-item + &-item {
+            margin-top: 0.8em;
+        }
+
+        &-btn {
+            display: block;
+            width: 100%;
+            margin-top: 0.6em;
+        }
+
+        &-agree {
+            margin-top: 0.4em;
+        }
+    }
+}

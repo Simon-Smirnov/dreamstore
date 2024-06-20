@@ -1,0 +1,13 @@
+.dropdown-list {
+    &-description {
+        display: none;
+    }
+
+    &-item {
+        &.open {
+            .dropdown-list-description {
+                display: block;
+            }
+        }
+    }
+}

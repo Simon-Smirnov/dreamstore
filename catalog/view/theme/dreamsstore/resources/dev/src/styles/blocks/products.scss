@@ -1,0 +1,63 @@
+.products_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3em 1em;
+    margin-bottom: 1em;
+
+    &-item {
+        position: relative;
+    }
+
+    &-thumb {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &-wishlist {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        cursor: pointer;
+    }
+
+    &-price {
+        margin-top: 0.8em;
+
+        .price-new {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-4-dark);
+        }
+
+        .price-old {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--color-6-dark);
+            text-decoration: line-through;
+            text-decoration-thickness: 0.2px;
+        }
+
+        .price-percent {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--color-6-dark);
+            border-radius: 0.3em;
+            border: 1px solid var(--libe);
+            padding: 0 0.5em;
+        }
+
+        span + span {
+            margin-left: 0.2em;
+        }
+    }
+
+    &-title {
+        font-weight: 500;
+        font-size: 1.1rem;
+        color: var(--color-5-dark);
+        line-height: 1.4;
+        margin-top: 0.8em;
+    }
+}

@@ -1,0 +1,155 @@
+{{ header }}
+<div id="information-information">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content" class="homevisit">
+        <div class="container"><h1 class="page-title">{{ heading_title }}</h1></div>
+        <section class="homevisit_main">
+            <div class="container">
+                <div class="homevisit_main-content">
+                    <div class="homevisit_main-content_description">
+                        {{ info }}
+                        {# <p>Место под описание....Мы предлагаем уникальную возможность создавать индивидуальные наборы #}
+                        {#    постельного белья, позволяя вам наслаждаться разнообразными комбинациями тканей и #}
+                        {#    дизайнов.</p> #}
+                        {# <p>Каждое изделие можно изготовить в неограниченном количестве и различных размерах, а также #}
+                        {#    украсить его дизайнерской обработкой или персонализированной вышивкой, чтобы придать ему #}
+                        {#    уникальный характер.</p> #}
+                    </div>
+                    <div class="homevisit_main-content_img">
+                        <img src="{{ assets }}/assets/images/homevisit/main.webp">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="homevisit_stages">
+            <div class="container">
+                <h2 class="section-title">Этапы работы с дизайнером</h2>
+                <div class="homevisit_stages-inner">
+                    <div class="homevisit_stages-item">
+                        <div class="homevisit_stages-item_block">
+                            <span class="homevisit_stages-item_num">01</span>
+                            <span class="homevisit_stages-item_line"></span>
+                        </div>
+                        <h4 class="homevisit_stages-item_title">Выезд дизайнера в удобное<br>для вас время</h4>
+                        <p class="homevisit_stages-item_text">Пригласите дизайнера на дом, он поможет Вам определиться с
+                            возможными вариантами, подходящими
+                            под ваш интерьер.</p>
+                    </div>
+                    <div class="homevisit_stages-item">
+                        <div class="homevisit_stages-item_block">
+                            <span class="homevisit_stages-item_num">02</span>
+                            <span class="homevisit_stages-item_line"></span>
+                        </div>
+                        <h4 class="homevisit_stages-item_title">Дизайн проект и подбор материалов с учетом Ваших
+                            пожеланий и требований</h4>
+                        <p class="homevisit_stages-item_text">На основе стиля и особенностей вашего помещение дизайнер
+                            разработает оптимальное решение и
+                            предоставит дизайн-проект с учетом Ваших пожеланий</p>
+                    </div>
+                    <div class="homevisit_stages-item">
+                        <div class="homevisit_stages-item_block">
+                            <span class="homevisit_stages-item_num">03</span>
+                            <span class="homevisit_stages-item_line"></span>
+                        </div>
+                        <h4 class="homevisit_stages-item_title">Оформление договора,<br>внесение предоплаты</h4>
+                        <p class="homevisit_stages-item_text">После согласования заключается договор и вносится пр
+                            едоплата</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="homevisit_service">
+            <div class="container">
+                <div class="homevisit_service-inner">
+                    <div class="homevisit_service-info">
+                        <div class="homevisit_service-info_item">
+                            <h3 class="homevisit_service-info_item-title">Что входит в услугу</h3>
+                            <ul class="homevisit_service-info_item-list">
+                                <li>Консультация на дому</li>
+                                <li>Подбор материалов с демонстрацией образцов</li>
+                                <li>Заключение договора</li>
+                            </ul>
+                        </div>
+                        <div class="homevisit_service-info_item">
+                            <h3 class="homevisit_service-info_item-title">Стоимость услуги</h3>
+                            <ul class="homevisit_service-info_item-list">
+                                <p class="homevisit_service-info_item-text">Стоимость выезда дизайнера в пределах МКАД –
+                                    500 руб.
+                                    <br>
+                                    Стоимость выезда за пределы МКАД – 500 рублей + 20 руб/км
+                                </p>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="homevisit_service-img">
+                        <img src="{{ assets }}/assets/images/homevisit/service.webp">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="homevisit_images">
+            <div class="container">
+                <ul class="homevisit_images-list">
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_1.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_2.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_3.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_4.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_5.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_6.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_7.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_8.webp"></li>
+                    <li><img src="{{ assets }}/assets/images/homevisit/list_9.webp"></li>
+                </ul>
+            </div>
+        </section>
+        <section class="homevisit_form">
+            <div class="container">
+                <div class="homevisit_form-inner">
+                    <div class="homevisit_form-image"><img src="{{ assets }}/assets/images/homevisit/form.webp"></div>
+                    <div class="homevisit_form-form">
+                        <form>
+                            <h2 class="homevisit_form-title section-title">Оставить заявку</h2>
+                            <p class="homevisit_form-description">Оставьте Ваши контакты для связи.<br>Мы свяжемся с
+                                Вами,
+                                для
+                                согласования времени и даты</p>
+                            <div class="homevisit_form-item">
+                                <input class="input-text" name="phone" type="text" placeholder="Телефон">
+                                <div class="phone-error error"></div>
+                            </div>
+                            <div class="homevisit_form-item">
+                                <input class="input-text" name="email" type="email" placeholder="E-mail">
+                                <div class="email-error error"></div>
+                            </div>
+                            <div class="homevisit_form-item">
+                                <textarea class="input-text" name="message" type="text" cols="10"
+                                          placeholder="Ваше сообщение"></textarea>
+                                <div class="message-error error"></div>
+                            </div>
+                            <button class="homevisit_form-btn btn btn-primary">Отправить</button>
+                            <div class="homevisit_form-agree">
+                                <label class="agree">
+                                    <input class="input-checkbox" name="agree" type="checkbox">
+                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                </label>
+                                <div class="agree-error error"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {#            {{ column_right }} #}
+        {#            {{ column_left }} #}
+        {#            {{ content_bottom }} #}
+        {#            {{ content_top }} #}
+    </div>
+</div>
+{{ footer }}

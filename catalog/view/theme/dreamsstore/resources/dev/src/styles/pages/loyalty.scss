@@ -1,0 +1,31 @@
+.loyalty {
+    h1 {
+        margin-bottom: 1.2em;
+    }
+
+    &_announcement {
+        &-inner {
+            padding: 2em 0;
+            background-color: var(--bg-light-60);
+            text-align: center;
+            border-radius: 0.3em;
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: var(--color-4-dark);
+        }
+
+        &-list {
+            li + li {
+                margin-top: 0.2em;
+            }
+        }
+    }
+
+    &-answers {
+        padding: 4em 0 6em;
+
+        &_list {
+            margin-top: 1.5em;
+        }
+    }
+}

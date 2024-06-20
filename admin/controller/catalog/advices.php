@@ -431,7 +431,7 @@ class ControllerCatalogAdvices extends Controller
             $data['advice_answers'][] = array(
                 'advice_answer_id' => $result['advice_answer_id'],
                 'title' => $result['title'],
-                'answer' => $result['answer'],
+                'answer' => html_entity_decode($result['answer']),
                 'sort_order' => $result['sort_order'],
                 'edit' => $this->url->link('catalog/advices/editanswer', 'user_token=' . $this->session->data['user_token'] . '&advice_answer_id=' . $result['advice_answer_id'] . '&advice_id=' . $parent_id . $url, true)
             );

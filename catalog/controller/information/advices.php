@@ -35,7 +35,7 @@ class ControllerInformationAdvices extends Controller
             foreach ($results as $result) {
                 $advices[] = [
                     'title' => $result['title'],
-                    'answer' => $result['answer']
+                    'answer' => html_entity_decode($result['answer'], ENT_QUOTES, 'UTF-8')
                 ];
             }
 

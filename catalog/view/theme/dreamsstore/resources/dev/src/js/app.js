@@ -4,6 +4,8 @@ import './classes/Fancybox.js'
 import Faq from './classes/Faq.js'
 import Reviews from './classes/Reviews.js'
 import Replies from './classes/Replies.js'
+import './classes/Loadmore.js'
+import List from './classes/List.js'
 import Stars from './classes/Stars.js'
 import './classes/Mask.js'
 import './classes/Slider.js'
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new Stars('.stars_grade');
     new Reviews('.review_form');
     new Replies('.vacancy_form');
+    new List('.dropdown-list');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

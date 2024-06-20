@@ -169,6 +169,14 @@ class ControllerCommonColumnLeft extends Controller
                 );
             }
 
+            if ($this->user->hasPermission('access', 'catalog/loyalty')) {
+                $catalog[] = array(
+                    'name' => $this->language->get('text_loyalty'),
+                    'href' => $this->url->link('catalog/loyalty', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                );
+            }
+
             if ($catalog) {
                 $data['menus'][] = array(
                     'id' => 'menu-catalog',
@@ -178,7 +186,7 @@ class ControllerCommonColumnLeft extends Controller
                     'children' => $catalog
                 );
             }
-            
+
             // Extension
             $marketplace = array();
 

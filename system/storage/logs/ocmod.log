@@ -1,4 +1,4 @@
-2024-06-18 9:08:35 - MOD: Modification Default
+2024-06-20 13:24:14 - MOD: Modification Default
 
 FILE: system/engine/action.php
 REGEX: ~(require|include)(_once)?\(([^)]+)~
@@ -28,4 +28,19 @@ CODE: if (is_file($file)) {
 LINE: 13
 CODE: $include[] = DIR_TEMPLATE;
 LINE: 46
+----------------------------------------------------------------
+MOD: Localcopy OCMOD Install Fix
+
+FILE: admin/controller/marketplace/install.php
+CODE: if ($safe) {
+LINE: 165
+CODE: if (is_dir($file) && !is_dir($path)) {
+LINE: 221
+----------------------------------------------------------------
+MOD: Show Subcategory products on category page
+
+FILE: catalog/controller/product/category.php
+CODE: $filter_data = array(
+LINE: 158
+LINE: 184
 ----------------------------------------------------------------
