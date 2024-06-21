@@ -6,13 +6,11 @@
 
     &-item {
         position: relative;
+        display: block;
     }
 
-    &-thumb {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    &-item:hover {
+        transform: translateY(-1.5px);
     }
 
     &-wishlist {

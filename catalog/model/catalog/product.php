@@ -16,6 +16,8 @@ class ModelCatalogProduct extends Model
                 'product_id' => $query->row['product_id'],
                 'name' => $query->row['name'],
                 'description' => $query->row['description'],
+                'care' => $query->row['care'],
+                'questions' => $query->row['questions'],
                 'meta_h1' => $query->row['meta_h1'],
                 'meta_title' => $query->row['meta_title'],
                 'meta_description' => $query->row['meta_description'],
@@ -401,6 +403,19 @@ class ModelCatalogProduct extends Model
     }
 
     public function getProductRelated($product_id)
+    {
+        $product_data = array();
+
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_related pr LEFT JOIN " . DB_PREFIX . "product p ON (pr.related_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pr.product_id = '" . (int)$product_id . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
+
+        foreach ($query->rows as $result) {
+            $product_data[$result['related_id']] = $this->getProduct($result['related_id']);
+        }
+
+        return $product_data;
+    }
+
+    public function getProductRelatedByParentCategory($product_id)
     {
         $product_data = array();
 
