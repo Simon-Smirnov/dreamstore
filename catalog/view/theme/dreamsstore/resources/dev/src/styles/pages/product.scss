@@ -153,6 +153,7 @@
     }
 
     &-images {
+
         &__image {
             width: 100%;
         }
@@ -222,5 +223,125 @@
         &__box li {
             list-style-type: disc !important;
         }
+    }
+
+    &-reviews {
+        padding: 3em 0;
+
+        &__block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__watchAll {
+            display: flex;
+            gap: 0.7em;
+            align-items: center;
+            cursor: pointer;
+
+            span {
+                color: var(--color-6-dark);
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                fill: none;
+                stroke: var(--color-6-dark);
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .section-title {
+            margin-bottom: 1em;
+        }
+
+        .reviews_site-list {
+            height: auto;
+        }
+
+        .reviews_site-list_item + .reviews_site-list_item {
+            margin-top: 0;
+        }
+
+
+    }
+
+    &-mayBeInterest {
+        padding: 3em 0;
+
+        .section-title {
+            margin-bottom: 1em;
+        }
+
+        &__list {
+            display: grid;
+            gap: 0.8em;
+            grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+
+            h4 {
+                text-align: center;
+                font-weight: 500;
+                font-size: 1.3rem;
+                color: var(--color-4-dark);
+                margin-top: 0.5em;
+            }
+        }
+
+        &__link {
+            display: block;
+        }
+
+        &__link:hover {
+            transform: translateY(-1.5px);
+        }
+    }
+
+    &-recentlyViewed {
+        padding: 3em 0;
+
+        .section-title {
+            margin-bottom: 1em;
+        }
+    }
+}
+
+.sliderProductMain {
+    position: relative;
+
+    &-arrows {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        z-index: 2;
+        padding: 0 1.5em;
+    }
+
+    &-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+    }
+}
+
+.sliderProductThumbs {
+    margin-top: 1em;
+
+    .product-images__item {
+        cursor: pointer;
+        border-radius: 0.6em;
+        overflow: hidden;
+        border: 0.3em solid transparent;
+    }
+
+    .product-images__item.swiper-slide-thumb-active {
+        border: 0.3em solid var(--color-6-dark);
     }
 }

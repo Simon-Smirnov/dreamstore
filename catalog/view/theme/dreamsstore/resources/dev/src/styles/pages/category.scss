@@ -73,6 +73,8 @@
             color: var(--color-4-dark);
             border-radius: 0.2em;
             padding: 1em 1.2em;
+            display: block;
+            width: 100%;
         }
 
         &-underCategories {
@@ -191,5 +193,5 @@
             background-color: transparent;
         }
     }
-    
+
 }

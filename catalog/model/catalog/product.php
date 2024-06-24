@@ -415,14 +415,25 @@ class ModelCatalogProduct extends Model
         return $product_data;
     }
 
-    public function getProductRelatedByParentCategory($product_id)
+    public function getCategoryIdForProduct($product_id)
+    {
+        $query = $this->db->query("SELECT `category_id` FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
+
+        return $query->row['category_id'];
+    }
+
+    public function getProductRelatedByCategory($category_id, $current_product_id)
     {
         $product_data = array();
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_related pr LEFT JOIN " . DB_PREFIX . "product p ON (pr.related_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) WHERE pr.product_id = '" . (int)$product_id . "' AND p.status = '1' AND p.date_available <= NOW() AND p2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");
+        $query = $this->db->query("SELECT `product_id` FROM " . DB_PREFIX . "product_to_category WHERE category_id = '" . (int)$category_id . "'");
 
-        foreach ($query->rows as $result) {
-            $product_data[$result['related_id']] = $this->getProduct($result['related_id']);
+        if (count($query->num_rows) > 0) {
+            foreach ($query->rows as $result) {
+                if ($result['product_id'] != $current_product_id) {
+                    $product_data[$result['product_id']] = $this->getProduct($result['product_id']);
+                }
+            }
         }
 
         return $product_data;

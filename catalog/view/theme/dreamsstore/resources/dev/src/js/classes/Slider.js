@@ -26,7 +26,79 @@ export default class Slider {
         const slider = document.querySelector('.slider')
         if (slider) {
             this.createSlider(slider, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Страница продукта (отзывы)
+        const sliderProductReviews = document.querySelector('.sliderProductReviews')
+        if (sliderProductReviews) {
+            this.createSlider(sliderProductReviews, {
                 slidesPerView: 3,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        const sliderProductThumbs = document.querySelector('.sliderProductThumbs')
+        let sliderThumbs;
+        if (sliderProductThumbs) {
+            sliderThumbs = this.createSlider(sliderProductThumbs, {
+                slidesPerView: 7,
+                spaceBetween: 8,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+            })
+        }
+
+        const sliderProductMain = document.querySelector('.sliderProductMain')
+        if (sliderProductMain) {
+            this.createSlider(sliderProductMain, {
+                slidesPerView: 1,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                thumbs: {
+                    swiper: sliderThumbs,
+                },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        const sliderProductRecentlyViewed = document.querySelector('.sliderProductRecentlyViewed')
+        if (sliderProductRecentlyViewed) {
+            this.createSlider(sliderProductRecentlyViewed, {
+                slidesPerView: 6,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -64,7 +136,7 @@ export default class Slider {
             if (dotted) {
                 options.pagination = {
                     el: dotted,
-                    type:'bullets',
+                    type: 'bullets',
                     clickable: true
                 }
             }
@@ -75,7 +147,7 @@ export default class Slider {
             if (indicator) {
                 options.pagination = {
                     el: indicator,
-                    type:'fraction',
+                    type: 'fraction',
                 }
             }
 

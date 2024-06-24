@@ -10,50 +10,120 @@
     <div class="container">
         <div id="content" class="product">
             <div class="product-left">
-                <div class="product-images">
-                    {% if thumb or images %}
-                        <div class="product-images__big">
-                            <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}">
-                                <picture>
-                                    <source srcset="{{ thumb.webp }}">
-                                    <img class="product-images__image"
-                                         src="{{ thumb.default }}" alt="{{ heading_title }}"
-                                         title="{{ heading_title }}"
-                                         loading="lazy"/>
-                                </picture>
-                            </a>
-                        </div>
-                        {# <ul class="product-images__list"> #}
-                        {#    {% if thumb %} #}
-                        {#        <li class="product-images__item"> #}
-                        {#            <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}"> #}
-                        {#                #}{# <img #}
-                        {#                #}{#        src="{{ thumb }}" title="{{ heading_title }}" #}
-                        {#                #}{#        alt="{{ heading_title }}"/> #}
-                        {#                <picture> #}
-                        {#                    <source srcset="{{ thumb.webp }}"> #}
-                        {#                    <img class="product-images__image" #}
-                        {#                         src="{{ thumb.default }}" alt="{{ heading_title }}" #}
-                        {#                         title="{{ heading_title }}" #}
-                        {#                         loading="lazy"/> #}
-                        {#                </picture> #}
-                        {#            </a> #}
-                        {#        </li> #}
-                        {#    {% endif %} #}
-                        {#    {% if images %} #}
-                        {#        {% for image in images %} #}
-                        {#            <li class="product-images__item"> #}
-                        {#                <a class="product-images__link" href="{{ image.popup }}" #}
-                        {#                   title="{{ heading_title }}"> #}
-                        {#                    <img class="product-images__image" #}
-                        {#                         src="{{ image.thumb }}" title="{{ heading_title }}" #}
-                        {#                         alt="{{ heading_title }}"/> #}
-                        {#                </a> #}
-                        {#            </li> #}
-                        {#        {% endfor %} #}
-                        {#    {% endif %} #}
-                        {# </ul> #}
-                    {% endif %}
+                <div class="sliderProductMain">
+                    <div class="product-images swiper">
+                        {% if thumb or images %}
+                            {# <div class="product-images__big"> #}
+                            {#    <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}"> #}
+                            {#        <picture> #}
+                            {#            <source srcset="{{ thumb.webp }}"> #}
+                            {#            <img class="product-images__image" #}
+                            {#                 src="{{ thumb.default }}" alt="{{ heading_title }}" #}
+                            {#                 title="{{ heading_title }}" #}
+                            {#                 loading="lazy"/> #}
+                            {#        </picture> #}
+                            {#    </a> #}
+                            {# </div> #}
+                            <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                                {#                            {% if thumb %} #}
+                                {#                                <li class="product-images__item"> #}
+                                {#                                    <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}"> #}
+                                {#                                        <img #}
+                                {#                                                src="{{ thumb }}" title="{{ heading_title }}" #}
+                                {#                                                alt="{{ heading_title }}"/> #}
+                                {#                                        <picture> #}
+                                {#                                            <source srcset="{{ thumb.webp }}"> #}
+                                {#                                            <img class="product-images__image" #}
+                                {#                                                 src="{{ thumb.default }}" alt="{{ heading_title }}" #}
+                                {#                                                 title="{{ heading_title }}" #}
+                                {#                                                 loading="lazy"/> #}
+                                {#                                        </picture> #}
+                                {#                                    </a> #}
+                                {#                                </li> #}
+                                {#                            {% endif %} #}
+                                {% if thumb %}
+                                    <li class="product-images__item">
+                                        <a class="product-images__link" href="{{ thumb.popup }}"
+                                           title="{{ heading_title }}">
+                                            <picture>
+                                                <source srcset="{{ thumb.webp }}">
+                                                <img class="product-images__image"
+                                                     src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                                     title="{{ heading_title }}"
+                                                     loading="lazy"/>
+                                            </picture>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% if images %}
+                                    {% for image in images %}
+                                        <li class="product-images__item">
+                                            <a class="product-images__link" href="{{ image.popup }}"
+                                               title="{{ heading_title }}">
+                                                <picture>
+                                                    <source srcset="{{ image.webp }}">
+                                                    <img class="product-images__image"
+                                                         src="{{ image.default }}" alt="{{ heading_title }}"
+                                                         title="{{ heading_title }}"
+                                                         loading="lazy"/>
+                                                </picture>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                        <nav class="sliderProductMain-arrows">
+                            <ul class="sliderProductMain-list">
+                                <div>
+                                    <li class="slider__arrow--prev">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                        </svg>
+                                    </li>
+                                </div>
+                                <div>
+                                    <li class="slider__arrow--next">
+                                        <svg xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                        </svg>
+                                    </li>
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="sliderProductThumbs">
+                    <div class="product-images swiper">
+                        {% if thumb or images %}
+                            <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                                {% if thumb %}
+                                    <li class="product-images__item">
+                                        <picture>
+                                            <source srcset="{{ thumb.webp }}">
+                                            <img class="product-images__image"
+                                                 src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                                 title="{{ heading_title }}"
+                                                 loading="lazy"/>
+                                        </picture>
+                                    </li>
+                                {% endif %}
+                                {% if images %}
+                                    {% for image in images %}
+                                        <li class="product-images__item">
+                                            <picture>
+                                                <source srcset="{{ image.webp }}">
+                                                <img class="product-images__image"
+                                                     src="{{ image.default }}" alt="{{ heading_title }}"
+                                                     title="{{ heading_title }}"
+                                                     loading="lazy"/>
+                                            </picture>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="product-tabs" data-tabs-parent>
                     <div class="product-tabs__togglers">
@@ -205,76 +275,195 @@
     </section>
     <section class="product-similar">
         <div class="container">
-            <h2 class="section-title">Похожие товары</h2>
-            <div class="products_grid product-similar__grid">
-                {% for product in products %}
-                    <a class="products_grid-item product-similar__item" href="{{ product.href }}">
-                        <div class="products_grid-thumb">
-                            <div class="products_grid-block">
-                                <picture>
-                                    <source srcset="{{ product.thumb.webp }}">
-                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                         title="{{ product.name }}"
-                                         src="{{ product.thumb.default }}" loading="lazy">
-                                </picture>
-                                <p class="products_grid-price">
-                                    {% if not product.special %}
-                                        <span
-                                                class="price-new">{{ product.price }}</span>
-                                    {% else %}
-                                        <span
-                                                class="price-new">{{ product.special }}</span>
-                                        <span
-                                                class="price-old">{{ product.price }}</span>
-                                        <span class="price-percent">{{ product.percent }}</span>
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <h4 class="products_grid-title">{{ product.name }}</h4>
-                            <button class="products_grid-wishlist" type="button" data-toggle="tooltip"
-                                    title="{{ button_wishlist }}"
-                                    onclick="wishlist.add('{{ product.product_id }}');">
-                                <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_heart"></use>
-                                </svg>
-                            </button>
-                            {# <div class=""> #}
-                            {#    <div class="caption"> #}
+            <div class="slider">
+                <h2 class="section-title">Похожие товары</h2>
+                <div class="swiper">
+                    <div class="swiper-wrapper" data-lightbox-parent>
+                        {% for product in products %}
+                            <a class="products_grid-item product-similar__item" href="{{ product.href }}"
+                               data-fancybox="slider">
+                                <div class="products_grid-thumb">
+                                    <div class="products_grid-block">
+                                        <picture>
+                                            <source srcset="{{ product.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                 title="{{ product.name }}"
+                                                 src="{{ product.thumb.default }}" loading="lazy">
+                                        </picture>
+                                        <p class="products_grid-price">
+                                            {% if not product.special %}
+                                                <span
+                                                        class="price-new">{{ product.price }}</span>
+                                            {% else %}
+                                                <span
+                                                        class="price-new">{{ product.special }}</span>
+                                                <span
+                                                        class="price-old">{{ product.price }}</span>
+                                                <span class="price-percent">{{ product.percent }}</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <h4 class="products_grid-title">{{ product.name }}</h4>
+                                    <button class="products_grid-wishlist" type="button" data-toggle="tooltip"
+                                            title="{{ button_wishlist }}"
+                                            onclick="wishlist.add('{{ product.product_id }}');">
+                                        <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_heart"></use>
+                                        </svg>
+                                    </button>
+                                    {# <div class=""> #}
+                                    {#    <div class="caption"> #}
 
-                            {#        <p>{{ product.description }}</p> #}
-                            {#        {% if product.price %} #}
-                            {#            <p class="price"> {% if not product.special %} #}
-                            {#                    {{ product.price }} #}
-                            {#                {% else %} <span #}
-                            {#                        class="price-new">{{ product.special }}</span> #}
-                            {#                    <span #}
-                            {#                            class="price-old">{{ product.price }}</span> {% endif %} #}
-                            {#                {% if product.tax %} <span #}
-                            {#                        class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
-                            {#            </p> #}
-                            {#        {% endif %} #}
-                            {#    </div> #}
-                            {#    <div class="button-group"> #}
-                            {#        <button type="button" #}
-                            {#                onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
-                            {#            <i class="fa fa-shopping-cart"></i> <span #}
-                            {#                    class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
-                            {#        </button> #}
-                            {#        <button type="button" data-toggle="tooltip" #}
-                            {#                title="{{ button_wishlist }}" #}
-                            {#                onclick="wishlist.add('{{ product.product_id }}');"><i #}
-                            {#                    class="fa fa-heart"></i></button> #}
-                            {#        <button type="button" data-toggle="tooltip" #}
-                            {#                title="{{ button_compare }}" #}
-                            {#                onclick="compare.add('{{ product.product_id }}');"><i #}
-                            {#                    class="fa fa-exchange"></i></button> #}
-                            {#    </div> #}
-                            {# </div> #}
-                        </div>
-                    </a>
-                {% endfor %}
+                                    {#        <p>{{ product.description }}</p> #}
+                                    {#        {% if product.price %} #}
+                                    {#            <p class="price"> {% if not product.special %} #}
+                                    {#                    {{ product.price }} #}
+                                    {#                {% else %} <span #}
+                                    {#                        class="price-new">{{ product.special }}</span> #}
+                                    {#                    <span #}
+                                    {#                            class="price-old">{{ product.price }}</span> {% endif %} #}
+                                    {#                {% if product.tax %} <span #}
+                                    {#                        class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
+                                    {#            </p> #}
+                                    {#        {% endif %} #}
+                                    {#    </div> #}
+                                    {#    <div class="button-group"> #}
+                                    {#        <button type="button" #}
+                                    {#                onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
+                                    {#            <i class="fa fa-shopping-cart"></i> <span #}
+                                    {#                    class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
+                                    {#        </button> #}
+                                    {#        <button type="button" data-toggle="tooltip" #}
+                                    {#                title="{{ button_wishlist }}" #}
+                                    {#                onclick="wishlist.add('{{ product.product_id }}');"><i #}
+                                    {#                    class="fa fa-heart"></i></button> #}
+                                    {#        <button type="button" data-toggle="tooltip" #}
+                                    {#                title="{{ button_compare }}" #}
+                                    {#                onclick="compare.add('{{ product.product_id }}');"><i #}
+                                    {#                    class="fa fa-exchange"></i></button> #}
+                                    {#    </div> #}
+                                    {# </div> #}
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    {% if reviews_to_shop %}
+        <section class="product-reviews sliderProductReviews">
+            <div class="container">
+                <div class="product-reviews__block">
+                    <h2 class="section-title">Отзывы покупателей</h2>
+                    <a href="/reviews" class="product-reviews__watchAll">
+                        <span>Смотреть все</span>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="reviews_site swiper">
+                    <ul class="reviews_site-list swiper-wrapper" data-lightbox-parent>
+                        {% for review in reviews_to_shop %}
+                            <li class="reviews_site-list_item" data-fancybox="slider">
+                                <div class="reviews_site-list_item-title">
+                                    <div class="reviews_site-list_item-title_initial">{{ review.initial }}</div>
+                                    <div class="reviews_site-list_item-title_block">
+                                        <h4 class="reviews_site-list_item-title_block-name">{{ review.name }}</h4>
+                                        <ul class="reviews_site-list_item-title_block-grade">
+                                            {% for grade in review.grades %}
+                                                <li>
+                                                    <svg class="icon-svg-star {{ grade }}"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <use xlink:href="/sprite.svg#icon_star"></use>
+                                                    </svg>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="reviews_site-list_item-title_date">
+                                        {{ review.date }}
+                                    </div>
+                                </div>
+                                <div class="reviews_site-list_item-text">{{ review.text }}</div>
+                                <div class="reviews_site-list_item-images">
+                                    {% for image in review.images %}
+                                        <picture>
+                                            <source srcset="{{ image.webp }}">
+                                            <img class="catalog-inner_link-img"
+                                                 src="{{ image.default }}" loading="lazy">
+                                        </picture>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if recently_viewed_products %}
+        <section class="product-recentlyViewed sliderProductRecentlyViewed">
+            <div class="container">
+                <h2 class="section-title">Ранее вы смотрели</h2>
+                <div class="swiper">
+                    <ul class="product-recentlyViewed__list swiper-wrapper" data-lightbox-parent>
+                        {% for recently_viewed_product in recently_viewed_products %}
+                            <li class="product-recentlyViewed__item">
+                                <div class="products_grid-thumb">
+                                    <div class="products_grid-block">
+                                        <picture>
+                                            <source srcset="{{ recently_viewed_product.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ recently_viewed_product.name }}"
+                                                 title="{{ recently_viewed_product.name }}"
+                                                 src="{{ recently_viewed_product.thumb.default }}" loading="lazy">
+                                        </picture>
+                                        <p class="products_grid-price">
+                                            {% if not recently_viewed_product.special %}
+                                                <span
+                                                        class="price-new">{{ recently_viewed_product.price }}</span>
+                                            {% else %}
+                                                <span
+                                                        class="price-new">{{ recently_viewed_product.special }}</span>
+                                                <span
+                                                        class="price-old">{{ recently_viewed_product.price }}</span>
+                                                <span class="price-percent">{{ recently_viewed_product.percent }}</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <h4 class="products_grid-title">{{ recently_viewed_product.name }}</h4>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if may_be_interest_categories %}
+        <section class="product-mayBeInterest">
+            <div class="container">
+                <h2 class="section-title">Может заинтересовать</h2>
+                <ul class="product-mayBeInterest__list">
+                    {% for interest_category in may_be_interest_categories %}
+                        <li>
+                            <a class="product-mayBeInterest__link" href="{{ interest_category.href }}">
+                                <picture>
+                                    <source srcset="{{ interest_category.image.webp }}">
+                                    <img class="catalog-inner_link-img" alt="{{ interest_category.name }}"
+                                         title="{{ interest_category.name }}"
+                                         src="{{ interest_category.image.default }}" loading="lazy">
+                                </picture>
+                                <h4>{{ interest_category.name }}</h4>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
 </div>
 {{ footer }}
