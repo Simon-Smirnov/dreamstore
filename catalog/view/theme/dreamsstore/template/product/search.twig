@@ -1,0 +1,198 @@
+{{ header }}
+<div id="product-search">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div id="content" class="search">
+            <h1 class="page-title">{{ heading_title }}</h1>
+            <div class="search-input">
+                <input class="input-text search-input__input" type="text" name="search" value="{{ search }}"
+                       placeholder="{{ text_keyword }}"
+                       id="input-search" class="form-control"/>
+                <svg class="search-input__svg" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/sprite.svg#icon_search"></use>
+                </svg>
+                <svg class="search-input__close" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/sprite.svg#icon_cross"></use>
+                </svg>
+                <p>результат(ов) по запросу {{ search }}</p>
+            </div>
+            <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary"/>
+            {% if products %}
+                <div class="category_main-controls">
+                    <div class="category_main-controls_sort">
+                        <p>{{ text_sort }}</p>
+                        <div id="sorts" class="select select-1 open">
+                            <input type="hidden" name="select"
+                                   value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC">
+                            <div class="select__box-btn">
+                                <button class="select__button" type="button">
+                                    По умолчанию
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </div>
+                            <ul class="select__list">
+                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC"
+                                    selected="selected">По умолчанию
+                                </li>
+                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=ASC">
+                                    Сначала недорогие
+                                </li>
+                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=DESC">
+                                    Сначала дорогие
+                                </li>
+                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.viewed&amp;order=DESC">
+                                    Популярные
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="category_main-controls_structure">
+                        <button type="button" id="grid-view"
+                                data-toggle="tooltip"
+                                title="{{ button_grid }}">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_square"></use>
+                            </svg>
+                        </button>
+                        <button type="button" id="list-view"
+                                data-toggle="tooltip"
+                                title="{{ button_list }}">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_list"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                {% for product in products %}
+                    <div class="product-layout product-list col-xs-12">
+                        <div class="product-thumb">
+                            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}"
+                                                                                 alt="{{ product.name }}"
+                                                                                 title="{{ product.name }}"
+                                                                                 class="img-responsive"/></a></div>
+                            <div>
+                                <div class="caption">
+                                    <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                                    <p>{{ product.description }}</p>
+                                    {% if product.price %}
+                                        <p class="price">
+                                            {% if  not product.special %}
+                                                {{ product.price }}
+                                            {% else %}
+                                                <span class="price-new">{{ product.special }}</span> <span
+                                                    class="price-old">{{ product.price }}</span>
+                                            {% endif %}
+                                            {% if product.tax %}
+                                                <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
+                                    {% if product.rating %}
+                                        <div class="rating">
+                                            {% for i in 1..5 %}
+                                                {% if product.rating < i %}
+                                                    <span class="fa fa-stack"><i
+                                                                class="fa fa-star-o fa-stack-2x"></i></span>
+                                                {% else %}
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+                                                                class="fa fa-star-o fa-stack-2x"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="button-group">
+                                    <button type="button"
+                                            onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">
+                                        <i class="fa fa-shopping-cart"></i> <span
+                                                class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span>
+                                    </button>
+                                    <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}"
+                                            onclick="wishlist.add('{{ product.product_id }}');"><i
+                                                class="fa fa-heart"></i></button>
+                                    <button type="button" data-toggle="tooltip" title="{{ button_compare }}"
+                                            onclick="compare.add('{{ product.product_id }}');"><i
+                                                class="fa fa-exchange"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if pagination %}
+                    <div class="category_more category-page__more">
+                        <button class="btn btn-second loadmore" data-loadmore
+                                data-items-identy-name="products_grid-item">
+                            Показать ещё
+                        </button>
+                    </div>
+
+                    <div class="category_pagination" data-pagination>
+                        {{ pagination }}
+                    </div>
+                {% endif %}
+            {% else %}
+                <p>{{ text_empty }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {#    {{ column_left }} #}
+    {#    {{ column_right }} #}
+    {#    {{ content_bottom }} #}
+    {#    {{ content_top }} #}
+</div>
+<script type="text/javascript"><!--
+    $('#button-search').bind('click', function () {
+        url = 'index.php?route=product/search';
+
+        var search = $('#content input[name=\'search\']').prop('value');
+
+        if (search) {
+            url += '&search=' + encodeURIComponent(search);
+        }
+
+        var category_id = $('#content select[name=\'category_id\']').prop('value');
+
+        if (category_id > 0) {
+            url += '&category_id=' + encodeURIComponent(category_id);
+        }
+
+        var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
+
+        if (sub_category) {
+            url += '&sub_category=true';
+        }
+
+        var filter_description = $('#content input[name=\'description\']:checked').prop('value');
+
+        if (filter_description) {
+            url += '&description=true';
+        }
+
+        location = url;
+    });
+
+    $('#content input[name=\'search\']').bind('keydown', function (e) {
+        if (e.keyCode == 13) {
+            $('#button-search').trigger('click');
+        }
+    });
+
+    $('select[name=\'category_id\']').on('change', function () {
+        if (this.value == '0') {
+            $('input[name=\'sub_category\']').prop('disabled', true);
+        } else {
+            $('input[name=\'sub_category\']').prop('disabled', false);
+        }
+    });
+
+    $('select[name=\'category_id\']').trigger('change');
+    --></script>
+{{ footer }}

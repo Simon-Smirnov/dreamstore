@@ -1,92 +1,90 @@
-<div id="cart">
-	<a>
-		<svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+<div id="cart" class="miniCart" data-dropdown-cart>
+    <a href="/cart" class="dropdownCartBtn">
+        <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
             <use xlink:href="/sprite.svg#icon_basket"></use>
         </svg>
-		<span id="cart-total">{{ text_items }}</span>
-	</a>
-	{# <ul class="dropdown-menu pull-right">
-		{% if products or vouchers %}
-			<li>
-				<table class="table table-striped">
-					{% for product in products %}
-						<tr>
-							<td class="text-center">
-								{% if product.thumb %}
-									<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail"/></a>
-								{% endif %}
-							</td>
-							<td class="text-left">
-								<a href="{{ product.href }}">{{ product.name }}</a>
-								{% if product.option %}
-									{% for option in product.option %}
-										<br/>
-										-
-										<small>{{ option.name }}
-											{{ option.value }}</small>
-									{% endfor %}
-								{% endif %}
-								{% if product.recurring %}
-									<br/>
-									-
-									<small>{{ text_recurring }}
-										{{ product.recurring }}</small>
-								{% endif %}
-							</td>
-							<td class="text-right">x
-								{{ product.quantity }}</td>
-							<td class="text-right">{{ product.total }}</td>
-							<td class="text-center">
-								<button type="button" onclick="cart.remove('{{ product.cart_id }}');" title="{{ button_remove }}" class="btn btn-danger btn-xs">
-									<i class="fa fa-times"></i>
-								</button>
-							</td>
-						</tr>
-					{% endfor %}
-					{% for voucher in vouchers %}
-						<tr>
-							<td class="text-center"></td>
-							<td class="text-left">{{ voucher.description }}</td>
-							<td class="text-right">x&nbsp;1</td>
-							<td class="text-right">{{ voucher.amount }}</td>
-							<td class="text-center text-danger">
-								<button type="button" onclick="voucher.remove('{{ voucher.key }}');" title="{{ button_remove }}" class="btn btn-danger btn-xs">
-									<i class="fa fa-times"></i>
-								</button>
-							</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</li>
-			<li>
-				<div>
-					<table class="table table-bordered">
-						{% for total in totals %}
-							<tr>
-								<td class="text-right">
-									<strong>{{ total.title }}</strong>
-								</td>
-								<td class="text-right">{{ total.text }}</td>
-							</tr>
-						{% endfor %}
-					</table>
-					<p class="text-right">
-						<a href="{{ cart }}">
-							<strong>
-								<i class="fa fa-shopping-cart"></i>
-								{{ text_cart }}</strong>
-						</a>&nbsp;&nbsp;&nbsp;<a href="{{ checkout }}">
-							<strong>
-								<i class="fa fa-share"></i>
-								{{ text_checkout }}</strong>
-						</a>
-					</p>
-				</div>
-			</li>
-		{% else %}
-			<li>
-				<p class="text-center">{{ text_empty }}</p>
-			</li>
-		{% endif %}
-	</ul> #}
+        <span id="cart-total">{{ text_items }}</span>
+    </a>
+    <div class="miniCart-dropDawn">
+        <div class="miniCart-dropDawn__inner dropdownCartContent">
+            {% if products %}
+                <div class="miniCart-products">
+                    {% for product in products %}
+                        <div class="miniCart-product">
+                            <div class="miniCart-product__img">
+                                {% if product.thumb %}
+                                    <picture>
+                                        <source srcset="{{ product.thumb.webp }}">
+                                        <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                             title="{{ product.name }}"
+                                             src="{{ product.thumb.default }}" loading="lazy">
+                                    </picture>
+                                {% endif %}
+                            </div>
+                            <div class="miniCart-product__block">
+                                <div class="miniCart-product__name">
+                                    <a href="{{ product.href }}">{{ product.name }}</a>
+                                    {% if product.option %}
+                                        <ul>
+                                            {% for option in product.option %}
+                                                <li>- {{ option.name }} {{ option.value }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </div>
+                                <div class="miniCart-product__control">
+                                    <div class="miniCart-product__change">
+                                        <div class="miniCart-product__set" data-change-minus="{{ product.cart_id }}"
+                                             data-change-quantity="{{ product.quantity }}">
+                                            <svg class="miniCart-product__minus"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg?v=1.0#icon_minus"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="miniCart-product__input" data-change="input">
+                                            {{ product.quantity }}
+                                        </div>
+                                        <div class="miniCart-product__set" data-change-plus="{{ product.cart_id }}"
+                                             data-change-quantity="{{ product.quantity }}">
+                                            <svg class="miniCart-product__plus"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg?v=1.0#icon_plus"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="miniCart-product__total">
+                                        {% if product.total_without_special %}
+                                            <div class="miniCart-product__withDiscount">{{ product.total }}</div>
+                                            <div class="miniCart-product__withOutDiscount">{{ product.total_without_special }}</div>
+                                        {% else %}
+                                            <div class="miniCart-product__withDiscount">{{ product.total }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="miniCart-product__remove">
+                                <button data-product-remove="{{ product.cart_id }}" type="button"
+                                        title="{{ button_remove }}" class="">
+                                    <svg class="miniCart-product__svg" xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_trash"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="miniCart-footer">
+                    <div class="miniCart-footer__total">
+                        <h4>Итого:</h4>
+                        <p>{{ total_products }}</p>
+                    </div>
+                    <a class="btn btn-primary miniCart-footer__btn" href="{{ cart }}">Перейти в корзину</a>
+                </div>
+            {% else %}
+                <div class="miniCart-empty">
+                    {{ text_empty }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 </div>

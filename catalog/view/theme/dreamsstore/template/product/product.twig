@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product-right">
+            <div class="product-right" data-products-to-cart>
                 <div class="product-right__info">
                     <p>Артикул: {{ sku }}</p>
                     <a href="{{ share }}">Поделиться</a>
@@ -156,7 +156,8 @@
                     {% if options %}
                         {% for option in options %}
                             {% if option.type == 'select' %}
-                                <div class="product-right__options-item">
+                                <div class="product-right__options-item" data-option-product-id="{{ product_id }}"
+                                     data-option="select">
                                     <span class="product-right__options-title">{{ option.name }}</span>
                                     <div class="select select-product product-right__options-block">
                                         <input type="hidden" name="option[{{ option.product_option_id }}]"
@@ -183,14 +184,16 @@
                                 {% if option.type == 'checkbox' %}
                                     <div class="product-right__options-checkbox_item {% if option.required %} required {% endif %}">
                                         <span class="product-right__options-title">{{ option.name }}</span>
-                                        <div id="input-option{{ option.product_option_id }}">
+                                        <div id="input-option{{ option.product_option_id }}"
+                                             data-option-product-id="{{ product_id }}" data-option="checkbox">
                                             {% for option_value in option.product_option_value %}
                                                 <div class="checkbox">
                                                     <label>
                                                         <input class="input-checkbox product-right__options-check"
                                                                type="checkbox"
                                                                name="option[{{ option.product_option_id }}][]"
-                                                               value="{{ option_value.product_option_value_id }}"/>
+                                                               value="{{ option_value.product_option_value_id }}"
+                                                               data-option-input-product-id="{{ product_id }}"/>
                                                         <span class="product-right__options-text">{{ option_value.name }}</span>
                                                     </label>
                                                 </div>
@@ -237,10 +240,11 @@
                 <div class="product-right__buttons" id="product">
                     <div class="product-right__add">
                         {# <label class="control-label" for="input-quantity">{{ entry_qty }}</label> #}
-                        <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity"
-                               class="form-control"/>
-                        <input type="hidden" name="product_id" value="{{ product_id }}"/>
-                        <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"
+                        {# <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" #}
+                        {#       class="form-control"/> #}
+                        <button type="button" id="button-cart" data-add-to-cart="true"
+                                data-product-id="{{ product_id }}"
+                                data-loading-text="{{ text_loading }}"
                                 class="btn btn-primary">{{ button_cart }}</button>
                         {% if minimum > 1 %}
                             <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>

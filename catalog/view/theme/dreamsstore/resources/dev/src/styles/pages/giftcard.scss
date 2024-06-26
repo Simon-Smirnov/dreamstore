@@ -1,0 +1,70 @@
+.giftCards {
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    padding-bottom: 4em;
+
+    &-steps {
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2em;
+        }
+
+        &__item {
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        &__item + &__item::after {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 90%;
+            height: 1px;
+            border-bottom: 1px dashed var(--libe);
+            top: 0.5em;
+            left: -7.5em;
+        }
+
+        &__num {
+            color: var(--color-6-dark);
+        }
+
+        &__text {
+            margin-top: 0.8em;
+            color: var(--color-5-dark);
+        }
+    }
+
+    &-cards {
+        padding: 3em 0;
+
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2em 0.8em;
+        }
+
+        &__price {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 0.8em;
+            color: var(--color-4-dark);
+        }
+
+        &__title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 0.8em;
+            color: var(--color-5-dark);
+        }
+
+        &__btn {
+            background-color: transparent;
+        }
+    }
+}

@@ -112,6 +112,46 @@ export default class Slider {
                 }
             })
         }
+
+        const sliderModelsThumbs = document.querySelector('.sliderModelsThumbs')
+        let sliderThumbsModels;
+        if (sliderModelsThumbs) {
+            sliderThumbsModels = this.createSlider(sliderModelsThumbs, {
+                slidesPerView: 5,
+                spaceBetween: 4,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        const sliderModelsMain = document.querySelector('.sliderModelsMain')
+        if (sliderModelsMain) {
+            this.createSlider(sliderModelsMain, {
+                slidesPerView: 1,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                thumbs: {
+                    swiper: sliderThumbsModels,
+                },
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {

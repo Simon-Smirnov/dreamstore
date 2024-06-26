@@ -1,0 +1,13 @@
+{% if models %}
+    {% for model in models %}
+        <div class="atelier-models__item" data-atelier-model="{{ model.product_id }}">
+            <picture>
+                <source srcset="{{ model.thumb.webp }}">
+                <img class="atelier-models__image" alt="{{ model.name }}"
+                     title="{{ model.name }}"
+                     src="{{ model.thumb.default }}" loading="lazy">
+            </picture>
+            <h4 class="atelier-models__title">{{ model.name }}</h4>
+        </div>
+    {% endfor %}
+{% endif %}

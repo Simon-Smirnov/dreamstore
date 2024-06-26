@@ -22,6 +22,9 @@ define('DIR_MODIFICATION', DIR_STORAGE . 'modification/');
 define('DIR_SESSION', DIR_STORAGE . 'session/');
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
 
+define('GIFT_CARD_CATEGORY_ID', 124);
+define('MODELS_CATEGORY_ID', 126);
+
 // DB
 define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');

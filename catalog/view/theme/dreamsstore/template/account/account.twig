@@ -1,0 +1,88 @@
+{{ header }}
+<div id="account-account">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if success %}
+        <div class="container">
+            <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+        </div>
+    {% endif %}
+    <div class="container">
+        <div id="content" class="account">
+            <h1 class="page-title">{{ text_account }}</h1>
+            <div class="account-block">
+                <div class="account-info">
+                    <h2 class="account-info__title">Контактные данные</h2>
+                    <div class="account-input">
+                        <input name="name">
+                        <div class="account-input__error"></div>
+                    </div>
+                    <div class="account-input">
+                        <input name="birthday">
+                        <div class="account-input__error"></div>
+                    </div>
+                    <div class="account-bonuses">
+                        <span class="account-bonuses__title">Ваши бонусы:</span>
+                        <span class="account-bonuses__num">{{ bonuses }}</span>
+                    </div>
+                    <p class="account-bonuses__text">Получайте бонусы с каждого заказа и используйте их при
+                        оплате</p>
+                    <a class="account-bonuses__link">Подробнее</a>
+                    <button class="btn btn-second">Выйти из профиля</button>
+                </div>
+                <div class="account-orders">
+                    <h2 class="account-orders__title">История заказов</h2>
+                    {% if orders %}
+                        <ul class="account-orders__list">
+                            <li class="account-orders__item">
+                                    
+                            </li>
+                        </ul>
+                    {% else %}
+                        <p class="account-orders__empty">У вас ещё нет заказов.</p>
+                    {% endif %}
+                </div>
+
+                <h2>{{ text_my_account }}</h2>
+                <ul class="list-unstyled">
+                    <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+                    <li><a href="{{ password }}">{{ text_password }}</a></li>
+                    <li><a href="{{ address }}">{{ text_address }}</a></li>
+                    <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+                </ul>
+                {% if credit_cards %}
+                    <h2>{{ text_credit_card }}</h2>
+                    <ul class="list-unstyled">
+                        {% for credit_card in credit_cards %}
+                            <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <h2>{{ text_my_orders }}</h2>
+                <ul class="list-unstyled">
+                    <li><a href="{{ order }}">{{ text_order }}</a></li>
+                    <li><a href="{{ download }}">{{ text_download }}</a></li>
+                    {% if reward %}
+                        <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+                    {% endif %}
+                    <li><a href="{{ return }}">{{ text_return }}</a></li>
+                    <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                    <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+                </ul>
+                <h2>{{ text_my_newsletter }}</h2>
+                <ul class="list-unstyled">
+                    <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+                </ul>
+            </div>
+        </div>
+        {#    {{ column_left }} #}
+        {#    {{ column_right }} #}
+        {#    {{ content_bottom }} #}
+        {#  {{ content_top }} #}
+    </div>
+{{ footer }}

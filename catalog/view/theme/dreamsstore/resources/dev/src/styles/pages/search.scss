@@ -1,0 +1,40 @@
+.search {
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    .search-input {
+        position: relative;
+
+        &__input {
+            padding: 0.7em 1.5em;
+            width: 100%;
+            max-width: none;
+            padding-left: 3em;
+            background-color: var(--white);
+            color: var(--color-4-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        &__svg {
+            position: absolute;
+            top: 0.9em;
+            left: 1.4em;
+            width: 1.3em;
+            height: 1.3em;
+            fill: none;
+            stroke: var(--color-6-dark);
+        }
+
+        &__close {
+            position: absolute;
+            top: 0.9em;
+            right: 1.4em;
+            width: 1.3em;
+            height: 1.3em;
+            fill: var(--color-6-dark);
+            cursor: pointer;
+        }
+    }
+}

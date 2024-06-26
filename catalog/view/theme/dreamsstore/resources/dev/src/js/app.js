@@ -7,6 +7,8 @@ import Replies from './classes/Replies.js'
 import './classes/Loadmore.js'
 import List from './classes/List.js'
 import Stars from './classes/Stars.js'
+import './classes/AtelierModel.js'
+import Moremodels from './classes/Moremodels.js'
 import './classes/Mask.js'
 import './classes/Slider.js'
 import './classes/Alert.js'
@@ -14,9 +16,10 @@ import './classes/Tabs.js'
 import './classes/SetSizes.js'
 import './classes/CookieAccept.js'
 import './classes/ToTop.js'
-
-import './classes/Hover3D.js'
-import './classes/Inputer.js'
+import Product from './classes/Product.js'
+import DropdawnCart from './classes/DropdawnCart.js'
+// import './classes/Hover3D.js'
+// import './classes/Inputer.js'
 
 document.addEventListener('DOMContentLoaded', function () {
     new Faq('.faq-block');
@@ -24,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
     new Reviews('.review_form');
     new Replies('.vacancy_form');
     new List('.dropdown-list');
+    new Moremodels('.atelier-models');
+    new Product('[data-products-to-cart]');
+    new DropdawnCart('[data-dropdown-cart]');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

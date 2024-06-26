@@ -1,0 +1,97 @@
+<div class="modelModal">
+    <div class="modelModal-images">
+        <div class="sliderModelsMain">
+            <div class="product-images swiper">
+                {% if thumb or images %}
+                    <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                        {% if thumb %}
+                            <li class="product-images__item">
+                                <a class="product-images__link" href="{{ thumb.popup }}"
+                                   title="{{ heading_title }}">
+                                    <picture>
+                                        <source srcset="{{ thumb.webp }}">
+                                        <img class="product-images__image"
+                                             src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                             title="{{ heading_title }}"
+                                             loading="lazy"/>
+                                    </picture>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if images %}
+                            {% for image in images %}
+                                <li class="product-images__item">
+                                    <a class="product-images__link" href="{{ image.popup }}"
+                                       title="{{ heading_title }}">
+                                        <picture>
+                                            <source srcset="{{ image.webp }}">
+                                            <img class="product-images__image"
+                                                 src="{{ image.default }}" alt="{{ heading_title }}"
+                                                 title="{{ heading_title }}"
+                                                 loading="lazy"/>
+                                        </picture>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+                <nav class="sliderProductMain-arrows">
+                    <ul class="sliderProductMain-list">
+                        <div>
+                            <li class="slider__arrow--prev">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </li>
+                        </div>
+                        <div>
+                            <li class="slider__arrow--next">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </li>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="sliderModelsThumbs">
+            <div class="product-images swiper">
+                {% if thumb or images %}
+                    <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                        {% if thumb %}
+                            <li class="product-images__item">
+                                <picture>
+                                    <source srcset="{{ thumb.webp }}">
+                                    <img class="product-images__image"
+                                         src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                         title="{{ heading_title }}"
+                                         loading="lazy"/>
+                                </picture>
+                            </li>
+                        {% endif %}
+                        {% if images %}
+                            {% for image in images %}
+                                <li class="product-images__item">
+                                    <picture>
+                                        <source srcset="{{ image.webp }}">
+                                        <img class="product-images__image"
+                                             src="{{ image.default }}" alt="{{ heading_title }}"
+                                             title="{{ heading_title }}"
+                                             loading="lazy"/>
+                                    </picture>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="modelModal-info">
+        <h4 class="modelModal-info__title">{{ name }}</h4>
+        <div class="modelModal-info__description">{{ description }}</div>
+        <button class="btn btn-primary modelModal-info__btn">Заявка на расчёт</button>
+    </div>
+</div>
