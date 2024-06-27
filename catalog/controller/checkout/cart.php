@@ -2,7 +2,7 @@
 
 class ControllerCheckoutCart extends Controller
 {
-    public function index()
+    public function index($update = false)
     {
         $this->load->language('checkout/cart');
 
@@ -74,9 +74,12 @@ class ControllerCheckoutCart extends Controller
                 }
 
                 if ($product['image']) {
-                    $image = $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_height'));
+                    $image = [
+                        'webp' => $this->model_tool_image->resize($product['image'], 256 * 2, null, ['webp' => true]),
+                        'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
+                    ];
                 } else {
-                    $image = '';
+                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
                 }
 
                 $option_data = array();
@@ -109,6 +112,16 @@ class ControllerCheckoutCart extends Controller
                 } else {
                     $price = false;
                     $total = false;
+                }
+
+                if (($this->customer->isLogged() || !$this->config->get('config_customer_price')) && $product['price'] != $product['price_without_special']) {
+                    $unit_price_without_special = $this->tax->calculate($product['price_without_special'], $product['tax_class_id'], $this->config->get('config_tax'));
+
+                    $price_without_special = $this->currency->format($unit_price_without_special, $this->session->data['currency']);
+                    $total_without_special = $this->currency->format($unit_price_without_special * $product['quantity'], $this->session->data['currency']);
+                } else {
+                    $price_without_special = false;
+                    $total_without_special = false;
                 }
 
                 $recurring = '';
@@ -145,6 +158,8 @@ class ControllerCheckoutCart extends Controller
                     'reward' => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
                     'price' => $price,
                     'total' => $total,
+                    'price_without_special' => $price_without_special,
+                    'total_without_special' => $total_without_special,
                     'href' => $this->url->link('product/product', 'product_id=' . $product['product_id'])
                 );
             }
@@ -176,6 +191,10 @@ class ControllerCheckoutCart extends Controller
                 'taxes' => &$taxes,
                 'total' => &$total
             );
+
+            $data['total_products'] = $this->currency->format($this->cart->getSubTotal(), $this->session->data['currency']);
+            $data['total_discounts'] = $this->currency->format($this->cart->getSubTotalDiscounts(), $this->session->data['currency']);
+            $data['total_rewards'] = $this->cart->getTotalRewards();
 
             // Display prices
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -243,7 +262,12 @@ class ControllerCheckoutCart extends Controller
             $data['footer'] = $this->load->controller('common/footer');
             $data['header'] = $this->load->controller('common/header');
 
-            $this->response->setOutput($this->load->view('checkout/cart', $data));
+            if ($update) {
+                return $this->load->view('checkout/cart', $data);
+            } else {
+                $this->response->setOutput($this->load->view('checkout/cart', $data));
+            }
+
         } else {
             $data['text_error'] = $this->language->get('text_empty');
 
@@ -258,7 +282,11 @@ class ControllerCheckoutCart extends Controller
             $data['footer'] = $this->load->controller('common/footer');
             $data['header'] = $this->load->controller('common/header');
 
-            $this->response->setOutput($this->load->view('error/not_found', $data));
+            if ($update) {
+                return $this->load->view('error/empty', $data);
+            } else {
+                $this->response->setOutput($this->load->view('error/empty', $data));
+            }
         }
     }
 
@@ -405,7 +433,12 @@ class ControllerCheckoutCart extends Controller
             unset($this->session->data['payment_methods']);
             unset($this->session->data['reward']);
 
-            $this->response->redirect($this->url->link('checkout/cart'));
+            //$this->response->redirect($this->url->link('checkout/cart'));
+
+            $json['success'] = 'Корзина успешно обновлена';
+
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode($json));
         }
 
         $this->response->addHeader('Content-Type: application/json');
@@ -420,6 +453,7 @@ class ControllerCheckoutCart extends Controller
 
         // Remove
         if (isset($this->request->post['key'])) {
+
             $this->cart->remove($this->request->post['key']);
 
             unset($this->session->data['vouchers'][$this->request->post['key']]);
@@ -477,9 +511,15 @@ class ControllerCheckoutCart extends Controller
             }
 
             $json['total'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
+            $json['success'] = 'Товар удален из корзины';
         }
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
+    }
+
+    public function info()
+    {
+        $this->response->setOutput($this->index(true));
     }
 }

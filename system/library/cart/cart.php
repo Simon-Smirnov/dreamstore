@@ -260,6 +260,7 @@ class Cart
                     'price' => ($price + $option_price),
                     'price_without_special' => ($price_without_special + $option_price),
                     'total' => ($price + $option_price) * $cart['quantity'],
+                    'total_without_special' => ($price_without_special + $option_price) * $cart['quantity'],
                     'reward' => $reward * $cart['quantity'],
                     'points' => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $cart['quantity'] : 0),
                     'tax_class_id' => $product_query->row['tax_class_id'],
@@ -350,6 +351,28 @@ class Cart
         }
 
         return $total;
+    }
+
+    public function getSubTotalDiscounts()
+    {
+        $totalDiscount = 0;
+
+        foreach ($this->getProducts() as $product) {
+            $totalDiscount += $product['total_without_special'] - $product['total'];
+        }
+
+        return $totalDiscount;
+    }
+
+    public function getTotalRewards()
+    {
+        $totalReward = 0;
+
+        foreach ($this->getProducts() as $product) {
+            $totalReward += $product['reward'];
+        }
+
+        return $totalReward;
     }
 
     public function getTaxes()

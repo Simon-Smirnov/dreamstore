@@ -1,7 +1,11 @@
+import Alert from './Alert.js'
+import CartAsyncMethods from './CartAsyncMethods.js'
+
 export default class {
 
-    constructor(selector) {
+    constructor(selector, checkoutCart = false) {
         this.block = document.querySelector(selector);
+        this.checkoutCart = checkoutCart;
         if (this.block) {
             this.block.addEventListener('mouseover', (e) => {
                 this.block.classList.add('open');
@@ -17,19 +21,35 @@ export default class {
                     const btn = target.closest('[data-product-remove]');
                     if (btn) {
                         this.cartId = btn.dataset.productRemove;
-                        this.remove().then(r => {
-                            console.log(r)
+                        CartAsyncMethods.remove(this.cartId, this.quantity).then(r => {
+                            console.log(r);
+                            if (r.success) {
+                                this.updateViewMiniCart();
+                                Alert.add(r.success);
+                                if (this.checkoutCart) {
+                                    this.updateViewCheckoutCart();
+                                }
+                            }
                         });
                     }
                 }
                 if (target.hasAttribute('data-change-minus') || target.closest('[data-change-minus]')) {
                     const btn = target.closest('[data-change-minus]');
                     if (btn) {
-                        this.cartId = btn.dataset.productMinus;
-                        console.log(this.cartId);
-                        this.remove().then(r => {
-                            console.log(r)
-                        });
+                        this.cartId = btn.dataset.changeMinus;
+                        this.quantity = +btn.dataset.changeQuantity;
+                        if (this.quantity > 1) {
+                            this.quantity--;
+                            CartAsyncMethods.update(this.cartId, this.quantity).then(r => {
+                                if (r.success) {
+                                    this.updateViewMiniCart();
+                                    Alert.add(r.success);
+                                    if (this.checkoutCart) {
+                                        this.updateViewCheckoutCart();
+                                    }
+                                }
+                            });
+                        }
                     }
                 }
                 if (target.hasAttribute('data-change-plus') || target.closest('[data-change-plus]')) {
@@ -38,8 +58,14 @@ export default class {
                         this.cartId = btn.dataset.changePlus;
                         this.quantity = +btn.dataset.changeQuantity;
                         this.quantity++;
-                        this.update().then(r => {
-                            console.log(r)
+                        CartAsyncMethods.update(this.cartId, this.quantity).then(r => {
+                            if (r.success) {
+                                this.updateViewMiniCart();
+                                Alert.add(r.success);
+                                if (this.checkoutCart) {
+                                    this.updateViewCheckoutCart();
+                                }
+                            }
                         });
                     }
                 }
@@ -47,38 +73,36 @@ export default class {
         }
     }
 
-    async remove() {
-        return new Promise(async resolve => {
-            // Начальные параметры
-            const body = new FormData()
-            body.append('key', this.cartId)
-
-            // Запрос
-            let result = await fetch('/index.php?route=checkout/cart/remove', {
-                method: 'POST',
-                body: body
+    async updateViewMiniCart() {
+        fetch('index.php?route=common/cart/info')
+            .then(response => response.text())
+            .then(data => {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(data, 'text/html');
+                let items = doc.querySelectorAll('.miniCart-dropDawn__inner');
+                let cartUl = document.querySelector('.miniCart-dropDawn');
+                cartUl.innerHTML = '';  // Очистим текущие элементы
+                items.forEach(item => {
+                    cartUl.appendChild(item);
+                });
             })
-
-            // Результат
-            await result.json()
-        })
+            .catch(error => console.error('Error:', error));
     }
 
-    async update() {
-        return new Promise(async resolve => {
-            // Начальные параметры
-            const body = new FormData()
-            //body.append(this.cartId, this.quantity)
-            body.append(`quantity[${this.cartId}]`, this.quantity)
-
-            // Запрос
-            let result = await fetch('/index.php?route=checkout/cart/edit', {
-                method: 'POST',
-                body: body
+    async updateViewCheckoutCart() {
+        fetch('index.php?route=checkout/cart/info')
+            .then(response => response.text())
+            .then(data => {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(data, 'text/html');
+                let items = doc.querySelectorAll('.cart-inner');
+                let cartUl = document.querySelector('.cart');
+                cartUl.innerHTML = '';  // Очистим текущие элементы
+                items.forEach(item => {
+                    cartUl.appendChild(item);
+                });
             })
-
-            // Результат
-            await result.json()
-        })
+            .catch(error => console.error('Error:', error));
     }
 }
+

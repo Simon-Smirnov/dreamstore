@@ -1,3 +1,5 @@
+import CartAsyncMethods from "./CartAsyncMethods.js";
+
 export default class {
 
     constructor(selector) {
@@ -9,70 +11,16 @@ export default class {
                     this.calculate_price_handler = this.calculatePrice.bind(this)
                     this.quantity = 1;
                     this.productId = e.target.dataset.productId;
-                    this.option_change_handler = this.calculate_price_handler
+                    this.option_change_handler = this.calculate_price_handler;
                     this.options = this.block.querySelectorAll('[data-option-product-id="' + this.productId + '"]');
-                    // this.options.forEach(option => {
-                    //     const option_inputs = option.querySelectorAll('[data-option-input-product-id="' + this.productId + '"]')
-                    //
-                    //     if (option_inputs.length) {
-                    //         option_inputs.forEach(option_input => option_input.addEventListener('change', this.option_change_handler))
-                    //     }
-                    // });
                     if (target.dataset.addToCart) {
-                        this.add().then(r => {
-                            console.log(r)
+                        CartAsyncMethods.add(this.productId, this.quantity, this.options).then(r => {
+                            console.log(r);
                         });
                     }
                 }
             })
         }
-    }
-
-    async add() {
-        return new Promise(async resolve => {
-            // Начальные параметры
-            const body = new FormData()
-            body.append('product_id', this.productId)
-            body.append('quantity', this.quantity)
-
-            // Опции
-            const options = this.getOptions()
-
-            for (let name in options) {
-                body.append(name, options[name])
-            }
-
-            console.log(options);
-
-            // Запрос
-            let result = await fetch('/index.php?route=checkout/cart/add', {
-                method: 'POST',
-                body: body
-            })
-
-            // Результат
-            result = await result.json()
-
-            // if (result.success) {
-            //     Alert.add('Товар добавлен в корзину покупок')
-            //
-            //     // window.dispatchEvent(new Event('product_add'))
-            //     this.product.dispatchEvent(new Event('product_add'))
-            //
-            //     resolve(true)
-            // }
-            //
-            // if (result.error) {
-            //     if (result.error.option) {
-            //         for (let error_key in result.error.option) {
-            //             const error = result.error.option[error_key]
-            //             Alert.add(error, 'error')
-            //         }
-            //     }
-            // }
-            //
-            // resolve(false)
-        })
     }
 
     getOptions() {
@@ -81,8 +29,6 @@ export default class {
         this.options.forEach(option => {
             const type = option.dataset.option
             let option_input = null
-
-            console.log(type);
 
             switch (type) {
                 case 'select':

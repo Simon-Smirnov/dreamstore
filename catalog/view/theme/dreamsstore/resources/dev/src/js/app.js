@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
     new List('.dropdown-list');
     new Moremodels('.atelier-models');
     new Product('[data-products-to-cart]');
-    new DropdawnCart('[data-dropdown-cart]');
+    new DropdawnCart('[data-dropdown-cart]', false);
+    new DropdawnCart('[data-checkout-cart]', true);
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

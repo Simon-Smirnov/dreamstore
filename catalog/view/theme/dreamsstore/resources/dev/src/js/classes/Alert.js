@@ -25,12 +25,12 @@ export default class Alert {
         alert_item.innerText = text
 
         alert_item.classList.add('alert__box')
-        alert_item.classList.add(type) 
+        alert_item.classList.add(type)
         alert_item.style.setProperty('--lifetime', this.#lifeTime + 's')
 
         alert_item.close_timeout = setTimeout(() => {
             Alert.close(alert_item)
-            
+
             clearInterval(alert_item.close_timeout)
         }, this.#lifeTime * 1000)
 

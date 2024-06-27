@@ -1,0 +1,168 @@
+{{ header }}
+<div id="checkout-cart">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if attention %}
+        <div class="alert notify">{{ attention }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    {% endif %}
+    {#    {% if success %} #}
+    {#        <div class="alert success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }} #}
+    {#            <button type="button" class="close" data-dismiss="alert">&times;</button> #}
+    {#        </div> #}
+    {#    {% endif %} #}
+    {% if error_warning %}
+        <div class="alert error alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    {% endif %}
+    <div class="container">
+        <div id="content" class="cart" data-checkout-cart>
+            <div class="cart-inner">
+                <h1 class="page-title">{{ heading_title }}</h1>
+                <form action="{{ action }}" method="post" enctype="multipart/form-data">
+                    <div class="cart-products">
+                        {% for product in products %}
+                            <div class="cart-products__item">
+                                <div class="cart-products__img">
+                                    {% if product.thumb %}
+                                        <picture>
+                                            <source srcset="{{ product.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                 title="{{ product.name }}"
+                                                 src="{{ product.thumb.default }}" loading="lazy">
+                                        </picture>
+                                    {% endif %}
+                                </div>
+                                <div class="cart-products__block">
+                                    <div class="cart-products__name">
+                                        <a
+                                                href="{{ product.href }}">{{ product.name }}</a>
+                                        {% if not product.stock %}
+                                            <span class="text-danger">***</span>
+                                        {% endif %}
+                                        <div class="cart-products__price">
+                                            {% if product.price_without_special %}
+                                                <div class="cart-products__withDiscount">{{ product.price }}</div>
+                                                <div class="cart-products__withOutDiscount">{{ product.price_without_special }}</div>
+                                            {% else %}
+                                                <div class="miniCart-product__withDiscount">{{ product.price }}</div>
+                                            {% endif %}
+                                        </div>
+                                        {% if product.option %}
+                                            <ul class="cart-products__options">
+                                                {% for option in product.option %}
+                                                    <li>{{ option.name }}: {{ option.value }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                    <div class="cart-products__controls">
+                                        <div class="cart-products__control">
+                                            <div class="cart-products__change">
+                                                <div class="cart-products__set"
+                                                     data-change-minus="{{ product.cart_id }}"
+                                                     data-change-quantity="{{ product.quantity }}">
+                                                    <svg class="cart-products__minus"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <use xlink:href="/sprite.svg?v=1.0#icon_minus"></use>
+                                                    </svg>
+                                                </div>
+                                                <div class="cart-products__input">
+                                                    {{ product.quantity }}
+                                                </div>
+                                                <div class="cart-products__set" data-change-plus="{{ product.cart_id }}"
+                                                     data-change-quantity="{{ product.quantity }}">
+                                                    <svg class="cart-products__plus"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <use xlink:href="/sprite.svg?v=1.0#icon_plus"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="cart-products__total">
+                                                {% if product.total_without_special %}
+                                                    <div class="cart-products__withDiscount">{{ product.total }}</div>
+                                                    <div class="cart-products__withOutDiscount">{{ product.total_without_special }}</div>
+                                                {% else %}
+                                                    <div class="cart-products__withDiscount">{{ product.total }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-products__remove">
+                                    <button data-product-remove="{{ product.cart_id }}" type="button" title="Удалить"
+                                            class="">
+                                        <svg class="miniCart-product__svg" xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_trash"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                <div class="cart-totals">
+                    {#                {% for total in totals %} #}
+                    {#                    <div class="cart-totals__item"> #}
+                    {#                        <div class="cart-totals__title">{{ total.title }}:</div> #}
+                    {#                        <div class="cart-totals__value">{{ total.text }}</div> #}
+                    {#                    </div> #}
+                    {#                {% endfor %} #}
+                    <div class="cart-totals__item">
+                        <div class="cart-totals__title">Товаров на:</div>
+                        <div class="cart-totals__line"></div>
+                        <div class="cart-totals__value">
+                            {{ total_products }}
+                        </div>
+                    </div>
+                    <div class="cart-totals__item">
+                        <div class="cart-totals__title">Скидка:</div>
+                        <div class="cart-totals__line"></div>
+                        <div class="cart-totals__value">
+                            - {{ total_discounts }}
+                        </div>
+                    </div>
+                    <div class="cart-totals__item">
+                        <div class="cart-totals__title">Общий вес:</div>
+                        <div class="cart-totals__line"></div>
+                        <div class="cart-totals__value">
+                            {% if weight %}
+                                {{ weight }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="cart-totals__item">
+                        <div class="cart-totals__title">Стоимость доставки:</div>
+                        <div class="cart-totals__line"></div>
+                        <div class="cart-totals__value">не рассчитана</div>
+                    </div>
+                    <div class="cart-totals__item">
+                        <div class="cart-totals__title">Бонусов за заказ:</div>
+                        <div class="cart-totals__line"></div>
+                        <div class="cart-totals__value">
+                            <span>+{{ total_rewards }}</span>
+                            {% if not logged %}
+                                <a class="cart-totals__login" href="/">Войти</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-toCheckout">
+                    <a href="{{ checkout }}" class="btn btn-primary">Перейти к оформлению</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {{ column_left }} #}
+    {#    {{ column_right }} #}
+    {#    {{ content_bottom }} #}
+    {#    {{ content_top }} #}
+</div>
+{{ footer }} 
