@@ -159,6 +159,56 @@
                 </div>
             </div>
         </div>
+        <section class="addToOrder">
+            <div class="container">
+                <div class="sliderAddToOrder">
+                    <h2 class="section-title">Добавьте к заказу</h2>
+                    <div class="swiper">
+                        <div class="swiper-wrapper" data-lightbox-parent>
+                            {% for product_add_to_order in products_add_to_order %}
+                                <a class="products_grid-item product-similar__item"
+                                   href="{{ product_add_to_order.href }}"
+                                   data-fancybox="slider">
+                                    <div class="products_grid-thumb">
+                                        <div class="products_grid-block">
+                                            <picture>
+                                                <source srcset="{{ product_add_to_order.thumb.webp }}">
+                                                <img class="catalog-inner_link-img"
+                                                     alt="{{ product_add_to_order.name }}"
+                                                     title="{{ product_add_to_order.name }}"
+                                                     src="{{ product_add_to_order.thumb.default }}"
+                                                     loading="lazy">
+                                            </picture>
+                                            <p class="products_grid-price">
+                                                {% if not product_add_to_order.special %}
+                                                    <span
+                                                            class="price-new">{{ product_add_to_order.price }}</span>
+                                                {% else %}
+                                                    <span
+                                                            class="price-new">{{ product_add_to_order.special }}</span>
+                                                    <span
+                                                            class="price-old">{{ product_add_to_order.price }}</span>
+                                                    <span class="price-percent">{{ product_add_to_order.percent }}</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <h4 class="products_grid-title">{{ product_add_to_order.name }}</h4>
+                                        {# <button class="products_grid-wishlist" type="button" #}
+                                        {#        data-toggle="tooltip" #}
+                                        {#        title="{{ button_wishlist }}" #}
+                                        {#        onclick="wishlist.add('{{ product_add_to_order.product_id }}');"> #}
+                                        {#    <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg"> #}
+                                        {#        <use xlink:href="/sprite.svg#icon_heart"></use> #}
+                                        {#    </svg> #}
+                                        {# </button> #}
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     {#    {{ column_left }} #}
     {#    {{ column_right }} #}

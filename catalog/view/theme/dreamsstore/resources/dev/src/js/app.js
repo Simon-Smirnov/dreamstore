@@ -1,6 +1,8 @@
 import './classes/Modal.js'
 import './classes/Select.js'
 import './classes/Fancybox.js'
+// import './classes/Checkout_old.js'
+import './classes/Checkout.js'
 import Faq from './classes/Faq.js'
 import Reviews from './classes/Reviews.js'
 import Replies from './classes/Replies.js'
@@ -18,6 +20,7 @@ import './classes/CookieAccept.js'
 import './classes/ToTop.js'
 import Product from './classes/Product.js'
 import DropdawnCart from './classes/DropdawnCart.js'
+import Checkout from "./classes/Checkout.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -31,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new Product('[data-products-to-cart]');
     new DropdawnCart('[data-dropdown-cart]', false);
     new DropdawnCart('[data-checkout-cart]', true);
+    new Checkout('[data-checkout]');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

@@ -148,6 +148,7 @@ class ControllerCheckoutCart extends Controller
 
                 $data['products'][] = array(
                     'cart_id' => $product['cart_id'],
+                    'product_id' => $product['product_id'],
                     'thumb' => $image,
                     'name' => $product['name'],
                     'model' => $product['model'],
@@ -252,6 +253,67 @@ class ControllerCheckoutCart extends Controller
                     if ($result) {
                         $data['modules'][] = $result;
                     }
+                }
+            }
+
+            $data['products_add_to_order'] = array();
+            $this->load->model('catalog/product');
+            $category_id_for_product = $this->model_catalog_product->getCategoryIdForProduct($data['products']['0']['product_id']);
+
+            if (isset($category_id_for_product) && $category_id_for_product != '0') {
+                $results = $this->model_catalog_product->getProductRelatedByCategory($category_id_for_product, $this->request->get['product_id']);
+
+                foreach ($results as $result) {
+                    if ($result['image']) {
+                        $image = [
+                            'webp' => $this->model_tool_image->resize($result['image'], 256 * 2, null, ['webp' => true]),
+                            'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
+                        ];
+                    } else {
+                        $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    }
+
+                    if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+                        $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                    } else {
+                        $price = false;
+                    }
+
+                    if (!is_null($result['special']) && (float)$result['special'] >= 0) {
+                        $special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                        $percent = '-' . round((((float)$result['price'] - (float)$result['special']) / (float)$result['price']), 2) * 100 . '%';
+                        $tax_price = (float)$result['special'];
+                    } else {
+                        $special = false;
+                        $percent = '';
+                        $tax_price = (float)$result['price'];
+                    }
+
+                    if ($this->config->get('config_tax')) {
+                        $tax = $this->currency->format($tax_price, $this->session->data['currency']);
+                    } else {
+                        $tax = false;
+                    }
+
+                    if ($this->config->get('config_review_status')) {
+                        $rating = (int)$result['rating'];
+                    } else {
+                        $rating = false;
+                    }
+
+                    $data['products_add_to_order'][] = array(
+                        'product_id' => $result['product_id'],
+                        'thumb' => $image,
+                        'name' => $result['name'],
+                        'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+                        'price' => $price,
+                        'special' => $special,
+                        'percent' => $percent,
+                        'tax' => $tax,
+                        'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
+                        'rating' => $rating,
+                        'href' => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+                    );
                 }
             }
 
@@ -403,6 +465,7 @@ class ControllerCheckoutCart extends Controller
                     array_multisort($sort_order, SORT_ASC, $totals);
                 }
 
+                $json['success'] = 'Товар добавлен в корзину';
                 $json['total'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
             } else {
                 $json['redirect'] = str_replace('&amp;', '&', $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']));
@@ -513,6 +576,15 @@ class ControllerCheckoutCart extends Controller
             $json['total'] = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
             $json['success'] = 'Товар удален из корзины';
         }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    public function getQuantity()
+    {
+        $json = array();
+        $json['quantity'] = $this->cart->countProducts();
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));

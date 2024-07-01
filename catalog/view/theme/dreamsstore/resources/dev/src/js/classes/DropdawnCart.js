@@ -29,6 +29,9 @@ export default class {
                                 if (this.checkoutCart) {
                                     this.updateViewCheckoutCart();
                                 }
+                                CartAsyncMethods.getQuantityCart().then(r => {
+                                    this.updateQuantityIconMiniCart(r.quantity);
+                                })
                             }
                         });
                     }
@@ -47,6 +50,9 @@ export default class {
                                     if (this.checkoutCart) {
                                         this.updateViewCheckoutCart();
                                     }
+                                    CartAsyncMethods.getQuantityCart().then(r => {
+                                        this.updateQuantityIconMiniCart(r.quantity);
+                                    })
                                 }
                             });
                         }
@@ -65,6 +71,9 @@ export default class {
                                 if (this.checkoutCart) {
                                     this.updateViewCheckoutCart();
                                 }
+                                CartAsyncMethods.getQuantityCart().then(r => {
+                                    this.updateQuantityIconMiniCart(r.quantity);
+                                })
                             }
                         });
                     }
@@ -103,6 +112,10 @@ export default class {
                 });
             })
             .catch(error => console.error('Error:', error));
+    }
+
+    updateQuantityIconMiniCart(quantity) {
+        document.querySelector('#cart-total').textContent = quantity;
     }
 }
 

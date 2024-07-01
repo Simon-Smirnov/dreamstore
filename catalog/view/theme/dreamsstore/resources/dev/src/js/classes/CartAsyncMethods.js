@@ -1,6 +1,6 @@
 export default class {
 
-    async add(productId, quantity, options = {}) {
+    static async add(productId, quantity, options = {}) {
         return new Promise(async resolve => {
             // Начальные параметры
             const body = new FormData()
@@ -55,7 +55,7 @@ export default class {
             })
 
             // Результат
-            let data = await result.json()
+            let data = await result.json();
             resolve(data);
         })
     }
@@ -64,11 +64,9 @@ export default class {
         return new Promise(async resolve => {
             // Начальные параметры
             const body = new FormData()
-            //body.append(this.cartId, this.quantity)
-            body.append(`quantity[${cartId}]`, quantity)
 
             // Запрос
-            let result = await fetch('/index.php?route=checkout/cart/get', {
+            let result = await fetch('/index.php?route=checkout/cart/getQuantity', {
                 method: 'POST',
                 body: body
             })
@@ -78,3 +76,11 @@ export default class {
             resolve(data);
         })
     }
+
+    // updateQuantityIconMiniCart() {
+    //     this.getQuantityCart.then(quantity => {
+    //         console.log(quantity);
+    //         document.querySelector('#cart-total').textContent = quantity;
+    //     })
+    // }
+}

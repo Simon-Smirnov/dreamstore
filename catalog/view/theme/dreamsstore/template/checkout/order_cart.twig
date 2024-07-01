@@ -1,0 +1,131 @@
+{% if attention %}
+    <div class="alert notify">{{ attention }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+{% endif %}
+{% if error_warning %}
+    <div class="alert error alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+{% endif %}
+<div class="checkOutCart" data-checkout-inner-cart>
+    <div class="checkOutCart-inner">
+        <div class="checkOutCart-products">
+            {% for product in products %}
+                <div class="checkOutCart-products__item">
+                    <div class="checkOutCart-products__img">
+                        {% if product.thumb %}
+                            <picture>
+                                <source srcset="{{ product.thumb.webp }}">
+                                <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                     title="{{ product.name }}"
+                                     src="{{ product.thumb.default }}" loading="lazy">
+                            </picture>
+                        {% endif %}
+                    </div>
+                    <div class="checkOutCart-products__block">
+                        <div class="checkOutCart-products__name">
+                            <a
+                                    href="{{ product.href }}">{{ product.name }}</a>
+                            {% if not product.stock %}
+                                <span class="text-danger">***</span>
+                            {% endif %}
+                            {% if product.option %}
+                                <ul class="checkOutCart-products__options">
+                                    {% for option in product.option %}
+                                        <li>{{ option.name }}: {{ option.value }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="checkOutCart-products__controls">
+                            <div class="checkOutCart-products__value">
+                                {{ product.quantity }} шт
+                            </div>
+                            <div class="checkOutCart-products__total">
+                                {% if product.total_without_special %}
+                                    <div class="checkOutCart-products__withDiscount">{{ product.total }}</div>
+                                    <div class="checkOutCart-products__withOutDiscount">{{ product.total_without_special }}</div>
+                                {% else %}
+                                    <div class="checkOutCart-products__withDiscount">{{ product.total }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkOutCart-products__remove">
+                        <button data-product-remove="{{ product.cart_id }}" type="button" title="Удалить"
+                                class="">
+                            <svg class="miniCart-product__svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_trash"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="checkOutCart-totals">
+            <div class="checkOutCart-totals__item">
+                <div class="checkOutCart-totals__title">Товаров на:</div>
+                <div class="checkOutCart-totals__line"></div>
+                <div class="checkOutCart-totals__value">
+                    {{ total_products }}
+                </div>
+            </div>
+            <div class="checkOutCart-totals__item">
+                <div class="checkOutCart-totals__title">Скидка:</div>
+                <div class="checkOutCart-totals__line"></div>
+                <div class="checkOutCart-totals__value">
+                    - {{ total_discounts }}
+                </div>
+            </div>
+            <div class="checkOutCart-totals__item">
+                <div class="checkOutCart-totals__title">Общий вес:</div>
+                <div class="checkOutCart-totals__line"></div>
+                <div class="checkOutCart-totals__value">
+                    {% if weight %}
+                        {{ weight }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="checkOutCart-totals__item">
+                <div class="checkOutCart-totals__title">Стоимость доставки:</div>
+                <div class="checkOutCart-totals__line"></div>
+                <div class="checkOutCart-totals__value">{{ totals.shipping.value|number_format(0, '.', ' ') }} руб.
+                </div>
+            </div>
+            {# <div class="checkOutCart-totals__item"> #}
+            {#    <div class="checkOutCart-totals__title">Вид доставки:</div> #}
+            {#    <div class="checkOutCart-totals__line"></div> #}
+            {#    <div class="checkOutCart-totals__value">{{ totals.shipping.title }} #}
+            {#    </div> #}
+            {# </div> #}
+            <div class="checkOutCart-totals__item">
+                <div class="checkOutCart-totals__title">Бонусов за заказ:</div>
+                <div class="checkOutCart-totals__line"></div>
+                <div class="checkOutCart-totals__value">
+                    <span>+{{ total_rewards }}</span>
+                    {% if not logged %}
+                        <a class="checkOutCart-totals__login" href="/">Войти</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="checkOutCart-totals__total">
+                <span class="checkOutCart-totals__total--name">Итого:</span>
+                <span class="checkOutCart-totals__total--value">{{ totals.total.value|number_format(0, '.', ' ') }} руб.</span>
+            </div>
+        </div>
+        <div class="checkOutCart-toOrder">
+            <a class="btn btn-primary" data-checkout-confirm>Оформить заказ</a>
+            <label class="agree">
+                <input class="input-checkbox" name="agree" type="checkbox" data-checkout-agree="agree"
+                       {% if agree %}checked{% endif %}>
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+        </div>
+    </div>
+</div>
+{#    {{ column_left }} #}
+{#    {{ column_right }} #}
+{#    {{ content_bottom }} #}
+{#    {{ content_top }} #}
+{{ footer }} 

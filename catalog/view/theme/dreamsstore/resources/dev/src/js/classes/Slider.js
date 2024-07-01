@@ -152,6 +152,25 @@ export default class Slider {
                 }
             })
         }
+
+        // Корзина (Добавьте к заказу)
+        const sliderAddToOrder = document.querySelector('.sliderAddToOrder')
+        if (sliderAddToOrder) {
+            this.createSlider(sliderAddToOrder, {
+                slidesPerView: 6,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {

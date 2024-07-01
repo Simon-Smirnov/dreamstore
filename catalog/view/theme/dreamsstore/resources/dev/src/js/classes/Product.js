@@ -1,4 +1,5 @@
 import CartAsyncMethods from "./CartAsyncMethods.js";
+import Alert from "./Alert.js";
 
 export default class {
 
@@ -13,9 +14,16 @@ export default class {
                     this.productId = e.target.dataset.productId;
                     this.option_change_handler = this.calculate_price_handler;
                     this.options = this.block.querySelectorAll('[data-option-product-id="' + this.productId + '"]');
+                    let options = this.getOptions();
                     if (target.dataset.addToCart) {
-                        CartAsyncMethods.add(this.productId, this.quantity, this.options).then(r => {
-                            console.log(r);
+                        CartAsyncMethods.add(this.productId, this.quantity, options).then(r => {
+                            if (r.success) {
+                                this.updateViewMiniCart();
+                                Alert.add(r.success);
+                                CartAsyncMethods.getQuantityCart().then(r => {
+                                    document.querySelector('#cart-total').textContent = r.quantity;
+                                })
+                            }
                         });
                     }
                 }
@@ -156,5 +164,21 @@ export default class {
         }
 
         this.product.dispatchEvent(new Event('price_calculated'))
+    }
+
+    async updateViewMiniCart() {
+        fetch('index.php?route=common/cart/info')
+            .then(response => response.text())
+            .then(data => {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(data, 'text/html');
+                let items = doc.querySelectorAll('.miniCart-dropDawn__inner');
+                let cartUl = document.querySelector('.miniCart-dropDawn');
+                cartUl.innerHTML = '';  // Очистим текущие элементы
+                items.forEach(item => {
+                    cartUl.appendChild(item);
+                });
+            })
+            .catch(error => console.error('Error:', error));
     }
 }

@@ -1,43 +1,79 @@
 .input {
-  &-text {
-    border: 1px solid var(--libe);
-    border-radius: 0.4em;
-    padding: 0.8em 1.5em;
-    color: var(--color-4-dark);
-    width: 100%;
-    max-width: 18em;
-    font-weight: 500;
-    font-size: 1.1rem;
-    font-family: var(--font-main);
+    &-text {
+        border: 1px solid var(--libe);
+        border-radius: 0.4em;
+        padding: 0.8em 1.5em;
+        color: var(--color-4-dark);
+        width: 100%;
+        max-width: 18em;
+        font-weight: 500;
+        font-size: 1.1rem;
+        font-family: var(--font-main);
 
-    &::placeholder {
-      color: var(--color-6-dark);
-      font-weight: 500;
+        &::placeholder {
+            color: var(--color-6-dark);
+            font-weight: 500;
+        }
     }
-  }
 
-  &-checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.35em;
-    width: 1em;
-    height: 1em;
-    border: 1px solid var(--libe);
-    transition: 0.1s all linear;
-    outline: none;
-    margin: 0;
-    position: relative;
-    top: 0.2em;
-    cursor: pointer;
-
-    &:checked {
-      background-image: url("./images/icons/check.png");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-size: 0.64em 0.55em;
-      background-position: center;
+    &-checkbox {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.35em;
+        width: 1em;
+        height: 1em;
+        border: 1px solid var(--libe);
+        transition: 0.1s all linear;
+        outline: none;
+        margin: 0;
+        position: relative;
+        top: 0.2em;
+        cursor: pointer;
     }
-  }
+
+    &-checkbox:checked {
+        background-image: url("./images/icons/check.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-size: 0.64em 0.55em;
+        background-position: center;
+    }
+
+    &-radio {
+        position: relative;
+        display: flex;
+        align-items: baseline;
+        gap: 0.7em;
+
+        &__input {
+            width: 1.2em;
+            height: 1.2em;
+            z-index: 1;
+            position: relative;
+        }
+
+        &__svg {
+            width: 1.2em;
+            height: 1.2em;
+            stroke: var(--libe);
+            fill: none;
+            z-index: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        &__input:checked + &__svg {
+            fill: var(--color-4-dark);
+        }
+
+        &__label {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-4-dark);
+        }
+    }
 }
 

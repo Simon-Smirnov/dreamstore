@@ -1,0 +1,245 @@
+{{ header }}
+<div id="checkout-checkout">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i
+                        class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div id="content" class="checkout" data-checkout>
+            <h1 class="page-title">{{ heading_title }}</h1>
+            <div class="checkout-content">
+                <div class="checkout-inner">
+                    <div class="checkout-left">
+                        {% if not logged %}
+                            <div class="checkout-login">
+                                <a class="checkout-login__link">Войдите или зарегистрируйтесь</a>
+                                <p class="checkout-login__text">Получайте бонусы и оплачивайте ими покупки</p>
+                            </div>
+                        {% endif %}
+                        <div class="checkout-blocks" data-checkout-form>
+                            <div class="checkout-blocks__item checkout-blocks__item--fields">
+                                <h4 class="checkout-blocks__title">Контактная информация</h4>
+                                <div class="checkout-blocks__customer">
+                                    <div class="checkout-blocks__inputs checkout__customer-inputs--fields">
+                                        <div class="checkout-blocks__input">
+                                            <input class="input-text" type="tel" name="phone"
+                                                   data-checkout-input="phone"
+                                                   value="{{ fields.phone ? fields.phone : '' }}"
+                                                   placeholder="Телефон">
+                                            {% if error_warning.phone %}
+                                                <p class="alert-input text-danger">{{ error_warning.phone }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="checkout-blocks__input">
+                                            <input class="input-text" type="text" name="email"
+                                                   data-checkout-input="email"
+                                                   value="{{ fields.email ? fields.email : '' }}"
+                                                   placeholder="E-mail">
+                                        </div>
+                                        {% if error_warning.email %}
+                                            <p class="alert-input text-danger">{{ error_warning.email }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-blocks__item checkout-blocks__item--delivery">
+                                <h4 class="checkout-blocks__title">Доставка</h4>
+                                <div class="checkout-address">
+                                    <div class="checkout-address__item hidden">
+                                        {# <div class="select select-custom select-5"> #}
+                                        {# <input type="hidden" name="region"> #}
+                                        {# <button type="button" class="select__button" data-placeholder="Выберите"> #}
+                                        {#    <span class="select__name">Регион</span> #}
+                                        {#    <span class="select__value" data-value-target-1></span> #}
+                                        {# </button> #}
+                                        {# <ul class="select__list"> #}
+                                        {#    <li data-value="Значение" data-value-1="Кировская область" #}
+                                        {#        selected="selected"> #}
+                                        <input value="Москва" data-checkout-input="zone">
+                                        <input value="2753" data-checkout-input="zone_id">
+                                        {# Кировская область #}
+                                        {#    </li> #}
+                                        {# </ul> #}
+                                        {# </div> #}
+                                    </div>
+                                    <div class="checkout-address__item">
+                                        <div class="checkout-blocks__input checkout-blocks__input--withLabel">
+                                            <input class="input-text" type="text" name="city"
+                                                   data-checkout-input="city"
+                                                   value="{{ fields.city ? fields.city : '' }}" placeholder=" ">
+                                            <label>Город</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkout-delivery__inputs">
+                                    {% for _shipping_method_key, _shipping_method in shipping_methods %}
+                                        <div class="input-radio">
+                                            <input class="input-radio__input"
+                                                   type="radio"
+                                                   name="shipping_type"
+                                                   id="shipping_type_{{ _shipping_method_key }}"
+                                                   value="{{ _shipping_method_key }}"
+                                                   data-shipping-type-input
+                                                    {{ _shipping_method_key == shipping_type ? "checked" : "" }}>
+                                            <svg class="input-radio__svg" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_input_radio"></use>
+                                            </svg>
+                                            <label for="shipping_type_{{ _shipping_method_key }}">
+                                                {{ _shipping_method.title }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="checkout-blocks__inputs checkout-blocks__inputs--address">
+                                    <div class="checkout-blocks__input">
+                                        <input class="input-text" type="text" name="name"
+                                               data-checkout-input="name"
+                                               value="{{ fields.name ? fields.name : '' }}"
+                                               placeholder="Получатель (ФИО полностью)">
+                                        {% if error_warning.name %}
+                                            <p class="alert-input text-danger">{{ error_warning.name }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="checkout-blocks__input">
+                                        <input class="input-text" type="text" name="street"
+                                               data-checkout-input="street"
+                                               value="{{ fields.street ? fields.street : '' }}"
+                                               placeholder="Улица">
+                                    </div>
+                                    <div class="checkout-blocks__block">
+                                        <div class="checkout-blocks__input">
+                                            <input class="input-text" type="text" name="house"
+                                                   data-checkout-input="house"
+                                                   value="{{ fields.house ? fields.house : '' }}"
+                                                   placeholder="Дом">
+                                        </div>
+                                        <div class="checkout-blocks__input">
+                                            <input class="input-text" type="text" name="appartment"
+                                                   data-checkout-input="appartment"
+                                                   value="{{ fields.appartment ? fields.appartment : '' }}"
+                                                   placeholder="Кв-ра/офис">
+                                        </div>
+                                    </div>
+                                    <div class="checkout-blocks__input checkout-blocks__input--comment">
+                                        <textarea class="input-text" name="comment"
+                                                  data-checkout-input="comment"
+                                                  placeholder="Комментарий к заказу">{{ fields.comment ? fields.comment : '' }}</textarea>
+                                        {# <label>Текст комментария</label> #}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-blocks__item checkout-blocks__item--payment">
+                            <h4 class="checkout-blocks__title">Оплата</h4>
+                            <div class="checkout-blocks__radios">
+                                {% for _payment_method in payment_methods %}
+                                    <div class="checkout-blocks__radio input-radio">
+                                        <input class="input-radio__input"
+                                               type="radio"
+                                               name="payment_method"
+                                               id="payment_method_{{ _payment_method.code }}"
+                                               value="{{ _payment_method.code }}"
+                                               data-payment-method-input
+                                                {{ _payment_method.code == payment_method.code ? "checked" : "" }}
+                                        >
+                                        <svg class="input-radio__svg" xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_input_radio"></use>
+                                        </svg>
+                                        <label for="payment_method_{{ _payment_method.code }}"
+                                               style="--icon: url({{ _payment_method.icon }})">
+                                            {{ _payment_method.title }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checkout-right">
+                        {{ order_cart }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# <div class="panel-group" id="accordion"> #}
+        {#    <div class="panel panel-default"> #}
+        {#        <div class="panel-heading"> #}
+        {#            <h4 class="panel-title">{{ text_checkout_option }}</h4> #}
+        {#        </div> #}
+        {#        <div class="panel-collapse collapse" id="collapse-checkout-option"> #}
+        {#            <div class="panel-body"></div> #}
+        {#        </div> #}
+        {#    </div> #}
+        {#    {% if not logged and account != 'guest' %} #}
+        {#        <div class="panel panel-default"> #}
+        {#            <div class="panel-heading"> #}
+        {#                <h4 class="panel-title">{{ text_checkout_account }}</h4> #}
+        {#            </div> #}
+        {#            <div class="panel-collapse collapse" id="collapse-payment-address"> #}
+        {#                <div class="panel-body"></div> #}
+        {#            </div> #}
+        {#        </div> #}
+        {#    {% else %} #}
+        {#        <div class="panel panel-default"> #}
+        {#            <div class="panel-heading"> #}
+        {#                <h4 class="panel-title">{{ text_checkout_payment_address }}</h4> #}
+        {#            </div> #}
+        {#            <div class="panel-collapse collapse" id="collapse-payment-address"> #}
+        {#                <div class="panel-body"></div> #}
+        {#            </div> #}
+        {#        </div> #}
+        {#    {% endif %} #}
+        {#    {% if shipping_required %} #}
+        {#        <div class="panel panel-default"> #}
+        {#            <div class="panel-heading"> #}
+        {#                <h4 class="panel-title">{{ text_checkout_shipping_address }}</h4> #}
+        {#            </div> #}
+        {#            <div class="panel-collapse collapse" id="collapse-shipping-address"> #}
+        {#                <div class="panel-body"></div> #}
+        {#            </div> #}
+        {#        </div> #}
+        {#        <div class="panel panel-default"> #}
+        {#            <div class="panel-heading"> #}
+        {#                <h4 class="panel-title">{{ text_checkout_shipping_method }}</h4> #}
+        {#            </div> #}
+        {#            <div class="panel-collapse collapse" id="collapse-shipping-method"> #}
+        {#                <div class="panel-body"></div> #}
+        {#            </div> #}
+        {#        </div> #}
+        {#    {% endif %} #}
+        {#    <div class="panel panel-default"> #}
+        {#        <div class="panel-heading"> #}
+        {#            <h4 class="panel-title">{{ text_checkout_payment_method }}</h4> #}
+        {#        </div> #}
+        {#        <div class="panel-collapse collapse" id="collapse-payment-method"> #}
+        {#            <div class="panel-body"></div> #}
+        {#        </div> #}
+        {#    </div> #}
+        {#    <div class="panel panel-default"> #}
+        {#        <div class="panel-heading"> #}
+        {#            <h4 class="panel-title">{{ text_checkout_confirm }}</h4> #}
+        {#        </div> #}
+        {#        <div class="panel-collapse collapse" id="collapse-checkout-confirm"> #}
+        {#            <div class="panel-body"></div> #}
+        {#        </div> #}
+        {#    </div> #}
+        {# </div> #}
+    </div>
+</div>
+{#    {{ column_left }} #}
+    {#    {{ column_right }} #}
+    {#    {{ content_bottom }} #}
+    {#    {{ content_top }} #}
+</div>
+{{ footer }}
