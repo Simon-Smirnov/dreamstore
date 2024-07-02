@@ -37,7 +37,7 @@
                                             <input class="input-text" type="tel" name="phone"
                                                    data-checkout-input="phone"
                                                    value="{{ fields.phone ? fields.phone : '' }}"
-                                                   placeholder="Телефон">
+                                                   placeholder="Телефон" {% if logged %}disabled{% endif %}>
                                             {% if error_warning.phone %}
                                                 <p class="alert-input text-danger">{{ error_warning.phone }}</p>
                                             {% endif %}
@@ -46,7 +46,7 @@
                                             <input class="input-text" type="text" name="email"
                                                    data-checkout-input="email"
                                                    value="{{ fields.email ? fields.email : '' }}"
-                                                   placeholder="E-mail">
+                                                   placeholder="E-mail" {% if logged %}disabled{% endif %}>
                                         </div>
                                         {% if error_warning.email %}
                                             <p class="alert-input text-danger">{{ error_warning.email }}</p>
@@ -107,7 +107,8 @@
                                         <input class="input-text" type="text" name="name"
                                                data-checkout-input="name"
                                                value="{{ fields.name ? fields.name : '' }}"
-                                               placeholder="Получатель (ФИО полностью)">
+                                               placeholder="Получатель (ФИО полностью)"
+                                               {% if logged %}disabled{% endif %}>
                                         {% if error_warning.name %}
                                             <p class="alert-input text-danger">{{ error_warning.name }}</p>
                                         {% endif %}

@@ -75,5 +75,52 @@
             color: var(--color-4-dark);
         }
     }
+
+    &-password {
+        position: relative;
+
+        svg {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            width: 1.5em;
+            height: 1.5em;
+            fill: var(--color-6-dark);
+            cursor: pointer;
+        }
+
+        svg:hover {
+            fill: var(--color-5-dark);
+        }
+    }
+
+    &-password.active {
+        svg {
+            fill: var(--color-5-dark);
+        }
+    }
+
+    &-block {
+        position: relative;
+
+        label {
+            display: none;
+            position: absolute;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-6-dark);
+        }
+        
+        input:not(:placeholder-shown) + label {
+            display: block;
+            top: 0.5em;
+            left: 2em;
+        }
+
+        input:not(:placeholder-shown) {
+            padding-top: 1.2em;
+            padding-bottom: 0.4em;
+        }
+    }
 }
 

@@ -1,0 +1,105 @@
+.account {
+    padding-bottom: 6em;
+
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    &-block {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 2em;
+    }
+
+    &-inputs {
+        margin-top: 1.5em;
+    }
+
+    &-input input {
+        background-color: var(--white);
+        max-width: none;
+        width: 100%;
+    }
+
+    &-input + &-input {
+        margin-top: 0.8em;
+    }
+
+    &-link {
+        font-weight: 500;
+        font-size: 1rem;
+        color: var(--color-6-dark);
+        border-bottom: 1px dashed var(--color-6-dark);
+        margin-top: 0.3em;
+        display: inline-block;
+    }
+
+    &-bonuses {
+        margin-top: 1em;
+        background-color: var(--bg-light-60);
+        padding-top: 1.5em;
+        padding-left: 1.5em;
+        padding-right: 6em;
+        padding-bottom: 1.8em;
+        border-radius: 0.3em;
+
+        &__title, &__num {
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: var(--color-4-dark);
+        }
+
+        &__num {
+            margin-left: 0.2em;
+        }
+
+        &__text {
+            margin-top: 0.7em;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-5-dark);
+            line-height: 1.5;
+        }
+
+        &__link {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-5-dark);
+            border-bottom: 1px dashed var(--color-6-dark);
+            margin-top: 0.6em;
+            display: inline-block;
+        }
+    }
+
+    &-btn {
+        max-width: none;
+        width: 100%;
+        background-color: transparent;
+    }
+
+    &-orders {
+        &__empty {
+            margin-top: 1.5em;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--color-5-dark);
+            padding-left: 0.2em;
+        }
+
+        &__list {
+            margin-top: 1.5em;
+        }
+
+        &__item + &__item {
+            margin-top: 1.5em;
+        }
+
+        &__item {
+            border-radius: 0.4em;
+            padding: 2em;
+            background-color: var(--white);
+        }
+    }
+
+
+}

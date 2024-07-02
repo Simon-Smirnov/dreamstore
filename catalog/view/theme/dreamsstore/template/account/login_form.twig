@@ -1,0 +1,42 @@
+<div id="login-modal">
+    <div class="login-inner" data-login-form>
+        <form>
+            <h2 class="section-title login-inner__title">Вход</h2>
+            <div class="login-inner__inputs">
+                <div class="login-inner__input">
+                    <input class="input-text" name="email" type="email" placeholder="E-mail">
+                    <div class="error-email text-danger"></div>
+                </div>
+                <div class="login-inner__input">
+                    <div class="input-password" data-input-password>
+                        <input class="input-text" name="password" type="password" placeholder="Пароль"
+                               data-input-password-input>
+                        <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg>
+                            <use xlink:href="/sprite.svg#icon_eye"></use>
+                        </svg>
+                    </div>
+                    <div class="error-password text-danger"></div>
+                </div>
+            </div>
+            <div class="login-inner__block">
+                <div class="login-inner__remember">
+                    <input id="login-inner-remember" class="input-checkbox" type="checkbox"/>
+                    <label for="login-inner-remember">Запомнить меня</label>
+                </div>
+                <div class="login-inner__forgot">
+                    <a href="something">Забыли пароль?</a>
+                </div>
+            </div>
+            <button class="btn btn-primary login-inner__btn" type="submit">Войти</button>
+            <label class="agree login-inner__agree">
+                <input class="input-checkbox" name="agree" type="checkbox">
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+            <div class="error-agree text-danger"></div>
+            <div class="login-inner__register">
+                <p class="login-inner__register--text">Еще нет аккаунта?</p>
+                <a class="login-inner__register--link" data-ligin-register>Регистрация</a>
+            </div>
+        </form>
+    </div>
+</div>

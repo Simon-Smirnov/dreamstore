@@ -17,67 +17,97 @@
             <h1 class="page-title">{{ text_account }}</h1>
             <div class="account-block">
                 <div class="account-info">
-                    <h2 class="account-info__title">Контактные данные</h2>
-                    <div class="account-input">
-                        <input name="name">
-                        <div class="account-input__error"></div>
-                    </div>
-                    <div class="account-input">
-                        <input name="birthday">
-                        <div class="account-input__error"></div>
+                    <h2 class="account-info__title section-title">Контактные данные</h2>
+                    <div class="account-inputs">
+                        <form data-account-form>
+                            <div class="account-input input-block">
+                                <input class="input-text" name="name" type="text" placeholder="Имя">
+                                <label>Имя</label>
+                                <div class="account-input__error"></div>
+                            </div>
+                            <div class="account-input  input-block">
+                                <input class="input-text" name="birthday" type="text" placeholder="День рождения">
+                                <label>День рождения</label>
+                                <div class="account-input__error"></div>
+                            </div>
+                            <div class="account-input  input-block">
+                                <input class="input-text" name="email" type="email" placeholder="E-mail">
+                                <label>E-mail</label>
+                                <div class="account-input__error"></div>
+                            </div>
+                            <div class="account-input input-password input-block" data-input-password>
+                                <input class="input-text" name="password" type="password" placeholder="Пароль"
+                                       data-input-password-input>
+                                <label>Пароль</label>
+                                <div class="account-input__error"></div>
+                                <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg="">
+                                    <use xlink:href="/sprite.svg#icon_eye"></use>
+                                </svg>
+                            </div>
+                            <a class="account-link">Установить новый пароль</a>
+                        </form>
                     </div>
                     <div class="account-bonuses">
                         <span class="account-bonuses__title">Ваши бонусы:</span>
-                        <span class="account-bonuses__num">{{ bonuses }}</span>
+                        <span class="account-bonuses__num">{{ rewards }}</span>
+                        <p class="account-bonuses__text">Получайте бонусы с каждого заказа и используйте их при
+                            оплате</p>
+                        <a class="account-bonuses__link">Подробнее</a>
                     </div>
-                    <p class="account-bonuses__text">Получайте бонусы с каждого заказа и используйте их при
-                        оплате</p>
-                    <a class="account-bonuses__link">Подробнее</a>
-                    <button class="btn btn-second">Выйти из профиля</button>
+                    <button class="btn btn-second account-btn">Выйти из профиля</button>
                 </div>
                 <div class="account-orders">
-                    <h2 class="account-orders__title">История заказов</h2>
+                    <h2 class="account-orders__title section-title">История заказов</h2>
                     {% if orders %}
                         <ul class="account-orders__list">
-                            <li class="account-orders__item">
-                                    
-                            </li>
+                            {% for order in orders %}
+                                <li class="account-orders__item">
+                                    <div class="account-orders__block">
+                                        <div class="account-orders__info">
+                                            <h4 class="account-orders__info">Заказ № {{ order.order_id }} от
+                                                {{ order.date_added }}</h4>
+                                            <p>• {{ order.status }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="account-orders__content">
+                                        <div class="account-orders__products">
+                                            {% for product in order.products %}
+                                            <div class="account-orders__product">
+                                                <div class="account-orders__product--image">
+                                                    <img src="">
+                                                </div>
+                                                <div class="account-orders__product--block">
+                                                    <div class="account-orders__product--title">
+                                                        {{ product.name }}
+                                                    </div>
+                                                    {% if product.options %}
+                                                        <div class="account-orders__product--options">
+                                                            <ul>
+                                                                {% for option in product.options %}
+                                                                    <li>{{ option.name }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="account-orders__product--total">
+                                                        <div class="account-orders__product--quantity">
+                                                            {{ product.quantity }}
+                                                        </div>
+                                                        <div class="account-orders__product--quantity">
+                                                            {{ product.total }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                </li>
+                            {% endfor %}
                         </ul>
                     {% else %}
                         <p class="account-orders__empty">У вас ещё нет заказов.</p>
                     {% endif %}
                 </div>
-
-                <h2>{{ text_my_account }}</h2>
-                <ul class="list-unstyled">
-                    <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-                    <li><a href="{{ password }}">{{ text_password }}</a></li>
-                    <li><a href="{{ address }}">{{ text_address }}</a></li>
-                    <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-                </ul>
-                {% if credit_cards %}
-                    <h2>{{ text_credit_card }}</h2>
-                    <ul class="list-unstyled">
-                        {% for credit_card in credit_cards %}
-                            <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <h2>{{ text_my_orders }}</h2>
-                <ul class="list-unstyled">
-                    <li><a href="{{ order }}">{{ text_order }}</a></li>
-                    <li><a href="{{ download }}">{{ text_download }}</a></li>
-                    {% if reward %}
-                        <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-                    {% endif %}
-                    <li><a href="{{ return }}">{{ text_return }}</a></li>
-                    <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-                    <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
-                </ul>
-                <h2>{{ text_my_newsletter }}</h2>
-                <ul class="list-unstyled">
-                    <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-                </ul>
             </div>
         </div>
         {#    {{ column_left }} #}

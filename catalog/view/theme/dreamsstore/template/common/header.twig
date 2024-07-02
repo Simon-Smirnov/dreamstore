@@ -161,10 +161,13 @@
                             {# {{ search }} #}
                         </li>
                         <li class="dropdown">
-                            <a class="">
+                            <a class="header-bottom_about-list_login" data-login-btn>
                                 <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_login"></use>
                                 </svg>
+                                {% if logged %}
+                                    <span>{{ points }}</span>
+                                {% endif %}
                             </a>
                             {# <a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-user"></i>
@@ -237,6 +240,14 @@
                         <li>{{ cart }}</li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal login-modal" data-modal-type="login-modal" hidden>
+        <div class="modal__content">
+            <div class="modal__box model-popup">
+                <button class="modal__close modal__close--fixed"></button>
+                <div class="model-popup__content" data-login-content></div>
             </div>
         </div>
     </div>

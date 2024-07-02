@@ -4,6 +4,10 @@ class ControllerCheckoutCheckout extends Controller
 {
     public function index($update = false, $errors = [])
     {
+
+        //echo "<pre>";
+        //var_dump($this->session->data);
+        //echo "</pre>";
         // Validate cart has products and has stock.
         if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
             $this->response->redirect($this->url->link('checkout/cart'));
@@ -52,12 +56,14 @@ class ControllerCheckoutCheckout extends Controller
             ];
         }
 
+
         if ($this->customer->isLogged()) {
             $data['fields'] = [
                 'name' => $this->customer->getFirstName(),
                 'phone' => $this->customer->getTelephone(),
                 'email' => $this->customer->getEmail()
             ];
+            $data['is_login'] = true;
         } else {
             $data['fields'] = [];
             if (isset($this->session->data['phone'])) {
@@ -70,46 +76,47 @@ class ControllerCheckoutCheckout extends Controller
             } else {
                 $data['fields']['email'] = '';
             }
-            if (isset($this->session->data['zone'])) {
-                $data['fields']['zone'] = $this->session->data['zone'];
-            } else {
-                $data['fields']['zone'] = '';
-            }
-            if (isset($this->session->data['zone_id'])) {
-                $data['fields']['zone_id'] = $this->session->data['zone_id'];
-            } else {
-                $data['fields']['zone_id'] = '';
-            }
-            if (isset($this->session->data['city'])) {
-                $data['fields']['city'] = $this->session->data['city'];
-            } else {
-                $data['fields']['city'] = '';
-            }
             if (isset($this->session->data['name'])) {
                 $data['fields']['name'] = $this->session->data['name'];
             } else {
                 $data['fields']['name'] = '';
             }
-            if (isset($this->session->data['street'])) {
-                $data['fields']['street'] = $this->session->data['street'];
-            } else {
-                $data['fields']['street'] = '';
-            }
-            if (isset($this->session->data['house'])) {
-                $data['fields']['house'] = $this->session->data['house'];
-            } else {
-                $data['fields']['house'] = '';
-            }
-            if (isset($this->session->data['appartment'])) {
-                $data['fields']['appartment'] = $this->session->data['appartment'];
-            } else {
-                $data['fields']['appartment'] = '';
-            }
-            if (isset($this->session->data['comment'])) {
-                $data['fields']['comment'] = $this->session->data['comment'];
-            } else {
-                $data['fields']['comment'] = '';
-            }
+        }
+
+        if (isset($this->session->data['zone'])) {
+            $data['fields']['zone'] = $this->session->data['zone'];
+        } else {
+            $data['fields']['zone'] = '';
+        }
+        if (isset($this->session->data['zone_id'])) {
+            $data['fields']['zone_id'] = $this->session->data['zone_id'];
+        } else {
+            $data['fields']['zone_id'] = '';
+        }
+        if (isset($this->session->data['city'])) {
+            $data['fields']['city'] = $this->session->data['city'];
+        } else {
+            $data['fields']['city'] = '';
+        }
+        if (isset($this->session->data['street'])) {
+            $data['fields']['street'] = $this->session->data['street'];
+        } else {
+            $data['fields']['street'] = '';
+        }
+        if (isset($this->session->data['house'])) {
+            $data['fields']['house'] = $this->session->data['house'];
+        } else {
+            $data['fields']['house'] = '';
+        }
+        if (isset($this->session->data['appartment'])) {
+            $data['fields']['appartment'] = $this->session->data['appartment'];
+        } else {
+            $data['fields']['appartment'] = '';
+        }
+        if (isset($this->session->data['comment'])) {
+            $data['fields']['comment'] = $this->session->data['comment'];
+        } else {
+            $data['fields']['comment'] = '';
         }
 
         if ($this->cart->hasShipping()) {
@@ -178,6 +185,7 @@ class ControllerCheckoutCheckout extends Controller
                         'quote' => $quote['quote'],
                         'sort_order' => $quote['sort_order'],
                         'cost' => $quote['cost'],
+                        'code' => $quote['code'],
                         'error' => $quote['error']
                     );
                 }

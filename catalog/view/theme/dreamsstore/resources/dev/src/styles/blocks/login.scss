@@ -1,0 +1,95 @@
+.login-modal {
+    .modal__box {
+        padding: 4em;
+    }
+
+    .modal__close--fixed {
+        top: 3.5em;
+        right: 2.5em;
+    }
+}
+
+.login-inner {
+    &__title {
+        text-align: center;
+    }
+
+    &__inputs {
+        margin-top: 1.5em;
+    }
+
+    &__input + &__input {
+        margin-top: 0.8em;
+    }
+
+    &__input input {
+        max-width: none;
+        background-color: var(--white);
+    }
+
+    &__block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.3em;
+    }
+
+    &__remember {
+        input {
+            width: 1.2em;
+            height: 1.2em;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.5em;
+            color: var(--color-5-dark);
+            cursor: pointer;
+        }
+    }
+
+    &__forgot {
+        a {
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.5em;
+            color: var(--color-6-dark);
+            cursor: pointer;
+            border-bottom: 1px dashed var(--color-6-dark);
+        }
+    }
+
+    &__btn {
+        max-width: none;
+        margin-top: 0.8em;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__agree {
+        justify-content: center;
+        margin-top: 0.4em;
+    }
+
+    &__register {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid var(--libe);
+        font-weight: 500;
+        font-size: 1.1rem;
+
+        &--text {
+            color: var(--color-4-dark);
+        }
+
+        &--link {
+
+            color: var(--color-6-dark);
+        }
+    }
+}
