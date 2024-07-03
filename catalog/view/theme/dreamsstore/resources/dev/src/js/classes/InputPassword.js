@@ -4,7 +4,6 @@ export default class {
         console.log(this.elementsPassword);
         if (this.elementsPassword.length > 0) {
             this.elementsPassword.forEach(element => {
-                console.log('ppp');
                 const svg = element.querySelector('[data-input-password-svg]');
                 const input = element.querySelector('[data-input-password-input]');
 

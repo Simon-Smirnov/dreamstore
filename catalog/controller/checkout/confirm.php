@@ -196,12 +196,14 @@ class ControllerCheckoutConfirm extends Controller
                     'product_id' => $product['product_id'],
                     'name' => $product['name'],
                     'model' => $product['model'],
+                    'image' => $product['image'],
                     'option' => $option_data,
                     'download' => $product['download'],
                     'quantity' => $product['quantity'],
                     'subtract' => $product['subtract'],
                     'price' => $product['price'],
                     'total' => $product['total'],
+                    'total_without_special' => $product['total_without_special'],
                     'tax' => $this->tax->getTax($product['price'], $product['tax_class_id']),
                     'reward' => $product['reward']
                 );
@@ -274,6 +276,11 @@ class ControllerCheckoutConfirm extends Controller
             } else {
                 $order_data['accept_language'] = '';
             }
+
+            $order_data['discount'] = $this->cart->getSubTotalDiscounts();
+            $order_data['weight'] = $this->cart->getWeight();
+            $order_data['weight_class_id'] = $this->config->get('config_weight_class_id');
+            $order_data['reward'] = $this->cart->getTotalRewards();
 
             $this->load->model('checkout/order');
 
@@ -363,11 +370,21 @@ class ControllerCheckoutConfirm extends Controller
                 );
             }
 
+            if ($this->customer->isLogged() && isset($order_data['reward']) && (int)$order_data['reward'] > 0) {
+                $this->load->model('account/reward');
+                $this->model_account_reward->setRewards($this->customer->getId(), $this->session->data['order_id'], $order_data['reward']);
+            }
+
             $data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
+            echo "<pre>";
+            print_r($data['payment']);
+            echo "</pre>";
+
+            //$this->response->setOutput($this->load->view('checkout/confirm', $data));
         } else {
             $data['redirect'] = $redirect;
         }
 
-        $this->response->setOutput($this->load->view('checkout/confirm', $data));
+        //$this->response->setOutput($this->load->view('checkout/confirm', $data));
     }
 }

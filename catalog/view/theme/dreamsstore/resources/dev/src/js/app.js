@@ -1,5 +1,6 @@
 import InputPassword from './classes/InputPassword.js'
 import './classes/Modal.js'
+import Account from './classes/Account.js'
 import Login from './classes/Login.js'
 import './classes/Select.js'
 import './classes/Fancybox.js'
@@ -28,6 +29,7 @@ import Checkout from "./classes/Checkout.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     new InputPassword('[data-input-password]');
+    new Account('[data-account-form]');
     new Login('[data-login-btn]');
     new Faq('.faq-block');
     new Stars('.stars_grade');

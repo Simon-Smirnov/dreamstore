@@ -2,7 +2,7 @@
 
 class ControllerAccountAccount extends Controller
 {
-    public function index()
+    public function index($answer = [])
     {
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/account', '', true);
@@ -26,13 +26,33 @@ class ControllerAccountAccount extends Controller
             'href' => $this->url->link('account/account', '', true)
         );
 
-        if (isset($this->session->data['success'])) {
-            $data['success'] = $this->session->data['success'];
-
-            unset($this->session->data['success']);
-        } else {
-            $data['success'] = '';
+        $data['error_name'] = '';
+        $data['error_birthday'] = '';
+        $data['error_password'] = '';
+        if (isset($answer['errors'])) {
+            if (isset($answer['errors']['name'])) {
+                $data['error_name'] = $answer['errors']['name'];
+            }
+            if (isset($answer['errors']['birthday'])) {
+                $data['error_birthday'] = $answer['errors']['birthday'];
+            }
+            if (isset($answer['errors']['password'])) {
+                $data['error_password'] = $answer['errors']['password'];
+            }
         }
+        $data['success'] = false;
+        if (isset($answer['success'])) {
+            $data['success'] = $answer['success'];
+        }
+
+
+        $customer_id = $this->customer->getId();
+        $this->load->model('account/customer');
+        $customer = $this->model_account_customer->getCustomer($customer_id);
+
+        $data['name'] = $customer['firstname'];
+        $data['email'] = $customer['email'];
+        $data['birthday'] = substr($customer['birthday'], 0, 10);
 
         $data['rewards'] = 0;
         if ($this->customer->getRewardPoints()) {
@@ -45,20 +65,53 @@ class ControllerAccountAccount extends Controller
 
         foreach ($orders as $order) {
             $products = $this->model_account_order->getOrderProducts($order['order_id']);
+            $order_totals = $this->model_account_order->getOrderTotals($order['order_id']);
+            $order['sub_total'] = 0;
+            $order['shipping_cost'] = 0;
+
+            foreach ($order_totals as $order_total) {
+                if ($order_total['code'] == 'sub_total') {
+                    $order['sub_total'] = $this->currency->format($order_total['value'], $this->session->data['currency']);
+                }
+                if ($order_total['code'] == 'shipping') {
+                    $order['shipping_cost'] = $this->currency->format($order_total['value'], $this->session->data['currency']);
+                }
+            }
+
             foreach ($products as $key => $product) {
+                $this->load->model('tool/image');
+                if ($product['image']) {
+                    $image = [
+                        'webp' => $this->model_tool_image->resize($product['image'], 256 * 2, null, ['webp' => true]),
+                        'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
+                    ];
+                } else {
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
+                }
+                $total = $this->currency->format($product['total'], $this->session->data['currency']);
+                $products[$key]['total'] = $total;
+                $total_without_special = false;
+                if ($product['total_without_special'] != 0) {
+                    $total_without_special = $this->currency->format($product['total_without_special'], $this->session->data['currency']);
+                }
+                $products[$key]['total_without_special'] = $total_without_special;
+                $products[$key]['image'] = $image;
                 $products[$key]['options'] = $this->model_account_order->getOrderOptions($order['order_id'], $product['order_product_id']);
             }
 
-            echo "<pre>";
-            var_dump($products);
-            echo "</pre>";
-
             $class = '';
-            if ($order['status_id'] == '1') {
+            if ($order['order_status_id'] == '1') {
                 $class = 'warning';
-            } else if ($order['status_id'] == '5') {
+            } else if ($order['order_status_id'] == '5') {
                 $class = 'success';
             }
+
+            $discount = false;
+            if ($order['discount'] > 0) {
+                $discount = $this->currency->format($order['discount'], $this->session->data['currency']);
+            }
+            $weight = $this->weight->format($this->cart->getWeight(), $order['weight_class_id'], $this->language->get('decimal_point'), $this->language->get('thousand_point'));
+            $total = $this->currency->format($order['total'], $this->session->data['currency']);
 
             $data['orders'][] = [
                 'order_id' => $order['order_id'],
@@ -66,15 +119,25 @@ class ControllerAccountAccount extends Controller
                 'date_added' => $order['date_added'],
                 'class' => $class,
                 'products' => $products,
-                'total' => $order['total']
+                'discount' => $discount,
+                'weight' => $weight,
+                'shipping_cost' => $order['shipping_cost'],
+                'sub_total' => $order['sub_total'],
+                'reward' => $order['reward'],
+                'total' => $total
             ];
         }
-
 
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
 
-        $this->response->setOutput($this->load->view('account/account', $data));
+        if (empty($answer)) {
+            $this->response->setOutput($this->load->view('account/account', $data));
+        } else {
+            return $this->load->view('account/account', $data);
+        }
+
+
     }
 
     public function country()
@@ -234,6 +297,34 @@ class ControllerAccountAccount extends Controller
         $this->response->setOutput(json_encode($json));
     }
 
+    public function logout()
+    {
+        $json = [];
+        if ($this->customer->isLogged()) {
+            $this->customer->logout();
+
+            unset($this->session->data['shipping_address']);
+            unset($this->session->data['shipping_method']);
+            unset($this->session->data['shipping_methods']);
+            unset($this->session->data['payment_address']);
+            unset($this->session->data['payment_method']);
+            unset($this->session->data['payment_methods']);
+            unset($this->session->data['comment']);
+            unset($this->session->data['order_id']);
+            unset($this->session->data['coupon']);
+            unset($this->session->data['reward']);
+            unset($this->session->data['voucher']);
+            unset($this->session->data['vouchers']);
+
+            $this->session->data['logout'] = true;
+
+            $json[redirect] = $this->url->link('common/logout', '', true);
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
     protected function validate($data)
     {
         $errors = [];
@@ -255,9 +346,65 @@ class ControllerAccountAccount extends Controller
             if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
                 $this->error['warning'] = $this->language->get('error_login');
 
-                //$this->model_account_customer->addLoginAttempt($this->request->post['email']);
+                $this->model_account_customer->addLoginAttempt($this->request->post['email']);
             } else {
                 $this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
+            }
+        }
+
+        return $errors;
+    }
+
+
+    public function edit()
+    {
+        $answer = [];
+
+        if ($this->request->post) {
+            $data = $this->request->post;
+        } else {
+            $answer['errors']['data'] = 'Некорректные данные';
+        }
+
+        $customer_id = $this->customer->getId();
+
+        if (empty($answer)) {
+            $this->load->model('account/customer');
+
+            $errosValidate = $this->editValidate($data);
+            if (empty($errosValidate)) {
+                $this->model_account_customer->updateCustomer($customer_id, $data);
+                //if (trim($this->request->post['password']) != '') {
+                //    $this->model_account_customer->editPasswordByCustomerId($customer_id, $data['password']);
+                //}
+                $answer['success'] = 'Данные успешно обновлены.';
+            } else {
+                $answer['errors'] = $errosValidate;
+            }
+        }
+
+        echo "<pre>";
+        var_dump($answer);
+        echo "</pre>";
+
+        $this->response->setOutput($this->index($answer));
+    }
+
+    protected function editValidate($data)
+    {
+        $errors = [];
+
+        if ((utf8_strlen(trim($data['name'])) < 1) || (utf8_strlen(trim($data['name'])) > 128)) {
+            $errors['name'] = 'Имя должно быть от 1 до 128 символов';
+        }
+
+        if ((utf8_strlen(trim($data['birthday'])) > 20)) {
+            $errors['birthday'] = 'Дата рождения не может быть больше 20 символов';
+        }
+
+        if (trim($data['password']) != '') {
+            if ((utf8_strlen(trim($data['password'])) < 6) || (utf8_strlen(trim($data['password'])) > 20)) {
+                $errors['password'] = 'Пароль должен быть от 6 до 20 символов';
             }
         }
 

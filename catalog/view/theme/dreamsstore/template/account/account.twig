@@ -18,33 +18,39 @@
             <div class="account-block">
                 <div class="account-info">
                     <h2 class="account-info__title section-title">Контактные данные</h2>
-                    <div class="account-inputs">
-                        <form data-account-form>
+                    <div class="account-inputs" data-account-form>
+                        <form data-account-renew>
+                            {% if success %}
+                                <input type="hidden" data-account-alert value="{{ success }}">
+                            {% endif %}
                             <div class="account-input input-block">
-                                <input class="input-text" name="name" type="text" placeholder="Имя">
+                                <input class="input-text" name="name" type="text" placeholder="Имя" value="{{ name }}">
                                 <label>Имя</label>
-                                <div class="account-input__error"></div>
+                                <div class="account-input__error text-danger">{{ error_name }}</div>
                             </div>
                             <div class="account-input  input-block">
-                                <input class="input-text" name="birthday" type="text" placeholder="День рождения">
+                                <input class="input-text" name="birthday" type="date" placeholder="День рождения"
+                                       value="{{ birthday }}" {% if birthday %}disabled{% endif %}>
                                 <label>День рождения</label>
-                                <div class="account-input__error"></div>
+                                <div class="account-input__error text-danger">{{ error_birthday }}</div>
                             </div>
                             <div class="account-input  input-block">
-                                <input class="input-text" name="email" type="email" placeholder="E-mail">
+                                <input class="input-text" name="email" type="email" placeholder="E-mail"
+                                       value="{{ email }}" disabled>
                                 <label>E-mail</label>
-                                <div class="account-input__error"></div>
+                                <div class="account-input__error text-danger"></div>
                             </div>
                             <div class="account-input input-password input-block" data-input-password>
                                 <input class="input-text" name="password" type="password" placeholder="Пароль"
+                                       value=""
                                        data-input-password-input>
                                 <label>Пароль</label>
-                                <div class="account-input__error"></div>
+                                <div class="account-input__error text-danger">{{ error_password }}</div>
                                 <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg="">
                                     <use xlink:href="/sprite.svg#icon_eye"></use>
                                 </svg>
                             </div>
-                            <a class="account-link">Установить новый пароль</a>
+                            <button class="account-link" type="submit">Подтвердить изменения</button>
                         </form>
                     </div>
                     <div class="account-bonuses">
@@ -54,51 +60,111 @@
                             оплате</p>
                         <a class="account-bonuses__link">Подробнее</a>
                     </div>
-                    <button class="btn btn-second account-btn">Выйти из профиля</button>
+                    <button class="btn btn-second account-btn" data-account-logout>Выйти из профиля</button>
                 </div>
                 <div class="account-orders">
                     <h2 class="account-orders__title section-title">История заказов</h2>
                     {% if orders %}
-                        <ul class="account-orders__list">
+                        <ul class="account-orders__list dropdown-list">
                             {% for order in orders %}
-                                <li class="account-orders__item">
+                                <li class="account-orders__item dropdown-list-item">
                                     <div class="account-orders__block">
                                         <div class="account-orders__info">
-                                            <h4 class="account-orders__info">Заказ № {{ order.order_id }} от
+                                            <h4 class="account-orders__title">Заказ № {{ order.order_id }} от
                                                 {{ order.date_added }}</h4>
-                                            <p>• {{ order.status }}</p>
+                                            <p class="account-orders__status {{ order.class }}">• {{ order.status }}</p>
+                                        </div>
+                                        <div class="account-orders__arrow">
+                                            <svg xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
                                         </div>
                                     </div>
-                                    <div class="account-orders__content">
+                                    <div class="account-orders__content dropdown-list-description">
                                         <div class="account-orders__products">
                                             {% for product in order.products %}
-                                            <div class="account-orders__product">
-                                                <div class="account-orders__product--image">
-                                                    <img src="">
-                                                </div>
-                                                <div class="account-orders__product--block">
-                                                    <div class="account-orders__product--title">
-                                                        {{ product.name }}
+                                                <div class="account-orders__product">
+                                                    <div class="account-orders__product--image">
+                                                        <picture>
+                                                            <source srcset="{{ product.image.webp }}">
+                                                            <img class="category_underCategories-img"
+                                                                 src="{{ product.image.default }}"
+                                                                 loading="lazy">
+                                                        </picture>
                                                     </div>
-                                                    {% if product.options %}
-                                                        <div class="account-orders__product--options">
-                                                            <ul>
-                                                                {% for option in product.options %}
-                                                                    <li>{{ option.name }}</li>
-                                                                {% endfor %}
-                                                            </ul>
+                                                    <div class="account-orders__product--block">
+                                                        <div class="account-orders__product--title">
+                                                            {{ product.name }}
                                                         </div>
+                                                        {% if product.options %}
+                                                            <div class="account-orders__product--options">
+                                                                <ul>
+                                                                    {% for option in product.options %}
+                                                                        <li>{{ option.name }}: {{ option.value }}</li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
+                                                        <div class="account-orders__product--total">
+                                                            <div class="account-orders__product--quantity">
+                                                                {{ product.quantity }} шт
+                                                            </div>
+                                                            <div class="account-orders__product--value">
+                                                                {{ product.total }}
+                                                            </div>
+                                                            {% if product.total_without_special %}
+                                                                <div class="account-orders__product--withoutSpecial">
+                                                                    {{ product.total_without_special }}
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="account-orders__totals">
+                                            <div class="account-orders__total">
+                                                <div class="account-orders__total--title">Товаров на:</div>
+                                                <div class="account-orders__total--line"></div>
+                                                <div class="account-orders__total--value">
+                                                    {{ order.sub_total }}
+                                                </div>
+                                            </div>
+                                            {% if order.discount %}
+                                                <div class="account-orders__total">
+                                                    <div class="account-orders__total--title">Скидка:</div>
+                                                    <div class="account-orders__total--line"></div>
+                                                    <div class="account-orders__total--value">
+                                                        - {{ order.discount }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            <div class="account-orders__total">
+                                                <div class="account-orders__total--title">Общий вес:</div>
+                                                <div class="account-orders__total--line"></div>
+                                                <div class="account-orders__total--value">
+                                                    {% if order.weight %}
+                                                        {{ order.weight }} кг
                                                     {% endif %}
-                                                    <div class="account-orders__product--total">
-                                                        <div class="account-orders__product--quantity">
-                                                            {{ product.quantity }}
-                                                        </div>
-                                                        <div class="account-orders__product--quantity">
-                                                            {{ product.total }}
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                {% endfor %}
+                                            </div>
+                                            <div class="account-orders__total">
+                                                <div class="account-orders__total--title">Стоимость доставки:</div>
+                                                <div class="account-orders__total--line"></div>
+                                                <div class="account-orders__total--value">{{ order.shipping_cost }}</div>
+                                            </div>
+                                            <div class="account-orders__total">
+                                                <div class="account-orders__total--title">Бонусов за заказ:</div>
+                                                <div class="account-orders__total--line"></div>
+                                                <div class="account-orders__total--value">
+                                                    <span>+{{ order.reward }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-orders__summ">
+                                                <div class="account-orders__summ--title">Итого:</div>
+                                                <div class="account-orders__summ--value">
+                                                    {{ order.total }}
+                                                </div>
                                             </div>
                                         </div>
                                 </li>
