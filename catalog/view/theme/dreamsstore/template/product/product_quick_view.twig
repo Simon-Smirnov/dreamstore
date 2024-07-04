@@ -1,0 +1,236 @@
+<div id="content" class="product product-quick">
+    <div class="product-left">
+        <div class="sliderProductMain">
+            <div class="product-images swiper">
+                {% if thumb or images %}
+                    {# <div class="product-images__big"> #}
+                    {#    <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}"> #}
+                    {#        <picture> #}
+                    {#            <source srcset="{{ thumb.webp }}"> #}
+                    {#            <img class="product-images__image" #}
+                    {#                 src="{{ thumb.default }}" alt="{{ heading_title }}" #}
+                    {#                 title="{{ heading_title }}" #}
+                    {#                 loading="lazy"/> #}
+                    {#        </picture> #}
+                    {#    </a> #}
+                    {# </div> #}
+                    <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                        {#                            {% if thumb %} #}
+                        {#                                <li class="product-images__item"> #}
+                        {#                                    <a class="product-images__link" href="{{ popup }}" title="{{ heading_title }}"> #}
+                        {#                                        <img #}
+                        {#                                                src="{{ thumb }}" title="{{ heading_title }}" #}
+                        {#                                                alt="{{ heading_title }}"/> #}
+                        {#                                        <picture> #}
+                        {#                                            <source srcset="{{ thumb.webp }}"> #}
+                        {#                                            <img class="product-images__image" #}
+                        {#                                                 src="{{ thumb.default }}" alt="{{ heading_title }}" #}
+                        {#                                                 title="{{ heading_title }}" #}
+                        {#                                                 loading="lazy"/> #}
+                        {#                                        </picture> #}
+                        {#                                    </a> #}
+                        {#                                </li> #}
+                        {#                            {% endif %} #}
+                        {% if thumb %}
+                            <li class="product-images__item">
+                                <a class="product-images__link" href="{{ thumb.popup }}"
+                                   title="{{ heading_title }}">
+                                    <picture>
+                                        <source srcset="{{ thumb.webp }}">
+                                        <img class="product-images__image"
+                                             src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                             title="{{ heading_title }}"
+                                             loading="lazy"/>
+                                    </picture>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if images %}
+                            {% for image in images %}
+                                <li class="product-images__item">
+                                    <a class="product-images__link" href="{{ image.popup }}"
+                                       title="{{ heading_title }}">
+                                        <picture>
+                                            <source srcset="{{ image.webp }}">
+                                            <img class="product-images__image"
+                                                 src="{{ image.default }}" alt="{{ heading_title }}"
+                                                 title="{{ heading_title }}"
+                                                 loading="lazy"/>
+                                        </picture>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+                <nav class="sliderProductMain-arrows">
+                    <ul class="sliderProductMain-list">
+                        <div>
+                            <li class="slider__arrow--prev">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </li>
+                        </div>
+                        <div>
+                            <li class="slider__arrow--next">
+                                <svg xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </li>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="sliderProductThumbs">
+            <div class="product-images swiper">
+                {% if thumb or images %}
+                    <ul class="product-images__list swiper-wrapper" data-lightbox-parent>
+                        {% if thumb %}
+                            <li class="product-images__item">
+                                <picture>
+                                    <source srcset="{{ thumb.webp }}">
+                                    <img class="product-images__image"
+                                         src="{{ thumb.default }}" alt="{{ heading_title }}"
+                                         title="{{ heading_title }}"
+                                         loading="lazy"/>
+                                </picture>
+                            </li>
+                        {% endif %}
+                        {% if images %}
+                            {% for image in images %}
+                                <li class="product-images__item">
+                                    <picture>
+                                        <source srcset="{{ image.webp }}">
+                                        <img class="product-images__image"
+                                             src="{{ image.default }}" alt="{{ heading_title }}"
+                                             title="{{ heading_title }}"
+                                             loading="lazy"/>
+                                    </picture>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="product-right" data-products-to-cart>
+        <div class="product-right__info">
+            <p>Артикул: {{ sku }}</p>
+            <a href="{{ share }}">Поделиться</a>
+        </div>
+        <h1 class="section-title">{{ heading_title }}</h1>
+        <div class="product-right__color">
+        </div>
+        <div class="product-right__options">
+            {% if options %}
+                {% for option in options %}
+                    {% if option.type == 'select' %}
+                        <div class="product-right__options-item" data-option-product-id="{{ product_id }}"
+                             data-option="select">
+                            <span class="product-right__options-title">{{ option.name }}</span>
+                            <div class="select select-product product-right__options-block">
+                                <input type="hidden" name="option[{{ option.product_option_id }}]"
+                                       value="{{ option.product_option_value.0.product_option_value_id }}">
+                                <div class="select__box-btn">
+                                    <button class="select__button" type="button">По умолчанию<br></button>
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                    </svg>
+                                </div>
+                                <ul class="select__list">
+                                    {% for option_value in option.product_option_value %}
+                                        <li data-value="{{ option_value.product_option_value_id }}"
+                                            selected="selected">{{ option_value.name }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="product-right__options-checkbox">
+                    {% for option in options %}
+                        {% if option.type == 'checkbox' %}
+                            <div class="product-right__options-checkbox_item {% if option.required %} required {% endif %}">
+                                <span class="product-right__options-title">{{ option.name }}</span>
+                                <div id="input-option{{ option.product_option_id }}"
+                                     data-option-product-id="{{ product_id }}" data-option="checkbox">
+                                    {% for option_value in option.product_option_value %}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="input-checkbox product-right__options-check"
+                                                       type="checkbox"
+                                                       name="option[{{ option.product_option_id }}][]"
+                                                       value="{{ option_value.product_option_value_id }}"
+                                                       data-option-input-product-id="{{ product_id }}"/>
+                                                <span class="product-right__options-text">{{ option_value.name }}</span>
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if option.type == 'radio' %}
+                            <div class="form-group{% if option.required %} required {% endif %}">
+                                <label class="control-label">{{ option.name }}</label>
+                                <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"
+                                                       name="option[{{ option.product_option_id }}]"
+                                                       value="{{ option_value.product_option_value_id }}"/>
+                                                {% if option_value.image %} <img
+                                                        src="{{ option_value.image }}"
+                                                        alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"
+                                                        class="img-thumbnail"/> {% endif %}
+                                                {{ option_value.name }}
+                                                {% if option_value.price %}
+                                                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                                                {% endif %} </label>
+                                        </div>
+                                    {% endfor %} </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="product-right__price">
+            {% if price %}
+                {% if not special %}
+                    <h2 class="product-right__newPrice">{{ price }}</h2>
+                {% else %}
+                    <h2 class="product-right__newPrice">{{ special }}</h2>
+                    <span class="product-right__oldPrice">{{ price }}</span>
+                    <span class="product-right__percent">{{ percent }}</span>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="product-right__buttons" id="product">
+            <div class="product-right__add">
+                {# <label class="control-label" for="input-quantity">{{ entry_qty }}</label> #}
+                {# <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" #}
+                {#       class="form-control"/> #}
+                <button type="button" id="button-cart" data-add-to-cart="true"
+                        data-product-id="{{ product_id }}"
+                        data-loading-text="{{ text_loading }}"
+                        class="btn btn-primary">{{ button_cart }}</button>
+                {% if minimum > 1 %}
+                    <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
+                {% endif %}
+            </div>
+            <div class="product-right__click">
+                <button class="btn btn-second">Заказать в 1 клик</button>
+            </div>
+        </div>
+        <div class="product-right__complect">
+            <h4>Добавить в комплект</h4>
+        </div>
+        <div class="product-right__delivery">
+
+        </div>
+    </div>
+</div>

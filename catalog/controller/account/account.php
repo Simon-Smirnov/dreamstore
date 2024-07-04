@@ -318,7 +318,7 @@ class ControllerAccountAccount extends Controller
 
             $this->session->data['logout'] = true;
 
-            $json[redirect] = $this->url->link('common/logout', '', true);
+            $json[redirect] = $this->url->link('common/home', '', true);
         }
 
         $this->response->addHeader('Content-Type: application/json');

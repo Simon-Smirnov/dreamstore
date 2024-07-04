@@ -1,0 +1,19 @@
+.wishlist {
+
+    padding-bottom: 6em;
+
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    &-empty {
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: var(--color-5-dark);
+    }
+
+    &-btn {
+        margin-top: 1em;
+    }
+
+}

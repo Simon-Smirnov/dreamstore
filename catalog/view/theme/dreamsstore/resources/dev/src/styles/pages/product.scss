@@ -345,3 +345,58 @@
         border: 0.3em solid var(--color-6-dark);
     }
 }
+
+.wishlist {
+    .modal__box {
+        padding: 2.5em 2.5em;
+    }
+
+    .product-left {
+        width: 45%;
+    }
+
+    .product-right {
+        width: 55%;
+    }
+
+    .modal__close--fixed {
+        width: 0.8em;
+        height: 0.8em;
+    }
+
+    .product-right__info {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .product-right__newPrice {
+        font-size: 1.7rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
+
+    .sliderProductThumbs .product-images__item.swiper-slide-thumb-active {
+        border: 0.15em solid var(--color-6-dark);
+    }
+
+    .product-right__options-title {
+        font-size: 1rem;
+    }
+
+    .select__button {
+        font-size: 0.9rem;
+    }
+
+    .select__list li {
+        font-size: 0.9rem;
+    }
+
+    .product-right__options-text {
+        font-size: 1rem;
+    }
+}

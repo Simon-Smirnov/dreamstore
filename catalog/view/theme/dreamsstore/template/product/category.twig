@@ -152,9 +152,9 @@
                                                 </p>
                                             </div>
                                             <h4 class="products_grid-title">{{ product.name }}</h4>
-                                            <button class="products_grid-wishlist" type="button" data-toggle="tooltip"
+                                            <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}"
                                                     title="{{ button_wishlist }}"
-                                                    onclick="wishlist.add('{{ product.product_id }}');">
+                                                    data-product-wishlist="{{ product.product_id }}">
                                                 <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
                                                     <use xlink:href="/sprite.svg#icon_heart"></use>
                                                 </svg>

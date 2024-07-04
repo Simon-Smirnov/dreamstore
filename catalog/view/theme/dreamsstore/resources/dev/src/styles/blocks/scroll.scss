@@ -1,0 +1,24 @@
+.custom-scroll {
+    --scroll-size: 0.3em;
+
+    &::-webkit-scrollbar-track {
+        background: var(--color-8-dark);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-6);
+        border-radius: var(--scroll-size);
+    }
+
+    &--x {
+        &::-webkit-scrollbar {
+            height: var(--scroll-size);
+        }
+    }
+
+    &--y {
+        &::-webkit-scrollbar {
+            width: var(--scroll-size);
+        }
+    }
+}

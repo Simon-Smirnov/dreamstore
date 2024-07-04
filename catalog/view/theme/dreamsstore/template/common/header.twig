@@ -48,7 +48,7 @@
 
     <link rel="stylesheet" href="{{ assets }}/assets/app.min.css">
 </head>
-<body class="{{ class }}">
+<body class="{{ class }} custom-scroll custom-scroll--y">
 <header>
     <div class="header-top">
         <div class="container">
@@ -152,8 +152,8 @@
                 </div>
                 <div class="header-bottom_about">
                     <ul class="header-bottom_about-list">
-                        <li>
-                            <a href="">
+                        <li data-search-btn>
+                            <a>
                                 <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_search"></use>
                                 </svg>
@@ -161,7 +161,8 @@
                             {# {{ search }} #}
                         </li>
                         <li class="dropdown">
-                            <a class="header-bottom_about-list_login" data-login-btn>
+                            <a class="header-bottom_about-list_login" {% if logged %}
+                                href="/account" {% else %}data-login-btn{% endif %}>
                                 <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_login"></use>
                                 </svg>
@@ -169,72 +170,15 @@
                                     <span>{{ points }}</span>
                                 {% endif %}
                             </a>
-                            {# <a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-user"></i>
-                                        <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        {% if logged %}
-                                            <li>
-                                                <a href="{{ account }}">
-                                                    <i class="fa fa-address-book"></i>
-                                                    {{ text_account }}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ order }}">
-                                                    <i class="fa fa-archive"></i>
-                                                    {{ text_order }}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ transaction }}">
-                                                    <i class="fa fa-money"></i>
-                                                    {{ text_transaction }}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ download }}">
-                                                    <i class="fa fa-download"></i>
-                                                    {{ text_download }}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ logout }}">
-                                                    <i class="fa fa-sign-out"></i>
-                                                    {{ text_logout }}</a>
-                                            </li>
-                                        {% else %}
-                                            <li>
-                                                <a href="{{ register }}">
-                                                    <i class="fa fa-user-circle"></i>
-                                                    {{ text_register }}</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ login }}">
-                                                    <i class="fa fa-sign-in"></i>
-                                                    {{ text_login }}</a>
-                                            </li>
-                                        {% endif %}
-                                        <hr>
-                                        <li>
-                                            <a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ checkout }}" title="{{ text_checkout }}">
-                                                <i class="fa fa-share"></i>
-                                                <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span>
-                                            </a>
-                                        </li>
-                                    </ul> #}
                         </li>
                         <li>
-                            <a class="header-bottom_about-list_wishlist" href="{{ wishlist }}" id="wishlist-total"
+                            <a class="header-bottom_about-list_wishlist" {% if logged %}href="{{ wishlist }}"{% else %}
+                            data-login-btn{% endif %} id="wishlist-total"
                                title="{{ text_wishlist }}">
                                 <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_wishlist"></use>
                                 </svg>
-                                <span class="">{{ text_wishlist }}</span>
+                                <span data-wishlist-total>{{ text_wishlist }}</span>
                             </a>
                         </li>
                         <li>{{ cart }}</li>
@@ -243,6 +187,7 @@
             </div>
         </div>
     </div>
+    <div class="header-search" data-header-search></div>
     <div class="modal login-modal" data-modal-type="login-modal" hidden>
         <div class="modal__content">
             <div class="modal__box model-popup">

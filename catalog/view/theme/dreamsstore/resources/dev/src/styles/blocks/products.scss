@@ -20,6 +20,10 @@
         cursor: pointer;
     }
 
+    &-wishlist.inWishlist svg {
+        fill: var(--white);
+    }
+
     &-price {
         margin-top: 0.8em;
 

@@ -24,6 +24,8 @@ import './classes/ToTop.js'
 import Product from './classes/Product.js'
 import DropdawnCart from './classes/DropdawnCart.js'
 import Checkout from "./classes/Checkout.js";
+import Wishlist from "./classes/Wishlist.js";
+import Search from "./classes/Search.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -41,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     new DropdawnCart('[data-dropdown-cart]', false);
     new DropdawnCart('[data-checkout-cart]', true);
     new Checkout('[data-checkout]');
+    new Wishlist('[data-product-wishlist]', '[data-wishlist]');
+    new Search('[data-search-btn]');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

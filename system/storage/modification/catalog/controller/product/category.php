@@ -203,7 +203,7 @@ class ControllerProductCategory extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -234,6 +234,11 @@ class ControllerProductCategory extends Controller
                     $rating = false;
                 }
 
+                $inWishlist = false;
+                if ($this->customer->isLogged()) {
+                    $inWishlist = $this->model_catalog_product->checkProductInWishlist($result['product_id'], $this->customer->getId());
+                }
+
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
                     'thumb' => $image,
@@ -243,6 +248,7 @@ class ControllerProductCategory extends Controller
                     'special' => $special,
                     'percent' => $percent,
                     'tax' => $tax,
+                    'in_wishlist' => $inWishlist,
                     'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
                     'rating' => $result['rating'],
                     'href' => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
