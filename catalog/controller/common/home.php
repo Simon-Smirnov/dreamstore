@@ -32,20 +32,20 @@ class ControllerCommonHome extends Controller
             }
         }
 
-        $module_id = 34;
+
         $this->load->model('setting/module');
 
-        $module_info = $this->model_setting_module->getModule($module_id);
-        $id_products_recomended = $module_info['product'];
-
+        $module_id = 35;
+        $module_info_hits = $this->model_setting_module->getModule($module_id);
+        $id_products_hits = $module_info_hits['product'];
+        $products_hits = [];
         $this->load->model('catalog/product');
-        foreach ($id_products_recomended as $product_id) {
-            $products_recomended[] = $this->model_catalog_product->getProduct($product_id);
+        foreach ($id_products_hits as $product_id) {
+            $products_hits[] = $this->model_catalog_product->getProduct($product_id);
         }
 
-        $data['products_recomended'] = [];
-
-        foreach ($products_recomended as $product) {
+        $data['hits'] = [];
+        foreach ($products_hits as $product) {
             if ($product['image']) {
                 $image = [
                     'webp' => $this->model_tool_image->resize($product['image'], 256 * 2, null, ['webp' => true]),
@@ -55,12 +55,53 @@ class ControllerCommonHome extends Controller
                 $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
             }
 
-            $data['products_recomended'][] = [
+            if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+                $price = $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+            } else {
+                $price = false;
+            }
+
+            if (!is_null($product['special']) && (float)$product['special'] >= 0) {
+                $special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                $tax_price = (float)$product['special'];
+                $percent = '-' . round((((float)$product['price'] - (float)$product['special']) / (float)$product['price']), 2) * 100 . '%';
+            } else {
+                $special = false;
+                $percent = '';
+                $tax_price = (float)$product['price'];
+            }
+
+            if ($this->config->get('config_tax')) {
+                $tax = $this->currency->format($tax_price, $this->session->data['currency']);
+            } else {
+                $tax = false;
+            }
+
+            if ($this->config->get('config_review_status')) {
+                $rating = (int)$product['rating'];
+            } else {
+                $rating = false;
+            }
+
+            $inWishlist = false;
+            if ($this->customer->isLogged()) {
+                $inWishlist = $this->model_catalog_product->checkProductInWishlist($product['product_id'], $this->customer->getId());
+            }
+
+            $data['hits'][] = array(
                 'product_id' => $product['product_id'],
                 'thumb' => $image,
                 'name' => $product['name'],
-                'price' => $this->currency->format($product['price'], $this->config->get('config_currency')),
-            ];
+                'description' => utf8_substr(trim(strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+                'price' => $price,
+                'special' => $special,
+                'percent' => $percent,
+                'tax' => $tax,
+                'in_wishlist' => $inWishlist,
+                'minimum' => $product['minimum'] > 0 ? $product['minimum'] : 1,
+                'rating' => $product['rating'],
+                'href' => $this->url->link('product/product', 'product_id=' . $product['product_id'])
+            );
         }
 
         $data['column_left'] = $this->load->controller('common/column_left');

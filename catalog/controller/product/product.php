@@ -923,6 +923,8 @@ class ControllerProductProduct extends Controller
 
             $data['sku'] = $product_info['sku'];
 
+            $data['href'] = $this->url->link('product/product', 'product_id=' . $product_id);
+
             if ($product_info['image']) {
                 $data['thumb'] = [
                     'webp' => $this->model_tool_image->resize($product_info['image'], 900 * 2, null, ['webp' => true]),

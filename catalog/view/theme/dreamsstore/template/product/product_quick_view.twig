@@ -163,7 +163,8 @@
                                             <label>
                                                 <input class="input-checkbox product-right__options-check"
                                                        type="checkbox"
-                                                       name="option[{{ option.product_option_id }}][]"
+                                                        {# name="option[{{ option.product_option_id }}][]" #}
+                                                       name="option[{{ option.product_option_id }}]"
                                                        value="{{ option_value.product_option_value_id }}"
                                                        data-option-input-product-id="{{ product_id }}"/>
                                                 <span class="product-right__options-text">{{ option_value.name }}</span>
@@ -230,7 +231,7 @@
             <h4>Добавить в комплект</h4>
         </div>
         <div class="product-right__delivery">
-
+            <a class="btn btn-second" href="{{ href }}">Подробнее о товаре</a>
         </div>
     </div>
 </div>

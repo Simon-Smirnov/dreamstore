@@ -191,7 +191,8 @@
                                                     <label>
                                                         <input class="input-checkbox product-right__options-check"
                                                                type="checkbox"
-                                                               name="option[{{ option.product_option_id }}][]"
+                                                                {# name="option[{{ option.product_option_id }}][]" #}
+                                                               name="option[{{ option.product_option_id }}]"
                                                                value="{{ option_value.product_option_value_id }}"
                                                                data-option-input-product-id="{{ product_id }}"/>
                                                         <span class="product-right__options-text">{{ option_value.name }}</span>

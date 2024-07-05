@@ -68,13 +68,13 @@ class ControllerProductSearch extends Controller
             $limit = $this->config->get('theme_' . $this->config->get('config_theme') . '_product_limit');
         }
 
-        if (isset($this->request->get['search'])) {
-            $this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->request->get['search']);
-        } elseif (isset($this->request->get['tag'])) {
-            $this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->language->get('heading_tag') . $this->request->get['tag']);
-        } else {
-            $this->document->setTitle($this->language->get('heading_title'));
-        }
+        //if (isset($this->request->get['search'])) {
+        //    $this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->request->get['search']);
+        //} elseif (isset($this->request->get['tag'])) {
+        //    $this->document->setTitle($this->language->get('heading_title') . ' - ' . $this->language->get('heading_tag') . $this->request->get['tag']);
+        //} else {
+        $this->document->setTitle($this->language->get('heading_title'));
+        //}
 
         $data['breadcrumbs'] = array();
 
@@ -126,11 +126,11 @@ class ControllerProductSearch extends Controller
             'href' => $this->url->link('product/search', $url)
         );
 
-        if (isset($this->request->get['search'])) {
-            $data['heading_title'] = $this->language->get('heading_title') . ' - ' . $this->request->get['search'];
-        } else {
-            $data['heading_title'] = $this->language->get('heading_title');
-        }
+        //if (isset($this->request->get['search'])) {
+        //    $data['heading_title'] = $this->language->get('heading_title') . ' - ' . $this->request->get['search'];
+        //} else {
+        $data['heading_title'] = $this->language->get('heading_title');
+        //}
 
         $data['text_compare'] = sprintf($this->language->get('text_compare'), (isset($this->session->data['compare']) ? count($this->session->data['compare']) : 0));
 
@@ -188,14 +188,18 @@ class ControllerProductSearch extends Controller
             );
 
             $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            $data['total'] = $product_total;
 
             $results = $this->model_catalog_product->getProducts($filter_data);
 
             foreach ($results as $result) {
                 if ($result['image']) {
-                    $image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+                    $image = [
+                        'webp' => $this->model_tool_image->resize($result['image'], 256 * 2, null, ['webp' => true]),
+                        'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
+                    ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -207,8 +211,10 @@ class ControllerProductSearch extends Controller
                 if (!is_null($result['special']) && (float)$result['special'] >= 0) {
                     $special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
                     $tax_price = (float)$result['special'];
+                    $percent = '-' . round((((float)$result['price'] - (float)$result['special']) / (float)$result['price']), 2) * 100 . '%';
                 } else {
                     $special = false;
+                    $percent = '';
                     $tax_price = (float)$result['price'];
                 }
 
@@ -224,6 +230,11 @@ class ControllerProductSearch extends Controller
                     $rating = false;
                 }
 
+                $inWishlist = false;
+                if ($this->customer->isLogged()) {
+                    $inWishlist = $this->model_catalog_product->checkProductInWishlist($result['product_id'], $this->customer->getId());
+                }
+
                 $data['products'][] = array(
                     'product_id' => $result['product_id'],
                     'thumb' => $image,
@@ -231,7 +242,9 @@ class ControllerProductSearch extends Controller
                     'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
                     'price' => $price,
                     'special' => $special,
+                    'percent' => $percent,
                     'tax' => $tax,
+                    'in_wishlist' => $inWishlist,
                     'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
                     'rating' => $result['rating'],
                     'href' => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
@@ -509,5 +522,44 @@ class ControllerProductSearch extends Controller
 
         $this->response->setOutput($this->load->view('product/search_modal', $data));
         //return $this->load->view('product/search_modal', $data);
+    }
+
+    public function quickTips()
+    {
+        $data = [];
+
+        if (isset($this->request->post['phrase']) && $this->request->post['phrase'] != '') {
+            $filter_data = array(
+                'filter_name' => $this->request->post['phrase'],
+                'limit' => 12
+            );
+
+            $this->load->model('catalog/product');
+            $results = $this->model_catalog_product->getProducts($filter_data);
+
+            $this->load->model('tool/image');
+            $data['products'] = [];
+            if (isset($results) && !empty($results)) {
+                foreach ($results as $result) {
+                    if ($result['image']) {
+                        $image = [
+                            'webp' => $this->model_tool_image->resize($result['image'], 256 * 2, null, ['webp' => true]),
+                            'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
+                        ];
+                    } else {
+                        $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
+                    }
+
+                    $data['products'][] = [
+                        'product_id' => $result['product_id'],
+                        'thumb' => $image,
+                        'name' => $result['name'],
+                        'href' => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+                        'price' => $this->currency->format($result['price'], $this->config->get('config_currency')),
+                    ];
+                }
+            }
+        }
+        $this->response->setOutput($this->load->view('product/search_quick_tips', $data));
     }
 }

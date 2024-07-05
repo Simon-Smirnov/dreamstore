@@ -20,6 +20,9 @@ export default class {
                             Alert.add(r.success);
                             product.classList.add('inWishlist');
                         }
+                        if (r.warning) {
+                            Alert.add(r.warning, 'notify');
+                        }
                     })
                 });
             });

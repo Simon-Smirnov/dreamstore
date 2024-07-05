@@ -42,7 +42,7 @@
         {% if cards %}
             <div class="container">
                 <div class="giftCards-cards">
-                    <ul class="giftCards-cards__list">
+                    <ul class="giftCards-cards__list" data-gift-card>
                         {% for card in cards %}
                             <li class="giftCards-cards__item">
                                 <picture>
@@ -52,7 +52,9 @@
                                 </picture>
                                 <p class="giftCards-cards__price">{{ card.price }}</p>
                                 <h4 class="giftCards-cards__title">{{ card.name }}</h4>
-                                <button class="btn btn-second giftCards-cards__btn">В корзину</button>
+                                <button class="btn btn-second giftCards-cards__btn"
+                                        data-gift-card-add="{{ card.product_id }}">В корзину
+                                </button>
                             </li>
                         {% endfor %}
                     </ul>

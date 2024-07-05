@@ -17,127 +17,109 @@
                 <svg class="search-input__svg" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="/sprite.svg#icon_search"></use>
                 </svg>
+                <button class="btn btn-primary search-input__btn">Найти</button>
                 <svg class="search-input__close" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="/sprite.svg#icon_cross"></use>
                 </svg>
-                <p>результат(ов) по запросу {{ search }}</p>
+                <p class="search-input__text">{{ total }} результат(ов) по запросу "{{ search }}"</p>
             </div>
-            <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary"/>
             {% if products %}
-                <div class="category_main-controls">
-                    <div class="category_main-controls_sort">
-                        <p>{{ text_sort }}</p>
-                        <div id="sorts" class="select select-1 open">
-                            <input type="hidden" name="select"
-                                   value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC">
-                            <div class="select__box-btn">
-                                <button class="select__button" type="button">
-                                    По умолчанию
-                                </button>
-                                <svg xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
-                                </svg>
+                <div class="search-block">
+                    <div class="category_main-controls">
+                        <div class="category_main-controls_sort">
+                            <p>{{ text_sort }}</p>
+                            <div id="sorts" class="select select-1 open">
+                                <input type="hidden" name="select"
+                                       value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC">
+                                <div class="select__box-btn">
+                                    <button class="select__button" type="button">
+                                        По умолчанию
+                                    </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                    </svg>
+                                </div>
+                                <ul class="select__list">
+                                    <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC"
+                                        selected="selected">По умолчанию
+                                    </li>
+                                    <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=ASC">
+                                        Сначала недорогие
+                                    </li>
+                                    <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=DESC">
+                                        Сначала дорогие
+                                    </li>
+                                    <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.viewed&amp;order=DESC">
+                                        Популярные
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="select__list">
-                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC"
-                                    selected="selected">По умолчанию
-                                </li>
-                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=ASC">
-                                    Сначала недорогие
-                                </li>
-                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=DESC">
-                                    Сначала дорогие
-                                </li>
-                                <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.viewed&amp;order=DESC">
-                                    Популярные
-                                </li>
-                            </ul>
+                        </div>
+                        <div class="category_main-controls_structure">
+                            <button type="button" id="grid-view"
+                                    data-toggle="tooltip"
+                                    title="{{ button_grid }}">
+                                <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_square"></use>
+                                </svg>
+                            </button>
+                            <button type="button" id="list-view"
+                                    data-toggle="tooltip"
+                                    title="{{ button_list }}">
+                                <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_list"></use>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="category_main-controls_structure">
-                        <button type="button" id="grid-view"
-                                data-toggle="tooltip"
-                                title="{{ button_grid }}">
-                            <svg class="" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_square"></use>
-                            </svg>
-                        </button>
-                        <button type="button" id="list-view"
-                                data-toggle="tooltip"
-                                title="{{ button_list }}">
-                            <svg class="" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_list"></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                {% for product in products %}
-                    <div class="product-layout product-list col-xs-12">
-                        <div class="product-thumb">
-                            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}"
-                                                                                 alt="{{ product.name }}"
-                                                                                 title="{{ product.name }}"
-                                                                                 class="img-responsive"/></a></div>
-                            <div>
-                                <div class="caption">
-                                    <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                                    <p>{{ product.description }}</p>
-                                    {% if product.price %}
-                                        <p class="price">
-                                            {% if  not product.special %}
-                                                {{ product.price }}
+                    <div class="products_grid search-grid" data-items-identy>
+                        {% for product in products %}
+                            <a class="products_grid-item" href="{{ product.href }}">
+                                <div class="products_grid-thumb">
+                                    <div class="products_grid-block">
+                                        <picture>
+                                            <source srcset="{{ product.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                 title="{{ product.name }}"
+                                                 src="{{ product.thumb.default }}" loading="lazy">
+                                        </picture>
+                                        <p class="products_grid-price">
+                                            {% if not product.special %}
+                                                <span
+                                                        class="price-new">{{ product.price }}</span>
                                             {% else %}
-                                                <span class="price-new">{{ product.special }}</span> <span
-                                                    class="price-old">{{ product.price }}</span>
-                                            {% endif %}
-                                            {% if product.tax %}
-                                                <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+                                                <span
+                                                        class="price-new">{{ product.special }}</span>
+                                                <span
+                                                        class="price-old">{{ product.price }}</span>
+                                                <span class="price-percent">{{ product.percent }}</span>
                                             {% endif %}
                                         </p>
-                                    {% endif %}
-                                    {% if product.rating %}
-                                        <div class="rating">
-                                            {% for i in 1..5 %}
-                                                {% if product.rating < i %}
-                                                    <span class="fa fa-stack"><i
-                                                                class="fa fa-star-o fa-stack-2x"></i></span>
-                                                {% else %}
-                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
-                                                                class="fa fa-star-o fa-stack-2x"></i></span>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                <div class="button-group">
-                                    <button type="button"
-                                            onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');">
-                                        <i class="fa fa-shopping-cart"></i> <span
-                                                class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span>
+                                    </div>
+                                    <h4 class="products_grid-title">{{ product.name }}</h4>
+                                    <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}"
+                                            title="{{ button_wishlist }}"
+                                            data-product-wishlist="{{ product.product_id }}">
+                                        <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_heart"></use>
+                                        </svg>
                                     </button>
-                                    <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}"
-                                            onclick="wishlist.add('{{ product.product_id }}');"><i
-                                                class="fa fa-heart"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="{{ button_compare }}"
-                                            onclick="compare.add('{{ product.product_id }}');"><i
-                                                class="fa fa-exchange"></i></button>
                                 </div>
-                            </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                    {% if pagination %}
+                        <div class="category_more category-page__more">
+                            <button class="btn btn-second loadmore" data-loadmore
+                                    data-items-identy-name="products_grid-item">
+                                Показать ещё
+                            </button>
                         </div>
-                    </div>
-                {% endfor %}
-                {% if pagination %}
-                    <div class="category_more category-page__more">
-                        <button class="btn btn-second loadmore" data-loadmore
-                                data-items-identy-name="products_grid-item">
-                            Показать ещё
-                        </button>
-                    </div>
-
-                    <div class="category_pagination" data-pagination>
-                        {{ pagination }}
-                    </div>
-                {% endif %}
+                        <div class="category_pagination" data-pagination>
+                            {{ pagination }}
+                        </div>
+                    {% endif %}
+                </div>
             {% else %}
                 <p>{{ text_empty }}</p>
             {% endif %}
@@ -148,51 +130,4 @@
     {#    {{ content_bottom }} #}
     {#    {{ content_top }} #}
 </div>
-<script type="text/javascript"><!--
-    $('#button-search').bind('click', function () {
-        url = 'index.php?route=product/search';
-
-        var search = $('#content input[name=\'search\']').prop('value');
-
-        if (search) {
-            url += '&search=' + encodeURIComponent(search);
-        }
-
-        var category_id = $('#content select[name=\'category_id\']').prop('value');
-
-        if (category_id > 0) {
-            url += '&category_id=' + encodeURIComponent(category_id);
-        }
-
-        var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
-
-        if (sub_category) {
-            url += '&sub_category=true';
-        }
-
-        var filter_description = $('#content input[name=\'description\']:checked').prop('value');
-
-        if (filter_description) {
-            url += '&description=true';
-        }
-
-        location = url;
-    });
-
-    $('#content input[name=\'search\']').bind('keydown', function (e) {
-        if (e.keyCode == 13) {
-            $('#button-search').trigger('click');
-        }
-    });
-
-    $('select[name=\'category_id\']').on('change', function () {
-        if (this.value == '0') {
-            $('input[name=\'sub_category\']').prop('disabled', true);
-        } else {
-            $('input[name=\'sub_category\']').prop('disabled', false);
-        }
-    });
-
-    $('select[name=\'category_id\']').trigger('change');
-    --></script>
 {{ footer }}

@@ -62,9 +62,11 @@ export default class {
                     break
                 case 'checkbox': {
                     const option_inputs = option.querySelectorAll('input:checked')
-                    console.log(option_inputs)
                     option_inputs.forEach((input, key) => {
-                        options[input.name + '[' + key + ']'] = input.value
+                        if (!Array.isArray(options[input.name])) {
+                            options[input.name] = [];
+                        }
+                        options[input.name].push(input.value);
                     })
                 }
                     break

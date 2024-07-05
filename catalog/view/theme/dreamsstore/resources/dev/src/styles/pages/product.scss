@@ -399,4 +399,14 @@
     .product-right__options-text {
         font-size: 1rem;
     }
+
+    .product-right__delivery {
+        width: 100%;
+
+        .btn {
+            max-width: none;
+            width: 100%;
+            text-align: center;
+        }
+    }
 }

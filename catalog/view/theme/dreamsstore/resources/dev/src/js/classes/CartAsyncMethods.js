@@ -8,7 +8,13 @@ export default class {
             body.append('quantity', quantity)
 
             for (let name in options) {
-                body.append(name, options[name])
+                if (Array.isArray(options[name])) {
+                    options[name].forEach((item, index) => {
+                        body.append(name + '[]', item);
+                    });
+                } else {
+                    body.append(name, options[name])
+                }
             }
 
             // Запрос

@@ -1,9 +1,11 @@
 .search {
+    padding-bottom: 6em;
+
     h1 {
         margin-bottom: 1em;
     }
 
-    .search-input {
+    &-input {
         position: relative;
 
         &__input {
@@ -27,6 +29,17 @@
             stroke: var(--color-6-dark);
         }
 
+        &__btn {
+            position: absolute;
+            top: 0.9em;
+            right: 4.4em;
+            fill: none;
+            stroke: var(--color-6-dark);
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.3em 1em;
+        }
+
         &__close {
             position: absolute;
             top: 0.9em;
@@ -36,9 +49,138 @@
             fill: var(--color-6-dark);
             cursor: pointer;
         }
+
+        &__text {
+            margin-top: 0.3em;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-6-dark);
+        }
+    }
+
+    &-block {
+        margin-top: 4em;
+    }
+
+    &-grid {
+        margin-top: 1em;
     }
 
     &-modal {
         background-color: var(--white);
+        padding-bottom: 3em;
+        overflow-y: auto;
+        height: 100%;
+
+        &__inlet {
+            position: relative;
+            padding-top: 1.5em;
+        }
+
+        &__input {
+            width: 100%;
+            font-size: 1rem;
+            padding: 0.8em 2em;
+            border-bottom: 1px solid var(--libe);
+            font-family: var(--font-main);
+            color: var(--color-4-dark);
+            font-weight: 500;
+        }
+
+        &__input::placeholder {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--color-6-dark);
+        }
+
+        &__svg {
+            position: absolute;
+            left: 0.1em;
+            bottom: 1em;
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: none;
+            stroke: var(--color-6-dark);
+        }
+
+        &__close {
+            position: absolute;
+            bottom: 1em;
+            right: 1.4em;
+            width: 1.2em;
+            height: 1.2em;
+            fill: var(--color-6-dark);
+            cursor: pointer;
+        }
+
+        &__tips {
+            margin-top: 1em;
+        }
+
+        &__recomended {
+            margin-top: 3em;
+
+            &--block {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1.5em;
+            }
+
+            &--arrows {
+                display: flex;
+                align-items: center;
+                gap: 1.5em;
+            }
+
+            &--prev, &--next {
+                width: 1.5em;
+                height: 1.5em;
+            }
+
+            &--prev svg, &--next svg {
+                cursor: pointer;
+                width: 1.5em;
+                height: 1.5em;
+                fill: none;
+                stroke: var(--text);
+                background-color: transparent;
+            }
+
+            &--prev {
+                transform: rotate(180deg);
+            }
+
+            .search-modal__recomended--prev, .search-modal__recomended--next {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &-quickTips {
+        &__product:hover {
+            transform: translateY(-1.5px);
+        }
+
+        &__products {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1em;
+        }
+
+        &__price {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-4-dark);
+            margin-top: 0.3em;
+        }
+
+        &__title {
+            margin-top: 0.3em;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--color-5-dark);
+            line-height: 1.4;
+        }
     }
 }

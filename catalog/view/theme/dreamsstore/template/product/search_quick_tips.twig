@@ -1,0 +1,20 @@
+{# {% if products %} #}
+<div class="search-quickTips__products">
+    {% for product in products %}
+        <a class="search-quickTips__product" href="{{ product.href }}">
+            <div class="search-quickTips__image">
+                <picture>
+                    <source srcset="{{ product.thumb.webp }}">
+                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                         title="{{ product.name }}"
+                         src="{{ product.thumb.default }}" loading="lazy">
+                </picture>
+            </div>
+            <div class="search-quickTips__block">
+                <p class="search-quickTips__price">{{ product.price }}</p>
+                <h4 class="search-quickTips__title">{{ product.name }}</h4>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{# {% endif %} #}

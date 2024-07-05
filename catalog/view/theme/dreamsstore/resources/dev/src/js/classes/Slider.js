@@ -171,6 +171,44 @@ export default class Slider {
                 }
             })
         }
+
+        // Модальный поиск
+        const sliderModalSearch = document.querySelector('.sliderModalSearch')
+        if (sliderModalSearch) {
+            this.createSlider(sliderModalSearch, {
+                slidesPerView: 6,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Хиты на главной странице
+        const sliderHits = document.querySelector('.sliderHits')
+        if (sliderHits) {
+            this.createSlider(sliderHits, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {
