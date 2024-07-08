@@ -1,0 +1,48 @@
+.seo {
+    padding: 3em 0;
+
+    &-inner {
+        &__title {
+            margin-bottom: 0.7em;
+        }
+
+        &__block {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        &__text {
+            height: 10em;
+            overflow-y: hidden;
+        }
+
+        &__text, &__text * {
+            font-weight: 500 !important;
+            font-size: 1.2rem !important;
+            color: var(--color-4) !important;
+            font-family: var(--font-main) !important;
+        }
+
+        &__more {
+            display: inline-block;
+            margin-top: 1em;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-6-dark);
+            cursor: pointer;
+        }
+
+        &__tags {
+            margin-top: 1.5em;
+        }
+
+        &__tag {
+            width: fit-content;
+            color: var(--color-6-dark);
+            padding: 0.5em 0.7em;
+            background-color: transparent;
+        }
+    }
+}

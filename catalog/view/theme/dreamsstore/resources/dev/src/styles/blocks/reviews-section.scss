@@ -1,0 +1,95 @@
+.sectionReviews {
+    padding: 3em 0;
+
+    .section-title {
+        margin-bottom: 0.7em;
+    }
+
+    &-block {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &__link {
+            flex-shrink: 0;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--color-6-dark);
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+
+                svg {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    fill: none;
+                    stroke: var(--color-6-dark);
+                }
+            }
+        }
+    }
+
+    &-reviews {
+        &__item {
+            background-color: var(--white);
+            border-radius: 0.3em;
+            padding: 1.5em;
+
+            &--text {
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-4-dark);
+                margin-top: 1em;
+            }
+
+            &--images {
+                display: flex;
+                gap: 0.5em;
+                margin-top: 1.5em;
+            }
+        }
+
+        &__title {
+            display: flex;
+            gap: 1em;
+
+            &--initial {
+                color: var(--color-4-dark);
+                font-weight: 500;
+                font-size: 1.2rem;
+                background-color: var(--bg-light-60);
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                border-radius: 50%;
+                width: 2.1em;
+                height: 2.1em;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            &--block {
+                &--name {
+                    font-weight: 500;
+                    font-size: 1.1rem;
+                    color: var(--color-4-dark);
+                }
+
+                &--grade {
+                    display: flex;
+                    gap: 0.1em;
+                    margin-top: 0.2em;
+                }
+            }
+
+            &--date {
+                margin-left: auto;
+                color: var(--color-6-dark);
+                font-weight: 500;
+            }
+        }
+    }
+}

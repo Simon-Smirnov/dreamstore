@@ -7,12 +7,33 @@
 
     .bestOffers-control {
 
+        .bestOffers-link {
+            flex-shrink: 0;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--color-6-dark);
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+            }
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                fill: none;
+                stroke: var(--color-6-dark);
+            }
+        }
+
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         .bestOffers-togglers {
             border-bottom: none;
+            margin-bottom: 1rem;
         }
 
         .tabs__toggler {

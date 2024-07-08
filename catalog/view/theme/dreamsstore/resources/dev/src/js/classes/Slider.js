@@ -209,6 +209,82 @@ export default class Slider {
                 }
             })
         }
+
+        // Новинки на главной странице
+        const sliderNovelties = document.querySelector('.sliderNovelties')
+        if (sliderNovelties) {
+            this.createSlider(sliderNovelties, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Отзывы на главной странице
+        const sliderReviews = document.querySelector('.sliderReviews')
+        if (sliderReviews) {
+            this.createSlider(sliderReviews, {
+                slidesPerView: 3,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Тэги на главной странице
+        const sliderTags = document.querySelector('.sliderTags')
+        if (sliderTags) {
+            this.createSlider(sliderTags, {
+                slidesPerView: 'auto',
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Акции на главной странице
+        const sliderStocks = document.querySelector('.sliderStocks')
+        if (sliderStocks) {
+            this.createSlider(sliderStocks, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {
