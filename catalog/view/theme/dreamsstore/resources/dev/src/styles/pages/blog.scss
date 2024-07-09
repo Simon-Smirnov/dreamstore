@@ -1,0 +1,98 @@
+.blogs {
+    h1 {
+        margin-bottom: 0.8em;
+    }
+
+    padding-bottom: 6em;
+
+    &-inner {
+        &__tabs {
+            &--list {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--libe);
+                border-radius: 0.3em;
+            }
+
+            &--item {
+                padding: 1em 3em;
+            }
+
+            &--item.right {
+                text-align: end;
+            }
+
+            &--item.middle {
+                border-left: 1px solid var(--libe);
+                border-right: 1px solid var(--libe);
+            }
+
+            &--item.left {
+                text-align: start;
+            }
+
+            &--link {
+                color: var(--text-2);
+                font-size: 1.1em;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            &--link:hover {
+                color: var(--color-4-dark);
+            }
+
+            &--link.active {
+                color: var(--color-4-dark);
+            }
+        }
+    }
+
+    &-site {
+        &__item {
+            position: relative;
+        }
+
+        &__item:hover {
+            transform: translateY(-1.5px);
+        }
+
+        &__list {
+            margin-top: 3em;
+        }
+
+        &__image {
+            position: relative;
+            border-radius: 0.5em;
+            overflow: hidden;
+        }
+
+        &__theme {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--color-9);
+            background: #3D38333D;
+            padding: 0.6em 0;
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        &__date {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--color-6-dark);
+            margin-top: 0.5em;
+        }
+
+        &__title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-4-dark);
+            margin-top: 0.5em;
+            line-height: 1.4;
+        }
+    }
+}

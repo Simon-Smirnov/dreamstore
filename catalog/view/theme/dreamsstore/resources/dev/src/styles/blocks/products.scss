@@ -63,3 +63,21 @@
         margin-top: 0.8em;
     }
 }
+
+.product-marks {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+
+.product-mark {
+    background-color: #3D38337A;
+    color: var(--color-9);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+}
