@@ -88,6 +88,31 @@ class ControllerCatalogBlog extends Controller
         $this->getList();
     }
 
+    public function copy()
+    {
+        $this->load->language('catalog/blog');
+
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('catalog/blog');
+
+        if (isset($this->request->post['selected']) && $this->validateCopy()) {
+            foreach ($this->request->post['selected'] as $blog_id) {
+                $this->model_catalog_blog->copyBlog($blog_id);
+            }
+
+            $this->session->data['success'] = $this->language->get('text_success');
+
+            $url = '';
+            $url .= $this->urlFilter();
+            $url .= $this->urlSortAndPage();
+
+            $this->response->redirect($this->url->link('catalog/blog', 'user_token=' . $this->session->data['user_token'] . $url, true));
+        }
+
+        $this->getList();
+    }
+
     protected function getList()
     {
         if (isset($this->request->get['filter_title'])) {
@@ -143,6 +168,7 @@ class ControllerCatalogBlog extends Controller
         );
 
         $data['add'] = $this->url->link('catalog/blog/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
+        $data['copy'] = $this->url->link('catalog/blog/copy', 'user_token=' . $this->session->data['user_token'] . $url, true);
         $data['delete'] = $this->url->link('catalog/blog/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
         $data['blogs'] = array();
@@ -435,7 +461,7 @@ class ControllerCatalogBlog extends Controller
             $timestamp = strtotime($blog_info['date_blog']);
             $data['date_blog'] = date('Y-m-d', $timestamp);
         } else {
-            $data['date_blog'] = 0;
+            $data['date_blog'] = date('Y-m-d');
         }
 
         if (isset($this->request->post['sort_order'])) {
@@ -567,7 +593,6 @@ class ControllerCatalogBlog extends Controller
 
         return !$this->error;
     }
-
 
     protected function urlFilter()
     {

@@ -10,9 +10,12 @@
 !index.html
 
 download/
+image
 image/data/
 image/cache/
 system/cache/
 system/logs/
 system/storage/cache/
+system/storage/logs/
+catalog/view/theme/dreamsstore/resources/dev/src/images/
 system/storage/logs/

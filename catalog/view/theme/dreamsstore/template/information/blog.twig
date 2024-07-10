@@ -1,0 +1,147 @@
+{{ header }}
+<div id="information-blog">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div class="blog">
+            <h1 class="page-title">{{ title }}</h1>
+            <div class="blog-inner">
+                <div class="blog-image">
+                    <picture>
+                        <source srcset="{{ thumb.webp }}">
+                        <img class="catalog-inner_link-img" alt="{{ blog.title }}"
+                             title="{{ blog.title }}"
+                             src="{{ image.default }}" loading="lazy">
+                    </picture>
+                </div>
+                <div class="blog-about">
+                    <div class="blog-about__date">
+                        {{ date }}
+                        {{ mon }}
+                    </div>
+                    <div class="blog-about__share share">
+                        <a data-modal="share">Поделиться</a>
+                    </div>
+                </div>
+                <section class="blog-main">
+                    <h2 class="blog-main__title">{{ title_h2 }}</h2>
+                    <div class="blog-main__description">{{ description }}</div>
+                </section>
+                {% if description_expert %}
+                    <section class="blog-expert">
+                        <div class="blog-expert__title">Мнение эксперта</div>
+                        <div class="blog-expert__text">{{ description_expert }}</div>
+                        {% if name_expert %}
+                            <div class="blog-expert__name">
+                                <div class="blog-expert__shortName">
+                                    {{ name_expert_first_spell }}
+                                </div>
+                                <div class="blog-expert__fullName">
+                                    {{ name_expert }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </section>
+                {% endif %}
+                {% if images %}
+                    <section class="blog-slider">
+                        <h3 class="section-title">{{ title_slider }}</h3>
+                        <div class="blog-slider__items sliderBlog">
+                            <div class="swiper">
+                                <div class="swiper-wrapper" data-lightbox-parent>
+                                    {% for image in images %}
+                                        <div class="blog-slider__item">
+                                            <picture>
+                                                <source srcset="{{ image.webp }}">
+                                                <img class="catalog-inner_link-img" alt="{{ title }}"
+                                                     title="{{ title }}"
+                                                     src="{{ image.default }}" loading="lazy">
+                                            </picture>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <nav class="sliderBlog-arrows">
+                                <ul class="sliderBlog-list">
+                                    <div>
+                                        <li class="slider__arrow--prev">
+                                            <svg xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
+                                        </li>
+                                    </div>
+                                    <div>
+                                        <li class="slider__arrow--next">
+                                            <svg xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </nav>
+                        </div>
+                    </section>
+                {% endif %}
+                {% if title_video and video %}
+                    <section class="blog-video">
+                        <h3 class="blog-video__title">{{ title_video }}</h3>
+                        <h3 class="blog-video__content">{{ video }}</h3>
+                    </section>
+                {% endif %}
+            </div>
+            {% if similar_articles %}
+                <section class="blog-similar sliderBlogSimilar">
+                    <h2 class="section-title">Похожие статьи</h2>
+                    <div class="swiper blog-similar__slider">
+                        <div class="swiper-wrapper">
+                            {% for similar_article in similar_articles %}
+                                <a class="blogs-site__item" href="{{ similar_article.href }}">
+                                    <div class="blogs-site__image">
+                                        <picture>
+                                            <source srcset="{{ similar_article.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ similar_article.name }}"
+                                                 title="{{ similar_article.name }}"
+                                                 src="{{ similar_article.thumb.default }}" loading="lazy">
+                                        </picture>
+                                        <h3 class="blogs-site__theme">{{ similar_article.theme }}</h3>
+                                    </div>
+                                    <p class="blogs-site__date">{{ similar_article.date }}</p>
+                                    <h4 class="blogs-site__title">{{ similar_article.title }}</h4>
+                                    <div class="product-marks">
+                                        <span class="blogs-site__category product-mark">{{ similar_article.category_name }}</span>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+            <section class="beAware">
+                <div class="container">
+                    <div class="beAware-inner">
+                        <div class="beAware-block">
+                            <h2 class="beAware-block__title">Будьте в курсе наших акций и скидок !</h2>
+                        </div>
+                        <form class="beAware-form">
+                            <div class="beAware-form__block">
+                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                                <label class="agree">
+                                    <input class="input-checkbox" name="agree" type="checkbox">
+                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                </label>
+                            </div>
+                            <div class="beAware-btn">
+                                <button class="btn btn-primary">Подписаться</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{{ footer }}

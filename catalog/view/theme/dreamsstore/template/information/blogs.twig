@@ -10,52 +10,51 @@
     <div class="blogs">
         <div class="container">
             <h1 class="page-title">{{ title }}</h1>
-            <div class="blogs-inner" data-tabs-parent>
+            <div class="blogs-inner">
                 <div class="blogs-inner__tabs">
                     <ul class="blogs-inner__tabs--list">
                         <li class="blogs-inner__tabs--item grow right">
-                            <a class="blogs-inner__tabs--link active"
-                               data-content="site" data-tab-target="tab-1">Все</a>
+                            <a class="blogs-inner__tabs--link {% if not category_id %}active{% endif %}"
+                               href="{{ href_all }}">Все</a>
                         </li>
-                        <li class="blogs-inner__tabs--item middle" data-content="news">
-                            <a class="blogs-inner__tabs--link" data-content="news"
-                               data-tab-target="tab-2">Новости</a>
+                        <li class="blogs-inner__tabs--item middle">
+                            <a class="blogs-inner__tabs--link {% if category_id == '1' %}active{% endif %}"
+                               href="{{ href_news }}">Новости</a>
                         </li>
-                        <li class="blogs-inner__tabs--item grow left" data-content="useful">
-                            <a class="blogs-inner__tabs--link" data-content="useful"
-                               data-tab-target="tab-3">Полезное</a>
+                        <li class="blogs-inner__tabs--item grow left">
+                            <a class="blogs-inner__tabs--link {% if category_id == '2' %}active{% endif %}"
+                               href="{{ href_useful }}">Полезное</a>
                         </li>
                     </ul>
                 </div>
                 <div class="blogs-inner__content">
-                    <ul>
-                        <li class="blogs-inner__content--item open" data-content="site" data-tab="tab-1">
-                            <div class="blogs-site">
-                                <div class="blogs-site__list products_grid">
-                                    {% for blog in blogs %}
-                                        <a class="blogs-site__item" href="{{ blog.href }}">
-                                            <div class="blogs-site__image">
-                                                <picture>
-                                                    <source srcset="{{ blog.thumb.webp }}">
-                                                    <img class="catalog-inner_link-img" alt="{{ blog.name }}"
-                                                         title="{{ blog.name }}"
-                                                         src="{{ blog.thumb.default }}" loading="lazy">
-                                                </picture>
-                                                <h3 class="blogs-site__theme">{{ blog.theme }}</h3>
-                                            </div>
-                                            <p class="blogs-site__date">{{ blog.date }}</p>
-                                            <h4 class="blogs-site__title">{{ blog.title }}</h4>
-                                            <div class="product-marks">
-                                                <span class="blogs-site__category product-mark">{{ blog.category }}</span>
-                                            </div>
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </li>
-                        <li class="reviews_inner-content_item" data-content="yandex" data-tab="tab-2"></li>
-                        <li class="reviews_inner-content_item" data-content="social" data-tab="tab-3"></li>
-                    </ul>
+                    <div class="blogs-site">
+                        <div class="blogs-site__list products_grid">
+                            {% for blog in blogs %}
+                                <a class="blogs-site__item" href="{{ blog.href }}">
+                                    <div class="blogs-site__image">
+                                        <picture>
+                                            <source srcset="{{ blog.thumb.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ blog.name }}"
+                                                 title="{{ blog.name }}"
+                                                 src="{{ blog.thumb.default }}" loading="lazy">
+                                        </picture>
+                                        <h3 class="blogs-site__theme">{{ blog.theme }}</h3>
+                                    </div>
+                                    <p class="blogs-site__date">{{ blog.date }}</p>
+                                    <h4 class="blogs-site__title">{{ blog.title }}</h4>
+                                    <div class="product-marks">
+                                        <span class="blogs-site__category product-mark">{{ blog.category }}</span>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blogs-control">
+                <div class="blogs-pagination">
+                    {{ pagination }}
                 </div>
             </div>
         </div>

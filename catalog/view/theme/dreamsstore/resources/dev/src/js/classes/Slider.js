@@ -285,6 +285,44 @@ export default class Slider {
                 }
             })
         }
+
+        // Блог
+        const sliderBlog = document.querySelector('.sliderBlog')
+        if (sliderBlog) {
+            this.createSlider(sliderBlog, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Блог похожие статьи
+        const sliderBlogSimilar = document.querySelector('.sliderBlogSimilar')
+        if (sliderBlogSimilar) {
+            this.createSlider(sliderBlogSimilar, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {

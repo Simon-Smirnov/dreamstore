@@ -27,6 +27,7 @@ $_['text_vacancies'] = 'Вакансии';
 $_['text_replies'] = 'Отклики на вакансии';
 $_['text_advices'] = 'Советы по уходу';
 $_['text_loyalty'] = 'Программа лояльности';
+$_['text_colors'] = 'Цвета';
 $_['text_filter'] = 'Фильтры';
 $_['text_geo_zone'] = 'Гео зоны';
 $_['text_information'] = 'Статьи';

@@ -10,6 +10,63 @@ class ModelInformationBlogs extends Model
         return $query->rows;
     }
 
+    public function getBlog($blog_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog WHERE blog_id = '" . (int)$blog_id . "'");
+
+        return $query->row;
+    }
+
+    public function getBlogsWithFilters($data)
+    {
+        $sql = "SELECT * FROM " . DB_PREFIX . "blog b LEFT JOIN " . DB_PREFIX . "blog_category bc ON (b.blog_category_id = bc.blog_category_id)";
+
+        if (isset($data['filter_category_id']) && $data['filter_category_id'] != '') {
+            $sql .= " WHERE b.blog_category_id = '" . (int)$data['filter_category_id'] . "'";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if (!isset($data['start']) || $data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if (!isset($data['limit']) || $data['limit'] < 1) {
+                $data['limit'] = 12;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
+    public function getBlogsTotalWithFilters($filters)
+    {
+        $sql = "SELECT COUNT(*) as total FROM " . DB_PREFIX . "blog b LEFT JOIN " . DB_PREFIX . "blog_category bc ON (b.blog_category_id = bc.blog_category_id)";
+
+        if (isset($filters['filter_category_id']) && $filters['filter_category_id'] != '') {
+            $sql .= " WHERE b.blog_category_id = '" . (int)$filters['filter_category_id'] . "'";
+        }
+
+        if (isset($data['start']) || isset($data['limit'])) {
+            if (!isset($data['start']) || $data['start'] < 0) {
+                $data['start'] = 0;
+            }
+
+            if (!isset($data['limit']) || $data['limit'] < 1) {
+                $data['limit'] = 12;
+            }
+
+            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->row['total'];
+    }
+
     public function getBlogCategoryName($blog_category_id)
     {
         $query = $this->db->query("SELECT `name` FROM " . DB_PREFIX . "blog_category WHERE blog_category_id = '" . (int)$blog_category_id . "'");
@@ -17,11 +74,40 @@ class ModelInformationBlogs extends Model
         return $query->row['name'];
     }
 
+    public function getBlogCategoriesId()
+    {
+        $query = $this->db->query("SELECT `blog_category_id` FROM " . DB_PREFIX . "blog_category");
+
+        $ids = [];
+        foreach ($query->rows as $result) {
+            $ids[] = $result['blog_category_id'];
+        }
+
+        return $ids;
+    }
+
     public function getImages($blog_id)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog_image WHERE blog_id = '" . (int)$blog_id . "' ORDER BY sort_order");
 
         return $query->rows;
+    }
+
+    public function getSimilarArticles($blog_id, $category_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog b LEFT JOIN " . DB_PREFIX . "blog_category bc ON (b.blog_category_id = bc.blog_category_id) WHERE b.blog_category_id = '" . (int)$category_id . "' ORDER BY RAND() LIMIT 12");
+
+        $articles = [];
+
+        if (count($query->rows) > 0) {
+            foreach ($query->rows as $article) {
+                if ($article['blog_id'] != $blog_id) {
+                    $articles[] = $article;
+                }
+            }
+        }
+
+        return $articles;
     }
 
     public function addReview($data)

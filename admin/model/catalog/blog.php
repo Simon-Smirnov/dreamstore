@@ -42,6 +42,19 @@ class ModelCatalogBlog extends Model
         $this->cache->delete('blog');
     }
 
+    public function copyBlog($blog_id)
+    {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "blog b WHERE b.blog_id = '" . (int)$blog_id . "'");
+
+        if ($query->num_rows) {
+            $data = $query->row;
+
+            $data['status'] = '0';
+
+            return $this->addBlog($data);
+        }
+    }
+
     public function getBlog($blog_id)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog WHERE blog_id = '" . (int)$blog_id . "'");
