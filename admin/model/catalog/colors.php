@@ -4,21 +4,21 @@ class ModelCatalogColors extends Model
 {
     public function addColor($data)
     {
-        $this->db->query("INSERT INTO " . DB_PREFIX . "colors SET `title` = '" . $this->db->escape($data['title']) . "', `hex` = '" . $this->db->escape($data['hex']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "colors SET `title` = '" . $this->db->escape($data['title']) . "', `hex` = '" . $this->db->escape($data['hex']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), date_updated = NOW()");
     }
 
     public function editColor($color_id, $data)
     {
-        $this->db->query("UPDATE " . DB_PREFIX . "loyalty SET title = '" . $this->db->escape($data['title']) . "', description = '" . $this->db->escape($data['description']) . "', sort_order = '" . (int)$data['sort_order'] . "', status = '" . (int)$data['status'] . "' WHERE loyalty_id = '" . (int)$loyalty_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "colors SET title = '" . $this->db->escape($data['title']) . "', `hex` = '" . $this->db->escape($data['hex']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_updated = NOW() WHERE color_id = '" . (int)$color_id . "'");
 
-        $this->cache->delete('loyalty');
+        $this->cache->delete('color');
     }
 
-    public function deleteColor($loyalty_id)
+    public function deleteColor($color_id)
     {
-        $this->db->query("DELETE FROM `" . DB_PREFIX . "loyalty` WHERE loyalty_id = '" . (int)$loyalty_id . "'");
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "colors` WHERE color_id = '" . (int)$color_id . "'");
 
-        $this->cache->delete('loyalty');
+        $this->cache->delete('color');
     }
 
     public function getColor($color_id)
@@ -32,6 +32,10 @@ class ModelCatalogColors extends Model
     {
         if ($data) {
             $sql = "SELECT * FROM " . DB_PREFIX . "colors";
+
+            if (isset($data['filter_title'])) {
+                $sql .= " WHERE title LIKE '%" . $this->db->escape($data['filter_title']) . "%'";
+            }
 
             $sort_data = array(
                 'title',
@@ -66,16 +70,16 @@ class ModelCatalogColors extends Model
 
             return $query->rows;
         } else {
-            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "loyalty");
-            $loyalties_data = $query->rows;
+            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "colors");
+            $colors_data = $query->rows;
 
-            return $loyalties_data;
+            return $colors_data;
         }
     }
 
     public function getTotalColors()
     {
-        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "loyalty");
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "colors");
 
         return $query->row['total'];
     }

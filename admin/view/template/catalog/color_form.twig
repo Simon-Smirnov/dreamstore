@@ -48,17 +48,15 @@
                         <label class="col-sm-2 control-label"
                                for="input-hex">{{ entry_hex }}</label>
                         <div class="col-sm-10">
-                            <div class="col-sm-3">
-                                <input type="color"
-                                       name="hex"
-                                       data-length="7"
-                                       value="{{ hex }}"
-                                       placeholder="{{ entry_hex }}"
-                                       id="input-hex" class="form-control"/>
-                                {% if hex %}
-                                    <div><strong>Текущий цвет в hex:</strong> {{ hex }}</div>
-                                {% endif %}
-                            </div>
+                            <input style="width: 60px; height: 50px" type="color"
+                                   name="hex"
+                                   data-length="7"
+                                   value="{{ hex }}"
+                                   placeholder="{{ entry_hex }}"
+                                   id="input-hex" class="form-control"/>
+                            {% if hex %}
+                                <div><strong>Текущий цвет в hex:</strong> {{ hex }}</div>
+                            {% endif %}
                             {% if error_hex %}
                                 <div class="text-danger">{{ error_hex }}</div>
                             {% endif %}

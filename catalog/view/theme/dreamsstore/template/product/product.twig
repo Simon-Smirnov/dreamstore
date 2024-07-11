@@ -147,13 +147,25 @@
             <div class="product-right" data-products-to-cart>
                 <div class="product-right__info">
                     <p>Артикул: {{ sku }}</p>
-                    <a href="{{ share }}">Поделиться</a>
+                    <a data-modal="share">Поделиться</a>
                 </div>
                 <h1 class="section-title">{{ heading_title }}</h1>
-                <div class="product-right__color">
-                    
-                </div>
-                <div class="product-right__options">
+                {% if related_products %}
+                    <div class="product-right__color productColors">
+                        <p class="productColors-active">
+                            <span class=" productColors-span" style="background-color: {{ hex }}"></span>
+                        </p>
+                        {% for related_product in related_products %}
+                            <a href="{{ related_product.href }}" class="product-right__color--link
+                            productColors-link"
+                               value="{{ related_product.product_id }}">
+                            <span class=" productColors-span"
+                                  style="background-color: {{ related_product.hex }}"></span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class=" product-right__options">
                     {% if options %}
                         {% for option in options %}
                             {% if option.type == 'select' %}
@@ -256,9 +268,54 @@
                         <button class="btn btn-second">Заказать в 1 клик</button>
                     </div>
                 </div>
-                <div class="product-right__complect">
-                    <h4>Добавить в комплект</h4>
-                </div>
+                {% if set_products %}
+                    <div class="product-right__complect">
+                        <h4 class="product-right__complect--title">Добавить в комплект</h4>
+                        {% for set_product in set_products %}
+                            <div class="product-right__complect--item">
+                                <div class="product-right__complect--block"
+                                     data-product-set-products="{{ set_product.ids }}">
+                                    <span class="product-right__complect--span">
+                                        <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_plus"></use>
+                                        </svg>
+                                    </span>
+                                    <h5 class="product-right__complect--name">{{ set_product.category.name }}</h5>
+                                </div>
+                                {% if set_product.products %}
+                                    <div class="product-set">
+                                        {% for set_prod in set_product.products %}
+                                            <div class="product-set__item">
+                                                <div class="product-set__image">
+                                                    <picture>
+                                                        <source srcset="{{ set_prod.thumb.webp }}">
+                                                        <img class="product-images__image"
+                                                             src="{{ set_prod.thumb.default }}"
+                                                             alt="{{ set_prod.heading_title }}"
+                                                             title="{{ set_prod.heading_title }}"
+                                                             loading="lazy"/>
+                                                    </picture>
+                                                </div>
+                                                <div class="product-set__block">
+                                                    <h5 class="product-set__name">{{ set_prod.name }}
+                                                    </h5>
+                                                    <div class=product-set__price">
+
+                                                    </div>
+                                                </div>
+                                                <div class="product-set__remove">
+                                                    <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                                        <use xlink:href="/sprite.svg#icon_cross"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="product-right__delivery">
 
                 </div>
@@ -279,84 +336,86 @@
             </div>
         </div>
     </section>
-    <section class="product-similar">
-        <div class="container">
-            <div class="slider">
-                <h2 class="section-title">Похожие товары</h2>
-                <div class="swiper">
-                    <div class="swiper-wrapper" data-lightbox-parent>
-                        {% for product in products %}
-                            <a class="products_grid-item product-similar__item" href="{{ product.href }}"
-                               data-fancybox="slider">
-                                <div class="products_grid-thumb">
-                                    <div class="products_grid-block">
-                                        <picture>
-                                            <source srcset="{{ product.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                 title="{{ product.name }}"
-                                                 src="{{ product.thumb.default }}" loading="lazy">
-                                        </picture>
-                                        <p class="products_grid-price">
-                                            {% if not product.special %}
-                                                <span
-                                                        class="price-new">{{ product.price }}</span>
-                                            {% else %}
-                                                <span
-                                                        class="price-new">{{ product.special }}</span>
-                                                <span
-                                                        class="price-old">{{ product.price }}</span>
-                                                <span class="price-percent">{{ product.percent }}</span>
-                                            {% endif %}
-                                        </p>
-                                    </div>
-                                    <h4 class="products_grid-title">{{ product.name }}</h4>
-                                    <button class="products_grid-wishlist" type="button" data-toggle="tooltip"
-                                            title="{{ button_wishlist }}"
-                                            onclick="wishlist.add('{{ product.product_id }}');">
-                                        <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/sprite.svg#icon_heart"></use>
-                                        </svg>
-                                    </button>
-                                    {# <div class=""> #}
-                                    {#    <div class="caption"> #}
+    {% if products %}
+        <section class="product-similar">
+            <div class="container">
+                <div class="slider">
+                    <h2 class="section-title">Похожие товары</h2>
+                    <div class="swiper">
+                        <div class="swiper-wrapper" data-lightbox-parent>
+                            {% for product in products %}
+                                <a class="products_grid-item product-similar__item" href="{{ product.href }}"
+                                   data-fancybox="slider">
+                                    <div class="products_grid-thumb">
+                                        <div class="products_grid-block">
+                                            <picture>
+                                                <source srcset="{{ product.thumb.webp }}">
+                                                <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                     title="{{ product.name }}"
+                                                     src="{{ product.thumb.default }}" loading="lazy">
+                                            </picture>
+                                            <p class="products_grid-price">
+                                                {% if not product.special %}
+                                                    <span
+                                                            class="price-new">{{ product.price }}</span>
+                                                {% else %}
+                                                    <span
+                                                            class="price-new">{{ product.special }}</span>
+                                                    <span
+                                                            class="price-old">{{ product.price }}</span>
+                                                    <span class="price-percent">{{ product.percent }}</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                        <h4 class="products_grid-title">{{ product.name }}</h4>
+                                        <button class="products_grid-wishlist" type="button" data-toggle="tooltip"
+                                                title="{{ button_wishlist }}"
+                                                onclick="wishlist.add('{{ product.product_id }}');">
+                                            <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_heart"></use>
+                                            </svg>
+                                        </button>
+                                        {# <div class=""> #}
+                                        {#    <div class="caption"> #}
 
-                                    {#        <p>{{ product.description }}</p> #}
-                                    {#        {% if product.price %} #}
-                                    {#            <p class="price"> {% if not product.special %} #}
-                                    {#                    {{ product.price }} #}
-                                    {#                {% else %} <span #}
-                                    {#                        class="price-new">{{ product.special }}</span> #}
-                                    {#                    <span #}
-                                    {#                            class="price-old">{{ product.price }}</span> {% endif %} #}
-                                    {#                {% if product.tax %} <span #}
-                                    {#                        class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
-                                    {#            </p> #}
-                                    {#        {% endif %} #}
-                                    {#    </div> #}
-                                    {#    <div class="button-group"> #}
-                                    {#        <button type="button" #}
-                                    {#                onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
-                                    {#            <i class="fa fa-shopping-cart"></i> <span #}
-                                    {#                    class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
-                                    {#        </button> #}
-                                    {#        <button type="button" data-toggle="tooltip" #}
-                                    {#                title="{{ button_wishlist }}" #}
-                                    {#                onclick="wishlist.add('{{ product.product_id }}');"><i #}
-                                    {#                    class="fa fa-heart"></i></button> #}
-                                    {#        <button type="button" data-toggle="tooltip" #}
-                                    {#                title="{{ button_compare }}" #}
-                                    {#                onclick="compare.add('{{ product.product_id }}');"><i #}
-                                    {#                    class="fa fa-exchange"></i></button> #}
-                                    {#    </div> #}
-                                    {# </div> #}
-                                </div>
-                            </a>
-                        {% endfor %}
+                                        {#        <p>{{ product.description }}</p> #}
+                                        {#        {% if product.price %} #}
+                                        {#            <p class="price"> {% if not product.special %} #}
+                                        {#                    {{ product.price }} #}
+                                        {#                {% else %} <span #}
+                                        {#                        class="price-new">{{ product.special }}</span> #}
+                                        {#                    <span #}
+                                        {#                            class="price-old">{{ product.price }}</span> {% endif %} #}
+                                        {#                {% if product.tax %} <span #}
+                                        {#                        class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
+                                        {#            </p> #}
+                                        {#        {% endif %} #}
+                                        {#    </div> #}
+                                        {#    <div class="button-group"> #}
+                                        {#        <button type="button" #}
+                                        {#                onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
+                                        {#            <i class="fa fa-shopping-cart"></i> <span #}
+                                        {#                    class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
+                                        {#        </button> #}
+                                        {#        <button type="button" data-toggle="tooltip" #}
+                                        {#                title="{{ button_wishlist }}" #}
+                                        {#                onclick="wishlist.add('{{ product.product_id }}');"><i #}
+                                        {#                    class="fa fa-heart"></i></button> #}
+                                        {#        <button type="button" data-toggle="tooltip" #}
+                                        {#                title="{{ button_compare }}" #}
+                                        {#                onclick="compare.add('{{ product.product_id }}');"><i #}
+                                        {#                    class="fa fa-exchange"></i></button> #}
+                                        {#    </div> #}
+                                        {# </div> #}
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
     {% if reviews_to_shop %}
         <section class="product-reviews sliderProductReviews">
             <div class="container">
@@ -471,5 +530,15 @@
             </div>
         </section>
     {% endif %}
+    <div class="modal product-set-modal" data-modal-type="product-set" hidden>
+        <div class="modal__content">
+            <div class="modal__box model-popup">
+                <button class="modal__close modal__close--fixed"></button>
+                <div class="model-popup__content">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {{ footer }}

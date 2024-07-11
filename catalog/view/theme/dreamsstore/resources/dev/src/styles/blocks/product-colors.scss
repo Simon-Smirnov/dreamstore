@@ -1,0 +1,33 @@
+.productColors {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+
+    &-link, &-active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border-radius: 50%;
+        width: 1.3em;
+        height: 1.3em;
+        background-color: var(--white);
+        box-sizing: content-box;
+    }
+
+    &-link {
+        border: 1px solid var(--libe);
+    }
+
+    &-active {
+        border: 2px solid var(--color-4-dark);
+    }
+
+
+    &-span {
+        display: block;
+        width: 0.75em;
+        height: 0.75em;
+        border-radius: 50%;
+    }
+}

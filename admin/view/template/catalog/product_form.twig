@@ -258,6 +258,43 @@
                                     </select>
                                 </div>
                             </div>
+                            {# <div class="form-group"> #}
+                            {#    <label class="col-sm-2 control-label" for="input-color"> #}
+                            {#        <span data-toggle="tooltip" #}
+                            {#              title="{{ help_color }}">{{ entry_color }}</span> #}
+                            {#    </label> #}
+                            {#    <div class="col-sm-10"> #}
+                            {#        <input type="text" name="colors" value="" placeholder="{{ entry_color }}" #}
+                            {#               id="input-color" class="form-control"/> #}
+                            {#        <div id="product-colors" class="well well-sm" #}
+                            {#             style="height: 150px; overflow: auto;"> #}
+                            {#            {% for product_color in product_colors %} #}
+                            {#                <div id="product-related{{ product_color.product_id }}"><i #}
+                            {#                            class="fa fa-minus-circle"></i> {{ product_color.name }} #}
+                            {#                    <input type="hidden" name="product_color[]" #}
+                            {#                           value="{{ product_color.product_id }}"/> #}
+                            {#                </div> #}
+                            {#            {% endfor %} #}
+                            {#        </div> #}
+                            {#    </div> #}
+                            {# </div> #}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="input-color">{{ entry_color }}</label>
+                                <div class="col-sm-10">
+                                    <select name="product_colors" id="input-color" class="form-control">
+                                        <option value="0">{{ text_none }}</option>
+                                        {% for color in colors %}
+                                            {% if color.color_id == color_id %}
+                                                <option value="{{ color.color_id }}"
+                                                        selected="selected">{{ color.title }}</option>
+                                            {% else %}
+                                                <option value="{{ color.color_id }}">{{ color.title }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-quantity">{{ entry_quantity }}</label>
                                 <div class="col-sm-10">
@@ -528,6 +565,25 @@
                                                        value="{{ product_related.product_id }}"/>
                                             </div>
                                         {% endfor %}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-set">
+                                    <span data-toggle="tooltip"
+                                          title="{{ help_set }}">{{ entry_set }}</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="set" value="" placeholder="{{ entry_set }}"
+                                           id="input-set" class="form-control"/>
+                                    <div id="product-set" class="well well-sm"
+                                         style="height: 150px; overflow: auto;"> {% for product_set in product_sets %}
+                                            <div id="product-set{{ product_set.product_id }}"><i
+                                                        class="fa fa-minus-circle"></i> {{ product_set.name }}
+                                                <input type="hidden" name="product_set[]"
+                                                       value="{{ product_set.product_id }}"/>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1486,6 +1542,66 @@
         });
 
         $('#product-related').delegate('.fa-minus-circle', 'click', function () {
+            $(this).parent().remove();
+        });
+
+        // Set
+        $('input[name=\'set\']').autocomplete({
+            'source': function (request, response) {
+                $.ajax({
+                    url: 'index.php?route=catalog/product/autocompleteSet&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+                    dataType: 'json',
+                    success: function (json) {
+                        response($.map(json, function (item) {
+                            return {
+                                label: item['name'],
+                                value: item['product_id']
+                            }
+                        }));
+                    }
+                });
+            },
+            'select': function (item) {
+                $('input[name=\'set\']').val('');
+
+                $('#product-set' + item['value']).remove();
+
+                $('#product-set').append('<div id="product-set' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_set[]" value="' + item['value'] + '" /></div>');
+            }
+        });
+
+        $('#product-set').delegate('.fa-minus-circle', 'click', function () {
+            $(this).parent().remove();
+        });
+
+        // Colors
+        $('input[name=\'colors\']').autocomplete({
+            'source': function (request, response) {
+                console.log(request);
+                $.ajax({
+                    url: 'index.php?route=catalog/colors/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+                    dataType: 'json',
+                    success: function (json) {
+                        console.log(json);
+                        response($.map(json, function (item) {
+                            return {
+                                label: item['name'],
+                                value: item['color_id']
+                            }
+                        }));
+                    }
+                });
+            },
+            'select': function (item) {
+                $('input[name=\'colors\']').val('');
+
+                $('#product-colors' + item['value']).remove();
+
+                $('#product-colors').append('<div id="product-colors' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="product_colors[]" value="' + item['value'] + '" /></div>');
+            }
+        });
+
+        $('#product-colors').delegate('.fa-minus-circle', 'click', function () {
             $(this).parent().remove();
         });
         //--></script>

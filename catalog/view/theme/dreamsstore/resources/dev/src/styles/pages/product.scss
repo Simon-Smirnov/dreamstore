@@ -1,4 +1,5 @@
 .product {
+    margin-top: 2em;
     padding-bottom: 4em;
     display: flex;
     --product-gap: 2em;
@@ -22,6 +23,10 @@
             font-weight: 500;
             font-size: 1rem;
             color: var(--color-6-dark);
+        }
+
+        &__color {
+            margin-top: 0.5em;
         }
 
         &__options {
@@ -129,6 +134,63 @@
             display: flex;
             --product-gap-2: 1em;
             gap: var(--product-gap-2);
+        }
+
+        &__complect {
+            margin-top: 1.5em;
+            background-color: var(--white);
+            border-radius: 0.4em;
+            padding: 1.5em;
+
+            &--title {
+                font-weight: 500;
+                font-size: 1.2rem;
+                color: var(--color-4-dark);
+                margin-bottom: 1em;
+            }
+
+            &--item {
+
+            }
+
+            &--block {
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-4-dark);
+                cursor: pointer;
+            }
+
+
+            &--item + &--item {
+                margin-top: 0.5em;
+            }
+
+
+            &--span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid var(--libe);
+                width: 1.5em;
+                height: 1.5em;
+
+                svg {
+                    width: 1em;
+                    height: 1em;
+                    fill: var(--color-4-dark);
+                    stroke: none;
+                }
+            }
+
+            &--name {
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-4-dark);
+            }
         }
 
         &__add, &__click {
@@ -306,6 +368,35 @@
 
         .section-title {
             margin-bottom: 1em;
+        }
+    }
+
+    &-set {
+        &__item {
+            display: grid;
+            grid-template-columns: 0.5fr 2fr 0.3fr;
+            gap: 1em;
+            padding: 1em 0;
+            border-bottom: 1px solid var(--libe);
+        }
+
+        &__image img {
+            border-radius: 0.4em;
+        }
+
+        &__name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-5-dark);
+        }
+
+        &__remove {
+            svg {
+                width: 1em;
+                height: 1em;
+                fill: var(--color-6-dark);
+                cursor: pointer;
+            }
         }
     }
 }

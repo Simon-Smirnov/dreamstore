@@ -51,14 +51,14 @@ class ControllerCatalogColors extends Controller
 
     public function edit()
     {
-        $this->load->language('catalog/loyalty');
+        $this->load->language('catalog/colors');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/loyalty');
+        $this->load->model('catalog/colors');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_loyalty->editLoyalty($this->request->get['loyalty_id'], $this->request->post);
+            $this->model_catalog_colors->editColor($this->request->get['color_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -76,7 +76,7 @@ class ControllerCatalogColors extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/loyalty', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/colors', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getForm();
@@ -84,15 +84,15 @@ class ControllerCatalogColors extends Controller
 
     public function delete()
     {
-        $this->load->language('catalog/loyalty');
+        $this->load->language('catalog/colors');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/loyalty');
+        $this->load->model('catalog/colors');
 
         if (isset($this->request->post['selected'])) {
-            foreach ($this->request->post['selected'] as $loyalty_id) {
-                $this->model_catalog_loyalty->deleteLoyalty($loyalty_id);
+            foreach ($this->request->post['selected'] as $color_id) {
+                $this->model_catalog_colors->deleteColor($color_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -111,7 +111,7 @@ class ControllerCatalogColors extends Controller
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/loyalty', 'user_token=' . $this->session->data['user_token'] . $url, true));
+            $this->response->redirect($this->url->link('catalog/colors', 'user_token=' . $this->session->data['user_token'] . $url, true));
         }
 
         $this->getList();
@@ -399,6 +399,45 @@ class ControllerCatalogColors extends Controller
         }
 
         return !$this->error;
+    }
+
+    public function autocomplete()
+    {
+        $json = array();
+
+        if (isset($this->request->get['filter_name'])) {
+            $this->load->model('catalog/colors');
+
+            if (isset($this->request->get['filter_name'])) {
+                $filter_name = $this->request->get['filter_name'];
+            } else {
+                $filter_name = '';
+            }
+
+            //if (isset($this->request->get['limit'])) {
+            //    $limit = (int)$this->request->get['limit'];
+            //} else {
+            $limit = (int)$this->config->get('config_autocomplete_admin') > 0 ? (int)$this->config->get('config_autocomplete_admin') : 10;
+
+            $filter_data = array(
+                'filter_title' => $filter_name,
+                'start' => 0,
+                'limit' => $limit
+            );
+
+            $results = $this->model_catalog_colors->getColors($filter_data);
+
+            foreach ($results as $result) {
+
+                $json[] = array(
+                    'color_id' => $result['color_id'],
+                    'name' => strip_tags(html_entity_decode($result['title'], ENT_QUOTES, 'UTF-8')),
+                );
+            }
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 
 }
