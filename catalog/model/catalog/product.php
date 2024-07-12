@@ -422,22 +422,6 @@ class ModelCatalogProduct extends Model
 
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_set  WHERE set_id = '" . (int)$product_id . "'");
 
-        //$sql = "
-        //    SELECT
-        //        ps.*,
-        //        (SELECT category_id FROM " . DB_PREFIX . "product_to_category ptc WHERE ptc.product_id = ps.set_id) AS category_id
-        //    FROM
-        //        " . DB_PREFIX . "product_set ps
-        //    WHERE
-        //        ps.set_id = '" . (int)$product_id . "'
-        //    ";
-
-        //$query = $this->db->query($sql);
-
-        //foreach ($query->rows as $result) {
-        //    $product_data[$result['product_id']] = $this->getProduct($result['product_id']);
-        //}
-
         $products_id = '';
         foreach ($query->rows as $result) {
             if ($products_id == '') {
@@ -447,15 +431,15 @@ class ModelCatalogProduct extends Model
             }
         }
 
-        $sql = "SELECT category_id, GROUP_CONCAT(product_id) AS products FROM ds_product_to_category WHERE product_id IN (" . $products_id . ") GROUP BY category_id";
+        if ($products_id != "") {
+            $sql = "SELECT category_id, GROUP_CONCAT(product_id) AS products FROM ds_product_to_category WHERE product_id IN (" . $products_id . ") GROUP BY category_id";
 
-        $query = $this->db->query($sql);
+            $query = $this->db->query($sql);
 
-        //foreach ($query->rows as $result) {
-        //    $product_data[$result['product_id']] = $this->getCategoriesWithProducts($result['product_id']);
-        //}
+            $product_data = $query->rows;
+        }
 
-        return $query->rows;
+        return $product_data;
     }
 
     public function getCategoryIdForProduct($product_id)

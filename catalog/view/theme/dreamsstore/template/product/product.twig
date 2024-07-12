@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product-right" data-products-to-cart>
+            <div class="product-right" data-products-to-cart data-product-id-global="{{ product_id }}">
                 <div class="product-right__info">
                     <p>Артикул: {{ sku }}</p>
                     <a data-modal="share">Поделиться</a>
@@ -171,7 +171,12 @@
                             {% if option.type == 'select' %}
                                 <div class="product-right__options-item" data-option-product-id="{{ product_id }}"
                                      data-option="select">
-                                    <span class="product-right__options-title">{{ option.name }}</span>
+                                    <span class="product-right__options-title">{{ option.name }}
+                                        {% if option.option_id == '15' %}
+                                            <span class="product-right__sizeTable"
+                                                  data-modal="size_table">Таблица размеров</span>
+                                        {% endif %}
+                                    </span>
                                     <div class="select select-product product-right__options-block">
                                         <input type="hidden" name="option[{{ option.product_option_id }}]"
                                                value="{{ option.product_option_value.0.product_option_value_id }}">
@@ -256,10 +261,20 @@
                         {# <label class="control-label" for="input-quantity">{{ entry_qty }}</label> #}
                         {# <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" #}
                         {#       class="form-control"/> #}
-                        <button type="button" id="button-cart" data-add-to-cart="true"
-                                data-product-id="{{ product_id }}"
-                                data-loading-text="{{ text_loading }}"
-                                class="btn btn-primary">{{ button_cart }}</button>
+                        <div class="product-right__add--block">
+                            {% if in_cart %}
+                                <a class="product-right__add--toCart" href="/cart">
+                                    <h5>В корзине: {{ in_cart }}</h5>
+                                    <span>Перейти в корзину</span>
+                                </a>
+                            {% endif %}
+                            <button type="button" id="button-cart" data-add-to-cart="true"
+                                    data-product-id="{{ product_id }}"
+                                    data-loading-text="{{ text_loading }}"
+                                    class="btn btn-primary {% if in_cart %}inCart{% endif %}">
+                                {% if in_cart %}+1{% else %}{{ button_cart }}{% endif %}
+                            </button>
+                        </div>
                         {% if minimum > 1 %}
                             <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
                         {% endif %}
@@ -270,54 +285,120 @@
                 </div>
                 {% if set_products %}
                     <div class="product-right__complect">
-                        <h4 class="product-right__complect--title">Добавить в комплект</h4>
-                        {% for set_product in set_products %}
-                            <div class="product-right__complect--item">
-                                <div class="product-right__complect--block"
-                                     data-product-set-products="{{ set_product.ids }}">
-                                    <span class="product-right__complect--span">
-                                        <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/sprite.svg#icon_plus"></use>
-                                        </svg>
-                                    </span>
-                                    <h5 class="product-right__complect--name">{{ set_product.category.name }}</h5>
-                                </div>
-                                {% if set_product.products %}
-                                    <div class="product-set">
-                                        {% for set_prod in set_product.products %}
-                                            <div class="product-set__item">
-                                                <div class="product-set__image">
-                                                    <picture>
-                                                        <source srcset="{{ set_prod.thumb.webp }}">
-                                                        <img class="product-images__image"
-                                                             src="{{ set_prod.thumb.default }}"
-                                                             alt="{{ set_prod.heading_title }}"
-                                                             title="{{ set_prod.heading_title }}"
-                                                             loading="lazy"/>
-                                                    </picture>
-                                                </div>
-                                                <div class="product-set__block">
-                                                    <h5 class="product-set__name">{{ set_prod.name }}
-                                                    </h5>
-                                                    <div class=product-set__price">
-
-                                                    </div>
-                                                </div>
-                                                <div class="product-set__remove">
-                                                    <svg class="" xmlns="http://www.w3.org/2000/svg">
-                                                        <use xlink:href="/sprite.svg#icon_cross"></use>
-                                                    </svg>
-                                                </div>
+                        <div class="product-right__complect--inner">
+                            <h4 class="product-right__complect--title">Добавить в комплект</h4>
+                            {% for set_product in set_products %}
+                                <div class="product-right__complect--item">
+                                    <div class="product-right__complect--block"
+                                         data-product-set-products="{{ set_product.ids }}"
+                                         data-product-set-category="{{ set_product.category.name }}">
+                                        <span class="product-right__complect--span">
+                                            <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_plus"></use>
+                                            </svg>
+                                        </span>
+                                        <h5 class="product-right__complect--name">{{ set_product.category.name }}</h5>
+                                        {% if set_product.category_total_products %}
+                                            <div class="product-right__complect--number">
+                                                {{ set_product.category_total_products }}
                                             </div>
-                                        {% endfor %}
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
+                                    {% if set_product.products %}
+                                        <div class="product-set">
+                                            {% for set_prod in set_product.products %}
+                                                {% if set_prod.is_show %}
+                                                    <div class="product-set__item">
+                                                        <div class="product-set__image">
+                                                            <picture>
+                                                                <source srcset="{{ set_prod.thumb.webp }}">
+                                                                <img class="product-images__image"
+                                                                     src="{{ set_prod.thumb.default }}"
+                                                                     alt="{{ set_prod.heading_title }}"
+                                                                     title="{{ set_prod.heading_title }}"
+                                                                     loading="lazy"/>
+                                                            </picture>
+                                                        </div>
+                                                        <div class="product-set__block">
+                                                            <h5 class="product-set__name">{{ set_prod.name }}</h5>
+                                                            <div class="product-set__price">
+                                                                {% if not set_prod.special %}
+                                                                    <span class="price-new">
+                                                                        {{ set_prod.price }}
+                                                                    </span>
+                                                                {% else %}
+                                                                    <span class="price-new">
+                                                                        {{ set_prod.special }}
+                                                                    </span>
+                                                                    <span class="price-old">
+                                                                        {{ set_prod.price }}
+                                                                    </span>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-set__remove">
+                                                            <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                                                <use xlink:href="/sprite.svg#icon_cross"></use>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 {% endif %}
                 <div class="product-right__delivery">
 
+                </div>
+                <div class="modal set-modal" data-modal-type="set" hidden>
+                    <div class="modal__content">
+                        <div class="modal__box model-popup">
+                            <button class="modal__close modal__close--fixed"></button>
+                            <div class="model-popup__content" data-set-content>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal product-size-table-modal" data-modal-type="size_table" hidden>
+                    <div class="modal__content">
+                        <div class="modal__box model-popup">
+                            <button class="modal__close modal__close--fixed"></button>
+                            <div class="model-popup__content">
+                                <h2 class="section-title">Таблица размеров</h2>
+                                <div class="productSizeTable">
+                                    <div class="productSizeTable_table">
+                                        <div class="productSizeTable-item left"></div>
+                                        <div class="productSizeTable-item">Пододеяльник</div>
+                                        <div class="productSizeTable-item">Простыня</div>
+                                        <div class="productSizeTable-item left">Полутороспальный</div>
+                                        <div class="productSizeTable-item">155х205</div>
+                                        <div class="productSizeTable-item">180х230</div>
+                                        <div class="productSizeTable-item left">Двуспальный</div>
+                                        <div class="productSizeTable-item">180х210</div>
+                                        <div class="productSizeTable-item">240х260</div>
+                                        <div class="productSizeTable-item left">Двуспальный плюс</div>
+                                        <div class="productSizeTable-item">200х200</div>
+                                        <div class="productSizeTable-item">240х260</div>
+                                        <div class="productSizeTable-item left">Евро</div>
+                                        <div class="productSizeTable-item">200х220</div>
+                                        <div class="productSizeTable-item">245х260</div>
+                                        <div class="productSizeTable-item left">Евро макси</div>
+                                        <div class="productSizeTable-item">220х240</div>
+                                        <div class="productSizeTable-item">245х270</div>
+                                        <div class="productSizeTable-item left">Дуэт</div>
+                                        <div class="productSizeTable-item">155х205 (2шт)</div>
+                                        <div class="productSizeTable-item">245х270</div>
+                                    </div>
+                                    <a class="productSizeTable_link" data-modal="dont_find">Нет нужного размера?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

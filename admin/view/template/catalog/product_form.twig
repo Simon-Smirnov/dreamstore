@@ -325,6 +325,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="input-size-table">{{ entry_size_table }}</label>
+                                <div class="col-sm-10">
+                                    <select name="size_table" id="input-size-table" class="form-control">
+                                        {% if size_table %}
+                                            <option value="1" selected="selected">{{ text_yes }}</option>
+                                            <option value="0">{{ text_no }}</option>
+                                        {% else %}
+                                            <option value="1">{{ text_yes }}</option>
+                                            <option value="0" selected="selected">{{ text_no }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-stock-status"><span
                                             data-toggle="tooltip"
                                             title="{{ help_stock_status }}">{{ entry_stock_status }}</span></label>

@@ -1,10 +1,16 @@
 import CartAsyncMethods from "./CartAsyncMethods.js";
 import Alert from "./Alert.js";
+import Modal from "./Modal.js";
+import Product from "./Product.js";
+import Slider from "./Slider.js";
+import Select from "./Select.js";
 
 export default class {
 
     constructor(selector) {
-        this.block = document.querySelector(selector)
+        this.block = document.querySelector(selector);
+        this.content = this.block.querySelector('[data-set-content]');
+        this.globalProductId = this.block.dataset.productIdGlobal;
         if (this.block) {
             this.block.addEventListener('click', (e) => {
                 const target = e.target;
@@ -23,9 +29,51 @@ export default class {
                                 CartAsyncMethods.getQuantityCart().then(r => {
                                     document.querySelector('#cart-total').textContent = r.quantity;
                                 })
+                                this.updateProductBtn(this.globalProductId);
                             }
                         });
                     }
+                }
+                if (target.dataset.productSetProducts || target.closest('[data-product-set-products]')) {
+                    console.log('set');
+                    const item = target.closest('[data-product-set-products]');
+                    const ids = item.dataset.productSetProducts;
+                    const categoryName = item.dataset.productSetCategory;
+                    const body = new FormData;
+                    body.append('products_id', ids);
+                    body.append('category_name', categoryName);
+                    this.getProducts(body).then(data => {
+                        if (data) {
+                            this.content.innerHTML = data;
+                        }
+                        Modal.openTarget('set');
+                        // new Product('[data-products-to-cart]');
+                    })
+                }
+                if (target.dataset.datasetChangeMinus || target.closest('[data-change-minus]')) {
+                    const blockProduct = target.closest('[data-change-product]');
+                    if ((+blockProduct.querySelector('[data-product-input]').value - 1) > 0) {
+                        blockProduct.querySelector('[data-product-input]').value = +blockProduct.querySelector('[data-product-input]').value - 1;
+                    }
+                }
+                if (target.dataset.datasetChangePlus || target.closest('[data-change-plus]')) {
+                    const blockProduct = target.closest('[data-change-product]');
+                    blockProduct.querySelector('[data-product-input]').value = +blockProduct.querySelector('[data-product-input]').value + 1;
+                }
+                if (target.dataset.datasetProductSetBtn || target.closest('[data-product-set-btn]')) {
+                    const products_id = this.block.querySelectorAll('[data-product-input]');
+                    products_id.forEach(product => {
+                        CartAsyncMethods.add(product.dataset.productId, product.value).then(r => {
+                            if (r.success) {
+                                this.updateViewMiniCart();
+                                Alert.add(r.success);
+                                CartAsyncMethods.getQuantityCart().then(r => {
+                                    document.querySelector('#cart-total').textContent = r.quantity;
+                                })
+                                this.updateSetContent(this.globalProductId);
+                            }
+                        });
+                    });
                 }
             })
         }
@@ -114,6 +162,36 @@ export default class {
         return options
     }
 
+    updateSetContent(productId) {
+        this.getProduct(productId).then(data => {
+            if (data) {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(data, 'text/html');
+                console.log(doc);
+                let item = doc.querySelector('.product-right__complect--inner');
+                let product_content = document.querySelector('.product-right__complect');
+                product_content.innerHTML = '';  // Очистим текущие элементы
+                product_content.appendChild(item);
+                // this.content.innerHTML = r;
+            }
+        });
+    }
+
+    updateProductBtn(productId) {
+        this.getProduct(productId).then(data => {
+            if (data) {
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(data, 'text/html');
+                console.log(doc);
+                let item = doc.querySelector('.product-right__add--block');
+                let product_content = document.querySelector('.product-right__add');
+                product_content.innerHTML = '';  // Очистим текущие элементы
+                product_content.appendChild(item);
+                // this.content.innerHTML = r;
+            }
+        });
+    }
+
     async calculatePrice() {
         const body = new FormData
         body.append('product_id', this.productId)
@@ -182,5 +260,38 @@ export default class {
                 });
             })
             .catch(error => console.error('Error:', error));
+    }
+
+    async getProducts(body) {
+        return new Promise(async resolve => {
+
+            // Запрос
+            let results = await fetch('/index.php?route=product/product/getSetComplects', {
+                method: 'POST',
+                body: body
+            })
+
+            // Результат
+            let data = await results.text();
+            resolve(data);
+        })
+    }
+
+    async getProduct(productId) {
+        return new Promise(async resolve => {
+
+            const body = new FormData()
+            body.append('product_id', productId)
+
+            // Запрос
+            let results = await fetch('/index.php?route=product/product/info', {
+                method: 'POST',
+                body: body
+            })
+
+            // Результат
+            let data = await results.text();
+            resolve(data);
+        })
     }
 }

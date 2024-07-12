@@ -61,6 +61,7 @@ $_['entry_tax_class'] = 'Налоговый класс';
 $_['entry_points'] = 'Цена в бонусных баллах';
 $_['entry_option_points'] = 'Цена в бонусных баллах';
 $_['entry_subtract'] = 'Вычитать со склада';
+$_['entry_size_table'] = 'Показывать таблицу размеров';
 $_['entry_weight_class'] = 'Единица измерения веса';
 $_['entry_weight'] = 'Вес';
 $_['entry_dimension'] = 'Размеры (Д x Ш x В)';

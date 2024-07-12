@@ -148,3 +148,33 @@
   100%
     transform: scale(1)
     opacity: 1
+
+.dont-find
+  &__text
+    margin-top: 1em
+    font-size: 1rem
+    font-size: 500
+    color: var(--color-5-dark)
+    line-height: 1.4
+
+  &__form
+    margin-top: 1.5em
+
+  &__input
+    textarea, input
+      background-color: var(--white)
+      max-width: none
+      width: 100%
+
+  &__input
+    textarea
+      min-height: 7em
+
+  &__input + &__input
+    margin-top: 1em
+
+.dont-find__form .dont-find__btn
+  max-width: none
+  text-align: center
+  margin-top: 1em
+  width: 100%

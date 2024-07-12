@@ -652,6 +652,14 @@ class ControllerCatalogProduct extends Controller
             $data['subtract'] = 1;
         }
 
+        if (isset($this->request->post['size_table'])) {
+            $data['size_table'] = $this->request->post['size_table'];
+        } elseif (!empty($product_info)) {
+            $data['size_table'] = $product_info['size_table'];
+        } else {
+            $data['size_table'] = 0;
+        }
+
         if (isset($this->request->post['sort_order'])) {
             $data['sort_order'] = $this->request->post['sort_order'];
         } elseif (!empty($product_info)) {

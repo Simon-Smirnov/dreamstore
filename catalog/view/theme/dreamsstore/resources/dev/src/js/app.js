@@ -29,6 +29,7 @@ import Search from "./classes/Search.js";
 import GiftCard from "./classes/GiftCard.js";
 import ShowMore from "./classes/ShowMore.js";
 import BestOffers from "./classes/BestOffers.js";
+import Mail from "./classes/Mail.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new GiftCard('[data-gift-card]');
     new BestOffers('[data-view-all-href]');
     new ShowMore('[data-show-more]');
+    new Mail('[data-form-mail]');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

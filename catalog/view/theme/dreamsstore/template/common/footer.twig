@@ -181,6 +181,45 @@
     </a>
 </div>
 
+<div class="modal dont-find-modal" data-modal-type="dont_find" hidden>
+    <div class="modal__content">
+        <div class="modal__box model-popup">
+            <button class="modal__close modal__close--fixed"></button>
+            <div class="model-popup__content">
+                <h2 class="section-title">Не нашли свой размер или дизайн?</h2>
+                <p class="dont-find__text">
+                    Положите в корзину похожие размеры, а в комментариях к заказу укажите нужные. Или опишите свой заказ
+                    в этой форме:
+                </p>
+                <form class="dont-find__form" data-form-mail>
+                    <div class="dont-find__input input-block">
+                        <input class="input-text" name="name" type="text" placeholder="Имя" value="">
+                        <label>Имя</label>
+                        <div class="account-input__error text-danger"></div>
+                    </div>
+                    <div class="dont-find__input input-block">
+                        <input class="input-text" name="phone" type="tel" placeholder="Телефон" value="">
+                        <label>Телефон</label>
+                        <div class="account-input__error text-danger"></div>
+                    </div>
+                    <div class="dont-find__input input-block">
+                        <input class="input-text" name="email" type="email" placeholder="E-mail" value="">
+                        <label>E-mail</label>
+                        <div class="account-input__error text-danger"></div>
+                    </div>
+                    <div class="dont-find__input input-block">
+                        <textarea class="input-text" cols="50" name="message" type="text" placeholder="Сообщение"
+                                  value=""></textarea>
+                        <label>Сообщение</label>
+                        <div class="account-input__error text-danger"></div>
+                    </div>
+                    <button class="btn btn-primary dont-find__btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/catalog/view/javascript/swiper-master/swiper-bundle.min.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/script.js" type="module"></script>
 

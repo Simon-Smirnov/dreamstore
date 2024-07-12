@@ -1,0 +1,51 @@
+<div class="productModalSet">
+    <div class="productModalSet_content">
+        <div>
+            <h2 class="section-title">{{ category_name }}</h2>
+            <div class="productModalSet_products">
+                {% for product in products %}
+                    <div class="productModalSet_item">
+                        <picture>
+                            <source srcset="{{ product.thumb.webp }}">
+                            <img class="category_underCategories-img" src="{{ product.thumb.default }}"
+                                 loading="lazy">
+                        </picture>
+                        <p class="productModalSet_price">
+                            {% if not product.special %}
+                                <span
+                                        class="price-new">{{ product.price }}</span>
+                            {% else %}
+                                <span
+                                        class="price-new">{{ product.special }}</span>
+                                <span
+                                        class="price-old">{{ product.price }}</span>
+                                {# <span class="price-percent">{{ product.percent }}</span> #}
+                            {% endif %}
+                        </p>
+                        <h4 class="productModalSet_title">{{ product.name }}</h4>
+                        <div class="productModalSet_change" data-change-product>
+                            <div class="productModalSet_set"
+                                 data-change-minus="{{ product.cart_id }}"
+                                 data-change-quantity="{{ product.quantity }}">
+                                <svg class="productModalSet_minus"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg?v=1.0#icon_minus"></use>
+                                </svg>
+                            </div>
+                            <input class="productModalSet_input" value="0"
+                                   data-product-id="{{ product.product_id }}" data-product-input disabled>
+                            <div class="productModalSet_set" data-change-plus="{{ product.cart_id }}"
+                                 data-change-quantity="{{ product.quantity }}">
+                                <svg class="productModalSet_plus"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg?v=1.0#icon_plus"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button class="productModalSet_btn btn btn-primary" data-product-set-btn>Добавить</button>
+    </div>
+</div>

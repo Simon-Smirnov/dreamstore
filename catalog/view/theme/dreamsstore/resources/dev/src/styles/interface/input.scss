@@ -110,14 +110,14 @@
             font-weight: 500;
             color: var(--color-6-dark);
         }
-        
-        input:not(:placeholder-shown) + label {
+
+        input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label {
             display: block;
             top: 0.5em;
             left: 2em;
         }
 
-        input:not(:placeholder-shown) {
+        input:not(:placeholder-shown), textarea:not(:placeholder-shown) {
             padding-top: 1.2em;
             padding-bottom: 0.4em;
         }
