@@ -11,6 +11,9 @@ export default class {
                     if (target.dataset.viewAllHref && target.classList.contains('active')) {
                         const href = target.dataset.viewAllHref;
                         link.href = href;
+                        if (document.querySelector('[ data-view-all-link-mobil]')) {
+                            document.querySelector('[ data-view-all-link-mobil]').href = href;
+                        }
                     }
                 })
             });

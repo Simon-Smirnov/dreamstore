@@ -8,10 +8,10 @@ import Select from "./Select.js";
 export default class {
 
     constructor(selector) {
-        this.block = document.querySelector(selector);
-        this.content = this.block.querySelector('[data-set-content]');
-        this.globalProductId = this.block.dataset.productIdGlobal;
+        this.block = document.querySelector(selector)
         if (this.block) {
+            this.content = this.block.querySelector('[data-set-content]');
+            this.globalProductId = this.block.dataset.productIdGlobal;
             this.block.addEventListener('click', (e) => {
                 const target = e.target;
                 if (target.dataset.productId) {

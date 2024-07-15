@@ -1,0 +1,35 @@
+{% if categories %}
+    <div class="dropdownMenuMobil" data-menu-modal-catalog>
+        <h3 class="dropdownMenuMobil-title">Каталог</h3>
+        <svg class="dropdownMenuMobil-cross" data-menu-modal-catalog-btn-close xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="/sprite.svg#icon_cross"></use>
+        </svg>
+        <nav class="dropdownMenuMobil-nav">
+            <ul class="dropdownMenuMobil-list">
+                {% for category in categories %}
+                    {% if category.children %}
+                        <li class="dropdownMenuMobil-item dropdown">
+                            <a href="{{ category.href }}" class="dropdownMenuMobil-toggle"
+                               data-toggle="dropdown">{{ category.name }}</a>
+                            <div class="dropdownMenuMobil-menu">
+                                <div class="dropdownMenuMobil-inner">
+                                    {% for child in category.children %}
+                                        <ul>
+                                            <li>
+                                                <a href="{{ child.href }}">{{ child.name }}</a>
+                                            </li>
+                                        </ul>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="dropdownMenuMobil-item">
+                            <a href="{{ category.href }}">{{ category.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}

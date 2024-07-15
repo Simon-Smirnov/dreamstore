@@ -92,4 +92,39 @@
             }
         }
     }
+
+    &-link {
+        border-radius: 0.4em;
+        border: 1px solid var(--libe);
+        padding: 1em 0;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            justify-content: center;
+
+            span {
+                font-weight: 500;
+                font-size: 1.2rem;
+                color: var(--color-6-dark);
+            }
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                fill: none;
+                stroke: var(--color-6-dark);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sectionReviews-block__link {
+        display: none;
+    }
+    .sectionReviews {
+        padding-bottom: 2em;
+    }
 }

@@ -9,6 +9,7 @@
         font-weight: 500;
         font-size: 1.1rem;
         font-family: var(--font-main);
+        position: relative;
 
         &::placeholder {
             color: var(--color-6-dark);
@@ -23,6 +24,7 @@
         border-radius: 0.35em;
         width: 1em;
         height: 1em;
+        font-size: 1rem;
         border: 1px solid var(--libe);
         transition: 0.1s all linear;
         outline: none;
@@ -121,6 +123,15 @@
             padding-top: 1.2em;
             padding-bottom: 0.4em;
         }
+    }
+
+    &-block.required::after {
+        content: "•";
+        position: absolute;
+        right: 0.6em;
+        top: 0.4em;
+        font-size: 0.8rem;
+        color: var(--libe);
     }
 }
 

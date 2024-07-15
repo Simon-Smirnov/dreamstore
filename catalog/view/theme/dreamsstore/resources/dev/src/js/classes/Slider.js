@@ -193,7 +193,7 @@ export default class Slider {
 
         // Хиты на главной странице
         const sliderHits = document.querySelector('.sliderHits')
-        if (sliderHits) {
+        if (sliderHits && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderHits, {
                 slidesPerView: 4,
                 spaceBetween: 12,
@@ -212,7 +212,7 @@ export default class Slider {
 
         // Новинки на главной странице
         const sliderNovelties = document.querySelector('.sliderNovelties')
-        if (sliderNovelties) {
+        if (sliderNovelties && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderNovelties, {
                 slidesPerView: 4,
                 spaceBetween: 12,
@@ -233,7 +233,7 @@ export default class Slider {
         const sliderReviews = document.querySelector('.sliderReviews')
         if (sliderReviews) {
             this.createSlider(sliderReviews, {
-                slidesPerView: 3,
+                slidesPerView: 1,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -244,6 +244,12 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 3,
+                        spaceBetween: 12
+                    }
                 }
             })
         }
@@ -269,7 +275,7 @@ export default class Slider {
 
         // Акции на главной странице
         const sliderStocks = document.querySelector('.sliderStocks')
-        if (sliderStocks) {
+        if (sliderStocks && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderStocks, {
                 slidesPerView: 4,
                 spaceBetween: 12,
@@ -312,6 +318,44 @@ export default class Slider {
                 slidesPerView: 4,
                 spaceBetween: 12,
                 allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Полезное из блока на главной странице
+        const sliderUserfulFromBlog = document.querySelector('.sliderUserfulFromBlog')
+        if (sliderUserfulFromBlog && window.matchMedia('(min-width: 600px)').matches) {
+            this.createSlider(sliderUserfulFromBlog, {
+                slidesPerView: 4,
+                spaceBetween: 12,
+                allowTouchMove: false,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        //Преимущества на главной странице
+        const sliderAdvantages = document.querySelector('.sliderAdvantages')
+        if (sliderAdvantages && window.matchMedia('(max-width: 600px)').matches) {
+            this.createSlider(sliderAdvantages, {
+                slidesPerView: 1,
+                spaceBetween: 12,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,

@@ -1,68 +1,7 @@
 <footer>
     <div class="container">
-        {# <div class="row"> #}
-        {#    {% if informations %} #}
-        {#        <div class="col-sm-3"> #}
-        {#            <div class="title">{{ text_information }}</div> #}
-        {#            <ul class="list-unstyled"> #}
-        {#                {% for information in informations %} #}
-        {#                    <li> #}
-        {#                        <a href="{{ information.href }}">{{ information.title }}</a> #}
-        {#                    </li> #}
-        {#                {% endfor %} #}
-        {#            </ul> #}
-        {#        </div> #}
-        {#    {% endif %} #}
-        {#    <div class="col-sm-3"> #}
-        {#        <div class="title">{{ text_service }}</div> #}
-        {#        <ul class="list-unstyled"> #}
-        {#            <li> #}
-        {#                <a href="{{ contact }}">{{ text_contact }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ return }}">{{ text_return }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ sitemap }}">{{ text_sitemap }}</a> #}
-        {#            </li> #}
-        {#        </ul> #}
-        {#    </div> #}
-        {#    <div class="col-sm-3"> #}
-        {#        <div class="title">{{ text_extra }}</div> #}
-        {#        <ul class="list-unstyled"> #}
-        {#            <li> #}
-        {#                <a href="{{ manufacturer }}">{{ text_manufacturer }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ voucher }}">{{ text_voucher }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ special }}">{{ text_special }}</a> #}
-        {#            </li> #}
-        {#        </ul> #}
-        {#    </div> #}
-        {#    <div class="col-sm-3"> #}
-        {#        <div class="title">{{ text_account }}</div> #}
-        {#        <ul class="list-unstyled"> #}
-        {#            <li> #}
-        {#                <a href="{{ account }}">{{ text_account }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ order }}">{{ text_order }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ wishlist }}">{{ text_wishlist }}</a> #}
-        {#            </li> #}
-        {#            <li> #}
-        {#                <a href="{{ newsletter }}">{{ text_newsletter }}</a> #}
-        {#            </li> #}
-        {#        </ul> #}
-        {#    </div> #}
-        {# </div> #}
-        {# <hr> #}
-        {# <p>{{ powered }}</p> #}
         <div class="footer">
-            <div class="footer-grid">
+            <div class="footer-grid" data-footer-list>
                 <div class="footer-grid_item footer-grid_item-info">
                     <a href="/">
                         <img class="footer-grid_logo" src="{{ assets }}/assets/images/logo_2.webp">
@@ -76,47 +15,65 @@
                         </li>
                     </ul>
                 </div>
-                <div class="footer-grid_item">
-                    <h4 class="footer-grid_item-title">Покупателям</h4>
+                <div class="footer-grid_item" data-footer-item>
+                    <h4 class="footer-grid_item-title" data-footer-title><span>Покупателям</span>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                        </svg>
+                    </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a>Оплата и доставка</a></li>
-                        <li class="footer-grid_item-list_item"><a>Гарантия и возврат</a></li>
-                        <li class="footer-grid_item-list_item"><a>Как выбрать ткань</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/buyers">Оплата и доставка</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/buyers?content=guarantee">Гарантия и
+                                возврат</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/buyers?content=choose">Как выбрать
+                                ткань</a></li>
                         <li class="footer-grid_item-list_item"><a href="/faq">Частые вопросы</a></li>
-                        <li class="footer-grid_item-list_item"><a>Советы по уходу</a></li>
-                        <li class="footer-grid_item-list_item"><a href="reviews">Отзывы</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/advices">Советы по уходу</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/reviews">Отзывы</a></li>
                         <li class="footer-grid_item-list_item"><a href="/blogs">Блог</a></li>
                     </ul>
                 </div>
-                <div class="footer-grid_item">
-                    <h4 class="footer-grid_item-title">Каталог</h4>
+                <div class="footer-grid_item" data-footer-item>
+                    <h4 class="footer-grid_item-title" data-footer-title><span>Каталог</span>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                        </svg>
+                    </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a>Постельное белье</a></li>
-                        <li class="footer-grid_item-list_item"><a>Подушки</a></li>
-                        <li class="footer-grid_item-list_item"><a>Одеяла</a></li>
-                        <li class="footer-grid_item-list_item"><a>Шторы</a></li>
-                        <li class="footer-grid_item-list_item"><a>Покрывала</a></li>
-                        <li class="footer-grid_item-list_item"><a>Полотенца</a></li>
-                        <li class="footer-grid_item-list_item"><a>Одежда для дома</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/bedsheets">Постельное белье</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/pillows">Подушки</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/blankets">Одеяла</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/curtains">Шторы</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/bedspreads">Покрывала</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/towels">Полотенца</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/homewear">Одежда для дома</a></li>
                     </ul>
                 </div>
-                <div class="footer-grid_item">
-                    <h4 class="footer-grid_item-title">Сервисы</h4>
+                <div class="footer-grid_item" data-footer-item>
+                    <h4 class="footer-grid_item-title" data-footer-title><span>Сервисы</span>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                        </svg>
+                    </h4>
                     <ul class="footer-grid_item-list">
                         <li class="footer-grid_item-list_item"><a href="/atelier">Ателье</a></li>
                         <li class="footer-grid_item-list_item"><a>Индивидуальная вышивка</a></li>
-                        <li class="footer-grid_item-list_item"><a>Выезд дизайнера на дом</a></li>
-                        <li class="footer-grid_item-list_item"><a>Подарочный сертификат</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/homevisit">Выезд дизайнера на дом</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/giftcard">Подарочный сертификат</a></li>
                         <li class="footer-grid_item-list_item"><a>Заказать образцы ткани</a></li>
-                        <li class="footer-grid_item-list_item"><a>Программа лояльности</a></li>
+                        <li class="footer-grid_item-list_item"><a href="loyalty">Программа лояльности</a></li>
                     </ul>
                 </div>
-                <div class="footer-grid_item">
-                    <h4 class="footer-grid_item-title">Компания</h4>
+                <div class="footer-grid_item" data-footer-item>
+                    <h4 class="footer-grid_item-title" data-footer-title><span>Компания</span>
+                        <svg xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                        </svg>
+                    </h4>
                     <ul class="footer-grid_item-list">
                         <li class="footer-grid_item-list_item"><a href="/aboutcompany">О нас</a></li>
-                        <li class="footer-grid_item-list_item">Вакансии</li>
-                        <li class="footer-grid_item-list_item">Сотрудничество</li>
+                        <li class="footer-grid_item-list_item"><a href="/vacancies">Вакансии</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/cooperation">Сотрудничество</a></li>
                         <li class="footer-grid_item-list_item"><a href="tel:+79956686050">+7 995 668 60 50</a></li>
                         <li class="footer-grid_item-list_item"><a
                                     href="mailto:dreamsstore@mail.ru">dreamsstore@mail.ru</a></li>
@@ -153,18 +110,99 @@
                         </li>
                     </ul>
                 </div>
-                <div class="footer-grid_item">
-                    <h4 class="footer-grid_item-title">Не упустите акции!</h4>
+                <div class="footer-grid_item" data-footer-item>
+                    <h4 class="footer-grid_item-title" data-footer-title>Не упустите акции!</h4>
                     <form class="footer-grid_item-form">
-                        <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
-                        <button class="btn btn-primary">Подписаться</button>
+                        <div class="footer-grid_item-block">
+                            <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                            <button class="btn btn-primary">Подписаться</button>
+                        </div>
                         <label class="agree">
                             <input class="input-checkbox" name="agree" type="checkbox">
                             <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
                         </label>
                     </form>
                 </div>
+                <div class="footer-grid_item footer-grid_item-list_item-social">
+                    <ul>
+                        <li>
+                            <a>
+                                <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_vk"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_telegram"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_whatsapp"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_viber"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_instagram"></use>
+                            </svg>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="footer-menu">
+        <div class="container">
+            <nav class="footer-menu__nav">
+                <ul>
+                    <li>
+                        <a href="">
+                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_tiles"></use>
+                            </svg>
+                            <span>Каталог</span>
+                        </a>
+                    </li>
+                    <li data-search-btn>
+                        <a>
+                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_search"></use>
+                            </svg>
+                            <span>Поиск</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_basket"></use>
+                            </svg>
+                            <span>Корзина</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_wishlist"></use>
+                            </svg>
+                            <span>Избранное</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="/sprite.svg#icon_login"></use>
+                            </svg>
+                            <span>Профиль</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </footer>
@@ -224,5 +262,6 @@
 <script src="/catalog/view/javascript/script.js" type="module"></script>
 
 <script src="{{ assets }}/assets/app.min.js"></script>
+</div>
 </body>
 </html>

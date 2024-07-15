@@ -63,3 +63,46 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .bestOffers-link {
+        display: none;
+    }
+    .bestOffers {
+        padding: 2em 0;
+
+        .swiper-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em 1em;
+        }
+
+        .swiper-wrapper :nth-child(n+5) {
+            display: none;
+        }
+    }
+    .bestOffers-control__link {
+        border: 1px solid var(--libe);
+        padding: 1em;
+        border-radius: 0.4em;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: var(--color-6-dark);
+        margin-top: 1em;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            justify-content: center;
+        }
+
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: none;
+            stroke: var(--color-6-dark);
+        }
+    }
+}
+
+

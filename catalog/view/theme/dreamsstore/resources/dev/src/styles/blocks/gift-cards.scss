@@ -35,3 +35,39 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .gift-cards-inner_block {
+        grid-area: gift-block;
+    }
+    .gift-cards-inner_btn {
+        grid-area: gift-btn;
+    }
+    .gift-cards-inner_img {
+        grid-area: gift-img;
+
+        img {
+            transform: scale(1.1);
+        }
+    }
+    .gift-cards-inner {
+        grid-template-columns: 1fr;
+        grid-template-areas: "gift-block"
+                             "gift-btn"
+                             "gift-img";
+        gap: 1em;
+        padding: 2em;
+    }
+    .gift-cards-inner_block-title {
+        font-size: 1.5em;
+        margin-bottom: 0.8em;
+    }
+    .gift-cards-inner_btn .btn {
+        width: 100%;
+        max-width: none;
+        text-align: center;
+    }
+    .gift-cards {
+        margin-top: 4em;
+    }
+}

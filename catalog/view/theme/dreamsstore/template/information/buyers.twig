@@ -1,0 +1,101 @@
+{{ header }}
+<div id="information-buyers">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content" class="buyers">
+        <div class="container">
+            <h1 class="page-title">{{ heading_title }}</h1>
+        </div>
+        <div class="container">
+            <div class="buyers-inner">
+                <div class="buyers-tabs">
+                    <ul class="buyers-tabs__list">
+                        <li class="buyers-tabs__item grow right">
+                            <a class="buyers-tabs__link {% if not is_guarantee and not is_choose %}active{% endif %}"
+                               href="{{ href }}">Оплата и доставка</a>
+                        </li>
+                        <li class="buyers-tabs__item middle">
+                            <a class="buyers-tabs__link {% if is_guarantee %}active{% endif %}"
+                               href="{{ href_guarantee }}">Гарантия и возврат</a>
+                        </li>
+                        <li class="buyers-tabs__item grow left">
+                            <a class="buyers-tabs__link {% if is_choose %}active{% endif %}"
+                               href="{{ href_choose }}">Как выбрать ткань</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="buyers-content">
+                    {% if is_guarantee %}
+                        Гарантия и возврат
+                    {% elseif is_choose %}
+                        Как выбрать ткань
+                    {% else %}
+                        <div class="buyers-item">
+                            <div class="buyers-item__title">
+                                <img class="advantages-item_img"
+                                     src="{{ assets }}/assets/images/icons/pay.webp">
+                                <h3>Оплата</h3>
+                            </div>
+                            <div class="buyers-item__content">
+                                <p class="buyers-item__text">После добавления товаров в корзину вы можете оформить заказ
+                                    и
+                                    выбрать удобный способ оплаты: картой, СПБ, онлайн переводом, оплатой по счету.</p>
+                                <p class="buyers-item__text">Для жителей Москвы и Московской области (до 20 км от МКАД)
+                                    возможна оплата при получении товара курьеру.</p>
+                                <p class="buyers-item__text">Для заказов с доставкой в другой регион России возможна
+                                    оплата
+                                    на сайте любым удобным способом</p>
+                                <p class="buyers-item__text">Внимание! При оплате картой прямо на сайте действует скидка
+                                    3%</p>
+                            </div>
+                        </div>
+                        <div class="buyers-item">
+                            <div class="buyers-item__title">
+                                <img class="advantages-item_img"
+                                     src="{{ assets }}/assets/images/icons/get.webp">
+                                <h3>Доставка по Москве</h3>
+                            </div>
+                            <div class="buyers-item__content">
+                                <p class="buyers-item__text">Доставка возможна курьером до квартиры, дома или офиса, а
+                                    также до пункта выдачи заказов транспортной компании.</p>
+                                <p class="buyers-item__text">Для заказов, оформленных с доставкой по Москве и МО в
+                                    пределах 20 км от МКАД, оплата за товары производится курьеру при получении наличным
+                                    и безналичным способом.</p>
+                                <p class="buyers-item__text">Стоимость доставки курьером в пределах МКАД – 500
+                                    руб. Стоимость доставки за пределы МКАД – 500 рублей + 20 руб/1 км, рассчитывается
+                                    более детально менеджером после оформления заказа.</p>
+                                <p class="buyers-item__text">Стоимость доставки фиксированная и не меняется от
+                                    количества заказанных позиций. При общем заказе в нашем магазине на сумму 20 000
+                                    рублей доставка составит всего 2% от его стоимости!</p>
+                            </div>
+                        </div>
+                        <div class="buyers-item">
+                            <div class="buyers-item__title">
+                                <img class="advantages-item_img"
+                                     src="{{ assets }}/assets/images/icons/get.webp">
+                                <h3>Доставка в другие регионы</h3>
+                            </div>
+                            <div class="buyers-item__content">
+                                <p class="buyers-item__text">Доставка осуществляется по всей России, странам СНГ и ряду
+                                    некоторых стран, не входящих в СНГ.</p>
+                                <p class="buyers-item__text">После оформления заказа на нашем сайте с Вами свяжется наш
+                                    менеджер для согласования способа доставки и оплаты.</p>
+                                <p class="buyers-item__text">Товары нашего магазина вы также можете приобрести на сайте
+                                    Ozon Для уточнения любой информации пожалуйста свяжитесь с нами!</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                {#            {{ column_right }} #}
+                {#            {{ column_left }} #}
+                {#            {{ content_bottom }} #}
+                {#            {{ content_top }} #}
+            </div>
+        </div>
+    </div>
+{{ footer }}

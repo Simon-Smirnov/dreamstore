@@ -164,4 +164,10 @@ class ModelInformationBlogs extends Model
         //}
     }
 
+    public function getUsefulFromBlog()
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog WHERE blog_category_id = 2 ORDER BY sort_order");
+        return $query->rows;
+    }
+
 }

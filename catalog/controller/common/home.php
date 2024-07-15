@@ -35,7 +35,7 @@ class ControllerCommonHome extends Controller
         $this->load->model('setting/module');
         $this->load->model('catalog/product');
         $this->load->model('catalog/category');
-
+        $this->load->model('information/blogs');
         $this->load->model('information/reviews');
 
 
@@ -277,6 +277,37 @@ class ControllerCommonHome extends Controller
                 'rating' => $product['rating'],
                 'href' => $this->url->link('product/product', 'product_id=' . $product['product_id'])
             );
+        }
+
+        $useful_from_blog = $this->model_information_blogs->getUsefulFromBlog();
+
+        $data['useful_from_blog'] = [];
+
+        foreach ($useful_from_blog as $blog) {
+            if ($blog['image']) {
+                $thumb = [
+                    'webp' => $this->model_tool_image->resize($blog['image'], 256 * 2, null, ['webp' => true]),
+                    'default' => $this->model_tool_image->resize($blog['image'], 256 * 2, null),
+                ];
+            } else {
+                $thumb = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
+            }
+
+            $dateString = $blog['date_blog'];
+            $date = new DateTime($dateString);
+            setlocale(LC_TIME, 'ru_RU.UTF-8');
+            $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+
+            $category_name = $this->model_information_blogs->getBlogCategoryName($blog['blog_category_id']);
+
+            $data['useful_from_blog'][] = [
+                'title' => $blog['title'],
+                'theme' => $blog['theme'],
+                'thumb' => $thumb,
+                'category' => $category_name,
+                'href' => $this->url->link('information/blog', 'blog_id=' . $blog['blog_id']),
+                'date' => $formattedDate,
+            ];
         }
 
         $data['tags'] = $this->model_catalog_category->getCategoriesTags();

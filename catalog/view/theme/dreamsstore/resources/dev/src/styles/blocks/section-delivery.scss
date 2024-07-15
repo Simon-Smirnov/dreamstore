@@ -1,0 +1,46 @@
+.sectionDelivery {
+    padding: 3em 0;
+
+    &-inner {
+        background-color: var(--white);
+        padding: 2em 3em;
+        border-radius: 0.4em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8em;
+    }
+
+    &-info {
+        &__text {
+            margin-top: 0.5em;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-5-dark);
+            line-height: 1.4;
+        }
+    }
+
+    &-btn {
+        flex-shrink: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sectionDelivery-inner {
+        flex-direction: column;
+        gap: 1em;
+    }
+    .sectionDelivery-btn {
+        width: 100%;
+
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .sectionDelivery-info__title {
+        font-size: 1.5rem;
+        margin-bottom: 0.6em;
+    }
+}

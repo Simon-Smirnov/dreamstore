@@ -153,7 +153,7 @@
 
 .header-bottom_about-list {
     display: flex;
-    gap: 1em;
+    gap: 1.6em;
     align-items: center;
     padding-left: 0;
 }
@@ -409,3 +409,33 @@
 }
 
 /*main desktop menu end code*/
+.header-bottom_mobil {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+}
+
+.header-bottom_mobil--phone img {
+    width: 1.5em;
+}
+
+.header-bottom_mobil--burger {
+    width: 1.5em;
+}
+
+.header-bottom_mobil--cross {
+    width: 1.5em;
+    height: 1.5em;
+    fill: var(--text);
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .header-top, .header-bottom_block-catalog, .header-bottom_navigation, .header-bottom_about {
+        display: none;
+    }
+    header {
+        background-color: var(--white);
+        box-shadow: 0px 0px 16px 0px #00000014;
+    }
+}

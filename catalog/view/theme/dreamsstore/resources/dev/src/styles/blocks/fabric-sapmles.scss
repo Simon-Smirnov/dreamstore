@@ -1,36 +1,51 @@
 .fabric-samples {
-  margin: 3em 0;
+    margin: 3em 0;
 
-  &-inner {
-    display: grid;
-    grid-template-columns: 2fr 0.5fr;
-    align-items: center;
-    background-color: var(--bg-light-60);
-    padding: 1em 3em;
-    border-radius: 0.4em;
+    &-inner {
+        display: grid;
+        grid-template-columns: 2fr 0.5fr;
+        align-items: center;
+        background-color: var(--bg-light-60);
+        padding: 1em 3em;
+        border-radius: 0.4em;
 
-    &_block {
-      &-title {
-        font-size: 2em;
-        font-weight: 500;
-        color: var(--color-4-dark);
-      }
+        &_block {
+            &-title {
+                font-size: 2em;
+                font-weight: 500;
+                color: var(--color-4-dark);
+            }
 
-      &-text {
-        font-size: 1.1em;
-        font-weight: 500;
-        line-height: 1.4;
-        color: var(--color-5-dark);
-        margin-top: 0.6em;
-      }
+            &-text {
+                font-size: 1.1em;
+                font-weight: 500;
+                line-height: 1.4;
+                color: var(--color-5-dark);
+                margin-top: 0.6em;
+            }
+        }
+
+        &_btn {
+            a {
+                margin-left: auto;
+                display: block;
+                width: fit-content;
+            }
+        }
     }
+}
 
-    &_btn {
-      a {
-        margin-left: auto;
-        display: block;
-        width: fit-content;
-      }
+@media screen and (max-width: 600px) {
+    .fabric-samples {
+        margin-top: 2em;
+        margin-bottom: 2em;
     }
-  }
+    .fabric-samples-inner {
+        grid-template-columns: 1fr;
+        gap: 1em;
+    }
+    .fabric-samples-inner_btn a {
+        width: 100%;
+        text-align: center;
+    }
 }

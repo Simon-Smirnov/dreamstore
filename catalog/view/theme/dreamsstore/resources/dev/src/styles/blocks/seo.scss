@@ -46,3 +46,13 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .seo {
+        padding-top: 2em;
+    }
+    .seo-inner__block {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

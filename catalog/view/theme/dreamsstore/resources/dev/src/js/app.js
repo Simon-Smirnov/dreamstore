@@ -30,6 +30,8 @@ import GiftCard from "./classes/GiftCard.js";
 import ShowMore from "./classes/ShowMore.js";
 import BestOffers from "./classes/BestOffers.js";
 import Mail from "./classes/Mail.js";
+import FooterList from "./classes/FooterList.js";
+import MenuMobil from "./classes/MenuMobil.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -53,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
     new BestOffers('[data-view-all-href]');
     new ShowMore('[data-show-more]');
     new Mail('[data-form-mail]');
+    new FooterList('[data-footer-list]');
+    new MenuMobil('[data-menu-mobil-btn-open]', '[data-menu-mobil-btn-close]', '[data-menu-mobil]');
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');
