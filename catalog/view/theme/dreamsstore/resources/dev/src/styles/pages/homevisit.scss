@@ -21,6 +21,7 @@
 
                 img {
                     width: 100%;
+                    border-radius: 0.4em;
                 }
             }
         }
@@ -206,5 +207,32 @@
         &-agree {
             margin-top: 0.4em;
         }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .homevisit_main {
+        padding: 2em 0;
+    }
+    .homevisit_stages-inner {
+        display: block;
+    }
+    .homevisit_stages-item + .homevisit_stages-item {
+        margin-top: 2em;
+    }
+    .homevisit_stages-item_line {
+        display: none;
+    }
+    .homevisit_stages-item {
+        display: flex;
+        gap: 1em;
+        align-items: start;
+    }
+    .homevisit_stages-item_title {
+        margin-top: 0;
+    }
+    .homevisit_stages-item_block {
+        position: relative;
+        top: 0.25em;
     }
 }

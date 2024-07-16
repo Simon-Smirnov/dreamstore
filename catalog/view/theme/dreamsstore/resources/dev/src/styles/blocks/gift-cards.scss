@@ -4,10 +4,10 @@
 
     &-inner {
         display: grid;
-        grid-template-columns: 1.7fr 1fr 0.7fr;
+        grid-template-columns: 1.7fr 0.7fr 0.7fr;
         align-items: center;
         background-color: var(--white);
-        padding: 0 3em;
+        padding: 1em 2em;
         border-radius: 1em;
 
         &_block {
@@ -31,6 +31,13 @@
                 margin-left: auto;
                 display: block;
                 width: fit-content;
+            }
+        }
+
+        &_img {
+            img {
+                position: relative;
+                top: 1em;
             }
         }
     }
@@ -69,5 +76,8 @@
     }
     .gift-cards {
         margin-top: 4em;
+    }
+    .gift-cards-inner_img img {
+        top: 1.5em;
     }
 }

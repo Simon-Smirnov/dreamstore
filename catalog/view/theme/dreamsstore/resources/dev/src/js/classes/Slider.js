@@ -26,7 +26,7 @@ export default class Slider {
         const slider = document.querySelector('.slider')
         if (slider) {
             this.createSlider(slider, {
-                slidesPerView: 4,
+                slidesPerView: 1,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -37,6 +37,32 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                }
+            })
+        }
+
+        // Похожие товары
+        const sliderProductSimilar = document.querySelector('.sliderProductSimilar')
+        if (sliderProductSimilar) {
+            this.createSlider(sliderProductSimilar, {
+                slidesPerView: 2,
+                spaceBetween: 12,
+                allowTouchMove: true,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        allowTouchMove: false,
+                        slidesPerView: 4,
+                        spaceBetween: 8,
+                    }
                 }
             })
         }
@@ -45,17 +71,24 @@ export default class Slider {
         const sliderProductReviews = document.querySelector('.sliderProductReviews')
         if (sliderProductReviews) {
             this.createSlider(sliderProductReviews, {
-                slidesPerView: 3,
+                slidesPerView: 1,
                 spaceBetween: 12,
-                allowTouchMove: false,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
                 speed: 1000,
-                autoplay: {
-                    delay: 4000,
-                    disableOnInteraction: true,
-                    pauseOnMouseEnter: false
+                // autoplay: {
+                //     delay: 4000,
+                //     disableOnInteraction: true,
+                //     pauseOnMouseEnter: false
+                // },
+                breakpoints: {
+                    600: {
+                        allowTouchMove: false,
+                        slidesPerView: 4,
+                        spaceBetween: 8,
+                    }
                 }
             })
         }
@@ -64,13 +97,20 @@ export default class Slider {
         let sliderThumbs;
         if (sliderProductThumbs) {
             sliderThumbs = this.createSlider(sliderProductThumbs, {
-                slidesPerView: 7,
-                spaceBetween: 8,
-                allowTouchMove: false,
+                slidesPerView: 5,
+                spaceBetween: 4,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
                 speed: 1000,
+                breakpoints: {
+                    600: {
+                        allowTouchMove: false,
+                        slidesPerView: 7,
+                        spaceBetween: 8,
+                    }
+                }
             })
         }
 
@@ -79,7 +119,7 @@ export default class Slider {
             this.createSlider(sliderProductMain, {
                 slidesPerView: 1,
                 spaceBetween: 12,
-                allowTouchMove: false,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
@@ -91,6 +131,11 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        allowTouchMove: false,
+                    }
                 }
             })
         }
@@ -98,8 +143,8 @@ export default class Slider {
         const sliderProductRecentlyViewed = document.querySelector('.sliderProductRecentlyViewed')
         if (sliderProductRecentlyViewed) {
             this.createSlider(sliderProductRecentlyViewed, {
-                slidesPerView: 6,
-                spaceBetween: 12,
+                slidesPerView: 2,
+                spaceBetween: 8,
                 allowTouchMove: false,
                 loop: false,
                 autoHeight: false,
@@ -109,6 +154,13 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 6,
+                        spaceBetween: 12,
+                        allowTouchMove: false,
+                    }
                 }
             })
         }
@@ -157,9 +209,9 @@ export default class Slider {
         const sliderAddToOrder = document.querySelector('.sliderAddToOrder')
         if (sliderAddToOrder) {
             this.createSlider(sliderAddToOrder, {
-                slidesPerView: 6,
-                spaceBetween: 12,
-                allowTouchMove: false,
+                slidesPerView: 2,
+                spaceBetween: 8,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
@@ -168,6 +220,13 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 6,
+                        spaceBetween: 12,
+                        allowTouchMove: false,
+                    }
                 }
             })
         }
@@ -176,9 +235,9 @@ export default class Slider {
         const sliderModalSearch = document.querySelector('.sliderModalSearch')
         if (sliderModalSearch) {
             this.createSlider(sliderModalSearch, {
-                slidesPerView: 6,
-                spaceBetween: 12,
-                allowTouchMove: false,
+                slidesPerView: 2,
+                spaceBetween: 8,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
@@ -187,6 +246,13 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 6,
+                        spaceBetween: 12,
+                        allowTouchMove: false,
+                    }
                 }
             })
         }
@@ -296,9 +362,9 @@ export default class Slider {
         const sliderBlog = document.querySelector('.sliderBlog')
         if (sliderBlog) {
             this.createSlider(sliderBlog, {
-                slidesPerView: 4,
-                spaceBetween: 12,
-                allowTouchMove: false,
+                slidesPerView: 2,
+                spaceBetween: 8,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
@@ -307,6 +373,12 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 4,
+                        spaceBetween: 12
+                    }
                 }
             })
         }
@@ -315,9 +387,9 @@ export default class Slider {
         const sliderBlogSimilar = document.querySelector('.sliderBlogSimilar')
         if (sliderBlogSimilar) {
             this.createSlider(sliderBlogSimilar, {
-                slidesPerView: 4,
-                spaceBetween: 12,
-                allowTouchMove: false,
+                slidesPerView: 2,
+                spaceBetween: 8,
+                allowTouchMove: true,
                 loop: false,
                 autoHeight: false,
                 calculateHeight: false,
@@ -326,6 +398,12 @@ export default class Slider {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: false
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 4,
+                        spaceBetween: 12
+                    }
                 }
             })
         }
@@ -387,12 +465,21 @@ export default class Slider {
 
             // Dotted
             const dotted = box.querySelector('.dotted')
+            const uniqueId = `swiper-${Math.random().toString(36).substr(2, 9)}`;
 
             if (dotted) {
+                dotted.classList.add(uniqueId);
                 options.pagination = {
-                    el: dotted,
+                    el: `.${uniqueId}`,
                     type: 'bullets',
-                    clickable: true
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return `<span class="${className} custom-bullet">
+                                    <svg class="custom-bullet_svg" xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_dot"></use>
+                                    </svg>
+                                </span>`;
+                    },
                 }
             }
 

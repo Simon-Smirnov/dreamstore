@@ -244,3 +244,47 @@
         stroke: var(--color-4-dark);
     }
 }
+
+@media screen and (max-width: 600px) {
+    .blog-main__title {
+        font-size: 1.5rem;
+    }
+    .sliderBlog-arrows {
+        display: none;
+    }
+    .beAware {
+        margin: 0;
+    }
+    .beAware-inner {
+        display: block;
+        padding: 1.5em;
+    }
+    .beAware-block__title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 0.8em;
+    }
+    .beAware-form {
+        display: block;
+    }
+    .beAware-btn {
+        margin-top: 1em;
+
+        .btn {
+            max-width: none;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .beAware-form__block {
+        align-items: start;
+
+        .agree {
+            margin-top: 0.3em;
+        }
+    }
+    .beAware-form__block input {
+        max-width: none;
+    }
+}
+

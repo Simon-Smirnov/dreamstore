@@ -44,7 +44,7 @@
         &__item + &__item {
             margin-top: 0.3em;
         }
-        
+
         &__text {
             color: var(--color-5-dark);
             line-height: 1.4;
@@ -112,6 +112,16 @@
             justify-content: center;
         }
     }
+}
 
-
+@media screen and (max-width: 600px) {
+    .cooperation-inner {
+        display: block;
+    }
+    .cooperation-form {
+        margin-top: 4em;
+    }
+    .cooperation {
+        padding-bottom: 4em;
+    }
 }

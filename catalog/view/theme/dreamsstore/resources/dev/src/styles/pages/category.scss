@@ -193,5 +193,92 @@
             background-color: transparent;
         }
     }
+}
 
+@media screen and (max-width: 600px) {
+    .category_getFree {
+        border: 1px dashed var(--libe);
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .category_getFree-link {
+        display: block;
+        margin-top: 0.8em;
+        text-align: center;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .category_underCategories {
+        display: flex;
+        gap: 0.5em;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 1em;
+    }
+    .category_underCategories-item {
+        flex-shrink: 0;
+        width: auto;
+    }
+    .category_underCategories-link {
+        flex-direction: column;
+    }
+    .category_underCategories-link img {
+        max-width: 6.5em;
+        border-radius: 0.6em;
+    }
+    .category_underCategories-link span {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        height: 3em;
+        padding-left: 1em;
+        padding-right: 1em;
+        font-size: 0.9rem;
+        align-items: center;
+    }
+    .category_block {
+        display: block;
+    }
+    .category_other, .category_main {
+        width: 100%;
+    }
+    .category_other-underCategories {
+        display: none;
+    }
+    .category_other-filter {
+        display: none;
+    }
+    .category_main-controls_structure {
+        display: none;
+    }
+    .category_main-controls {
+        margin-top: 1em;
+    }
+    .category_main-controls_sort {
+        p {
+            display: none;
+        }
+
+        .select {
+            background-color: var(--white);
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 1em;
+            padding-right: 0;
+            border-radius: 0.4em;
+        }
+    }
+    .products_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5em 1em;
+
+        .products_grid-price .price-percent {
+            display: none;
+        }
+
+        .catalog-inner_link-img {
+            border-radius: 0.4em;
+        }
+    }
 }

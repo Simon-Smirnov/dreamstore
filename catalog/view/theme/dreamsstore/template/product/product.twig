@@ -402,6 +402,24 @@
                 </div>
             </div>
         </div>
+        <div class="product-tabs mobile" data-tabs-parent>
+            <div class="product-tabs__togglers">
+                <button class="product-tabs__toggler" data-tab-target="tab-1">Описание</button>
+                <button class="product-tabs__toggler" data-tab-target="tab-2">Уход</button>
+                <button class="product-tabs__toggler" data-tab-target="tab-3">Частые вопросы</button>
+            </div>
+            <div class="product-tabs__content">
+                <div class="product-tabs__box" data-tab="tab-1">
+                    {{ description }}
+                </div>
+                <div class="product-tabs__box" data-tab="tab-2">
+                    {{ care }}
+                </div>
+                <div class="product-tabs__box" data-tab="tab-3">
+                    {{ questions }}
+                </div>
+            </div>
+        </div>
     </div>
     <section class="fabric-samples">
         <div class="container">
@@ -420,7 +438,7 @@
     {% if products %}
         <section class="product-similar">
             <div class="container">
-                <div class="slider">
+                <div class="sliderProductSimilar">
                     <h2 class="section-title">Похожие товары</h2>
                     <div class="swiper">
                         <div class="swiper-wrapper" data-lightbox-parent>
@@ -546,6 +564,13 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="dotted"></div>
+                <a class="product-reviews__link" href="/reviews">
+                    <span>Смотреть все</span>
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                    </svg>
+                </a>
             </div>
         </section>
     {% endif %}

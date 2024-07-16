@@ -5,3 +5,9 @@
         margin-bottom: 1em;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .product-similar {
+        padding-bottom: 3em;
+    }
+}

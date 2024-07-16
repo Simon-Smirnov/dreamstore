@@ -34,3 +34,28 @@
     display: none;
 }
 
+.dotted {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    gap: 0.3em;
+    z-index: 2;
+    fill: transparent;
+    margin-top: 1em;
+}
+
+.custom-bullet {
+    cursor: pointer;
+}
+
+.custom-bullet_svg {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    border: 0.2em solid var(--color-4-dark);
+}
+
+.custom-bullet_svg:hover, .swiper-pagination-bullet-active {
+    fill: var(--color-4-dark);
+}
+

@@ -138,18 +138,30 @@
 
 @media (max-width: 550px) {
     :root {
-        font-size: 0.95rem;
+        font-size: 0.94rem;
     }
 }
 
 @media (max-width: 500px) {
     :root {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
     }
 }
 
 @media (max-width: 450px) {
     :root {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        font-size: 0.76rem;
+    }
+}
+
+@media (max-width: 350px) {
+    :root {
+        font-size: 0.7rem;
     }
 }

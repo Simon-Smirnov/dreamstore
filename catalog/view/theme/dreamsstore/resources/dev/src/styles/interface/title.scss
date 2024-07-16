@@ -1,11 +1,22 @@
 .section-title {
-  font-size: 2em;
-  font-weight: 500;
-  color: var(--color-4-dark);
+    font-size: 2em;
+    font-weight: 500;
+    color: var(--color-4-dark);
 }
+
 .page-title {
-  font-size: 2.6rem;
-  font-weight: 500;
-  color: var(--text);
-  text-align: center;
+    font-size: 2.6rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .page-title {
+        font-size: 1.7em;
+    }
 }

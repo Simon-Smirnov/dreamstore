@@ -93,3 +93,13 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .login-modal .modal__box {
+        padding: 1.5em;
+    }
+    .login-modal .modal__close--fixed {
+        top: 1.7em;
+        right: 1.5em;
+    }
+}

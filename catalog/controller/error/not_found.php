@@ -4,6 +4,7 @@ class ControllerErrorNotFound extends Controller
 {
     public function index()
     {
+
         $this->load->language('error/not_found');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -35,8 +36,6 @@ class ControllerErrorNotFound extends Controller
                 'href' => $this->url->link($route, $url, $this->request->server['HTTPS'])
             );
         }
-
-        $data =
 
         $data['continue'] = $this->url->link('common/home');
 

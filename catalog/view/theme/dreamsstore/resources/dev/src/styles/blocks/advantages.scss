@@ -3,7 +3,7 @@
     padding-bottom: 3em;
 
     @media screen and (min-width: 600px) {
-        &-inner {
+        &-inner .swiper-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 2.2em;

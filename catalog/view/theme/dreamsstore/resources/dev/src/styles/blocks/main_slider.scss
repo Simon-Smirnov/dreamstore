@@ -1,0 +1,29 @@
+.main_slider-inner {
+    overflow-x: hidden;
+
+    .dotted {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: -2em;
+        gap: 0.3em;
+        z-index: 2;
+        fill: transparent;
+        margin-top: 0;
+    }
+
+    .custom-bullet {
+        cursor: pointer;
+    }
+
+    .custom-bullet_svg {
+        width: 0.7em;
+        height: 0.7em;
+    }
+
+    .custom-bullet_svg:hover, .swiper-pagination-bullet-active {
+        fill: var(--color-8);
+    }
+}
+
+

@@ -161,3 +161,9 @@
         margin-bottom: 0.7em;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .cart {
+        width: 100%;
+    }
+}

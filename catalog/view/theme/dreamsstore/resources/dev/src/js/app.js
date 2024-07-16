@@ -32,6 +32,7 @@ import BestOffers from "./classes/BestOffers.js";
 import Mail from "./classes/Mail.js";
 import FooterList from "./classes/FooterList.js";
 import MenuMobil from "./classes/MenuMobil.js";
+import SelectLink from "./classes/SelectLink.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -57,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
     new Mail('[data-form-mail]');
     new FooterList('[data-footer-list]');
     new MenuMobil('[data-menu-mobil-btn-open]', '[data-menu-mobil-btn-close]', '[data-menu-mobil]');
+    new SelectLink('[data-select-link]');
+
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

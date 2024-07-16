@@ -28,9 +28,20 @@ class ControllerCommonMenuMobil extends Controller
                         'filter_sub_category' => true
                     );
 
+                    $grandChildren = $this->model_catalog_category->getCategories($child['category_id']);
+
+                    $grandChildren_data = [];
+                    foreach ($grandChildren as $grandChild) {
+                        $grandChildren_data[] = [
+                            'name' => $grandChild['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+                            'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $grandChild['category_id']),
+                        ];
+                    }
+
                     $children_data[] = array(
                         'name' => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-                        'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+                        'grandChildren' => $grandChildren_data,
+                        'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),
                     );
                 }
 

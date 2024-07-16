@@ -2,19 +2,29 @@ import Slider from "./Slider.js";
 
 export default class {
     constructor(selectorBtn) {
-        this.btnOpen = document.querySelector(selectorBtn);
+        this.btnsOpen = document.querySelectorAll(selectorBtn);
         this.content = document.querySelector('[data-header-search]');
-        if (this.btnOpen) {
-            this.btnOpen.addEventListener('click', (e) => {
-                e.preventDefault();
-                const body = new FormData()
-                this.getSearchModal(body).then((data) => {
-                    this.content.classList.add('open');
-                    this.content.innerHTML = data;
-                    document.body.style.overflow = 'hidden';
-                    Slider.init()
+        if (this.btnsOpen.length > 0) {
+            this.btnsOpen.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const body = new FormData()
+                    this.getSearchModal(body).then((data) => {
+                        this.content.classList.add('open');
+                        this.content.innerHTML = data;
+                        document.body.style.overflow = 'hidden';
+                        Slider.init()
+                        this.btnClose = this.content.querySelector('[data-modal-search-close]');
+                        if (this.btnClose) {
+                            this.btnClose.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                this.content.classList.remove('open');
+                                document.body.style.overflow = 'auto';
+                            });
+                        }
+                    });
                 });
-            });
+            })
         }
         if (this.content) {
             this.content.addEventListener('input', (e) => {

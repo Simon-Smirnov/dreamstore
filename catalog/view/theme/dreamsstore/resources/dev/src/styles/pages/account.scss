@@ -256,3 +256,12 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .account-block {
+        display: block;
+    }
+    .account-orders {
+        margin-top: 6em;
+    }
+}

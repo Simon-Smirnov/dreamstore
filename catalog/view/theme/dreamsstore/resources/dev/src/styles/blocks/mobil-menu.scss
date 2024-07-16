@@ -12,12 +12,18 @@
     &-nav {
         padding: 1em;
 
-        &__item {
-            a {
-                font-size: 1rem;
-                font-weight: 500;
-                color: var(--color-4-dark);
-            }
+        //&__item {
+        //    a {
+        //        font-size: 1rem;
+        //        font-weight: 500;
+        //        color: var(--color-4-dark);
+        //    }
+        //}
+
+        &__link {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-4-dark);
         }
 
         &__item + &__item {
@@ -80,8 +86,200 @@
     right: 0;
     background-color: var(--color-8-dark);
     z-index: 3;
+    padding: 2em;
+    overflow-y: auto;
+
+    &-title {
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: var(--color-4-dark);
+    }
+
+    &-cross {
+        width: 2em;
+        height: 2em;
+        fill: var(--color-6-dark);
+        position: absolute;
+        top: 1.9em;
+        right: 2em;
+        padding: 0.3em;
+        border-radius: 50%;
+        border: 1px solid var(--libe);
+    }
+
+    &-nav {
+        margin-top: 0.8em;
+    }
+
+    &-item {
+
+    }
+
+    &-item.hidden {
+        display: none;
+    }
+
+    &-link {
+        display: flex;
+        font-weight: 500;
+        font-size: 1.1rem;
+        color: var(--color-4-dark);
+        padding: 0.8em 0;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        fill: none;
+        stroke: var(--color-4-dark);
+    }
+
+    &-svg.next {
+
+    }
+
+    &-svg.back {
+        transform: rotate(180deg);
+        display: none;
+    }
+
+    &-item + &-item {
+        border-top: 1px solid var(--libe);
+    }
+
+    &-children {
+        display: none;
+
+        &__all {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-5-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8em 0;
+        }
+
+        &__svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            fill: none;
+            stroke: var(--color-5-dark);
+        }
+
+        &__item {
+            border-bottom: 1px solid var(--libe);
+        }
+
+        &__link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8em 0;
+            font-size: 1.1rem;
+            color: var(--color-4-dark);
+            font-weight: 500;
+        }
+
+        //&__list {
+        //    display: none;
+        //}
+    }
+
+    &-grandChildren {
+        display: none;
+
+        &__list {
+            display: none;
+            padding-left: 1em;
+            padding-bottom: 0.8em;
+        }
+
+        &__item {
+
+        }
+
+        &__item + &__item {
+            margin-top: 1em;
+        }
+
+        &__link {
+            font-weight: 500;
+            color: var(--color-5-dark);
+            font-size: 0.9rem;
+        }
+
+        &__svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            fill: none;
+            stroke: var(--color-5-dark);
+            transform: rotate(90deg);
+        }
+    }
+
+    &-giftCard {
+        margin-top: 1em;
+        background-color: var(--white);
+        border-radius: 0.4em;
+        padding: 1.5em;
+        position: relative;
+
+        &__title {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--color-4-dark);
+        }
+
+        &__text {
+            margin-top: 0.8em;
+            line-height: 1.4;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-6-dark);
+            padding-right: 3em;
+        }
+
+        &__img {
+            position: absolute;
+            width: 4em;
+            bottom: 0;
+            right: 0;
+        }
+    }
 }
 
 .dropdownMenuMobil.active {
     display: block;
+}
+
+.dropdownMenuMobil-item.active .dropdownMenuMobil-link {
+    justify-content: start;
+    gap: 0.5em;
+}
+
+.dropdownMenuMobil-item.active .dropdownMenuMobil-svg.back {
+    display: block;
+}
+
+.dropdownMenuMobil-item.active .dropdownMenuMobil-svg.next {
+    display: none;
+}
+
+.dropdownMenuMobil-item.active .dropdownMenuMobil-children {
+    display: block;
+}
+
+.dropdownMenuMobil-item.active .dropdownMenuMobil-children {
+    display: block;
+}
+
+.dropdownMenuMobil-children__item.active .dropdownMenuMobil-grandChildren__list {
+    display: block;
+}
+
+.dropdownMenuMobil-children__item.active .dropdownMenuMobil-grandChildren__svg {
+    transform: rotate(-90deg);
 }

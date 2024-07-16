@@ -84,3 +84,19 @@
         border-top: 1px solid var(--libe);
     }
 }
+
+@media screen and (max-width: 600px) {
+    .buyers-tabs__item {
+        padding: 1em 1em;
+    }
+    .buyers-tabs {
+        overflow-x: auto;
+        padding-bottom: 0.5em;
+    }
+    .buyers-tabs__list {
+        width: max-content;
+    }
+    .buyers {
+        padding-bottom: 3em;
+    }
+}

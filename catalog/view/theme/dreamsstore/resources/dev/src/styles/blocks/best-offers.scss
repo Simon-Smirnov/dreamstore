@@ -63,6 +63,10 @@
     }
 }
 
+.bestOffers-control__link {
+    display: none;
+}
+
 @media screen and (max-width: 600px) {
     .bestOffers-link {
         display: none;
@@ -81,6 +85,7 @@
         }
     }
     .bestOffers-control__link {
+        display: block;
         border: 1px solid var(--libe);
         padding: 1em;
         border-radius: 0.4em;

@@ -8,24 +8,72 @@
             <ul class="dropdownMenuMobil-list">
                 {% for category in categories %}
                     {% if category.children %}
-                        <li class="dropdownMenuMobil-item dropdown">
-                            <a href="{{ category.href }}" class="dropdownMenuMobil-toggle"
-                               data-toggle="dropdown">{{ category.name }}</a>
-                            <div class="dropdownMenuMobil-menu">
-                                <div class="dropdownMenuMobil-inner">
-                                    {% for child in category.children %}
-                                        <ul>
-                                            <li>
-                                                <a href="{{ child.href }}">{{ child.name }}</a>
+                        <li class="dropdownMenuMobil-item dropdown" data-menu-mobil-child>
+                            <p class="dropdownMenuMobil-link"
+                               data-toggle="dropdown" data-menu-mobil-child-btn>
+                                <svg class="dropdownMenuMobil-svg back"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                                <span>{{ category.name }}</span>
+                                <svg class="dropdownMenuMobil-svg next" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                </svg>
+                            </p>
+                            <div class="dropdownMenuMobil-children">
+                                <a class="dropdownMenuMobil-children__all" href="{{ category.href }}">
+                                    <span>Все товары в категории</span>
+                                    <svg class="dropdownMenuMobil-children__svg" xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                    </svg>
+                                </a>
+                                {% for child in category.children %}
+                                    <ul class="dropdownMenuMobil-children__list">
+                                        {% if child.grandChildren %}
+                                            <li class="dropdownMenuMobil-children__item"
+                                                data-menu-mobil-grandchildren>
+                                                <p class="dropdownMenuMobil-children__link"
+                                                   href="{{ child.href }}" data-menu-mobil-grandchildren-btn>
+                                                    <span>{{ child.name }}</span>
+                                                    <svg class="dropdownMenuMobil-grandChildren__svg"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                                    </svg>
+                                                </p>
+                                                <ul class="dropdownMenuMobil-grandChildren__list">
+                                                    {% for grandChild in child.grandChildren %}
+                                                        <li class="dropdownMenuMobil-grandChildren__item">
+                                                            <a class="dropdownMenuMobil-grandChildren__link"
+                                                               href="{{ grandChild.href }}">
+                                                                {{ grandChild.name }}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
                                             </li>
-                                        </ul>
-                                    {% endfor %}
+                                        {% else %}
+                                            <li class="dropdownMenuMobil-children__item">
+                                                <a class="dropdownMenuMobil-children__link"
+                                                   href="{{ child.href }}">
+                                                    <span>{{ child.name }}</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                {% endfor %}
+                                <div class="dropdownMenuMobil-giftCard">
+                                    <h4 class="dropdownMenuMobil-giftCard__title">Подарочные карты</h4>
+                                    <p class="dropdownMenuMobil-giftCard__text">Когда вы не уверены в том, что именно
+                                        может понравиться близкому человеку или боитесь прогадать с размером,
+                                        электронная подарочная карта – лучший сюрприз.</p>
+                                    <img class="dropdownMenuMobil-giftCard__img"
+                                         src="{{ assets }}/assets/images/mobilemenu/giftcard.webp">
                                 </div>
                             </div>
                         </li>
                     {% else %}
-                        <li class="dropdownMenuMobil-item">
-                            <a href="{{ category.href }}">{{ category.name }}</a>
+                        <li class="dropdownMenuMobil-item" data-menu-mobil-child>
+                            <a class="dropdownMenuMobil-link" href="{{ category.href }}">{{ category.name }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}

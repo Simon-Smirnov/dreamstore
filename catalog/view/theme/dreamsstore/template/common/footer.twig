@@ -170,7 +170,7 @@
                         </a>
                     </li>
                     <li data-search-btn>
-                        <a>
+                        <a data-search-btn>
                             <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_search"></use>
                             </svg>
@@ -178,7 +178,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="/cart">
                             <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_basket"></use>
                             </svg>
@@ -186,7 +186,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a {% if logged %}href="{{ wishlist }}"{% else %}
+                        data-login-btn{% endif %}>
                             <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_wishlist"></use>
                             </svg>
@@ -194,7 +195,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a {% if logged %}
+                            href="/account" {% else %}data-login-btn{% endif %}>
                             <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_login"></use>
                             </svg>

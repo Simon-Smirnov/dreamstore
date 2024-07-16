@@ -72,6 +72,28 @@
         overflow-y: auto;
         height: 100%;
 
+        &__block {
+            display: none;
+            margin-top: 1em;
+
+            &--title {
+                font-weight: 500;
+                font-size: 1.5rem;
+                color: var(--color-4-dark);
+            }
+
+            &--cross {
+                width: 2em;
+                height: 2em;
+                stroke: none;
+                fill: var(--color-6-dark);
+                cursor: pointer;
+                border: 1px solid var(--libe);
+                border-radius: 50%;
+                padding: 0.3em;
+            }
+        }
+
         &__inlet {
             position: relative;
             padding-top: 1.5em;
@@ -182,5 +204,25 @@
             color: var(--color-5-dark);
             line-height: 1.4;
         }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .search-quickTips__products {
+        display: block;
+    }
+    .search-quickTips__product {
+        padding: 1em 0;
+        display: grid;
+        grid-template-columns: 0.4fr 1fr;
+        gap: 1em;
+    }
+    .search-quickTips__product + .search-quickTips__product {
+        border-top: 1px solid var(--libe);
+    }
+    .search-modal__block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }

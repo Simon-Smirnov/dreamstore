@@ -68,6 +68,28 @@
                 <div class="category_main">
                     {% if products %}
                         <div class="category_main-controls">
+                            {% if categories %}
+                                <div class="category_main-controls__categories">
+                                    <div class="select-link" data-select-link>
+                                        <div class="select-link__base" data-select-link-base>
+                                            <span>Категории</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="select-link__dropdown" data-select-link-dropdown>
+                                            <ul>
+                                                {% for category in categories %}
+                                                    <li class="select-link__item">
+                                                        <a class="select-link__link"
+                                                           href="{{ category.href }}">{{ category.name }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="category_main-controls_sort">
                                 {# <label class="input-group-addon" for="input-sort">{{ text_sort }}</label> #}
                                 {# <select id="input-sort" class="form-control" onchange="location = this.value;"> #}
@@ -107,7 +129,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                             <div class="category_main-controls_structure">
                                 <button type="button" id="grid-view"
@@ -221,6 +242,39 @@
                 {% endif %}
             </div>
         </div>
+        {# <section class="sectionGiftCard"> #}
+        {#    <div class="container"> #}
+        {#        <div class="sectionGiftCard-inner"> #}
+        {#            <div class="sectionGiftCard-block"> #}
+        {#                <h4 class="sectionGiftCard-title">Подарочные карты</h4> #}
+        {#                <p class="sectionGiftCard-text">Если вы боитесь ошибиться при выборе подарка для родных и #}
+        {#                    близких, вы можете оформить подарочную карту на сумму от 5000 рублей</p> #}
+        {#            </div> #}
+        {#            <div class="sectionGiftCard-img"> #}
+        {#                <img src="{{ assets }}/"> #}
+        {#            </div> #}
+        {#            <div class="sectionGiftCard-btn"> #}
+        {#                <button class="btn btn-primary">Выбрать подарочную карту</button> #}
+        {#            </div> #}
+        {#        </div> #}
+        {# </section> #}
+        <section class="gift-cards">
+            <div class="container">
+                <div class="gift-cards-inner">
+                    <div class="gift-cards-inner_block">
+                        <h2 class="gift-cards-inner_block-title">Подарочные карты</h2>
+                        <p class="gift-cards-inner_block-text">Если вы боитесь ошибиться при выборе подарка для родных и
+                            близких, вы можете оформить подарочную карту на сумму от 5000 рублей</p>
+                    </div>
+                    <div class="gift-cards-inner_img">
+                        <img src="/catalog/view/theme/dreamsstore/resources/dev/assets/images/gift_cards-section.webp">
+                    </div>
+                    <div class="gift-cards-inner_btn">
+                        <a class="btn btn-primary">Выбрать подарочную карту</a>
+                    </div>
+                </div>
+            </div>
+        </section>
         {#    {{ column_left }} #}
         {#    {{ column_right }} #}
         {#    {{ content_bottom }} #}

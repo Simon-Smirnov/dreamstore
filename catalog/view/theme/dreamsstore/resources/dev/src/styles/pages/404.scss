@@ -1,28 +1,37 @@
 .error_page {
-  padding: 10em 0;
+    padding: 10em 0;
 
-  &-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-  }
+    &-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+    }
 
-  &_message {
-    font-size: 1.2rem;
-    color: var(--color-4-dark);
-  }
+    &_message {
+        font-size: 1.2rem;
+        color: var(--color-4-dark);
+    }
 
-  &_number {
-    font-size: 10rem;
-    color: var(--color-4-dark);
-  }
+    &_number {
+        font-size: 10rem;
+        color: var(--color-4-dark);
+    }
 
-  &_text {
-    margin-top: 1em;
-    font-size: 1.2rem;
-    color: var(--color-5-dark);
-    margin-bottom: 3em;
-  }
+    &_text {
+        margin-top: 1em;
+        font-size: 1.2rem;
+        color: var(--color-5-dark);
+        margin-bottom: 3em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .error_page_text {
+        text-align: center;
+    }
+    .error_page {
+        padding: 5em 0;
+    }
 }

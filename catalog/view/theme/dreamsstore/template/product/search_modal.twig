@@ -1,6 +1,13 @@
 <div class="search-modal">
     <div class="container">
         <div class="search-modal__inner">
+            <div class="search-modal__block">
+                <h3 class="search-modal__block--title">Поиск</h3>
+                <svg class="search-modal__block--cross" data-modal-search-close xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/sprite.svg#icon_cross"></use>
+                </svg>
+            </div>
+
             <div class="search-modal__inlet">
                 <input class="search-modal__input" type="text" name="search" value="{{ search }}"
                        placeholder="Поиск среди товаров..."

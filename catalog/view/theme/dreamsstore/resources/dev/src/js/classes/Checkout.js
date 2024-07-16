@@ -91,6 +91,13 @@ export default class {
                     // }
                     // });
                 }
+                if (target.hasAttribute('[data-checkout-cart-consist-btn]') || target.closest('[data-checkout-cart-consist-btn]')) {
+                    const target = e.target.closest('[data-checkout-cart-consist-btn]');
+                    const parent = target.closest('[data-checkout-cart-consist]');
+                    if (parent) {
+                        parent.classList.toggle('active');
+                    }
+                }
             })
             this.checkout.addEventListener('focusout', (e) => {
                 const target = e.target;

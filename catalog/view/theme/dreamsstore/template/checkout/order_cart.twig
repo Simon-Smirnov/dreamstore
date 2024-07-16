@@ -10,7 +10,13 @@
 {% endif %}
 <div class="checkOutCart" data-checkout-inner-cart>
     <div class="checkOutCart-inner">
-        <div class="checkOutCart-products">
+        <div class="checkOutCart-products" data-checkout-cart-consist>
+            <div class="checkOutCart-products--title" data-checkout-cart-consist-btn>
+                <h3>Состав заказа</h3>
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+                </svg>
+            </div>
             {% for product in products %}
                 <div class="checkOutCart-products__item">
                     <div class="checkOutCart-products__img">
@@ -105,7 +111,7 @@
                 <div class="checkOutCart-totals__value">
                     <span>+{{ total_rewards }}</span>
                     {% if not logged %}
-                        <a class="checkOutCart-totals__login" href="/">Войти</a>
+                        <a class="checkOutCart-totals__login" data-login-btn href="/">Войти</a>
                     {% endif %}
                 </div>
             </div>

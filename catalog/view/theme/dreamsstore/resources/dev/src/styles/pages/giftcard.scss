@@ -68,3 +68,33 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .giftCards-steps__list {
+        display: block;
+    }
+    .giftCards-steps__item {
+        display: flex;
+        align-items: start;
+        gap: 1em;
+        text-align: left;
+    }
+    .giftCards-steps__text {
+        margin-top: 0;
+    }
+    .giftCards-steps__item + .giftCards-steps__item {
+        margin-top: 0.5em;
+    }
+    .giftCards-steps__item + .giftCards-steps__item::after {
+        display: none;
+    }
+    .giftCards-cards__list {
+        grid-template-columns: 1fr 1fr;
+    }
+    .giftCards-cards__btn {
+        margin-top: 0.3em;
+    }
+    .giftCards {
+        padding-bottom: 1em;
+    }
+}

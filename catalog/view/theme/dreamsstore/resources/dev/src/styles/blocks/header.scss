@@ -251,36 +251,6 @@
 
 /*header end code*/
 
-/*slider on main page start code*/
-.main_slider-inner {
-    overflow-x: hidden;
-}
-
-.custom-bullet {
-    cursor: pointer;
-}
-
-.main_slider-pagination {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    top: -2em;
-    gap: 0.3em;
-    z-index: 2;
-    fill: transparent;
-}
-
-.main_slider-pagination_svg {
-    width: 0.7em;
-    height: 0.7em;
-}
-
-.main_slider-pagination_svg:hover, .swiper-pagination-bullet-active {
-    fill: var(--color-8);
-}
-
-/*slider on main page end code*/
-
 /*main desktop menu start code*/
 .header-bottom_block-catalog_modal {
     display: none;
@@ -410,7 +380,7 @@
 
 /*main desktop menu end code*/
 .header-bottom_mobil {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 1.5em;
 }
@@ -437,5 +407,15 @@
     header {
         background-color: var(--white);
         box-shadow: 0px 0px 16px 0px #00000014;
+    }
+    .header-bottom_mobil {
+        display: flex;
+    }
+    .header-search.open {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 }

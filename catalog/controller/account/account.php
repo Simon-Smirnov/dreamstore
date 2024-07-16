@@ -383,10 +383,6 @@ class ControllerAccountAccount extends Controller
             }
         }
 
-        echo "<pre>";
-        var_dump($answer);
-        echo "</pre>";
-
         $this->response->setOutput($this->index($answer));
     }
 

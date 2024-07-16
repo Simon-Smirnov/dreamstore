@@ -153,9 +153,6 @@ class ControllerInformationAtelier extends Controller
                     $images_from_db = $this->model_catalog_product->getProductImages($filter_data);
                     if ($images_from_db) {
                         foreach ($images_from_db as $image_from_db) {
-                            echo "<pre>";
-                            var_dump($image_from_db);
-                            echo "</pre>";
                         }
                     }
 

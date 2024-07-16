@@ -25,6 +25,7 @@
 
         &__img {
             margin-top: 3em;
+            border-radius: 0.4em;
 
             img {
                 width: 100%;
@@ -118,6 +119,12 @@
             grid-template-columns: 1fr 1.1fr;
             background-color: var(--white);
             border-radius: 0.4em;
+        }
+
+        &__image {
+            img {
+                border-radius: 0.4em;
+            }
         }
     }
 
@@ -271,5 +278,54 @@
 
     .product-images__item.swiper-slide-thumb-active {
         border: 0.2em solid var(--color-6-dark);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .atelier-toOrder {
+        display: block;
+    }
+    .atelier-toOrder__bigImg {
+        margin-top: 1.5em;
+    }
+    .atelier-why {
+        padding: 2em 0;
+    }
+    .atelier-info {
+        margin: 2em 0;
+    }
+    .atelier-quiz__block {
+        display: block;
+    }
+    .atelier-models__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .atelier-form {
+        display: block;
+    }
+    .atelier-form_form {
+        margin-top: 1.5em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        padding-bottom: 1.5em;
+    }
+    .modelModal {
+        display: block;
+    }
+    .modelModal-images, .modelModal-info {
+        width: 100%;
+    }
+    .modelModal-info {
+        margin-top: 1.5em;
+    }
+    .atelier-modal .modal__close--fixed {
+        z-index: 2;
+        background-color: var(--white);
+        border-radius: 50%;
+        padding: 0.3em;
+        border: 1px solid var(--libe);
+        padding: 1em;
+        top: 1em;
+        right: 1em;
     }
 }

@@ -14,10 +14,6 @@ class ControllerExtensionTotalReward extends Controller
             }
         }
 
-        echo "<pre>";
-        var_dump($points_total);
-        echo "</pre>";
-
         if ($points && $points_total && $this->config->get('total_reward_status')) {
             $this->load->language('extension/total/reward');
 
