@@ -56,12 +56,10 @@ export default class {
                         if (data) {
                             let parser = new DOMParser();
                             let doc = parser.parseFromString(data, 'text/html');
-                            let items = doc.querySelectorAll('.checkout-content');
-                            let cartUl = document.querySelector('.checkout-inner');
+                            let item = doc.querySelector('.checkout-inner');
+                            let cartUl = document.querySelector('.checkout-content');
                             cartUl.innerHTML = '';  // Очистим текущие элементы
-                            items.forEach(item => {
-                                cartUl.appendChild(item);
-                            });
+                            cartUl.appendChild(item);
                         } else {
                             fetch('index.php?route=checkout/confirm', {
                                 method: 'POST',
@@ -69,7 +67,12 @@ export default class {
                             })
                                 .then(response => response.text())
                                 .then(data => {
-                                    console.log(data);
+                                    let parser = new DOMParser();
+                                    let doc = parser.parseFromString(data, 'text/html');
+                                    let item = doc.querySelector('.checkoutConfirm');
+                                    let cartUl = document.querySelector('.checkout-content');
+                                    cartUl.innerHTML = '';
+                                    cartUl.appendChild(item);
                                 })
                                 .catch(error => console.error('Error:', error));
                         }

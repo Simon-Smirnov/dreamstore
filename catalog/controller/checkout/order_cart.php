@@ -70,7 +70,7 @@ class ControllerCheckoutOrderCart extends Controller
                         'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 $option_data = array();
@@ -139,6 +139,7 @@ class ControllerCheckoutOrderCart extends Controller
             $data['total_products'] = $this->currency->format($this->cart->getSubTotal(), $this->session->data['currency']);
             $data['total_discounts'] = $this->currency->format($this->cart->getSubTotalDiscounts(), $this->session->data['currency']);
             $data['total_rewards'] = $this->cart->getTotalRewards();
+            $data['logged'] = $this->customer->isLogged();
 
             // Display prices
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {

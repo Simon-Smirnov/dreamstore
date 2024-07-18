@@ -64,7 +64,7 @@ class ControllerCommonCart extends Controller
                     'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
                 ];
             } else {
-                $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
             }
 
             $option_data = array();

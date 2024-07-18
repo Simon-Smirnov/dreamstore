@@ -261,7 +261,7 @@ export default class Slider {
         const sliderHits = document.querySelector('.sliderHits')
         if (sliderHits && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderHits, {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -280,7 +280,7 @@ export default class Slider {
         const sliderNovelties = document.querySelector('.sliderNovelties')
         if (sliderNovelties && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderNovelties, {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -343,7 +343,7 @@ export default class Slider {
         const sliderStocks = document.querySelector('.sliderStocks')
         if (sliderStocks && window.matchMedia('(min-width: 600px)').matches) {
             this.createSlider(sliderStocks, {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 12,
                 allowTouchMove: false,
                 loop: false,
@@ -445,6 +445,25 @@ export default class Slider {
                 }
             })
         }
+
+        //Преимущества на главной странице
+        const sliderHomeVisitImages = document.querySelector('.sliderHomeVisitImages')
+        if (sliderHomeVisitImages && window.matchMedia('(max-width: 600px)').matches) {
+            this.createSlider(sliderHomeVisitImages, {
+                slidesPerView: 1.2,
+                spaceBetween: 12,
+                allowTouchMove: true,
+                loop: false,
+                autoHeight: false,
+                calculateHeight: false,
+                speed: 1000,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: false
+                }
+            })
+        }
     }
 
     static createSlider(parent, options) {
@@ -474,11 +493,9 @@ export default class Slider {
                     type: 'bullets',
                     clickable: true,
                     renderBullet: function (index, className) {
-                        return `<span class="${className} custom-bullet">
-                                    <svg class="custom-bullet_svg" xmlns="http://www.w3.org/2000/svg">
-                                        <use xlink:href="/sprite.svg#icon_dot"></use>
-                                    </svg>
-                                </span>`;
+                        return `<div class="${className} colorPoint-outer">
+                                    <div class="colorPoint-inner"></div>
+                                </div>`;
                     },
                 }
             }

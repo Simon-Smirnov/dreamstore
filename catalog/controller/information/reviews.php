@@ -69,14 +69,15 @@ class ControllerInformationReviews extends Controller
                         'default' => $this->model_tool_image->resize($photo['image'], 60 * 2, null),
                     ];
                 } else {
-                    $images[] = $this->model_tool_image->resize('placeholder.png', 60 * 2);
+                    $images[] = ['default' => $this->model_tool_image->resize('placeholder.png', 60 * 2)];
                 }
             }
 
             $dateString = $review['date_added'];
             $date = new DateTime($dateString);
-            setlocale(LC_TIME, 'ru_RU.UTF-8');
+            setlocale(LC_ALL, 'russian');
             $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+            $formattedDate = iconv('windows-1251', 'utf-8', $formattedDate);
 
             $grade = (int)$review['rating'];
             $summ_grades += $grade;

@@ -195,13 +195,13 @@ class ControllerProductProduct extends Controller
         $data['hex'] = $this->model_catalog_color->getColorHex($product_info['color_id']);
 
         //check product page open from cateory page
-        if (isset($this->request->get['path'])) {
-            $parts = explode('_', (string)$this->request->get['path']);
-
-            if (empty($this->model_catalog_product->checkProductCategory($product_id, $parts))) {
-                $product_info = array();
-            }
-        }
+        //if (isset($this->request->get['path'])) {
+        //    $parts = explode('_', (string)$this->request->get['path']);
+        //
+        //    if (empty($this->model_catalog_product->checkProductCategory($product_id, $parts))) {
+        //        $product_info = array();
+        //    }
+        //}
 
         //check product page open from manufacturer page
         if (isset($this->request->get['manufacturer_id']) && !empty($product_info)) {
@@ -479,7 +479,7 @@ class ControllerProductProduct extends Controller
                             'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
                         ];
                     } else {
-                        $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                        $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                     }
 
                     if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -632,14 +632,15 @@ class ControllerProductProduct extends Controller
                             'default' => $this->model_tool_image->resize($photo['image'], 60 * 2, null),
                         ];
                     } else {
-                        $images[] = $this->model_tool_image->resize('placeholder.png', 60 * 2);
+                        $images[] = ['default' => $this->model_tool_image->resize('placeholder.png', 60 * 2)];
                     }
                 }
 
                 $dateString = $review['date_added'];
                 $date = new DateTime($dateString);
-                setlocale(LC_TIME, 'ru_RU.UTF-8');
+                setlocale(LC_ALL, 'russian');
                 $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+                $formattedDate = iconv('windows-1251', 'utf-8', $formattedDate);
 
                 $grade = (int)$review['rating'];
                 $grades = [];
@@ -681,7 +682,7 @@ class ControllerProductProduct extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 900 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 900 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 900 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -718,26 +719,29 @@ class ControllerProductProduct extends Controller
             }
 
             $data['may_be_interest_categories'] = [];
-            if ($parts && count($parts) > 1) {
-                $may_be_interest_category_id = (int)$parts[count($parts) - 2];
-                $may_be_interest_categories = $this->model_catalog_category->getCategories($may_be_interest_category_id);
-                foreach ($may_be_interest_categories as $category) {
-                    if ($category['image']) {
-                        $image = [
-                            'webp' => $this->model_tool_image->resize($category['image'], 400 * 2, null, ['webp' => true]),
-                            'default' => $this->model_tool_image->resize($category['image'], 400 * 2, null),
-                        ];
-                    } else {
-                        $image = $this->model_tool_image->resize('placeholder.png', 400 * 2);
-                    }
+            //if ($parts && count($parts) > 1) {
+            //    $may_be_interest_category_id = (int)$parts[count($parts) - 2];
+            //    $may_be_interest_categories = $this->model_catalog_category->getCategories($may_be_interest_category_id);
+            $may_be_interest_categories_id = [127, 108, 106, 107, 102, 103];
 
-                    $data['may_be_interest_categories'][] = [
-                        'name' => $category['name'],
-                        'image' => $image,
-                        'href' => $this->url->link('product/category', 'path=' . implode('_', $parts) . '_' . $category['category_id']),
+            foreach ($may_be_interest_categories_id as $category_id) {
+                $category = $this->model_catalog_category->getCategory($category_id);
+                if ($category['image']) {
+                    $image = [
+                        'webp' => $this->model_tool_image->resize($category['image'], 400 * 2, null, ['webp' => true]),
+                        'default' => $this->model_tool_image->resize($category['image'], 400 * 2, null),
                     ];
+                } else {
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 400 * 2)];
                 }
+
+                $data['may_be_interest_categories'][] = [
+                    'name' => $category['name'],
+                    'image' => $image,
+                    'href' => $this->url->link('product/category', 'path=' . implode('_', $parts) . '_' . $category['category_id']),
+                ];
             }
+            //}
 
             $this->model_catalog_product->updateViewed($product_id);
 
@@ -1039,7 +1043,7 @@ class ControllerProductProduct extends Controller
                     'default' => $this->model_tool_image->resize($product_info['image'], 900 * 2, null),
                 ];
             } else {
-                $data['thumb'] = $this->model_tool_image->resize('placeholder.png', 900 * 2);
+                $data['thumb'] = ['default' => $this->model_tool_image->resize('placeholder.png', 900 * 2)];
             }
 
             $data['images'] = array();
@@ -1053,7 +1057,7 @@ class ControllerProductProduct extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 900 * 2, null),
                     ];
                 } else {
-                    $data['images'][] = $this->model_tool_image->resize('placeholder.png', 900 * 2);
+                    $data['images'][] = ['default' => $this->model_tool_image->resize('placeholder.png', 900 * 2)];
                 }
             }
 
@@ -1164,7 +1168,7 @@ class ControllerProductProduct extends Controller
                             'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
                         ];
                     } else {
-                        $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                        $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                     }
 
                     if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -1242,14 +1246,15 @@ class ControllerProductProduct extends Controller
                             'default' => $this->model_tool_image->resize($photo['image'], 60 * 2, null),
                         ];
                     } else {
-                        $images[] = $this->model_tool_image->resize('placeholder.png', 60 * 2);
+                        $images[] = ['default' => $this->model_tool_image->resize('placeholder.png', 60 * 2)];
                     }
                 }
 
                 $dateString = $review['date_added'];
                 $date = new DateTime($dateString);
-                setlocale(LC_TIME, 'ru_RU.UTF-8');
+                setlocale(LC_ALL, 'russian');
                 $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+                $formattedDate = iconv('windows-1251', 'utf-8', $formattedDate);
 
                 $grade = (int)$review['rating'];
                 $grades = [];
@@ -1291,7 +1296,7 @@ class ControllerProductProduct extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 900 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 900 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 900 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -1371,7 +1376,7 @@ class ControllerProductProduct extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {

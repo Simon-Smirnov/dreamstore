@@ -49,5 +49,72 @@
         {#            {{ content_bottom }} #}
         {#            {{ content_top }} #}
     </div>
+    <div class="checkoutConfirm">
+        <div class="container">
+            <div class="checkoutConfirm-inner">
+                <div class="checkoutConfirm-image">
+                    <img src="{{ assets }}/assets/images/checkout/confirm.webp">
+                </div>
+                <h1 class="page-title">Заказ оформлен</h1>
+                <p class="checkoutConfirm-text">Спасибо, Имя! В ближайшее время наш менеджер свяжется с Вами для
+                    подтверждения
+                    заказа</p>
+                <ul class="checkoutConfirm-list">
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">№ Заказа:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">1 254</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Получатель:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Иванов Иван Иванович</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Телефон получателя:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">+7 (999) 999 99 99</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">E-mail:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Example@gmail.com</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Доставка:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Самовывоз из пункта выдачи СДЭК 800 руб.</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Пункт получения:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Адрес пункта</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Оплата:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Банковской картой онлайн</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Общий вес:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">4 кг</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Бонусов за заказ:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">+165</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Итоговая стоимость:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">41 200 руб.</p>
+                    </li>
+                </ul>
+                <button class="checkoutConfirm-btn btn btn-primary">Вернуться на главную</button>
+                {{ payment }}
+            </div>
+        </div>
+    </div>
 </div>
 {{ footer }}

@@ -1,0 +1,29 @@
+<div class="inner">
+    <form method="POST" data-forms-btn>
+        <div class="modal-firstorder">
+            <div class="modal-firstorder__image">
+                <img src="{{ assets }}/assets/images/modal/discount.webp">
+            </div>
+            <div class="modal-firstorder__form">
+                <h2 class="section-title">Получите скидку 5% на первый заказ</h2>
+                <p class="form-text">Оставьте свои e-mail, на него мы вышлем промокод со скидкой</p>
+                <input type="hidden" name="theme" value="Получите скидку 5% на первый заказ">
+                <div class="input-block required">
+                    <input class="input-text" type="text" name="email"
+                           value=""
+                           placeholder="E-mail">
+                    <label>E-mail</label>
+                    <div class="text-danger error error-email"></div>
+                </div>
+                <button class="btn btn-primary" data-forms-btn>Заказать звонок</button>
+                <div>
+                    <label class="agree">
+                        <input class="input-checkbox" name="agree" type="checkbox">
+                        <span>Даю согласие на <a>обработку персональных данных</a></span>
+                    </label>
+                    <div class="text-danger error error-agree"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -65,7 +65,7 @@ class ControllerProductGiftcard extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 200 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
                 }
 
                 if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {

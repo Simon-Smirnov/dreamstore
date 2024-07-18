@@ -1,0 +1,30 @@
+<div class="inner">
+    <form method="POST" data-forms-btn>
+        <h2 class="section-title">Заявка на расчёт</h2>
+        <p class="form-product">{{ product }}</p>
+        <input type="hidden" name="theme" value="Заявка на расчёт">
+        <input type="hidden" name="product" value="{{ product }}">
+        <div class="input-block required">
+            <input class="input-text" type="text" name="name"
+                   value=""
+                   placeholder="Имя">
+            <label>Имя</label>
+            <div class="text-danger error error-name"></div>
+        </div>
+        <div class="input-block required">
+            <input class="input-text" type="tel" name="phone"
+                   value=""
+                   placeholder="Телефон">
+            <label>Телефон</label>
+            <div class="text-danger error error-phone"></div>
+        </div>
+        <button class="btn btn-primary" data-forms-btn>Отправить</button>
+        <div>
+            <label class="agree">
+                <input class="input-checkbox" name="agree" type="checkbox">
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+            <div class="text-danger error error-agree"></div>
+        </div>
+    </form>
+</div>

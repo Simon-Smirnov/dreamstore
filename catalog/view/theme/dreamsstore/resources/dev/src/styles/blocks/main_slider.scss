@@ -2,27 +2,28 @@
     overflow-x: hidden;
 
     .dotted {
-        display: flex;
-        justify-content: center;
         position: relative;
-        top: -2em;
-        gap: 0.3em;
+        top: -3.5em;
         z-index: 2;
-        fill: transparent;
-        margin-top: 0;
-    }
+        gap: 0.6em;
 
-    .custom-bullet {
-        cursor: pointer;
-    }
+        .colorPoint-outer {
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            background-color: transparent;
+            border: 1px solid var(--white);
+        }
 
-    .custom-bullet_svg {
-        width: 0.7em;
-        height: 0.7em;
-    }
+        .colorPoint-inner {
+            width: 7px;
+            height: 7px;
+            background-color: transparent;
+        }
 
-    .custom-bullet_svg:hover, .swiper-pagination-bullet-active {
-        fill: var(--color-8);
+        .swiper-pagination-bullet-active .colorPoint-inner {
+            background-color: var(--white);
+        }
     }
 }
 

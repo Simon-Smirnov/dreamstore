@@ -1,4 +1,8 @@
-import MainMenu from './modules/main_menu.js';
+// import MainMenu from './modules/main_menu.js';
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     new MainMenu('.header-bottom_block-catalog');
+// });
 
 // document.addEventListener('DOMContentLoaded', function() {
 //     new MainMenu('.header-bottom_block-catalog');

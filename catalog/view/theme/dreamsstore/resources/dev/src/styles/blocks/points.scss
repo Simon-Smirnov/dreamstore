@@ -1,0 +1,48 @@
+.colorPoint {
+    display: flex;
+    gap: 0.8em;
+
+    &-outer {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: var(--white);
+        border: 1px solid var(--libe);
+        box-sizing: content-box;
+    }
+
+    &-outer.active {
+        border: 2px solid var(--color-4-dark);
+    }
+
+    &-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: black;
+    }
+}
+
+.dotted {
+    .colorPoint-outer {
+        width: 8px;
+        height: 8px;
+        border: 1px solid var(--color-4-dark);
+        cursor: pointer;
+    }
+
+    .colorPoint-inner {
+        width: 4px;
+        height: 4px;
+        background-color: transparent;
+    }
+
+    .swiper-pagination-bullet-active .colorPoint-inner {
+        background-color: var(--color-4-dark);
+    }
+}

@@ -1,0 +1,42 @@
+<div class="inner">
+    <form method="POST" data-forms-btn>
+        <h2 class="section-title">Задать вопрос</h2>
+        <input type="hidden" name="theme" value="Задать вопрос">
+        <div class="input-block required">
+            <input class="input-text" type="text" name="name"
+                   value=""
+                   placeholder="Имя">
+            <label>Имя</label>
+            <div class="text-danger error error-name"></div>
+        </div>
+        <div class="input-block required">
+            <input class="input-text" type="tel" name="phone"
+                   value=""
+                   placeholder="Телефон">
+            <label>Телефон</label>
+            <div class="text-danger error error-phone"></div>
+        </div>
+        <div class="input-block required">
+            <input class="input-text" type="email" name="email"
+                   value=""
+                   placeholder="E-mail">
+            <label>E-mail</label>
+            <div class="text-danger error error-email"></div>
+        </div>
+        <div class="input-block">
+            <textarea class="input-text" type="text" name="message"
+                      value=""
+                      placeholder="Ваш вопрос"></textarea>
+            <label>Вопрос</label>
+            <div class="text-danger error error-message"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Отправить</button>
+        <div>
+            <label class="agree">
+                <input class="input-checkbox" name="agree" type="checkbox">
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+            <div class="text-danger error error-agree"></div>
+        </div>
+    </form>
+</div>

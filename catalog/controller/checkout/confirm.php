@@ -286,6 +286,8 @@ class ControllerCheckoutConfirm extends Controller
 
             $this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
 
+            $data['order_id'] = $this->session->data['order_id'];
+
             $this->load->model('tool/upload');
 
             $data['products'] = array();
@@ -375,16 +377,21 @@ class ControllerCheckoutConfirm extends Controller
                 $this->model_account_reward->setRewards($this->customer->getId(), $this->session->data['order_id'], $order_data['reward']);
             }
 
+            $data['firstname'] = $order_data['firstname'];
+            $data['telephone'] = $order_data['telephone'];
+            $data['email'] = $order_data['email'];
+            $data['payment_method'] = $order_data['payment_method'];
+            $data['shipping_method'] = $order_data['shipping_method'];
+            $data['weight'] = $order_data['weight'];
+            $data['total'] = $order_data['total'];
+
             $data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
-            echo "<pre>";
-            print_r($data['payment']);
-            echo "</pre>";
 
             //$this->response->setOutput($this->load->view('checkout/confirm', $data));
         } else {
             $data['redirect'] = $redirect;
         }
 
-        //$this->response->setOutput($this->load->view('checkout/confirm', $data));
+        $this->response->setOutput($this->load->view('checkout/confirm', $data));
     }
 }

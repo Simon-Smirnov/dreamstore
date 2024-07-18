@@ -81,7 +81,7 @@ class ControllerInformationBlog extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 900 * 2, null),
                     ];
                 } else {
-                    $data['images'][] = $this->model_tool_image->resize('placeholder.png', 900 * 2);
+                    $data['images'][] = ['default' => $this->model_tool_image->resize('placeholder.png', 900 * 2)];
                 }
             }
 

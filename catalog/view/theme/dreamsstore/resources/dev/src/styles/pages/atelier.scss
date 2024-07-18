@@ -116,7 +116,7 @@
         &__block {
             margin-top: 1.8em;
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
+            grid-template-columns: 1fr 1.4fr;
             background-color: var(--white);
             border-radius: 0.4em;
         }
@@ -125,6 +125,44 @@
             img {
                 border-radius: 0.4em;
             }
+        }
+
+        &__body {
+            padding: 1.5em 2.5em 2.5em 2.5em;
+        }
+
+        &__tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border-radius: 0.4em;
+            border: 1px solid var(--libe);
+        }
+
+        &__tab {
+            padding: 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text);
+            font-weight: 500;
+            padding: 0.7em 0;
+        }
+
+        &__tab + &__tab {
+            border-left: 1px solid var(--libe);
+        }
+
+        &__smallTitle {
+            margin-top: 0.7em;
+            margin-bottom: 0.7em;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        &__items {
+            height: 100%;
+            overflow-y: auto;
+            max-height: 26em;
         }
     }
 

@@ -71,8 +71,9 @@ class ControllerInformationBlogs extends Controller
 
             $dateString = $blog['date_blog'];
             $date = new DateTime($dateString);
-            setlocale(LC_TIME, 'ru_RU.UTF-8');
+            setlocale(LC_ALL, 'russian');
             $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+            $formattedDate = iconv('windows-1251', 'utf-8', $formattedDate);
 
             $category_name = $this->model_information_blogs->getBlogCategoryName($blog['blog_category_id']);
 
@@ -134,8 +135,9 @@ class ControllerInformationBlogs extends Controller
 
             $dateString = $blog['date_blog'];
             $date = new DateTime($dateString);
-            setlocale(LC_TIME, 'ru_RU.UTF-8');
+            setlocale(LC_ALL, 'russian');
             $formattedDate = strftime('%d %B %Y', $date->getTimestamp());
+            $formattedDate = iconv('windows-1251', 'utf-8', $formattedDate);
 
             $category_name = $this->model_information_blogs->getBlogCategoryName($blog['blog_category_id']);
 

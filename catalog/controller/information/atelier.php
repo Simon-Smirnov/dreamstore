@@ -52,7 +52,7 @@ class ControllerInformationAtelier extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 200 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
                 }
 
                 $images = [];
@@ -65,7 +65,7 @@ class ControllerInformationAtelier extends Controller
                                 'default' => $this->model_tool_image->resize($image_from_db['image'], 200 * 2, null),
                             ];
                         } else {
-                            $image[] = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+                            $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
                         }
                     }
                 }
@@ -146,7 +146,7 @@ class ControllerInformationAtelier extends Controller
                             'default' => $this->model_tool_image->resize($result['image'], 200 * 2, null),
                         ];
                     } else {
-                        $image = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+                        $image = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
                     }
 
                     $images = [];
@@ -197,7 +197,7 @@ class ControllerInformationAtelier extends Controller
                 'default' => $this->model_tool_image->resize($result['image'], 200 * 2, null),
             ];
         } else {
-            $data['thumb'] = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+            $data['thumb'] = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
         }
 
         $data['images'] = [];
@@ -210,7 +210,7 @@ class ControllerInformationAtelier extends Controller
                         'default' => $this->model_tool_image->resize($image_from_db['image'], 200 * 2, null),
                     ];
                 } else {
-                    $data['images'][] = $this->model_tool_image->resize('placeholder.png', 200 * 2);
+                    $data['images'][] = ['default' => $this->model_tool_image->resize('placeholder.png', 200 * 2)];
                 }
             }
         }

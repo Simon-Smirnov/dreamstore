@@ -79,7 +79,7 @@ class ControllerCheckoutCart extends Controller
                         'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)] ;
                 }
 
                 $option_data = array();
@@ -317,6 +317,7 @@ class ControllerCheckoutCart extends Controller
                 }
             }
 
+            $data['logged'] = $this->customer->isLogged();
             $data['column_left'] = $this->load->controller('common/column_left');
             $data['column_right'] = $this->load->controller('common/column_right');
             $data['content_top'] = $this->load->controller('common/content_top');

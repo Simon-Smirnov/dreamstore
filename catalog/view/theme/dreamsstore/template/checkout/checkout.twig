@@ -33,20 +33,22 @@
                                 <h4 class="checkout-blocks__title">Контактная информация</h4>
                                 <div class="checkout-blocks__customer">
                                     <div class="checkout-blocks__inputs checkout__customer-inputs--fields">
-                                        <div class="checkout-blocks__input">
+                                        <div class="checkout-blocks__input input-block required">
                                             <input class="input-text" type="tel" name="phone"
                                                    data-checkout-input="phone"
                                                    value="{{ fields.phone ? fields.phone : '' }}"
-                                                   placeholder="Телефон" {% if logged %}disabled{% endif %}>
+                                                   placeholder="Телефон" {# {% if logged %}disabled{% endif %} #}>
+                                            <label>Телефон</label>
                                             {% if error_warning.phone %}
                                                 <p class="alert-input text-danger">{{ error_warning.phone }}</p>
                                             {% endif %}
                                         </div>
-                                        <div class="checkout-blocks__input">
+                                        <div class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
                                             <input class="input-text" type="text" name="email"
                                                    data-checkout-input="email"
                                                    value="{{ fields.email ? fields.email : '' }}"
                                                    placeholder="E-mail" {% if logged %}disabled{% endif %}>
+                                            <label>Email</label>
                                         </div>
                                         {% if error_warning.email %}
                                             <p class="alert-input text-danger">{{ error_warning.email }}</p>
@@ -75,9 +77,9 @@
                                         {# </div> #}
                                     </div>
                                     <div class="checkout-address__item">
-                                        <div class="checkout-blocks__input checkout-blocks__input--withLabel">
+                                        <div class="checkout-blocks__input input-block">
                                             <input class="input-text" type="text" name="city"
-                                                   data-checkout-input="city"
+                                                   data-checkout-input="city" placeholder="Город"
                                                    value="{{ fields.city ? fields.city : '' }}" placeholder=" ">
                                             <label>Город</label>
                                         </div>
@@ -93,51 +95,57 @@
                                                    value="{{ _shipping_method_key }}"
                                                    data-shipping-type-input
                                                     {{ _shipping_method_key == shipping_type ? "checked" : "" }}>
-                                            <svg class="input-radio__svg" xmlns="http://www.w3.org/2000/svg">
-                                                <use xlink:href="/sprite.svg#icon_input_radio"></use>
-                                            </svg>
-                                            <label for="shipping_type_{{ _shipping_method_key }}">
+                                            <div class="input-radio__outer">
+                                                <div class="input-radio__inner"></div>
+                                            </div>
+                                            <label class="input-radio__label"
+                                                   for="shipping_type_{{ _shipping_method_key }}">
                                                 {{ _shipping_method.title }}
                                             </label>
                                         </div>
                                     {% endfor %}
                                 </div>
                                 <div class="checkout-blocks__inputs checkout-blocks__inputs--address">
-                                    <div class="checkout-blocks__input">
+                                    <div class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
                                         <input class="input-text" type="text" name="name"
                                                data-checkout-input="name"
                                                value="{{ fields.name ? fields.name : '' }}"
                                                placeholder="Получатель (ФИО полностью)"
-                                               {% if logged %}disabled{% endif %}>
+                                               {% if logged %}disabled{% endif %}
+                                        >
+                                        <label>Получатель (ФИО полностью)</label>
                                         {% if error_warning.name %}
                                             <p class="alert-input text-danger">{{ error_warning.name }}</p>
                                         {% endif %}
                                     </div>
-                                    <div class="checkout-blocks__input">
+                                    <div class="checkout-blocks__input input-block required">
                                         <input class="input-text" type="text" name="street"
                                                data-checkout-input="street"
                                                value="{{ fields.street ? fields.street : '' }}"
                                                placeholder="Улица">
+                                        <label>Улица</label>
                                     </div>
-                                    <div class="checkout-blocks__block">
+                                    <div class="checkout-blocks__block input-block">
                                         <div class="checkout-blocks__input">
                                             <input class="input-text" type="text" name="house"
                                                    data-checkout-input="house"
                                                    value="{{ fields.house ? fields.house : '' }}"
                                                    placeholder="Дом">
+                                            <label>Дом</label>
                                         </div>
-                                        <div class="checkout-blocks__input">
+                                        <div class="checkout-blocks__input input-block required">
                                             <input class="input-text" type="text" name="appartment"
                                                    data-checkout-input="appartment"
                                                    value="{{ fields.appartment ? fields.appartment : '' }}"
                                                    placeholder="Кв-ра/офис">
+                                            <label>Кв-ра/офис</label>
                                         </div>
                                     </div>
-                                    <div class="checkout-blocks__input checkout-blocks__input--comment">
+                                    <div class="checkout-blocks__input checkout-blocks__input--comment input-block">
                                         <textarea class="input-text" name="comment"
                                                   data-checkout-input="comment"
                                                   placeholder="Комментарий к заказу">{{ fields.comment ? fields.comment : '' }}</textarea>
-                                        {# <label>Текст комментария</label> #}
+                                        <label>Комментарий к заказу</label>
                                     </div>
                                 </div>
                             </div>
@@ -155,17 +163,32 @@
                                                data-payment-method-input
                                                 {{ _payment_method.code == payment_method.code ? "checked" : "" }}
                                         >
-                                        <svg class="input-radio__svg" xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/sprite.svg#icon_input_radio"></use>
-                                        </svg>
-                                        <label for="payment_method_{{ _payment_method.code }}"
-                                               style="--icon: url({{ _payment_method.icon }})">
+                                        <div class="input-radio__outer">
+                                            <div class="input-radio__inner"></div>
+                                        </div>
+                                        <label class="input-radio__label"
+                                               for="payment_method_{{ _payment_method.code }}">
                                             {{ _payment_method.title }}
                                         </label>
                                     </div>
                                 {% endfor %}
                             </div>
                         </div>
+                        {% if points %}
+                            <div class="checkout-blocks__item checkout-blocks__item--bonuses">
+                                <h4 class="checkout-blocks__title">Оплата бонусами</h4>
+                                <div class="checkout-blocks__bonuses">
+                                    <div class="input-switch">
+                                        <input class="input-switch__input" type="checkbox">
+                                        <span class="input-switch__slider"></span>
+                                    </div>
+                                    <div class="checkout-blocks__bonuses--info">
+                                        <p>Списать бонусы</p>
+                                        <span>{{ points }} бонуса на балансе</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="checkout-right">
                         {{ order_cart }}

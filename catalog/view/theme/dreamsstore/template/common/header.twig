@@ -17,17 +17,20 @@
     {% if keywords %}
         <meta name="keywords" content="{{ keywords }}"/>
     {% endif %}
+    {# <script src="https://api-maps.yandex.ru/2.1/?apikey=dbceb3f3-76d9-46df-91a4-9e8471f15939"></script> #}
+    {# <script src="https://api-maps.yandex.ru/2.1/?apikey=8d3f91ef-9421-4a2a-b077-ef7ee901ce89&lang=ru_RU"></script> #}
+
     {# <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script> #}
     {# <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 		<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> #}
     {# <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" /> #}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-            rel="stylesheet">
+    {# <link rel="preconnect" href="https://fonts.googleapis.com"> #}
+    {# <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> #}
+    {# <link #}
+    {#        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" #}
+    {#        rel="stylesheet"> #}
 
     {# <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet"> #}
     {# <link href="/catalog/view/javascript/swiper-master/swiper-bundle.min.css" rel="stylesheet"> #}
@@ -45,10 +48,15 @@
     {% for analytic in analytics %}
         {{ analytic }}
     {% endfor %}
+    <script>
+        var assets = "{{ assets }}";
+    </script>
 
     <link rel="stylesheet" href="{{ assets }}/assets/app.min.css">
 </head>
 <body class="{{ class }} custom-scroll custom-scroll--y">
+{# {% if not logged %} #}
+{#    <div data-first-order data-forms="firstorder"></div>{% endif %} #}
 <div class="body">
     <header>
         <div class="header-top">
@@ -86,7 +94,7 @@
                         </div>
                         <div class="header-top_block">
                             <a class="header-top_block-phone" href="tel:+79956686050">+7 995 668 60 50</a>
-                            <a class="header-top_block-order" href="">Заказать звонок</a>
+                            <a class="header-top_block-order" data-forms="call">Заказать звонок</a>
                         </div>
                     </div>
                 </div>
@@ -117,12 +125,6 @@
                                                 {{ menu_main }}
                                             </div>
                                             <div class="header-bottom_block-catalog_about">
-                                                <a class="header-bottom_block-catalog_about-link">
-                                                    <span class="header-bottom_block-catalog_about-text">Все товары в категории</span>
-                                                    <svg class="svg-arrow" xmlns="http://www.w3.org/2000/svg">
-                                                        <use xlink:href="/sprite.svg#icon_arrow_right"></use>
-                                                    </svg>
-                                                </a>
                                                 <div class="header-bottom_block-catalog_about-inner"></div>
                                             </div>
                                             <div class="header-bottom_block-catalog_info">
@@ -260,7 +262,7 @@
             </nav>
             <div class="menuModal-footer">
                 <a class="menuModal-footer__phone" href="tel:+79956686050">+7 995 668 60 50</a>
-                <a class="menuModal-footer__call" href="">Заказать звонок</a>
+                <a class="menuModal-footer__call" data-forms="call">Заказать звонок</a>
                 <ul class="menuModal-footer__list">
                     <li>Пн-пт: 09:00 – 20:00</li>
                     <li>Сб-Вс: 10:00 – 18:00</li>

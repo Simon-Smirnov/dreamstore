@@ -119,6 +119,10 @@
             }
         }
     }
+
+    .dotted {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -131,5 +135,8 @@
     }
     .sectionReviews {
         padding-bottom: 2em;
+    }
+    .sectionReviews .dotted {
+        display: flex;
     }
 }

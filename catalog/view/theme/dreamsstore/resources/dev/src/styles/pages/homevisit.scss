@@ -102,6 +102,10 @@
                         padding-left: 1em;
                     }
 
+                    li + li {
+                        margin-top: 0.5em;
+                    }
+
                     li::before {
                         content: '•';
                         font-size: 0.8rem;
@@ -131,9 +135,6 @@
         padding: 4em 0;
 
         &-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1em;
 
             img {
                 width: 100%;
@@ -210,6 +211,14 @@
     }
 }
 
+@media screen and (min-width: 600px) {
+    .homevisit_images-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1em;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .homevisit_main {
         padding: 2em 0;
@@ -234,5 +243,42 @@
     .homevisit_stages-item_block {
         position: relative;
         top: 0.25em;
+    }
+    .homevisit_stages {
+        padding: 3em 0;
+    }
+    .homevisit_service {
+        padding: 3em 0;
+    }
+    .homevisit_service-inner {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .homevisit_service-img img {
+        border-radius: 0.4em;
+    }
+    .homevisit_service-info_item-title {
+        font-size: 1.5rem;
+    }
+    .homevisit_images {
+        padding: 3em 0;
+    }
+    .homevisit_form-inner {
+        display: block;
+    }
+    .homevisit_form-form {
+        margin-top: 2.5em;
+
+        form {
+            padding-left: 2em;
+            padding-right: 2em;
+            padding-bottom: 2em;
+        }
+    }
+    .homevisit_form-description {
+
+        br {
+            display: none;
+        }
     }
 }

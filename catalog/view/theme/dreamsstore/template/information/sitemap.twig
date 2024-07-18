@@ -1,0 +1,98 @@
+{{ header }}
+<div id="information-sitemap">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div id="content" class="sitemap">
+            <h1 class="page-title">{{ heading_title }}</h1>
+            <div class="sitemap-inner">
+                <ul class="sitemap-inner__list">
+                    <div class="sitemap-inner__left">
+                        {% for category_1 in categories %}
+                            <li class="sitemap-inner__item">
+                                <a class="sitemap-inner__link" href="{{ category_1.href }}">{{ category_1.name }}</a>
+                                {% if category_1.children %}
+                                    <ul class="sitemap-inner__list--lvl2">
+                                        {% for category_2 in category_1.children %}
+                                            <li class="sitemap-inner__item--lvl2">
+                                                <a class="sitemap-inner__link--lvl2"
+                                                   href="{{ category_2.href }}">{{ category_2.name }}</a>
+                                                {% if category_2.children %}
+                                                    <ul class="sitemap-inner__list--lvl3">
+                                                        {% for category_3 in category_2.children %}
+                                                            <li class="sitemap-inner__item--lvl3">
+                                                                <a class="sitemap-inner__link--lvl3"
+                                                                   href="{{ category_3.href }}">{{ category_3.name }}</a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </div>
+                    <div class="sitemap-inner__right">
+                        <li class="sitemap-inner__item"><a class="sitemap-inner__link"
+                                                           href="{{ special }}">{{ text_special }}</a></li>
+                        <li class="sitemap-inner__item">
+                            <a class="sitemap-inner__link"
+                               href="{{ account }}">{{ text_account }}</a>
+                            <ul class="sitemap-inner__list--lvl2">
+                                <li class="sitemap-inner__item--lvl2"><a class="sitemap-inner__link--lvl2"
+                                                                         href="{{ edit }}">{{ text_edit }}</a></li>
+                                <li class="sitemap-inner__item--lvl2"><a class="sitemap-inner__link--lvl2"
+                                                                         href="{{ password }}">{{ text_password }}</a>
+                                </li>
+                                <li class="sitemap-inner__item--lvl2"><a class="sitemap-inner__link--lvl2"
+                                                                         href="{{ address }}">{{ text_address }}</a>
+                                </li>
+                                <li class="sitemap-inner__item--lvl2"><a class="sitemap-inner__link--lvl2"
+                                                                         href="{{ history }}">{{ text_history }}</a>
+                                </li>
+                                <li class="sitemap-inner__item--lvl2"><a class="sitemap-inner__link--lvl2"
+                                                                         href="{{ download }}">{{ text_download }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sitemap-inner__item">
+                            <a class="sitemap-inner__link" href="{{ history }}">{{ text_cart }}</a>
+                        </li>
+                        <li class="sitemap-inner__item">
+                            <a class="sitemap-inner__link" href="{{ checkout }}">{{ text_checkout }}</a>
+                        </li>
+                        <li class="sitemap-inner__item">
+                            <a class="sitemap-inner__link" href="{{ search }}">{{ text_search }}</a>
+                        </li>
+                        <li class="sitemap-inner__item">{{ text_information }}
+                            <ul class="sitemap-inner__list--lvl2">
+                                {% for information in informations %}
+                                    <li class="sitemap-inner__item--lvl2">
+                                        <a class="sitemap-inner__link--lvl2"
+                                           href="{{ information.href }}">{{ information.title }}</a>
+                                    </li>
+                                {% endfor %}
+                                <li class="sitemap-inner__item--lvl2">
+                                    <a class="sitemap-inner__link--lvl2"
+                                       href="{{ contact }}">{{ text_contact }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            {#            {{ content_top }} #}
+            {#            {{ column_left }} #}
+            {#            {{ content_bottom }} #}
+            {#            {{ column_right }} #}
+        </div>
+    </div>
+</div>
+{{ footer }}

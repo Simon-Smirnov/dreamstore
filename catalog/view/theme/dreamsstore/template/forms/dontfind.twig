@@ -1,0 +1,44 @@
+<div class="inner">
+    <form method="POST" data-forms-btn>
+        <h2 class="section-title">Не нашли свой размер или дизайн?</h2>
+        <p class="form-text">Положите в корзину похожие размеры, а в комментариях к заказу укажите нужные. Или опишите
+            свой заказ в этой форме:</p>
+        <input type="hidden" name="theme" value="Не нашли свой размер или дизайн">
+        <div class="input-block required">
+            <input class="input-text" type="text" name="name"
+                   value=""
+                   placeholder="Имя">
+            <label>Имя</label>
+            <div class="text-danger error error-name"></div>
+        </div>
+        <div class="input-block required">
+            <input class="input-text" type="tel" name="phone"
+                   value=""
+                   placeholder="Телефон">
+            <label>Телефон</label>
+            <div class="text-danger error error-phone"></div>
+        </div>
+        <div class="input-block required">
+            <input class="input-text" type="email" name="email"
+                   value=""
+                   placeholder="E-mail">
+            <label>E-mail</label>
+            <div class="text-danger error error-email"></div>
+        </div>
+        <div class="input-block">
+            <textarea class="input-text" type="text" name="message"
+                      value=""
+                      placeholder="Сообщение"></textarea>
+            <label>Сообщение</label>
+            <div class="text-danger error error-message"></div>
+        </div>
+        <button class="btn btn-primary" data-forms-btn>Отправить</button>
+        <div>
+            <label class="agree">
+                <input class="input-checkbox" name="agree" type="checkbox">
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+            <div class="text-danger error error-agree"></div>
+        </div>
+    </form>
+</div>

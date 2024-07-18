@@ -4,10 +4,7 @@ class ControllerCheckoutCheckout extends Controller
 {
     public function index($update = false, $errors = [])
     {
-
-        //echo "<pre>";
-        //var_dump($this->session->data);
-        //echo "</pre>";
+        
         // Validate cart has products and has stock.
         if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
             $this->response->redirect($this->url->link('checkout/cart'));
@@ -56,7 +53,7 @@ class ControllerCheckoutCheckout extends Controller
             ];
         }
 
-
+        $data['points'] = false;
         if ($this->customer->isLogged()) {
             $data['fields'] = [
                 'name' => $this->customer->getFirstName(),
@@ -64,6 +61,7 @@ class ControllerCheckoutCheckout extends Controller
                 'email' => $this->customer->getEmail()
             ];
             $data['is_login'] = true;
+            $data['points'] = $this->customer->getRewardPoints();
         } else {
             $data['fields'] = [];
             if (isset($this->session->data['phone'])) {

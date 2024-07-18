@@ -8,8 +8,8 @@
                     </a>
                     <ul class="footer-grid_item-list">
                         <li class="footer-grid_item-list_item">© {{ year }} Dreams Store</li>
-                        <li class="footer-grid_item-list_item"><a>Карта сайта</a></li>
-                        <li class="footer-grid_item-list_item"><a>Политика конфиденциальности</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/sitemap">Карта сайта</a></li>
+                        <li class="footer-grid_item-list_item"><a href="/privacy">Политика конфиденциальности</a></li>
                         <li class="footer-grid_item-list_item vyiatka">Разработка сайта: <a><img class="img-vyiatka"
                                                                                                  src="{{ assets }}/assets/images/vyiatka_it.webp"></a>
                         </li>
@@ -40,13 +40,10 @@
                         </svg>
                     </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a href="/bedsheets">Постельное белье</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/pillows">Подушки</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/blankets">Одеяла</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/curtains">Шторы</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/bedspreads">Покрывала</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/towels">Полотенца</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/homewear">Одежда для дома</a></li>
+                        {% for category in categories %}
+                            <li class="footer-grid_item-list_item"><a href="{{ category.href }}">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="footer-grid_item" data-footer-item>
@@ -114,7 +111,10 @@
                     <h4 class="footer-grid_item-title" data-footer-title>Не упустите акции!</h4>
                     <form class="footer-grid_item-form">
                         <div class="footer-grid_item-block">
-                            <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                            <div class="input-block required">
+                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                                <label>Ваш E-mail</label>
+                            </div>
                             <button class="btn btn-primary">Подписаться</button>
                         </div>
                         <label class="agree">
@@ -221,40 +221,13 @@
     </a>
 </div>
 
-<div class="modal dont-find-modal" data-modal-type="dont_find" hidden>
-    <div class="modal__content">
-        <div class="modal__box model-popup">
-            <button class="modal__close modal__close--fixed"></button>
-            <div class="model-popup__content">
-                <h2 class="section-title">Не нашли свой размер или дизайн?</h2>
-                <p class="dont-find__text">
-                    Положите в корзину похожие размеры, а в комментариях к заказу укажите нужные. Или опишите свой заказ
-                    в этой форме:
-                </p>
-                <form class="dont-find__form" data-form-mail>
-                    <div class="dont-find__input input-block">
-                        <input class="input-text" name="name" type="text" placeholder="Имя" value="">
-                        <label>Имя</label>
-                        <div class="account-input__error text-danger"></div>
-                    </div>
-                    <div class="dont-find__input input-block">
-                        <input class="input-text" name="phone" type="tel" placeholder="Телефон" value="">
-                        <label>Телефон</label>
-                        <div class="account-input__error text-danger"></div>
-                    </div>
-                    <div class="dont-find__input input-block">
-                        <input class="input-text" name="email" type="email" placeholder="E-mail" value="">
-                        <label>E-mail</label>
-                        <div class="account-input__error text-danger"></div>
-                    </div>
-                    <div class="dont-find__input input-block">
-                        <textarea class="input-text" cols="50" name="message" type="text" placeholder="Сообщение"
-                                  value=""></textarea>
-                        <label>Сообщение</label>
-                        <div class="account-input__error text-danger"></div>
-                    </div>
-                    <button class="btn btn-primary dont-find__btn">Отправить</button>
-                </form>
+<div class="modals">
+    <div class="modal form-modal" data-modal-type="form" hidden>
+        <div class="modal__content">
+            <div class="modal__box model-popup">
+                <button class="modal__close modal__close--fixed"></button>
+                <div class="modal-form__content">
+                </div>
             </div>
         </div>
     </div>

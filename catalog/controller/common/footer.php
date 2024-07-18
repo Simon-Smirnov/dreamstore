@@ -30,6 +30,7 @@ class ControllerCommonFooter extends Controller
         $data['newsletter'] = $this->url->link('account/newsletter', '', true);
         $data['year'] = date("Y");
         $data['logged'] = $this->customer->isLogged();
+        $data['categories'] = $this->load->controller('common/catalog');
 
         $data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 

@@ -151,16 +151,27 @@
                 </div>
                 <h1 class="section-title">{{ heading_title }}</h1>
                 {% if related_products %}
-                    <div class="product-right__color productColors">
-                        <p class="productColors-active">
-                            <span class=" productColors-span" style="background-color: {{ hex }}"></span>
+                    <div class="{# product-right__color productColors #} colorPoint">
+                        {# <div> #}
+                        {#    <p class="productColors-active"> #}
+                        {#        <span class=" productColors-span" style="background-color: {{ hex }}"></span> #}
+                        {#    </p> #}
+                        {# </div> #}
+                        <p class="colorPoint-outer active">
+                            <span class="colorPoint-inner" style="background-color: {{ hex }}"></span>
                         </p>
                         {% for related_product in related_products %}
-                            <a href="{{ related_product.href }}" class="product-right__color--link
-                            productColors-link"
-                               value="{{ related_product.product_id }}">
-                            <span class=" productColors-span"
-                                  style="background-color: {{ related_product.hex }}"></span>
+                            {# <div> #}
+                            {#    <a href="{{ related_product.href }}" class="product-right__color--link #}
+                            {# productColors-link" #}
+                            {#       value="{{ related_product.product_id }}"> #}
+                            {#        <span class=" productColors-span" #}
+                            {#              style="background-color: {{ related_product.hex }}"></span> #}
+                            {#    </a> #}
+                            {# </div> #}
+                            <a class="colorPoint-outer" href="{{ related_product.href }}">
+                                <span class="colorPoint-inner"
+                                      style="background-color: {{ related_product.hex }}"></span>
                             </a>
                         {% endfor %}
                     </div>
@@ -280,7 +291,9 @@
                         {% endif %}
                     </div>
                     <div class="product-right__click">
-                        <button class="btn btn-second">Заказать в 1 клик</button>
+                        <button class="btn btn-second" data-forms="quickorder" data-forms-product="{{ heading_title }}">
+                            Заказать в 1 клик
+                        </button>
                     </div>
                 </div>
                 {% if set_products %}
@@ -394,7 +407,7 @@
                                         <div class="productSizeTable-item">155х205 (2шт)</div>
                                         <div class="productSizeTable-item">245х270</div>
                                     </div>
-                                    <a class="productSizeTable_link" data-modal="dont_find">Нет нужного размера?</a>
+                                    <a class="productSizeTable_link" data-forms="dontfind">Нет нужного размера?</a>
                                 </div>
                             </div>
                         </div>
@@ -430,7 +443,7 @@
                         также персональный подбор ткани и цвета</p>
                 </div>
                 <div class="fabric-samples-inner_btn">
-                    <a class="btn btn-primary">Связаться с нами</a>
+                    <a class="btn btn-primary" data-forms="reach">Связаться с нами</a>
                 </div>
             </div>
         </div>
@@ -643,6 +656,20 @@
                 <div class="model-popup__content">
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="body-body">
+        <div class="circle-container">
+            <div class="outer-circle">
+                <div class="inner-circle"></div>
+            </div>
+            <div class="outer-circle">
+                <div class="inner-circle"></div>
+            </div>
+            <div class="outer-circle">
+                <div class="inner-circle"></div>
             </div>
         </div>
     </div>

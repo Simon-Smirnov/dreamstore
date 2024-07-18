@@ -32,11 +32,16 @@ import BestOffers from "./classes/BestOffers.js";
 import Mail from "./classes/Mail.js";
 import FooterList from "./classes/FooterList.js";
 import MenuMobil from "./classes/MenuMobil.js";
+import MenuMain from "./classes/MenuMain.js";
 import SelectLink from "./classes/SelectLink.js";
+import Forms from "./classes/Forms.js";
+import ContactMap from "./classes/ContactMap.js";
+import "./classes/Map.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
 document.addEventListener('DOMContentLoaded', function () {
+
     new InputPassword('[data-input-password]');
     new Account('[data-account-form]');
     new Login('[data-login-btn]');
@@ -58,7 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
     new Mail('[data-form-mail]');
     new FooterList('[data-footer-list]');
     new MenuMobil('[data-menu-mobil-btn-open]', '[data-menu-mobil-btn-close]', '[data-menu-mobil]');
+    new MenuMain('.header-bottom_block-catalog');
     new SelectLink('[data-select-link]');
+    new Forms();
+    // new ContactMap();
 
 
     // let input = document.querySelector('#modal__attach_input');

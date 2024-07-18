@@ -390,7 +390,9 @@
             margin-top: 0;
         }
 
-
+        .dotted {
+            display: none;
+        }
     }
 
     &-mayBeInterest {
@@ -772,6 +774,13 @@
     }
 }
 
+.product-right {
+    .colorPoint {
+        margin-top: 1em;
+    }
+}
+
+
 @media screen and (max-width: 600px) {
     .product {
         display: block;
@@ -851,5 +860,8 @@
     .product-mayBeInterest {
         margin-top: 0;
         padding-top: 2em;
+    }
+    .product-reviews .dotted {
+        display: flex;
     }
 }

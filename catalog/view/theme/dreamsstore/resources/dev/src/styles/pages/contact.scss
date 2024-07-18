@@ -19,7 +19,7 @@
 
     &_small-title.button {
         padding-bottom: 0.1em;
-        width: fit-content;
+        width: max-content;
         border-bottom: 1px dashed var(--color-6-dark);
     }
 
@@ -42,6 +42,18 @@
     }
 }
 
+.contact-inner_map-wrapper {
+    width: 100%;
+    height: 35em;
+    border-radius: 0.4em;
+    overflow: hidden;
+}
+
+.contact-inner_map {
+    width: 100%;
+    height: 100%;
+}
+
 .contact {
     h1 {
         margin-bottom: 1em;
@@ -60,5 +72,11 @@
     #information-contact .first-know {
         margin-top: 5em;
         margin-bottom: 3em;
+    }
+    .contact-inner_map-wrapper {
+        margin-top: 2em;
+    }
+    .contact-inner_map-wrapper {
+        height: 30em;
     }
 }

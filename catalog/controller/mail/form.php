@@ -40,6 +40,36 @@ class ControllerMailForm extends Controller
         $this->response->setOutput(json_encode($json));
     }
 
+    public function sendFromForm()
+    {
+        $json = [];
+
+        if ((isset($this->request->post)) && $this->validate($this->request->post)) {
+
+            $message = [];
+            //$mail = new Mail($this->config->get('config_mail_engine'));
+            //$mail->parameter = $this->config->get('config_mail_parameter');
+            //$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+            //$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+            //$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+            //$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+            //$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+            //
+            //$mail->setTo($order_info['email']);
+            //$mail->setFrom($from);
+            //$mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
+            //$mail->setSubject(html_entity_decode(sprintf($language->get('text_subject'), $order_info['store_name'], $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
+            //$mail->setText($this->load->view('mail/order_edit', $data));
+            //$mail->send();
+            $json['success'] = 'Письмо успешно отправлено';
+        } else {
+            $json['error'] = $this->error;
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
     private function validate()
     {
         $this->error = [];
@@ -62,8 +92,20 @@ class ControllerMailForm extends Controller
             }
         };
 
+        if (isset($this->request->post['message'])) {
+            if ((utf8_strlen($this->request->post['message']) > 1000)) {
+                $this->error['message'] = 'Сообщение не должно быть более 1000 символов!';
+            }
+        };
+
+        if (isset($this->request->post['address'])) {
+            if ((utf8_strlen($this->request->post['address']) > 300)) {
+                $this->error['address'] = 'Сообщение не должно быть более 300 символов!';
+            }
+        };
+
         if (!isset($this->request->post['agree'])) {
-            $this->error['phone'] = 'Вы должны дать согласие на обработку персональных данных!';
+            $this->error['agree'] = 'Вы должны дать согласие на обработку персональных данных!';
         };
 
         return !$this->error;

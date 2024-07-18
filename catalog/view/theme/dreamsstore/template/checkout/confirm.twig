@@ -1,55 +1,73 @@
 {% if not redirect %}
-<div class="table-responsive">
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <td class="text-left">{{ column_name }}</td>
-        <td class="text-left">{{ column_model }}</td>
-        <td class="text-right">{{ column_quantity }}</td>
-        <td class="text-right">{{ column_price }}</td>
-        <td class="text-right">{{ column_total }}</td>
-      </tr>
-    </thead>
-    <tbody>
-    
-    {% for product in products %}
-    <tr>
-      <td class="text-left"><a href="{{ product.href }}">{{ product.name }}</a> {% for option in product.option %} <br/>
-        &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
-        {% if product.recurring %} <br/>
-        <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
-      <td class="text-left">{{ product.model }}</td>
-      <td class="text-right">{{ product.quantity }}</td>
-      <td class="text-right">{{ product.price }}</td>
-      <td class="text-right">{{ product.total }}</td>
-    </tr>
-    {% endfor %}
-    {% for voucher in vouchers %}
-    <tr>
-      <td class="text-left">{{ voucher.description }}</td>
-      <td class="text-left"></td>
-      <td class="text-right">1</td>
-      <td class="text-right">{{ voucher.amount }}</td>
-      <td class="text-right">{{ voucher.amount }}</td>
-    </tr>
-    {% endfor %}
-      </tbody>
-    
-    <tfoot>
-    
-    {% for total in totals %}
-    <tr>
-      <td colspan="4" class="text-right"><strong>{{ total.title }}:</strong></td>
-      <td class="text-right">{{ total.text }}</td>
-    </tr>
-    {% endfor %}
-      </tfoot>
-    
-  </table>
-</div>
-{{ payment }}
-{% else %} 
-<script type="text/javascript"><!--
-location = '{{ redirect }}';
-//--></script> 
+    <div class="checkoutConfirm">
+        <div class="container">
+            <div class="checkoutConfirm-inner">
+                <div class="checkoutConfirm-image">
+                    <img src="{{ assets }}/assets/images/checkout/confirm.webp">
+                </div>
+                <h1 class="page-title">Заказ оформлен</h1>
+                <p class="checkoutConfirm-text">Спасибо, Имя! В ближайшее время наш менеджер свяжется с Вами для
+                    подтверждения
+                    заказа</p>
+                <ul class="checkoutConfirm-list">
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">№ Заказа:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ order_id }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Получатель:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ firstname }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Телефон получателя:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ telephone }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">E-mail:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ email }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Доставка:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ shipping_method }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Пункт получения:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">Адрес пункта</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Оплата:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ payment_method }}</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Общий вес:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ weight }} кг</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Бонусов за заказ:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">+165</p>
+                    </li>
+                    <li class="checkoutConfirm-item">
+                        <p class="checkoutConfirm-item__title">Итоговая стоимость:</p>
+                        <span class="checkoutConfirm-item__border"></span>
+                        <p class="checkoutConfirm-item__value">{{ total }} руб.</p>
+                    </li>
+                </ul>
+                <button class="checkoutConfirm-btn btn btn-primary" href="/">Вернуться на главную</button>
+                {{ payment }}
+            </div>
+        </div>
+    </div>
+{% else %}
+    {# <script type="text/javascript"><!- -#}
+    {#    location = '{{ redirect }}'; #}
+    {#    //--></script> #}
 {% endif %} 

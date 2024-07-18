@@ -164,7 +164,7 @@ class ControllerProductCategory extends Controller
                         'default' => $this->model_tool_image->resize($result['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image = $this->model_tool_image->resize('placeholder.png', 256 * 2);
+                    $image = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 $data['categories'][] = array(

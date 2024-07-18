@@ -35,9 +35,9 @@ class ControllerInformationVacancies extends Controller
             foreach ($results as $result) {
                 $data['vacancies'][] = array(
                     'title' => $result['title'],
-                    //'responsibility' => html_entity_decode($result['responsibility']),
+                    'responsibility' => html_entity_decode($result['responsibility']),
                     //'responsibility' => strip_tags(mb_substr($result['responsibility'], 0, 200)) . '...',
-                    'responsibility' => mb_substr(strip_tags(html_entity_decode($result['responsibility'])), 0, 150) . '...',
+                    //'responsibility' => mb_substr(strip_tags(html_entity_decode($result['responsibility'])), 0, 150) . '...',
                     //'requirements' => html_entity_decode($result['requirements']),
                     //'conditions' => html_entity_decode($result['conditions']),
                     'href' => $this->url->link('information/vacancies/one', 'vacancy_id=' . $result['vacancy_id'])
