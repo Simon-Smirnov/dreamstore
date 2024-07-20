@@ -35,5 +35,6 @@ define('MODELS_CATEGORY_ID', 126);
 
 define('MODE', 0); // 0 - DEV, 1 - PROD
 define('ASSETS', MODE ? '/catalog/view/theme/dreamsstore/resources/app' : '/catalog/view/theme/dreamsstore/resources/dev');
+define('REVIEWS', '/image/');
 
 

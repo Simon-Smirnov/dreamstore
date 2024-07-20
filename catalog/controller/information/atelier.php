@@ -31,6 +31,7 @@ class ControllerInformationAtelier extends Controller
         $this->load->model('catalog/category');
         $this->load->model('catalog/product');
         $this->load->model('tool/image');
+        $this->load->model('catalog/color');
 
         $category_info = $this->model_catalog_category->getCategory($category_id);
 
@@ -85,6 +86,8 @@ class ControllerInformationAtelier extends Controller
                     'price' => $price,
                 );
             }
+
+            $data['colors'] = $this->model_catalog_color->getColors();
 
             $data['continue'] = $this->url->link('common/home');
 

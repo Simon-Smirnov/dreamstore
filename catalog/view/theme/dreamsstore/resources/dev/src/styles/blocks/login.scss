@@ -88,10 +88,48 @@
         }
 
         &--link {
-
+            cursor: pointer;
             color: var(--color-6-dark);
         }
     }
+
+    &__back {
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid var(--libe);
+
+        &--link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            color: var(--color-6-dark);
+            justify-content: center;
+            cursor: pointer;
+
+            svg {
+                transform: rotate(270deg);
+                width: 1.2em;
+                height: 1.2em;
+                stroke: none;
+                fill: var(--color-4-dark);
+            }
+
+            span {
+                font-weight: 500;
+                font-size: 1.1rem;
+                color: var(--color-5-dark);
+            }
+        }
+    }
+}
+
+.login-change__success {
+    font-size: 1.2rem;
+    margin-top: 1em;
+    color: var(--color-4-dark);
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 600px) {

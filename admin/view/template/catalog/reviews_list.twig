@@ -165,10 +165,17 @@
                                                 <td class="text-left">{{ review.phone }}</td>
                                                 <td class="text-left">
                                                     {{ review.text }}
-                                                    {% if review.images %}
+                                                    {% if review.images or review.videos %}
                                                         <div style="margin-top: 10px">
                                                             {% for image in review.images %}
                                                                 <image src="{{ image }}"></image>
+                                                            {% endfor %}
+                                                            {% for video in review.videos %}
+                                                                <video width="150" height="80" controls>
+                                                                    <source src="{{ image_reviews }}{{ video.href }}"
+                                                                            type="video/mp4">
+                                                                    Ваш браузер не поддерживает воспроизведение видео.
+                                                                </video>
                                                             {% endfor %}
                                                         </div>
                                                     {% endif %}

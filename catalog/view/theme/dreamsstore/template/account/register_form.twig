@@ -1,0 +1,42 @@
+<div id="login-modal">
+    <div class="login-inner" data-register-form>
+        <form data-register-form>
+            <h2 class="section-title login-inner__title">Регистрация</h2>
+            <div class="login-inner__inputs">
+                <div class="login-inner__input input-block required">
+                    <input class="input-text" name="email" type="email" placeholder="E-mail">
+                    <label>E-mail</label>
+                    <div class="error error-email error-emailexists text-danger"></div>
+                </div>
+                <div class="login-inner__input input-block input-password required" data-input-password>
+                    <input class="input-text" name="password" type="password" placeholder="{{ entry_password }}"
+                           value="{{ password }}" data-input-password-input>
+                    <label>{{ entry_password }}</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg>
+                        <use xlink:href="/sprite.svg#icon_eye"></use>
+                    </svg>
+                    <div class="error error-password text-danger"></div>
+                </div>
+                <div class="login-inner__input input-block input-password required" data-input-password>
+                    <input class="input-text" name="confirm" type="password" placeholder="{{ entry_confirm }}"
+                           value="{{ confirm }}" data-input-password-input>
+                    <label>{{ entry_confirm }}</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg>
+                        <use xlink:href="/sprite.svg#icon_eye"></use>
+                    </svg>
+                    <div class="error error-confirm text-danger"></div>
+                </div>
+            </div>
+            <button class="btn btn-primary login-inner__btn" type="submit">Зарегистрироваться</button>
+            <label class="agree login-inner__agree">
+                <input class="input-checkbox" name="agree" type="checkbox">
+                <span>Даю согласие на <a>обработку персональных данных</a></span>
+            </label>
+            <div class="error error-agree text-danger"></div>
+            <div class="login-inner__register">
+                <p class="login-inner__register--text">Уже есть аккаунт?</p>
+                <a class="login-inner__register--link" data-login-btn>Войти</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -81,30 +81,34 @@
                         <div class="atelier-quiz__image">
                             <img src="{{ assets }}/assets/images/atelier/quiz.webp">
                         </div>
-                        <div class="atelier-quiz__body">
+                        <div class="atelier-quiz__body" data-quiz-main>
                             <ul class="atelier-quiz__tabs">
-                                <li class="atelier-quiz__tab" data-quiz-tab="1">1. Модель</li>
+                                <li class="atelier-quiz__tab active" data-quiz-tab="1">1. Модель</li>
                                 <li class="atelier-quiz__tab" data-quiz-tab="2">2. Материалы</li>
                                 <li class="atelier-quiz__tab" data-quiz-tab="3">3. Размеры</li>
                                 <li class="atelier-quiz__tab" data-quiz-tab="4">4. Особенности</li>
                                 <li class="atelier-quiz__tab" data-quiz-tab="5">5. Заявка на расчёт</li>
                             </ul>
                             <form method="POST" data-quiz-form>
-                                <div class="atelier-quiz__step1" data-quiz-step="1">
+                                <input type="hidden" name="theme"
+                                       value="Расчёт индивидуального комплекта(QUIZ)">
+                                <div class="atelier-quiz__step atelier-quiz__step1 active" data-quiz-step="1">
                                     <h4 class="atelier-quiz__smallTitle">Выберите модель</h4>
                                     <div class="atelier-quiz__items">
                                         {% set isFirst = true %}
                                         {% for model in models %}
-                                            <div class="atelier-quiz__item" data-atelier-model="{{ model.product_id }}">
-                                                <input type="radio" name="model"
-                                                       value="{{ model.name }}"
-                                                       {% if isFirst %}checked{% set isFirst = false %}{% endif %}>
-                                                <picture>
-                                                    <source srcset="{{ model.thumb.webp }}">
-                                                    <img class="atelier-quiz__item--image" alt="{{ model.name }}"
-                                                         title="{{ model.name }}"
-                                                         src="{{ model.thumb.default }}" loading="lazy">
-                                                </picture>
+                                            <div class="atelier-quiz__item" data-quiz-step-next="2">
+                                                <div class="atelier-quiz__item--image">
+                                                    <picture>
+                                                        <source srcset="{{ model.thumb.webp }}">
+                                                        <img alt="{{ model.name }}"
+                                                             title="{{ model.name }}"
+                                                             src="{{ model.thumb.default }}" loading="lazy">
+                                                    </picture>
+                                                    <input type="radio" name="model"
+                                                           value="{{ model.name }}"
+                                                           {% if isFirst %}checked{% set isFirst = false %}{% endif %}>
+                                                </div>
                                                 <div class="atelier-quiz__item--block">
                                                     <h4 class="atelier-quiz__item--title">{{ model.name }}</h4>
                                                     <div class="atelier-quiz__item--text">{{ model.description }}</div>
@@ -113,143 +117,279 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                {# <div class="atelier-quiz__step2" data-quiz-step="2"> #}
-                                {#    <h4 class="atelier-quiz__smallTitle">Выберите материал и цвет</h4> #}
-                                {#    <h5 class="atelier-quiz__topic">Материал</h5> #}
-                                {#    <div сlass="atelier-quiz__tissue"> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="tissue" value="Тенсель" checked> #}
-                                {#            <span>Тенсель</span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="tissue" #}
-                                {#                   value="Хлопок мако-сатин плотность 300 ТС"> #}
-                                {#            <span>Хлопок мако-сатин плотность 300 ТС</span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="tissue" #}
-                                {#                   value="Хлопок сатин делюкс плотность 500 ТС"> #}
-                                {#            <span>Хлопок сатин делюкс плотность 500 ТС</span> #}
-                                {#        </label> #}
-                                {#    </div> #}
-                                {#    {% if colors %} #}
-                                {#        <div class="atelier-quiz__colors"> #}
-                                {#            {% set isFirst2 = true %} #}
-                                {#            {% for color in colors %} #}
-                                {#                <label> #}
-                                {#                    <input style="color:{{ color.hex }}" type="radio" name="tissue" #}
-                                {#                           value="Тенсель" #}
-                                {#                           {% if isFirst2 %}checked{% set isFirst2 = false %}{% endif %}> #}
-                                {#                    <span>{{ color.name }}</span> #}
-                                {#                </label> #}
-                                {#            {% endfor %} #}
-                                {#        </div> #}
-                                {#    {% endif %} #}
-                                {#    <div class="atelier-quiz__buttons"> #}
-                                {#        <a class="btn btn-second" data-quiz-step="1">Назад</a> #}
-                                {#        <a class="btn btn-primary" data-quiz-step="3">Далее</a> #}
-                                {#    </div> #}
-                                {# </div> #}
-                                {# <div class="atelier-quiz__step3" data-quiz-step="3"> #}
-                                {#    <h4 class="atelier-quiz__smallTitle">Выберите размеры</h4> #}
-                                {#    <div class="atelier-quiz__sizes"> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Полутороспальный" checked> #}
-                                {#            <span class="atelier-quiz__sizes--title">Полутороспальный</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 155х205, простыня 180х230 </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Двуспальный"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Двуспальный</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 180х210, простыня 240х260 </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Двуспальный плюс"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Двуспальный плюс</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 200х200, простыня 240х260 </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Евро"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Евро</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 200х220, простыня 245х260 </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Евро макси"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Евро макси</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 220х240, простыня 245х270  </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Дуэт"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Дуэт</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 155х205 (2шт), простыня 245х270 </span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="radio" name="size" value="Кинг сайз"> #}
-                                {#            <span class="atelier-quiz__sizes--title">Кинг сайз</span> #}
-                                {#            <span class="atelier-quiz__sizes--description">пододеяльник: 240х260 , простыня 245х310</span> #}
-                                {#        </label> #}
-                                {#    </div> #}
-                                {#    <div class="atelier-quiz__buttons"> #}
-                                {#        <a class="btn btn-second" data-quiz-step="2">Назад</a> #}
-                                {#        <a class="btn btn-primary" data-quiz-step="4">Далее</a> #}
-                                {#    </div> #}
-                                {# </div> #}
-                                {# <div class="atelier-quiz__step4" data-quiz-step="4"> #}
-                                {#    <h4 class="atelier-quiz__smallTitle">Особенности</h4> #}
-                                {#    <h5 class="atelier-quiz__topic">Вышивка<span></span></h5> #}
-                                {#    <div class="atelier-quiz__embroidery"> #}
-                                {#        <label> #}
-                                {#            <input type="checkbox" name="embroidery" value="Вышивка 3000 руб"> #}
-                                {#            <span>Вышивка 3 000 руб.</span> #}
-                                {#        </label> #}
-                                {#    </div> #}
-                                {#    <h5 class="atelier-quiz__topic">Одеяло-комфортер<span></span></h5> #}
-                                {#    <div class="atelier-quiz__blanket"> #}
-                                {#        <label> #}
-                                {#            <input type="checkbox" name="blanket" value="1 комфортер 5 000 руб"> #}
-                                {#            <span>1 комфортер 5 000 руб.</span> #}
-                                {#        </label> #}
-                                {#        <label> #}
-                                {#            <input type="checkbox" name="blanket" value="1 комфортер 5 000 руб"> #}
-                                {#            <span>2 комфортер 10 000 руб.</span> #}
-                                {#        </label> #}
-                                {#    </div> #}
-                                {#    <div class="atelier-quiz__buttons"> #}
-                                {#        <a class="btn btn-second" data-quiz-step="3">Назад</a> #}
-                                {#        <a class="btn btn-primary" data-quiz-step="5">Далее</a> #}
-                                {#    </div> #}
-                                {# </div> #}
-                                {# <div class="atelier-quiz__step5" data-quiz-step="5"> #}
-                                {#    <h4 class="atelier-quiz__smallTitle">Заявка на расчёт</h4> #}
-                                {#    <h5 class="atelier-quiz__topic">Контактная информация</h5> #}
-                                {#    <div class="input-block required"> #}
-                                {#        <input class="input-text" type="text" name="name" value="" placeholder="Имя"> #}
-                                {#        <label>Имя</label> #}
-                                {#        <div class="text-danger error error-name"></div> #}
-                                {#    </div> #}
-                                {#    <div class="input-block required"> #}
-                                {#        <input class="input-text" type="text" name="phone" value="" #}
-                                {#               placeholder="Телефон"> #}
-                                {#        <label>Телефон</label> #}
-                                {#        <div class="text-danger error error-phone"></div> #}
-                                {#    </div> #}
-                                {#    <div class="input-block required"> #}
-                                {#        <input class="input-text" type="text" name="email" value="" #}
-                                {#               placeholder="E-mail"> #}
-                                {#        <label>E-mail</label> #}
-                                {#        <div class="text-danger error error-email"></div> #}
-                                {#    </div> #}
-                                {#    <div class="input-block required"> #}
-                                {#        <input class="input-text" type="text" name="city" value="" #}
-                                {#               placeholder="Город"> #}
-                                {#        <label>Город</label> #}
-                                {#        <div class="text-danger error error-city"></div> #}
-                                {#    </div> #}
-                                {#    <div class="atelier-quiz__buttons"> #}
-                                {#        <a class="btn btn-second" data-quiz-step="4">Назад</a> #}
-                                {#        <button class="btn btn-primary" data-quiz-step="6">Отправить расчёт</button> #}
-                                {#    </div> #}
-                                {# </div> #}
+                                <div class="atelier-quiz__step atelier-quiz__step2" data-quiz-step="2">
+                                    <div class="atelier-quiz__step--block">
+                                        <h4 class="atelier-quiz__smallTitle">Выберите материал и цвет</h4>
+                                        <h5 class="atelier-quiz__topic">Материал:</h5>
+                                        <div class="atelier-quiz__tissue">
+                                            <div class="atelier-quiz__tissue--item">
+                                                <div class="input-radio">
+                                                    <input class="input-radio__input" id="tissue-input-1" type="radio"
+                                                           name="tissue"
+                                                           value="Тенсель" checked>
+                                                    <div class="input-radio__outer">
+                                                        <div class="input-radio__inner"></div>
+                                                    </div>
+                                                    <label for="tissue-input-1"><span>Тенсель</span></label>
+                                                </div>
+                                            </div>
+                                            <div class="atelier-quiz__tissue--item">
+                                                <div class="input-radio">
+                                                    <input class="input-radio__input" id="tissue-input-2" type="radio"
+                                                           name="tissue"
+                                                           value="Хлопок мако-сатин плотность 300 ТС">
+                                                    <div class="input-radio__outer">
+                                                        <div class="input-radio__inner"></div>
+                                                    </div>
+                                                    <label for="tissue-input-2"><span>Хлопок мако-сатин плотность 300 ТС</span></label>
+                                                </div>
+                                            </div>
+                                            <div class="atelier-quiz__tissue--item">
+                                                <div class="input-radio">
+                                                    <input class="input-radio__input" id="tissue-input-3" type="radio"
+                                                           name="tissue"
+                                                           value="Хлопок сатин делюкс плотность 500 ТС">
+                                                    <div class="input-radio__outer">
+                                                        <div class="input-radio__inner"></div>
+                                                    </div>
+                                                    <label for="tissue-input-3"><span>Хлопок сатин делюкс плотность 500 ТС</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="atelier-quiz__topic">Цвет основы:</h5>
+                                        {% if colors %}
+                                            <div class="atelier-quiz__colors">
+                                                {% set isFirst2 = true %}
+                                                {% for color in colors %}
+                                                    <div class="atelier-quiz__color">
+                                                        <input type="radio" name="color_basis"
+                                                               value="{{ color.title }}"
+                                                               {% if isFirst2 %}checked{% set isFirst2 = false %}{% endif %}>
+                                                        <div class="colorPoint-outer">
+                                                        <span class="colorPoint-inner"
+                                                              style="background-color: {{ color.hex }}"></span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        <h5 class="atelier-quiz__topic">Цвет контрастного канта:</h5>
+                                        {% if colors %}
+                                            <div class="atelier-quiz__colors">
+                                                {% set isFirst2 = true %}
+                                                {% for color in colors %}
+                                                    <div class="atelier-quiz__color">
+                                                        <input type="radio" name="color_edging"
+                                                               value="{{ color.title }}"
+                                                               {% if isFirst2 %}checked{% set isFirst2 = false %}{% endif %}>
+                                                        <div class="colorPoint-outer">
+                                                        <span class="colorPoint-inner"
+                                                              style="background-color: {{ color.hex }}"></span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="atelier-quiz__buttons">
+                                        <a class="btn btn-second" data-quiz-step-prev="1">Назад</a>
+                                        <a class="btn btn-primary" data-quiz-step-next="3">Далее</a>
+                                    </div>
+                                </div>
+                                <div class="atelier-quiz__step atelier-quiz__step3" data-quiz-step="3">
+                                    <div class="atelier-quiz__step--block">
+                                        <h4 class="atelier-quiz__smallTitle">Выберите размеры</h4>
+                                        <div class="atelier-quiz__sizes">
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-1" type="radio"
+                                                       name="size"
+                                                       value="Полутороспальный" checked>
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-1">
+                                                    <span class="atelier-quiz__size--title">Полутороспальный</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 155х205, простыня 180х230 </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-2" type="radio"
+                                                       name="size"
+                                                       value="Двуспальный">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-2">
+                                                    <span class="atelier-quiz__size--title">Двуспальный</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 180х210, простыня 240х260 </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-3" type="radio"
+                                                       name="size"
+                                                       value="Двуспальный плюс">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-3">
+                                                    <span class="atelier-quiz__size--title">Двуспальный плюс</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 200х200, простыня 240х260 </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-4" type="radio"
+                                                       name="size"
+                                                       value="Евро">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-4">
+                                                    <span class="atelier-quiz__size--title">Евро</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 200х220, простыня 245х260 </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-5" type="radio"
+                                                       name="size"
+                                                       value="Евро макси">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-5">
+                                                    <span class="atelier-quiz__size--title">Евро макси</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 220х240, простыня 245х270  </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-6" type="radio"
+                                                       name="size"
+                                                       value="Дуэт">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-6">
+                                                    <span class="atelier-quiz__size--title">Дуэт</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 155х205 (2шт), простыня 245х270 </span>
+                                                </label>
+                                            </div>
+                                            <div class="input-radio">
+                                                <input class="input-radio__input" id="size-input-7" type="radio"
+                                                       name="size"
+                                                       value="Кинг сайз">
+                                                <div class="input-radio__outer">
+                                                    <div class="input-radio__inner"></div>
+                                                </div>
+                                                <label for="size-input-7">
+                                                    <span class="atelier-quiz__size--title">Кинг сайз</span>
+                                                    <span
+                                                            class="atelier-quiz__size--description">пододеяльник: 240х260 , простыня 245х310 </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="atelier-quiz__buttons">
+                                        <a class="btn btn-second" data-quiz-step-prev="2">Назад</a>
+                                        <a class="btn btn-primary" data-quiz-step-next="4">Далее</a>
+                                    </div>
+                                </div>
+                                <div class="atelier-quiz__step atelier-quiz__step4" data-quiz-step="4">
+                                    <div class="atelier-quiz__step--block">
+                                        <h4 class="atelier-quiz__smallTitle">Особенности</h4>
+                                        <h5 class="atelier-quiz__topic"
+                                        >
+                                            Вышивка<span
+                                                    data-attention-text="Текст для подсказки Текст для подсказкиТекст для подсказкиТекст для подсказкиТекст для подсказки">
+                                                <svg class="svg-attention" xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="/sprite.svg#icon_attention"></use>
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        <div class="atelier-quiz__embroidery">
+                                            <label>
+                                                <input class="input-checkbox" type="checkbox" name="embroidery"
+                                                       value="Вышивка 3000 руб">
+                                                <span>Вышивка 3 000 руб.</span>
+                                            </label>
+                                        </div>
+                                        <h5 class="atelier-quiz__topic">Одеяло-комфортер<span
+                                                    data-attention-text="Текст для подсказки Текст для подсказкиТекст для подсказкиТекст для подсказкиТекст для подсказки">
+                                                <svg class="svg-attention" xmlns="http://www.w3.org/2000/svg">
+                                                    <use xlink:href="/sprite.svg#icon_attention"></use>
+                                                </svg>
+                                            </span></h5>
+                                        <div class="atelier-quiz__blankets">
+                                            <div class="atelier-quiz__blanket">
+                                                <label>
+                                                    <input class="input-checkbox" type="checkbox" name="blanket[]"
+                                                           value="1 комфортер 5 000 руб">
+                                                    <span>1 комфортер 5 000 руб.</span>
+                                                </label>
+                                            </div>
+                                            <div class="atelier-quiz__blanket">
+                                                <label>
+                                                    <input class="input-checkbox" type="checkbox" name="blanket[]"
+                                                           value="2 комфортер 10 000 руб">
+                                                    <span>2 комфортер 10 000 руб.</span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="atelier-quiz__buttons">
+                                        <a class="btn btn-second" data-quiz-step-prev="3">Назад</a>
+                                        <a class="btn btn-primary" data-quiz-step-next="5">Далее</a>
+                                    </div>
+                                </div>
+                                <div class="atelier-quiz__step atelier-quiz__step5" data-quiz-step="5">
+                                    <div class="atelier-quiz__step--block">
+                                        <h4 class="atelier-quiz__smallTitle">Заявка на расчёт</h4>
+                                        <h5 class="atelier-quiz__topic">Контактная информация</h5>
+                                        <div class="atelier-quiz__inputs">
+                                            <div class="input-block required">
+                                                <input class="input-text" type="text" name="name" value=""
+                                                       placeholder="Имя">
+                                                <label>Имя</label>
+                                                <div class="text-danger error error-name"></div>
+                                            </div>
+                                            <div class="input-block required">
+                                                <input class="input-text" type="tel" name="phone" value=""
+                                                       placeholder="Телефон">
+                                                <label>Телефон</label>
+                                                <div class="text-danger error error-phone"></div>
+                                            </div>
+                                            <div class="input-block required">
+                                                <input class="input-text" type="email" name="email" value=""
+                                                       placeholder="E-mail">
+                                                <label>E-mail</label>
+                                                <div class="text-danger error error-email"></div>
+                                            </div>
+                                            <div class="input-block required">
+                                                <input class="input-text" type="text" name="city" value=""
+                                                       placeholder="Город">
+                                                <label>Город</label>
+                                                <div class="text-danger error error-city"></div>
+                                            </div>
+                                            <div>
+                                                <label class="agree">
+                                                    <input class="input-checkbox" name="agree" type="checkbox">
+                                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                                </label>
+                                                <div class="text-danger error error-agree"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="atelier-quiz__buttons">
+                                        <a class="btn btn-second" data-quiz-step-prev="4">Назад</a>
+                                        <button class="btn btn-primary">Отправить расчёт
+                                        </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -290,21 +430,26 @@
                     <img src="{{ assets }}/assets/images/atelier/form.webp">
                 </div>
                 <div class="atelier-form_body">
-                    <form class="atelier-form_form">
+                    <form class="atelier-form_form" data-forms-btn data-forms-static>
                         <h2 class="section-title atelier-form_form-title">Заявка на расчёт</h2>
                         <p class="atelier-form_form-text">Оставьте Ваши контакты для связи. Мы свяжемся с Вами, уточним
                             Ваши пожелания и рассчитаем стоимость заказа</p>
-                        <div class="atelier-form_form-item">
-                            <input class="input-text" name="name" placeholder="Телефон">
-                            <div class="name-error error"></div>
+                        <div class="atelier-form_form-item atelier-form_form-item">
+                            <div class="input-block required">
+                                <input class="input-text" type="tel" name="phone" placeholder="Телефон">
+                                <label>Телефон</label>
+                                <div class="error error-phone text-danger"></div>
+                            </div>
                         </div>
-                        <div class="atelier-form_form-item">
-                            <input class="input-text" name="email" placeholder="Email">
-                            <div class="email-error error"></div>
+                        <div class="atelier-form_form-item input-block required">
+                            <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                            <label>Ваш E-mail</label>
+                            <div class="error error-email text-danger"></div>
                         </div>
-                        <div class="atelier-form_form-item">
+                        <div class="atelier-form_form-item input-block">
                             <textarea class="input-text" name="message" placeholder="Ваше сообщение"></textarea>
-                            <div class="message-error error"></div>
+                            <label>Ваше сообщение</label>
+                            <div class="error error-message text-danger"></div>
                         </div>
                         <button class="btn btn-primary atelier-form_btn">Отправить</button>
                         <div class="atelier-form_form-agree">
@@ -312,7 +457,7 @@
                                 <input class="input-checkbox" name="agree" type="checkbox">
                                 <span>Даю согласие на <a>обработку персональных данных</a></span>
                             </label>
-                            <div class="agree-error error"></div>
+                            <div class="error error-agree text-danger"></div>
                         </div>
                     </form>
                 </div>

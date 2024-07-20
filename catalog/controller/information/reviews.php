@@ -73,6 +73,15 @@ class ControllerInformationReviews extends Controller
                 }
             }
 
+            $results = $this->model_information_reviews->getVideos($review['reviews_id']);
+
+            $videos = [];
+            foreach ($results as $result) {
+                if ($result['video']) {
+                    $videos[]['href'] = $result['video'];
+                }
+            }
+
             $dateString = $review['date_added'];
             $date = new DateTime($dateString);
             setlocale(LC_ALL, 'russian');
@@ -96,6 +105,7 @@ class ControllerInformationReviews extends Controller
             $data['reviews'][] = [
                 'name' => $review['author'],
                 'images' => $images,
+                'videos' => $videos,
                 'initial' => mb_substr($review['author'], 0, 1),
                 'grades' => $grades,
                 'rating' => (int)$review['rating'] / 100,
@@ -161,7 +171,7 @@ class ControllerInformationReviews extends Controller
                     }
                 }
 
-                $filetypes = ['jpg', 'jpeg', 'png'];
+                $filetypes = ['jpg', 'jpeg', 'png', 'mp4'];
 
                 foreach ($this->request->files['image']['name'] as $image) {
                     // Sanitize the filename
@@ -174,7 +184,7 @@ class ControllerInformationReviews extends Controller
                     }
                 }
 
-                $mime_allowed = ['image/png', 'image/jpeg'];//'video/quicktime'
+                $mime_allowed = ['image/png', 'image/jpeg', 'video/mp4'];
 
                 foreach ($this->request->files['image']['type'] as $image_type) {
                     if (!in_array($image_type, $mime_allowed)) {
@@ -188,23 +198,56 @@ class ControllerInformationReviews extends Controller
                     }
                 }
 
-                foreach ($this->request->files['image']['size'] as $image_size) {
-                    if ($image_size > 5000000) {
-                        $this->errors['image'] = 'Файл должен весить не более 5мб';
+                //foreach ($this->request->files['image']['size'] as $image_size) {
+                //    if ($image_size > 5000000) {
+                //        $this->errors['image'] = 'Файл должен весить не более 5мб';
+                //    }
+                //}
+
+                foreach ($this->request->files['image'] as $image) {
+                    if ($image['type'] == 'video/mp4') {
+                        if ($image['size'] > 20000000) {
+                            $this->errors['image'] = 'Видео должно весить не более 20мб';
+                        }
+                    } else if ($image['type'] == 'image/png' || $image['type'] == 'image/jpeg') {
+                        if ($image_size > 5000000) {
+                            $this->errors['image'] = 'Картинка должна весить не более 5мб';
+                        }
                     }
                 }
             }
 
             if (!isset($this->errors['image'])) {
+                //foreach ($this->request->files['image']['name'] as $key => $image) {
+                //    $filename = basename(html_entity_decode($image, ENT_QUOTES, 'UTF-8'));
+                //    if ((utf8_strlen($filename) > 128)) {
+                //        $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                //    }
+                //    $file = token(32) . '.' . $filename;
+                //
+                //    move_uploaded_file($this->request->files['image']['tmp_name'][$key], DIR_IMAGE . 'catalog/reviews/' . $file);
+                //    $data['images'][] = 'catalog/reviews/' . $file;
+                //}
+
+                $data['images'] = [];
+                $data['videos'] = [];
+
                 foreach ($this->request->files['image']['name'] as $key => $image) {
                     $filename = basename(html_entity_decode($image, ENT_QUOTES, 'UTF-8'));
-                    if ((utf8_strlen($filename) > 128)) {
+                    if (utf8_strlen($filename) > 128) {
                         $filename = mb_substr($filename, -128, 128, 'UTF-8');
                     }
                     $file = token(32) . '.' . $filename;
+                    $tmpName = $this->request->files['image']['tmp_name'][$key];
+                    $fileType = $this->request->files['image']['type'][$key];
 
-                    move_uploaded_file($this->request->files['image']['tmp_name'][$key], DIR_IMAGE . 'catalog/reviews/' . $file);
-                    $data['images'][] = 'catalog/reviews/' . $file;
+                    move_uploaded_file($tmpName, DIR_IMAGE . 'catalog/reviews/' . $file);
+
+                    if ($fileType == 'video/mp4') {
+                        $data['videos'][] = 'catalog/reviews/' . $file;
+                    } elseif ($fileType == 'image/png' || $fileType == 'image/jpeg') {
+                        $data['images'][] = 'catalog/reviews/' . $file;
+                    }
                 }
 
                 $this->load->model('information/reviews');

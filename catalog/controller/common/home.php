@@ -45,7 +45,6 @@ class ControllerCommonHome extends Controller
         foreach ($reviews as $review) {
 
             $photos = $this->model_information_reviews->getImages($review['reviews_id']);
-
             $images = [];
             foreach ($photos as $photo) {
                 if ($photo['image']) {
@@ -55,6 +54,14 @@ class ControllerCommonHome extends Controller
                     ];
                 } else {
                     $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 60 * 2)];
+                }
+            }
+
+            $films = $this->model_information_reviews->getVideos($review['reviews_id']);
+            $videos = [];
+            foreach ($films as $film) {
+                if ($film['video']) {
+                    $videos[]['href'] = $film['video'];
                 }
             }
 
@@ -77,6 +84,7 @@ class ControllerCommonHome extends Controller
             $data['reviews'][] = [
                 'name' => $review['author'],
                 'images' => $images,
+                'videos' => $videos,
                 'initial' => mb_substr($review['author'], 0, 1),
                 'grades' => $grades,
                 'rating' => (int)$review['rating'] / 100,

@@ -7,14 +7,14 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="container">
-        {% if error_warning %}
-            <div class="alert alert-danger alert-dismissible"><i
-                        class="fa fa-exclamation-circle"></i> {{ error_warning }}
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-            </div>
-        {% endif %}
-    </div>
+    {# <div class="container"> #}
+    {#    {% if error_warning %} #}
+    {#        <div class="alert alert-danger alert-dismissible"><i #}
+    {#                    class="fa fa-exclamation-circle"></i> {{ error_warning }} #}
+    {#            <button type="button" class="close" data-dismiss="alert">&times;</button> #}
+    {#        </div> #}
+    {#    {% endif %} #}
+    {# </div> #}
 
     <div class="container">
         <div id="content" class="checkout" data-checkout>
@@ -174,12 +174,24 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        <div class="checkout-blocks__item checkout-blocks__item--bonuses">
+                            <h4 class="checkout-blocks__title">Промокод</h4>
+                            <div class="checkout-blocks__promotionalСode">
+                                <div class="checkout-blocks__input input-block">
+                                    <input class="input-text" type="text" name="coupon" data-checkout-input="coupon"
+                                           value="{{ coupon ? coupon : '' }}"
+                                           placeholder="Промокод">
+                                    <label>Промокод</label>
+                                </div>
+                            </div>
+                        </div>
                         {% if points %}
                             <div class="checkout-blocks__item checkout-blocks__item--bonuses">
                                 <h4 class="checkout-blocks__title">Оплата бонусами</h4>
                                 <div class="checkout-blocks__bonuses">
                                     <div class="input-switch">
-                                        <input class="input-switch__input" type="checkbox">
+                                        <input class="input-switch__input" name="bonuses" type="checkbox"
+                                               data-bonuses-switch value="on" {% if bonuses %}checked{% endif %}>
                                         <span class="input-switch__slider"></span>
                                     </div>
                                     <div class="checkout-blocks__bonuses--info">

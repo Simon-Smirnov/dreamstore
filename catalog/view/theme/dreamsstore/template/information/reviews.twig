@@ -51,15 +51,24 @@
                                                 </div>
                                             </div>
                                             <div class="reviews_site-list_item-text">{{ review.text }}</div>
-                                            <div class="reviews_site-list_item-images">
-                                                {% for image in review.images %}
-                                                    <picture>
-                                                        <source srcset="{{ image.webp }}">
-                                                        <img class="catalog-inner_link-img"
-                                                             src="{{ image.default }}" loading="lazy">
-                                                    </picture>
-                                                {% endfor %}
-                                            </div>
+                                            {% if review.images or review.videos %}
+                                                <div class="reviews_site-list_item-images">
+                                                    {% for image in review.images %}
+                                                        <picture>
+                                                            <source srcset="{{ image.webp }}">
+                                                            <img class="catalog-inner_link-img"
+                                                                 src="{{ image.default }}" loading="lazy">
+                                                        </picture>
+                                                    {% endfor %}
+                                                    {% for video in review.videos %}
+                                                        <video controls width="150" height="90">
+                                                            <source src="{{ image_reviews }}{{ video.href }}"
+                                                                    type="video/mp4">
+                                                            Ваш браузер не поддерживает воспроизведение видео.
+                                                        </video>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -131,7 +140,7 @@
                         <p>Прикрепить файл</p>
                     </label>
                     <div class="modal__size">
-                        <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб</span>
+                        <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб (MP4)</span>
                         <div class="modal__size-images"></div>
                         <div class="image-error error"></div>
                     </div>

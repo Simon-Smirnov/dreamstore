@@ -4,7 +4,11 @@ class ControllerCheckoutCheckout extends Controller
 {
     public function index($update = false, $errors = [])
     {
-        
+
+        //echo "<pre>";
+        //var_dump($this->session->data['phone']);
+        //echo "</pre>";
+
         // Validate cart has products and has stock.
         if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
             $this->response->redirect($this->url->link('checkout/cart'));
@@ -43,32 +47,28 @@ class ControllerCheckoutCheckout extends Controller
         $data['payment_method'] = $this->session->data['payment_method'];
 
         # Текстовые поля
-        if (!empty($this->session->data['checkout_fields'])) {
-            $data['fields'] = $this->session->data['checkout_fields'];
-        } else if ($this->customer->isLogged()) {
-            $data['fields'] = [
-                'name' => $this->customer->getFirstName(),
-                'phone' => $this->customer->getTelephone(),
-                'email' => $this->customer->getEmail()
-            ];
-        }
+        //if (!empty($this->session->data['checkout_fields'])) {
+        //    $data['fields'] = $this->session->data['checkout_fields'];
+        //} else if ($this->customer->isLogged()) {
+        //    $data['fields'] = [
+        //        'name' => $this->customer->getFirstName(),
+        //        //'phone' => $this->customer->getTelephone(),
+        //        'email' => $this->customer->getEmail()
+        //    ];
+        //}
 
         $data['points'] = false;
         if ($this->customer->isLogged()) {
             $data['fields'] = [
                 'name' => $this->customer->getFirstName(),
-                'phone' => $this->customer->getTelephone(),
+                //'phone' => $this->customer->getTelephone(),
                 'email' => $this->customer->getEmail()
             ];
             $data['is_login'] = true;
             $data['points'] = $this->customer->getRewardPoints();
         } else {
             $data['fields'] = [];
-            if (isset($this->session->data['phone'])) {
-                $data['fields']['phone'] = $this->session->data['phone'];
-            } else {
-                $data['fields']['phone'] = '';
-            }
+
             if (isset($this->session->data['email'])) {
                 $data['fields']['email'] = $this->session->data['email'];
             } else {
@@ -79,6 +79,12 @@ class ControllerCheckoutCheckout extends Controller
             } else {
                 $data['fields']['name'] = '';
             }
+        }
+
+        if (isset($this->session->data['phone'])) {
+            $data['fields']['phone'] = $this->session->data['phone'];
+        } else {
+            $data['fields']['phone'] = '';
         }
 
         if (isset($this->session->data['zone'])) {
@@ -115,6 +121,16 @@ class ControllerCheckoutCheckout extends Controller
             $data['fields']['comment'] = $this->session->data['comment'];
         } else {
             $data['fields']['comment'] = '';
+        }
+        if (isset($this->session->data['coupon'])) {
+            $data['coupon'] = $this->session->data['coupon'];
+        } else {
+            $data['coupon'] = '';
+        }
+        if (isset($this->session->data['bonuses']) && $this->session->data['bonuses'] == "on") {
+            $data['bonuses'] = true;
+        } else {
+            $data['bonuses'] = false;
         }
 
         if ($this->cart->hasShipping()) {
@@ -154,7 +170,7 @@ class ControllerCheckoutCheckout extends Controller
         $data['content_bottom'] = $this->load->controller('common/content_bottom');
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
-        $data['order_cart'] = $this->load->controller('checkout/order_cart');
+        $data['order_cart'] = $this->load->controller('checkout/order_cart', $data['error_warning']);
 
         if ($update) {
             return $this->load->view('checkout/checkout', $data);
@@ -793,6 +809,12 @@ class ControllerCheckoutCheckout extends Controller
             }
             if (isset($this->request->post['agree'])) {
                 $this->session->data['agree'] = $this->request->post['agree'];
+            }
+            if (isset($this->request->post['coupon'])) {
+                $this->session->data['coupon'] = $this->request->post['coupon'];
+            }
+            if (isset($this->request->post['bonuses'])) {
+                $this->session->data['bonuses'] = $this->request->post['bonuses'];
             }
         }
         $this->response->setOutput($this->index(true));

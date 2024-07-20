@@ -104,6 +104,24 @@ class ControllerMailForm extends Controller
             }
         };
 
+        if (isset($this->request->post['city'])) {
+            if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 64)) {
+                $this->error['city'] = 'Город должен быть от 2 до 64 символов!';
+            }
+        };
+
+        if (isset($this->request->post['companyname'])) {
+            if ((utf8_strlen($this->request->post['companyname']) < 2) || (utf8_strlen($this->request->post['companyname']) > 64)) {
+                $this->error['companyname'] = 'Называние компании должно быть от 2 до 64 символов!';
+            }
+        };
+
+        if (isset($this->request->post['occupation'])) {
+            if ((utf8_strlen($this->request->post['occupation']) < 2) || (utf8_strlen($this->request->post['occupation']) > 64)) {
+                $this->error['occupation'] = 'Род деятельности должен быть от 2 до 64 символов!';
+            }
+        };
+
         if (!isset($this->request->post['agree'])) {
             $this->error['agree'] = 'Вы должны дать согласие на обработку персональных данных!';
         };

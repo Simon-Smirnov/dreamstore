@@ -1,17 +1,15 @@
 export default class {
     constructor(selector) {
-        this.elementsPassword = document.querySelectorAll(selector);
-        console.log(this.elementsPassword);
-        if (this.elementsPassword.length > 0) {
-            this.elementsPassword.forEach(element => {
-                const svg = element.querySelector('[data-input-password-svg]');
-                const input = element.querySelector('[data-input-password-input]');
 
-                svg.addEventListener('click', () => {
-                    input.type = input.type === 'password' ? 'text' : 'password';
-                    element.classList.toggle('active');
-                })
-            })
-        }
+        document.addEventListener('click', (e) => {
+            const target = e.target;
+            if (target.hasAttribute('data-input-password-svg') || target.closest('[data-input-password-svg]')) {
+                const parent = target.closest('[data-input-password]');
+                console.log(parent)
+                parent.classList.toggle('active');
+                const input = parent.querySelector('[data-input-password-input]');
+                input.type = input.type === 'password' ? 'text' : 'password';
+            }
+        });
     }
 }

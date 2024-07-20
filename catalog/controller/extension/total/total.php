@@ -45,9 +45,9 @@ class ControllerExtensionTotalTotal extends Controller
                     // We have to put the totals in an array so that they pass by reference.
                     $this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 
-                    // echo "<pre>";
-                    // var_dump($result['code']);
-                    // echo "</pre>";
+                    //echo "<pre>";
+                    //var_dump($result['code']);
+                    //echo "</pre>";
                 }
             }
 

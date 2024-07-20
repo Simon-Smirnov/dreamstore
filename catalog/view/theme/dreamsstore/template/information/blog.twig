@@ -127,13 +127,21 @@
                         <div class="beAware-block">
                             <h2 class="beAware-block__title">Будьте в курсе наших акций и скидок !</h2>
                         </div>
-                        <form class="beAware-form">
+                        <form class="beAware-form" data-forms-btn data-forms-static>
                             <div class="beAware-form__block">
-                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
-                                <label class="agree">
-                                    <input class="input-checkbox" name="agree" type="checkbox">
-                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
-                                </label>
+                                <div class="input-block required">
+                                    <input class="input-text" name="email" type="email" placeholder="Ваш E-mail"
+                                           value="">
+                                    <label>Ваш E-mail</label>
+                                    <div class="error error-email text-danger"></div>
+                                </div>
+                                <div>
+                                    <label class="agree">
+                                        <input class="input-checkbox" name="agree" type="checkbox">
+                                        <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                    </label>
+                                    <div class="error error-agree text-danger"></div>
+                                </div>
                             </div>
                             <div class="beAware-btn">
                                 <button class="btn btn-primary">Подписаться</button>

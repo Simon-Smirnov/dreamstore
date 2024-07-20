@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']    = 'Отчет об использовании купонов';
+$_['heading_title']    = 'Отчет об использовании промокодов';
 
 // Text
 $_['text_extension']   = 'Дополнения';
@@ -9,7 +9,7 @@ $_['text_success']     = 'Данные успешно сохранены!';
 $_['text_filter']      = 'Фильтр';
 
 // Column
-$_['column_name']      = 'Название купона';
+$_['column_name']      = 'Название промокода';
 $_['column_code']      = 'Код';
 $_['column_orders']    = 'Заказов';
 $_['column_total']     = 'Итого';

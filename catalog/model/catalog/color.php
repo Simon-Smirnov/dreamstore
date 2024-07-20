@@ -8,4 +8,11 @@ class ModelCatalogColor extends Model
 
         return $query->row['hex'];
     }
+
+    public function getColors()
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "colors ORDER BY title");
+
+        return $query->rows;
+    }
 }

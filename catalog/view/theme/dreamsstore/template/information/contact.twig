@@ -117,15 +117,22 @@
                         <div class="first-know-inner_block">
                             <h2 class="first-know-inner_block-title">Узнавайте первыми о скидках!</h2>
                         </div>
-                        <form class="first-know-inner_form">
-                            <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                        <form class="first-know-inner_form" data-forms-btn data-forms-static>
+                            <div class="input-block required">
+                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                                <label>Ваш E-mail</label>
+                                <div class="error error-email text-danger"></div>
+                            </div>
                             <div class="first-know-inner_btn">
                                 <button class="btn btn-primary">Подписаться</button>
                             </div>
-                            <label class="agree">
-                                <input class="input-checkbox" name="agree" type="checkbox">
-                                <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
-                            </label>
+                            <div>
+                                <label class="agree">
+                                    <input class="input-checkbox" name="agree" type="checkbox">
+                                    <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                                </label>
+                                <div class="error error-agree text-danger"></div>
+                            </div>
                         </form>
                     </div>
                 </div>

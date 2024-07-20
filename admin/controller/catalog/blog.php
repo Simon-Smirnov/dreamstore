@@ -25,7 +25,24 @@ class ControllerCatalogBlog extends Controller
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 
-            $this->model_catalog_blog->addBlog($this->request->post);
+            $data = $this->request->post;
+
+            $data['video'] = "";
+
+            if (isset($this->request->files['video']) && !empty($this->request->files['video']['name'])) {
+                $filename = basename(html_entity_decode($this->request->files['video']['name'], ENT_QUOTES, 'UTF-8'));
+                if (utf8_strlen($filename) > 128) {
+                    $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                }
+                $file = token(32) . '.' . $filename;
+                $tmpName = $this->request->files['video']['tmp_name'];
+
+                move_uploaded_file($tmpName, DIR_IMAGE . 'catalog/blogs/' . $file);
+
+                $data['video'] = 'catalog/blogs/' . $file;
+            }
+
+            $this->model_catalog_blog->addBlog($data);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -48,7 +65,24 @@ class ControllerCatalogBlog extends Controller
         $this->load->model('catalog/blog');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_blog->editBlog($this->request->get['blog_id'], $this->request->post);
+            $data = $this->request->post;
+
+            $data['video'] = "";
+
+            if (isset($this->request->files['video']) && !empty($this->request->files['video']['name'])) {
+                $filename = basename(html_entity_decode($this->request->files['video']['name'], ENT_QUOTES, 'UTF-8'));
+                if (utf8_strlen($filename) > 128) {
+                    $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                }
+                $file = token(32) . '.' . $filename;
+                $tmpName = $this->request->files['video']['tmp_name'];
+
+                move_uploaded_file($tmpName, DIR_IMAGE . 'catalog/blogs/' . $file);
+
+                $data['video'] = 'catalog/blogs/' . $file;
+            }
+
+            $this->model_catalog_blog->editBlog($this->request->get['blog_id'], $data);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -489,6 +523,15 @@ class ControllerCatalogBlog extends Controller
             $data['image'] = '';
         }
 
+        // Image
+        if (isset($this->request->post['video'])) {
+            $data['video'] = $this->request->post['video'];
+        } elseif (!empty($blog_info)) {
+            $data['video'] = $blog_info['video'];
+        } else {
+            $data['video'] = '';
+        }
+
         $this->load->model('tool/image');
 
         if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
@@ -567,6 +610,46 @@ class ControllerCatalogBlog extends Controller
 
         if ((utf8_strlen($this->request->post['title_video']) > 128)) {
             $this->error['title_video'] = $this->language->get('title_video');
+        }
+
+        if (isset($this->request->post['video']) && trim($this->request->post['title_video']) != '') {
+            $this->error['title_video'] = $this->language->get('title_video');
+        }
+
+        if (isset($this->request->files['video']) && !empty($this->request->files['video']['name'])) {
+
+            if (!is_file($this->request->files['video']['tmp_name'])) {
+                $this->error['video'] = 'Файл не существует';
+            }
+
+            $content = file_get_contents($this->request->files['video']['tmp_name']);
+
+            if (preg_match('/\<\?php/i', $content)) {
+                $this->error['video'] = 'Нельзя использовать PHP в изображении';
+            }
+
+            $filetypes = ['mp4'];
+            // Sanitize the filename
+            $filename = basename(html_entity_decode($this->request->files['video']['name'], ENT_QUOTES, 'UTF-8'));
+
+            if (!is_file($this->request->files['video']['name'])) {
+                if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $filetypes)) {
+                    $this->error['video'] = 'Неверный тип файла';
+                }
+            }
+
+            $mime_allowed = ['video/mp4'];
+            if (!in_array($this->request->files['video']['type'], $mime_allowed)) {
+                $this->error['video'] = 'Неверный тип файла';
+            }
+
+            if ($this->request->files['video']['error'] != UPLOAD_ERR_OK) {
+                $this->error['video'] = 'Ошибка загрузки файла';
+            }
+
+            if ($this->request->files['video']['size'] > 50000000) {
+                $this->error['video'] = 'Видео должно весить не более 50мб';
+            }
         }
 
         if ($this->error && !isset($this->error['warning'])) {

@@ -40,7 +40,11 @@ export default class {
                     } else if (data.success) {
                         let div = document.createElement('div');
                         div.setAttribute('data-forms', 'success');
-                        this.getModalForm(div);
+                        if (form.hasAttribute('data-forms-static')) {
+                            this.getStaticForm(div, form);
+                        } else {
+                            this.getModalForm(div);
+                        }
                     }
                 });
             }
@@ -65,6 +69,22 @@ export default class {
             let form = doc.querySelector('.inner');
             modal_content.innerHTML = '';
             modal_content.appendChild(form);
+        });
+    }
+
+    getStaticForm(target, form) {
+        const url = target.dataset.forms;
+        const params = {};
+        if (target.dataset.formsProduct) {
+            params.product = target.dataset.formsProduct;
+        }
+        this.getForm(url, params).then(data => {
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(data, 'text/html');
+            // let modal_content = document.querySelector('.modal-form__content');
+            let content = doc.querySelector('.inner');
+            form.innerHTML = '';
+            form.appendChild(content);
         });
     }
 

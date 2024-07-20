@@ -19,6 +19,7 @@
         border-radius: 0.4em;
         box-shadow: 0px 0px 24px 0px #00000005;
         padding: 2em;
+        height: fit-content;
     }
 
     &-login {
@@ -29,6 +30,7 @@
             letter-spacing: 0.4px;
             padding-bottom: 0.1em;
             border-bottom: 1px dashed var(--libe);
+            cursor: pointer;
         }
 
         &__text {

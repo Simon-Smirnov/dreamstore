@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']    = 'Купон';
+$_['heading_title']    = 'Промокод';
 
 // Text
 $_['text_extension']   = 'Дополнения';
 $_['text_success']     = 'Данные успешно сохранены!';
-$_['text_edit']        = 'Изменить купон';
+$_['text_edit']        = 'Изменить промокод';
 
 // Entry
 $_['entry_status']     = 'Статус';

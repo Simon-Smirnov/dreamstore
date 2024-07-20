@@ -43,6 +43,7 @@ $_['entry_title_slider'] = 'Заголовок для слайдера';
 $_['entry_title_video'] = 'Заголовок для видео';
 $_['entry_date_blog'] = 'Дата поста';
 $_['entry_image'] = 'Главное изображение';
+$_['entry_video'] = 'Видео';
 $_['entry_additional_image'] = 'Изображения для слайдера';
 
 

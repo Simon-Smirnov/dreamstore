@@ -177,6 +177,165 @@ class ControllerAccountAccount extends Controller
         ]));
     }
 
+    public function changePasswordForm()
+    {
+        $data = array();
+        //$this->response->setOutput($this->load->view('account/login_modal', $data));
+
+        $this->response->setOutput(json_encode([
+            'html' => $this->load->view('account/change_password_form', $data)
+        ]));
+    }
+
+    public function registerForm()
+    {
+        $data = array();
+        //$this->response->setOutput($this->load->view('account/login_modal', $data));
+
+        $this->load->language('account/register');
+
+        $this->response->setOutput(json_encode([
+            'html' => $this->load->view('account/register_form', $data)
+        ]));
+    }
+
+    public function register()
+    {
+
+        $json = [];
+
+        if ($this->customer->isLogged()) {
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+
+        $this->load->language('account/register');
+        $this->load->model('account/customer');
+
+        $errosValidate = [];
+        if ($this->request->post) {
+            $data = $this->request->post;
+            $errosValidate = $this->validateRegister($data);
+        }
+
+        if (empty($errosValidate)) {
+            $customer_id = $this->model_account_customer->addCustomer($this->request->post);
+
+            // Clear any previous login attempts for unregistered accounts.
+            $this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
+            $this->customer->login($this->request->post['email'], $this->request->post['password']);
+            unset($this->session->data['guest']);
+            $json['success'] = "Поздравляем! Ваш аккаунт успешно создан.";
+        } else {
+            $json['errors'] = $errosValidate;
+        }
+
+        //$data['text_account_already'] = sprintf($this->language->get('text_account_already'), $this->url->link('account/login', '', true));
+
+        //if (isset($this->error['email'])) {
+        //    $data['error_email'] = $this->error['email'];
+        //} else {
+        //    $data['error_email'] = '';
+        //}
+        //
+        //if (isset($this->error['telephone'])) {
+        //    $data['error_telephone'] = $this->error['telephone'];
+        //} else {
+        //    $data['error_telephone'] = '';
+        //}
+        //
+        //if (isset($this->error['custom_field'])) {
+        //    $data['error_custom_field'] = $this->error['custom_field'];
+        //} else {
+        //    $data['error_custom_field'] = array();
+        //}
+        //
+        //if (isset($this->error['password'])) {
+        //    $data['error_password'] = $this->error['password'];
+        //} else {
+        //    $data['error_password'] = '';
+        //}
+        //
+        //if (isset($this->error['confirm'])) {
+        //    $data['error_confirm'] = $this->error['confirm'];
+        //} else {
+        //    $data['error_confirm'] = '';
+        //}
+
+        //$data['action'] = $this->url->link('account/register', '', true);
+
+        if (isset($this->request->post['email'])) {
+            $data['email'] = $this->request->post['email'];
+        } else {
+            $data['email'] = '';
+        }
+
+        if (isset($this->request->post['password'])) {
+            $data['password'] = $this->request->post['password'];
+        } else {
+            $data['password'] = '';
+        }
+
+        if (isset($this->request->post['confirm'])) {
+            $data['confirm'] = $this->request->post['confirm'];
+        } else {
+            $data['confirm'] = '';
+        }
+
+        //// Captcha
+        //if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
+        //    $data['captcha'] = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha'), $this->error);
+        //} else {
+        //    $data['captcha'] = '';
+        //}
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    protected function validateRegister($data)
+    {
+
+        $errors = [];
+
+        if ((utf8_strlen($data['email']) > 96) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = $this->language->get('error_email');
+        }
+
+        if ($this->model_account_customer->getTotalCustomersByEmail($data['email'])) {
+            $errors['emailexists'] = $this->language->get('error_exists');
+        }
+
+        if ((utf8_strlen(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
+            $errors['password'] = $this->language->get('error_password');
+        }
+
+        if ($data['confirm'] != $data['password']) {
+            $errors['confirm'] = $this->language->get('error_confirm');
+        }
+
+        //// Captcha
+        //if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
+        //    $captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
+        //
+        //    if ($captcha) {
+        //        $this->error['captcha'] = $captcha;
+        //    }
+        //}
+
+        // Agree to terms
+        if ($this->config->get('config_account_id')) {
+            $this->load->model('catalog/information');
+
+            $information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
+
+            if ($information_info && !isset($data['agree'])) {
+                $errors['agree'] = "Вы должны дать согласие на обработку персональных данных";
+            }
+        }
+
+        return $errors;
+    }
+
     public function login()
     {
 
@@ -402,6 +561,54 @@ class ControllerAccountAccount extends Controller
             if ((utf8_strlen(trim($data['password'])) < 6) || (utf8_strlen(trim($data['password'])) > 20)) {
                 $errors['password'] = 'Пароль должен быть от 6 до 20 символов';
             }
+        }
+
+        return $errors;
+    }
+
+    public function forgotten()
+    {
+        $json = [];
+
+        if ($this->customer->isLogged()) {
+            $this->response->redirect($this->url->link('account/account', '', true));
+        }
+
+        $this->load->language('account/forgotten');
+
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('account/customer');
+
+        $errosValidate = $this->validateForgotten();
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && empty($errosValidate)) {
+            $this->model_account_customer->editCode($this->request->post['email'], token(40));
+
+            $json['success'] = $this->language->get('text_success');
+        } else {
+            $json['errors'] = $errosValidate;
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    protected function validateForgotten()
+    {
+        $errors = [];
+
+        if (!isset($this->request->post['email'])) {
+            $errors['email'] = $this->language->get('error_email');
+        } elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+            $errors['email'] = $this->language->get('error_email');
+        }
+
+        // Check if customer has been approved.
+        $customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+
+        if ($customer_info && !$customer_info['status']) {
+            $errors['warning'] = $this->language->get('error_approved');
         }
 
         return $errors;

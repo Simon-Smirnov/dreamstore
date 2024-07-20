@@ -125,24 +125,26 @@
                 <div class="homevisit_form-inner">
                     <div class="homevisit_form-image"><img src="{{ assets }}/assets/images/homevisit/form.webp"></div>
                     <div class="homevisit_form-form">
-                        <form>
+                        <form data-forms-btn data-forms-static>
                             <h2 class="homevisit_form-title section-title">Оставить заявку</h2>
                             <p class="homevisit_form-description">Оставьте Ваши контакты для связи. <br>Мы свяжемся с
                                 Вами,
                                 для
                                 согласования времени и даты</p>
-                            <div class="homevisit_form-item">
-                                <input class="input-text" name="phone" type="text" placeholder="Телефон">
-                                <div class="phone-error error"></div>
+                            <div class="homevisit_form-item input-block required">
+                                <input class="input-text" name="phone" type="tel" placeholder="Телефон">
+                                <label>Телефон</label>
+                                <div class="error error-phone text-danger"></div>
                             </div>
-                            <div class="homevisit_form-item">
-                                <input class="input-text" name="email" type="email" placeholder="E-mail">
-                                <div class="email-error error"></div>
+                            <div class="homevisit_form-item input-block required">
+                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                                <label>Ваш E-mail</label>
+                                <div class="error error-email text-danger"></div>
                             </div>
-                            <div class="homevisit_form-item">
+                            <div class="homevisit_form-item input-block">
                                 <textarea class="input-text" name="message" type="text" cols="10"
                                           placeholder="Ваше сообщение"></textarea>
-                                <div class="message-error error"></div>
+                                <div class="error error-message text-danger"></div>
                             </div>
                             <button class="homevisit_form-btn btn btn-primary">Отправить</button>
                             <div class="homevisit_form-agree">
@@ -150,7 +152,7 @@
                                     <input class="input-checkbox" name="agree" type="checkbox">
                                     <span>Даю согласие на <a>обработку персональных данных</a></span>
                                 </label>
-                                <div class="agree-error error"></div>
+                                <div class="error error-agree text-danger"></div>
                             </div>
                         </form>
                     </div>

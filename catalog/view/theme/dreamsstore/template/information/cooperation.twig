@@ -38,38 +38,38 @@
                 <div class="cooperation-form">
                     <div class="cooperation-form__inner">
                         <h2 class="section-title ">Заявка<br>на сотрудничество</h2>
-                        <form class="cooperation__form" data-form-mail>
+                        <form class="cooperation__form" data-forms-btn data-forms-static>
                             <div class="cooperation__input input-block required">
                                 <input class="input-text" name="companyname" type="text"
                                        placeholder="Название компании"
                                        value="">
                                 <label>Название компании</label>
-                                <div class="cooperation__error text-danger" data-form-mail-error></div>
+                                <div class="error error-companyname text-danger"></div>
                             </div>
                             <div class="cooperation__input input-block required">
                                 <input class="input-text required" name="occupation" type="text"
                                        placeholder="Род деятельности"
                                        value="">
                                 <label>Род деятельности</label>
-                                <div class="cooperation__error text-danger" data-form-mail-error></div>
+                                <div class="error error-occupation text-danger"></div>
                             </div>
                             <div class="cooperation__input input-block required">
                                 <input class="input-text required" name="phone" type="tel" placeholder="Телефон"
                                        value="">
                                 <label>Телефон</label>
-                                <div class="cooperation__error text-danger" data-form-mail-error></div>
+                                <div class="error error-phone text-danger"></div>
                             </div>
                             <div class="cooperation__input input-block required">
                                 <input class="input-text" name="email" type="email" placeholder="E-mail" value="">
                                 <label>E-mail</label>
-                                <div class="cooperation__error text-danger" data-form-mail-error></div>
+                                <div class="error error-email text-danger"></div>
                             </div>
                             <div class="cooperation__input input-block">
                                 <textarea class="input-text" cols="50" name="message" type="text"
                                           placeholder="Сообщение"
                                           value=""></textarea>
                                 <label>Сообщение</label>
-                                <div class="cooperation__error text-danger"></div>
+                                <div class="error error-email text-danger"></div>
                             </div>
                             <button class="btn btn-primary cooperation__btn">Отправить</button>
                             <div class="cooperation__input">
@@ -77,7 +77,7 @@
                                     <input class="input-checkbox" name="agree" type="checkbox">
                                     <span>Даю согласие на <a>обработку персональных данных</a></span>
                                 </label>
-                                <div class="cooperation__error text-danger"></div>
+                                <div class="error error-agree text-danger"></div>
                             </div>
                         </form>
                     </div>

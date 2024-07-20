@@ -48,6 +48,10 @@
                 display: flex;
                 gap: 0.5em;
                 margin-top: 1.5em;
+
+                img, video {
+                    border-radius: 0.5em;
+                }
             }
         }
 

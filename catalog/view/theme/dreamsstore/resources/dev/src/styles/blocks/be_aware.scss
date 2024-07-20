@@ -26,14 +26,14 @@
         justify-content: end;
 
         &__block {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: end;
+            display: block;
+
+            .input-block {
+                width: unset;
+            }
 
             input {
-                max-width: 19em;
-
+                max-width: 100%;
             }
         }
     }

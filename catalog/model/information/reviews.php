@@ -17,6 +17,13 @@ class ModelInformationReviews extends Model
         return $query->rows;
     }
 
+    public function getVideos($reviews_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "reviews_video WHERE reviews_id = '" . (int)$reviews_id . "' ORDER BY sort_order");
+
+        return $query->rows;
+    }
+
     public function addReview($data)
     {
         //$this->db->query("INSERT INTO " . DB_PREFIX . "reviews SET author = '" . $this->db->escape($data['author']) . "', email = '" . $this->db->escape($data['email']) . "',  phone = '" . $this->db->escape($data['phone']) . "', customer_id = '" . (int)$this->customer->getId() . "', review = '" . $this->db->escape($data['review']) . "', rating = '" . (int)$data['rating'] . "', date_added = NOW()");
@@ -28,6 +35,14 @@ class ModelInformationReviews extends Model
         if (isset($data['images']) && !empty($data['images'])) {
             foreach ($data['images'] as $image) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "reviews_image SET reviews_id = '" . (int)$reviews_id . "', sort_order = '" . $sort_order . "', image = '" . $image . "'");
+                $sort_order++;
+            }
+        }
+
+        $sort_order = 0;
+        if (isset($data['videos']) && !empty($data['videos'])) {
+            foreach ($data['videos'] as $video) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "reviews_video SET reviews_id = '" . (int)$reviews_id . "', sort_order = '" . $sort_order . "', video = '" . $video . "'");
                 $sort_order++;
             }
         }

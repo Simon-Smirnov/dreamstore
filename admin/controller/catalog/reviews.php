@@ -283,6 +283,15 @@ class ControllerCatalogReviews extends Controller
                 }
             }
 
+            $films = $this->model_catalog_reviews->getVideos($result['reviews_id']);
+            $videos = [];
+            foreach ($films as $film) {
+                //$images[] = $this->model_tool_image->resize($photo['image'], 60, 40);
+                if ($film['video']) {
+                    $videos[]['href'] = $film['video'];
+                }
+            }
+
             $data['reviews'][] = array(
                 'reviews_id' => $result['reviews_id'],
                 'author' => $result['author'],
@@ -291,6 +300,7 @@ class ControllerCatalogReviews extends Controller
                 'text' => $result['text'],
                 'rating' => $result['rating'],
                 'images' => $images,
+                'videos' => $videos,
                 'status' => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
                 'edit' => $this->url->link('catalog/reviews/edit', 'user_token=' . $this->session->data['user_token'] . '&reviews_id=' . $result['reviews_id'] . $url, true)

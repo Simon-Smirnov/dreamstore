@@ -32,3 +32,5 @@ define('DB_DATABASE', 'dreamsstore');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'ds_');
 
+define('REVIEWS', '/image/');
+

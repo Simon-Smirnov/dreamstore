@@ -1,3 +1,5 @@
+import "./classes/StaticFunctions.js";
+import "./classes/Attentions.js";
 import InputPassword from './classes/InputPassword.js'
 import './classes/Modal.js'
 import Account from './classes/Account.js'
@@ -35,6 +37,7 @@ import MenuMobil from "./classes/MenuMobil.js";
 import MenuMain from "./classes/MenuMain.js";
 import SelectLink from "./classes/SelectLink.js";
 import Forms from "./classes/Forms.js";
+import Quiz from "./classes/Quiz.js";
 import ContactMap from "./classes/ContactMap.js";
 import "./classes/Map.js";
 // import './classes/Hover3D.js'

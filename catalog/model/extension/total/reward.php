@@ -1,76 +1,105 @@
 <?php
-class ModelExtensionTotalReward extends Model {
-	public function getTotal($total) {
-		if (isset($this->session->data['reward'])) {
-			$this->load->language('extension/total/reward', 'reward');
 
-			$points = $this->customer->getRewardPoints();
+class ModelExtensionTotalReward extends Model
+{
+    public function getTotal($total)
+    {
+        if (isset($this->session->data['bonuses'])) {
+            $this->load->language('extension/total/reward', 'reward');
 
-			if ($this->session->data['reward'] <= $points) {
-				$discount_total = 0;
+            if (isset($this->session->data['bonuses']) && $this->session->data['bonuses'] == 'on') {
+                $points = (int)$this->customer->getRewardPoints();
 
-				$points_total = 0;
+                $products_sum = $this->cart->getSubTotal();
+                //echo "<pre>";
+                //var_dump($points);
+                //var_dump($products_sum);
+                //echo "</pre>";
+                $max_sum_for_discount = (int)$products_sum / 2;
 
-				foreach ($this->cart->getProducts() as $product) {
-					if ($product['points']) {
-						$points_total += $product['points'];
-					}
-				}
+                $discount_total = $points;
 
-				$points = min($points, $points_total);
+                if ($points > $max_sum_for_discount) {
+                    $discount_total = $max_sum_for_discount;
+                }
 
-				foreach ($this->cart->getProducts() as $product) {
-					$discount = 0;
+                $total['totals'][] = array(
+                    'code' => 'reward',
+                    'title' => "Списано бонусов",
+                    'value' => $discount_total,
+                    'sort_order' => $this->config->get('total_reward_sort_order')
+                );
 
-					if ($product['points']) {
-						$discount = $product['total'] * ($this->session->data['reward'] / $points_total);
+                $total['total'] -= $discount_total;
 
-						if ($product['tax_class_id']) {
-							$tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
 
-							foreach ($tax_rates as $tax_rate) {
-								if ($tax_rate['type'] == 'P') {
-									$total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
-								}
-							}
-						}
-					}
+                //if ($this->session->data['reward'] <= $points) {
+                //    $discount_total = 0;
+                //
+                //    $points_total = 0;
+                //
+                //    foreach ($this->cart->getProducts() as $product) {
+                //        if ($product['points']) {
+                //            $points_total += $product['points'];
+                //        }
+                //    }
+                //
+                //    $points = min($points, $points_total);
+                //
+                //    foreach ($this->cart->getProducts() as $product) {
+                //        $discount = 0;
+                //
+                //        if ($product['points']) {
+                //            $discount = $product['total'] * ($this->session->data['reward'] / $points_total);
+                //
+                //            if ($product['tax_class_id']) {
+                //                $tax_rates = $this->tax->getRates($product['total'] - ($product['total'] - $discount), $product['tax_class_id']);
+                //
+                //                foreach ($tax_rates as $tax_rate) {
+                //                    if ($tax_rate['type'] == 'P') {
+                //                        $total['taxes'][$tax_rate['tax_rate_id']] -= $tax_rate['amount'];
+                //                    }
+                //                }
+                //            }
+                //        }
+                //
+                //        $discount_total += $discount;
+                //    }
+                //
+                //    $total['totals'][] = array(
+                //        'code' => 'reward',
+                //        'title' => sprintf($this->language->get('reward')->get('text_reward'), $this->session->data['reward']),
+                //        'value' => -$discount_total,
+                //        'sort_order' => $this->config->get('total_reward_sort_order')
+                //    );
+                //
+                //    $total['total'] -= $discount_total;
+            }
+        }
+    }
 
-					$discount_total += $discount;
-				}
+    public function confirm($order_info, $order_total)
+    {
+        $this->load->language('extension/total/reward');
 
-				$total['totals'][] = array(
-					'code'       => 'reward',
-					'title'      => sprintf($this->language->get('reward')->get('text_reward'), $this->session->data['reward']),
-					'value'      => -$discount_total,
-					'sort_order' => $this->config->get('total_reward_sort_order')
-				);
+        $points = 0;
 
-				$total['total'] -= $discount_total;
-			}
-		}
-	}
+        $start = strpos($order_total['title'], '(') + 1;
+        $end = strrpos($order_total['title'], ')');
 
-	public function confirm($order_info, $order_total) {
-		$this->load->language('extension/total/reward');
+        if ($start && $end) {
+            $points = substr($order_total['title'], $start, $end - $start);
+        }
 
-		$points = 0;
+        $this->load->model('account/customer');
 
-		$start = strpos($order_total['title'], '(') + 1;
-		$end = strrpos($order_total['title'], ')');
+        if ($this->model_account_customer->getRewardTotal($order_info['customer_id']) >= $points) {
+            $this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET customer_id = '" . (int)$order_info['customer_id'] . "', order_id = '" . (int)$order_info['order_id'] . "', description = '" . $this->db->escape(sprintf($this->language->get('text_order_id'), (int)$order_info['order_id'])) . "', points = '" . (float)-$points . "', date_added = NOW()");
+        }
+    }
 
-		if ($start && $end) {
-			$points = substr($order_total['title'], $start, $end - $start);
-		}
-
-		$this->load->model('account/customer');
-
-		if ($this->model_account_customer->getRewardTotal($order_info['customer_id']) >= $points) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_reward SET customer_id = '" . (int)$order_info['customer_id'] . "', order_id = '" . (int)$order_info['order_id'] . "', description = '" . $this->db->escape(sprintf($this->language->get('text_order_id'), (int)$order_info['order_id'])) . "', points = '" . (float)-$points . "', date_added = NOW()");
-		}
-	}
-
-	public function unconfirm($order_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points < 0");
-	}
+    public function unconfirm($order_id)
+    {
+        $this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points < 0");
+    }
 }

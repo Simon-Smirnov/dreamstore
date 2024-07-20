@@ -15,6 +15,14 @@ export default class {
                     body.append('shipping_method', e.target.value)
                     this.updateViewCheckOut(body);
                 }
+                if (e.target.hasAttribute('[data-bonuses-switch]') || e.target.closest('[data-bonuses-switch]')) {
+                    if (e.target.checked) {
+                        body.append('bonuses', e.target.value);
+                    } else {
+                        body.append('bonuses', '');
+                    }
+                    this.updateViewCheckOut(body);
+                }
                 if (e.target.hasAttribute('[data-checkout-agree]') || e.target.closest('[data-checkout-agree]')) {
                     if (e.target.checked) {
                         body.append(e.target.dataset.checkoutAgree, '1');
@@ -43,6 +51,7 @@ export default class {
                     }
                 }
                 if (target.hasAttribute('[data-checkout-confirm]') || target.closest('[data-checkout-confirm]')) {
+
                     const inputs = document.querySelectorAll('[data-checkout-input]');
                     const agree = document.querySelector('[data-checkout-agree]');
                     const body = new FormData;
@@ -52,31 +61,35 @@ export default class {
                     if (agree.checked) {
                         body.append(agree.dataset.checkoutAgree, '1');
                     }
-                    this.validate(body).then(data => {
-                        if (data) {
-                            let parser = new DOMParser();
-                            let doc = parser.parseFromString(data, 'text/html');
-                            let item = doc.querySelector('.checkout-inner');
-                            let cartUl = document.querySelector('.checkout-content');
-                            cartUl.innerHTML = '';  // Очистим текущие элементы
-                            cartUl.appendChild(item);
-                        } else {
-                            fetch('index.php?route=checkout/confirm', {
-                                method: 'POST',
-                                body: body
-                            })
-                                .then(response => response.text())
-                                .then(data => {
-                                    let parser = new DOMParser();
-                                    let doc = parser.parseFromString(data, 'text/html');
-                                    let item = doc.querySelector('.checkoutConfirm');
-                                    let cartUl = document.querySelector('.checkout-content');
-                                    cartUl.innerHTML = '';
-                                    cartUl.appendChild(item);
+                    this.updateViewCheckOut(body);
+                    setTimeout(() => {
+                        this.validate(body).then(data => {
+                            if (data) {
+                                let parser = new DOMParser();
+                                let doc = parser.parseFromString(data, 'text/html');
+                                let item = doc.querySelector('.checkout-inner');
+                                let cartUl = document.querySelector('.checkout-content');
+                                cartUl.innerHTML = '';  // Очистим текущие элементы
+                                cartUl.appendChild(item);
+                            } else {
+                                fetch('index.php?route=checkout/confirm', {
+                                    method: 'POST',
+                                    body: body
                                 })
-                                .catch(error => console.error('Error:', error));
-                        }
-                    })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        let parser = new DOMParser();
+                                        let doc = parser.parseFromString(data, 'text/html');
+                                        let item = doc.querySelector('.checkoutConfirm');
+                                        let cartUl = document.querySelector('.checkout-content');
+                                        cartUl.innerHTML = '';
+                                        cartUl.appendChild(item);
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
+                        })
+                    }, 500)
+
                     // console.log(r);
                     // if (!r) {
                     //     console.log(r);
@@ -105,13 +118,24 @@ export default class {
             this.checkout.addEventListener('focusout', (e) => {
                 const target = e.target;
                 if (target.hasAttribute('data-checkout-input')) {
-                    const inputs = document.querySelectorAll('[data-checkout-input]');
-                    const body = new FormData;
-                    inputs.forEach(input => {
-                        body.append(input.dataset.checkoutInput, input.value);
+                    let focusOutTimeout;
+                    focusOutTimeout = setTimeout(() => {
+                        const inputs = document.querySelectorAll('[data-checkout-input]');
+                        const body = new FormData;
+                        inputs.forEach(input => {
+                            body.append(input.dataset.checkoutInput, input.value);
+                        });
+                        // body.append(target.dataset.checkoutInput, target.value);
+                        this.updateViewCheckOut(body);
+                    }, 200);
+
+                    this.checkout.addEventListener('focusin', () => {
+                        clearTimeout(focusOutTimeout);
                     });
-                    // body.append(target.dataset.checkoutInput, target.value);
-                    this.updateViewCheckOut(body);
+
+                    this.checkout.addEventListener('input', () => {
+                        clearTimeout(focusOutTimeout);
+                    });
                 }
             })
         }

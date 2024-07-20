@@ -3,11 +3,11 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
 {% endif %}
-{% if error_warning %}
-    <div class="alert error alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
-{% endif %}
+{# {% if error_warning %} #}
+{#    <div class="alert error alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} #}
+{#        <button type="button" class="close" data-dismiss="alert">&times;</button> #}
+{#    </div> #}
+{# {% endif %} #}
 <div class="checkOutCart" data-checkout-inner-cart>
     <div class="checkOutCart-inner">
         <div class="checkOutCart-products" data-checkout-cart-consist>
@@ -84,6 +84,15 @@
                     - {{ total_discounts }}
                 </div>
             </div>
+            {% if totals.reward %}
+                <div class="checkOutCart-totals__item">
+                    <div class="checkOutCart-totals__title">Списано бонусов:</div>
+                    <div class="checkOutCart-totals__line"></div>
+                    <div class="checkOutCart-totals__value">
+                        - {{ totals.reward.value|number_format(0, '.', ' ') }} руб.
+                    </div>
+                </div>
+            {% endif %}
             <div class="checkOutCart-totals__item">
                 <div class="checkOutCart-totals__title">Общий вес:</div>
                 <div class="checkOutCart-totals__line"></div>
@@ -105,6 +114,14 @@
             {#    <div class="checkOutCart-totals__value">{{ totals.shipping.title }} #}
             {#    </div> #}
             {# </div> #}
+            {% if totals.coupon %}
+                <div class="checkOutCart-totals__item">
+                    <div class="checkOutCart-totals__title">Использован промокод:</div>
+                    <div class="checkOutCart-totals__line"></div>
+                    <div class="checkOutCart-totals__value">{{ totals.coupon.value|number_format(0, '.', ' ') }} руб.
+                    </div>
+                </div>
+            {% endif %}
             <div class="checkOutCart-totals__item">
                 <div class="checkOutCart-totals__title">Бонусов за заказ:</div>
                 <div class="checkOutCart-totals__line"></div>
@@ -127,6 +144,9 @@
                        {% if agree %}checked{% endif %}>
                 <span>Даю согласие на <a>обработку персональных данных</a></span>
             </label>
+            {% if error %}
+                <p class="alert-input text-danger">{{ error }}</p>
+            {% endif %}
         </div>
     </div>
 </div>

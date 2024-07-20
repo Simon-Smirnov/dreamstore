@@ -33,3 +33,10 @@ define('DB_PASSWORD', 'root');
 define('DB_DATABASE', 'dreamsstore');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'ds_');
+
+define('GIFT_CARD_CATEGORY_ID', 124);
+define('MODELS_CATEGORY_ID', 126);
+
+define('MODE', 0); // 0 - DEV, 1 - PROD
+define('ASSETS', MODE ? '/catalog/view/theme/dreamsstore/resources/app' : '/catalog/view/theme/dreamsstore/resources/dev');
+define('REVIEWS', '/image/');

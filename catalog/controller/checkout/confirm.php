@@ -372,10 +372,37 @@ class ControllerCheckoutConfirm extends Controller
                 );
             }
 
-            if ($this->customer->isLogged() && isset($order_data['reward']) && (int)$order_data['reward'] > 0) {
+            if ($this->customer->isLogged()) {
+
                 $this->load->model('account/reward');
-                $this->model_account_reward->setRewards($this->customer->getId(), $this->session->data['order_id'], $order_data['reward']);
+
+                //получаем текущие бонусы клиента
+                $current_bonuses = (int)$this->customer->getRewardPoints();
+
+                //начисляем бонусы
+                if (isset($order_data['reward']) && (int)$order_data['reward'] > 0) {
+                    $newPoints = $current_bonuses + (int)$order_data['reward'];
+                    $this->customer->setRewardPoints($newPoints);
+                    $this->model_account_reward->setRewards($this->customer->getId(), $this->session->data['order_id'], $order_data['reward']);
+                }
+
+                //списываем бонусы
+                foreach ($order_data['totals'] as $total) {
+                    if ($total['code'] == 'reward' && (int)$total['value'] > 0) {
+                        $newPoints = $current_bonuses - (int)$total['value'];
+                        if ($newPoints < 0) {
+                            $newPoints = 0;
+                        }
+                        $this->customer->setRewardPoints($newPoints);
+                    }
+                }
             }
+
+            echo "<pre>";
+            var_dump($order_data['totals']);
+            echo "</pre>";
+
+            exit();
 
             $data['firstname'] = $order_data['firstname'];
             $data['telephone'] = $order_data['telephone'];

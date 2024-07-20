@@ -2,8 +2,12 @@
 
 class ControllerCheckoutOrderCart extends Controller
 {
-    public function index()
+    public function index($errors = [])
     {
+
+        if (!empty($errors) && isset($errors['agree'])) {
+            $data['error'] = $errors['agree'];
+        }
 
         $this->load->language('checkout/order_cart');
 

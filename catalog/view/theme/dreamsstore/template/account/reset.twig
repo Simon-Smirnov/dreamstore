@@ -1,0 +1,46 @@
+{{ header }}
+<div id="account-reset">
+    <div class="container">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div id="content" class="accountReset">
+            <h1 class="page-title">{{ heading_title }}</h1>
+            <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <h4 class="accountReset-title">{{ text_password }}</h4>
+                <div class="accountReset-input input-block input-password required" data-input-password>
+                    <input class="input-text" name="password" type="password" placeholder="{{ entry_password }}"
+                           value="{{ password }}" data-input-password-input>
+                    <label>{{ entry_password }}</label>
+                    <div class="error-password text-danger">{% if error_password %}{{ error_password }}{% endif %}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg="">
+                        <use xlink:href="/sprite.svg#icon_eye"></use>
+                    </svg>
+                </div>
+                <div class="accountReset-input input-block input-password required" data-input-password>
+                    <input class="input-text" name="confirm" type="password" placeholder="{{ entry_confirm }}"
+                           value="{{ confirm }}" data-input-password-input>
+                    <label>{{ entry_confirm }}</label>
+                    <div class="error-password text-danger">{% if error_confirm %}{{ error_confirm }}{% endif %}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" data-input-password-svg="">
+                        <use xlink:href="/sprite.svg#icon_eye"></use>
+                    </svg>
+                </div>
+                <div class="accountReset-buttons">
+                    <a href="{{ back }}" class="btn btn-second">{{ button_back }}</a>
+                    <button type="submit" class="btn btn-primary">Подтвердить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {#    {{ column_left }} #}
+    {#    {{ column_right }} #}
+    {#    {{ content_bottom }} #}
+    {#    {{ content_top }} #}
+</div>
+{{ footer }}

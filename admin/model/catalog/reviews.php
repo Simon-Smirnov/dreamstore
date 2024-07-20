@@ -127,4 +127,12 @@ class ModelCatalogReviews extends Model
         return $query->rows;
 
     }
+
+    public function getVideos($reviews_id)
+    {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "reviews_video WHERE reviews_id = '" . (int)$reviews_id . "' ORDER BY sort_order");
+
+        return $query->rows;
+
+    }
 }

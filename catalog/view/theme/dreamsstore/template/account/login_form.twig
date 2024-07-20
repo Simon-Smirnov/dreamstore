@@ -1,6 +1,6 @@
 <div id="login-modal">
     <div class="login-inner" data-login-form>
-        <form>
+        <form data-login-form>
             <h2 class="section-title login-inner__title">Вход</h2>
             <div class="login-inner__inputs">
                 <div class="login-inner__input">
@@ -24,7 +24,7 @@
                     <label for="login-inner-remember">Запомнить меня</label>
                 </div>
                 <div class="login-inner__forgot">
-                    <a href="something">Забыли пароль?</a>
+                    <a data-change-password-btn>Забыли пароль?</a>
                 </div>
             </div>
             <button class="btn btn-primary login-inner__btn" type="submit">Войти</button>
@@ -35,7 +35,7 @@
             <div class="error-agree text-danger"></div>
             <div class="login-inner__register">
                 <p class="login-inner__register--text">Еще нет аккаунта?</p>
-                <a class="login-inner__register--link" data-ligin-register>Регистрация</a>
+                <a class="login-inner__register--link" data-login-register>Регистрация</a>
             </div>
         </form>
     </div>

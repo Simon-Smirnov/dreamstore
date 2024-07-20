@@ -59,6 +59,9 @@ class ControllerCommonHeader extends Controller
 
             $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
             $data['points'] = $this->customer->getRewardPoints();
+            if (!$data['points']) {
+                $data['points'] = '0';
+            }
         } else {
             $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
         }

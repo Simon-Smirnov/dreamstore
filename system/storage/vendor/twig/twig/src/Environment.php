@@ -136,6 +136,12 @@ class Environment
 
     }
 
+    public function getReviews()
+    {
+        return REVIEWS;
+
+    }
+
     /**
      * Gets the base template class for compiled templates.
      *

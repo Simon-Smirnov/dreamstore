@@ -43,7 +43,7 @@ export default class {
                         for (let i = 0; i < files.length; i++) {
                             const fileType = files[i].type;
                             const fileName = files[i].name.toLowerCase();
-                            if (fileType.startsWith('image/') && (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png'))) {
+                            if ((fileType.startsWith('image/') || fileType.startsWith('video/')) && (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png') || fileName.endsWith('.mp4'))) {
                                 this.images[target.dataset.num] = files[i];
                                 target.hidden = true;
                                 let input = document.createElement('input');
@@ -86,24 +86,88 @@ export default class {
     renderImages(target) {
         this.immageBlock.innerHTML = '';
 
+        // for (let imageKey in this.images) {
+        //     const reader = new FileReader();
+        //     reader.onload = (e) => {
+        //         const div = document.createElement('div');
+        //         div.classList.add('download-image-' + imageKey);
+        //         div.classList.add('download-image');
+        //         const img = document.createElement('img');
+        //         img.src = e.target.result;
+        //         img.classList.add('thumbnail');
+        //         div.appendChild(img);
+        //         const close = document.createElement('div');
+        //         close.classList.add('close_image');
+        //         close.dataset.num = imageKey;
+        //         close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg"><use xlink:href="/sprite.svg#icon_cross"></use></svg>';
+        //         div.appendChild(close);
+        //         this.immageBlock.appendChild(div);
+        //     }
+        //     reader.readAsDataURL(this.images[imageKey]);
+        // }
+
         for (let imageKey in this.images) {
+            const file = this.images[imageKey];
             const reader = new FileReader();
+
             reader.onload = (e) => {
-                const div = document.createElement('div');
-                div.classList.add('download-image-' + imageKey);
-                div.classList.add('download-image');
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.classList.add('thumbnail');
-                div.appendChild(img);
-                const close = document.createElement('div');
-                close.classList.add('close_image');
-                close.dataset.num = imageKey;
-                close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg"><use xlink:href="/sprite.svg#icon_cross"></use></svg>';
-                div.appendChild(close);
-                this.immageBlock.appendChild(div);
-            }
-            reader.readAsDataURL(this.images[imageKey]);
+                const fileType = file.type;
+
+                if (fileType.startsWith('image/')) {
+                    // Обрабатываем как изображение
+                    const div = document.createElement('div');
+                    div.classList.add('download-image-' + imageKey);
+                    div.classList.add('download-image');
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('thumbnail');
+                    div.appendChild(img);
+                    const close = document.createElement('div');
+                    close.classList.add('close_image');
+                    close.dataset.num = imageKey;
+                    close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg"><use xlink:href="/sprite.svg#icon_cross"></use></svg>';
+                    div.appendChild(close);
+                    this.immageBlock.appendChild(div);
+                } else if (fileType.startsWith('video/')) {
+                    // Обрабатываем как видео
+                    const video = document.createElement('video');
+                    video.src = e.target.result;
+                    video.crossOrigin = 'anonymous'; // Для обработки cross-origin видео
+
+                    video.addEventListener('loadeddata', () => {
+                        // Устанавливаем время для видео, чтобы оно начало воспроизведение
+                        video.currentTime = 1; // Устанавливаем на 1 секунду для более надежного захвата
+                    });
+
+                    video.addEventListener('seeked', () => {
+                        // Создаем canvas и захватываем кадр
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        const context = canvas.getContext('2d');
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                        // Создаем элемент изображения из canvas
+                        const img = document.createElement('img');
+                        img.src = canvas.toDataURL('image/png');
+                        img.classList.add('thumbnail');
+
+                        // Создаем элемент div и добавляем в него изображение и кнопки
+                        const div = document.createElement('div');
+                        div.classList.add('download-image-' + imageKey);
+                        div.classList.add('download-image');
+                        div.appendChild(img);
+                        const close = document.createElement('div');
+                        close.classList.add('close_image');
+                        close.dataset.num = imageKey;
+                        close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg"><use xlink:href="/sprite.svg#icon_cross"></use></svg>';
+                        div.appendChild(close);
+                        this.immageBlock.appendChild(div);
+                    });
+                }
+            };
+
+            reader.readAsDataURL(file);
         }
     }
 }

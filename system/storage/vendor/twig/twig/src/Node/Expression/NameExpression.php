@@ -20,7 +20,8 @@ class NameExpression extends AbstractExpression
         '_self' => '$this->getTemplateName()',
         '_context' => '$context',
         '_charset' => '$this->env->getCharset()',
-        'assets' => '$this->env->getAssets()'
+        'assets' => '$this->env->getAssets()',
+        'image_reviews' => '$this->env->getReviews()',
     ];
 
     public function __construct(string $name, int $lineno)
