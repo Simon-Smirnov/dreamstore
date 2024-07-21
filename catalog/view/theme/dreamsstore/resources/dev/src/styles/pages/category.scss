@@ -10,8 +10,11 @@
         padding: 1em 0;
         border: 1px solid var(--libe);
         border-radius: 0.4em;
-        font-weight: 500;
         font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
 
         &-text {
             color: var(--color-5-dark);
@@ -19,6 +22,10 @@
 
         &-link {
             color: var(--color-6-dark);
+        }
+
+        :hover &-link {
+            color: var(--color-4-dark);
         }
     }
 
@@ -51,9 +58,7 @@
             }
 
             span {
-                font-weight: 500;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
             }
         }
     }
@@ -70,7 +75,6 @@
         &-choice {
             background-color: var(--bg-light-60);
             font-size: 1.3rem;
-            color: var(--color-4-dark);
             border-radius: 0.2em;
             padding: 1em 1.2em;
             display: block;
@@ -86,7 +90,6 @@
             &_toMainCategory {
                 font-size: 1.1rem;
                 font-weight: 600;
-                color: var(--color-4-dark);
                 display: flex;
                 align-items: center;
                 gap: 0.3em;
@@ -106,9 +109,7 @@
 
             &_item {
                 margin-top: 0.6em;
-                font-weight: 500;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
             }
         }
 
@@ -136,7 +137,6 @@
             align-items: center;
 
             &_sort {
-                font-weight: 500;
                 font-size: 1.1rem;
                 display: flex;
                 align-items: center;
@@ -146,10 +146,6 @@
                     color: var(--color-6-dark);
                     margin-right: 0.3em;
                 }
-
-                //select {
-                //    color: var(--color-4-dark);
-                //}
             }
 
             &_structure {

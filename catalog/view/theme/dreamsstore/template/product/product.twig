@@ -147,7 +147,7 @@
             <div class="product-right" data-products-to-cart data-product-id-global="{{ product_id }}">
                 <div class="product-right__info">
                     <p>Артикул: {{ sku }}</p>
-                    <a data-modal="share">Поделиться</a>
+                    <a class="hover-dark" data-modal="share">Поделиться</a>
                 </div>
                 <h1 class="section-title">{{ heading_title }}</h1>
                 {% if related_products %}
@@ -184,7 +184,7 @@
                                      data-option="select">
                                     <span class="product-right__options-title">{{ option.name }}
                                         {% if option.option_id == '15' %}
-                                            <span class="product-right__sizeTable"
+                                            <span class="product-right__sizeTable hover-underline-dashed-dark hover-dark"
                                                   data-modal="size_table">Таблица размеров</span>
                                         {% endif %}
                                     </span>
@@ -226,6 +226,14 @@
                                                                data-option-input-product-id="{{ product_id }}"/>
                                                         <span class="product-right__options-text">{{ option_value.name }}</span>
                                                     </label>
+                                                    {% if option_value.attention %}
+                                                        <span data-attention-text="{{ option_value.attention }}">
+                                                        <svg class="svg-attention"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="/sprite.svg#icon_attention"></use>
+                                                        </svg>
+                                                    </span>
+                                                    {% endif %}
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -306,7 +314,8 @@
                                          data-product-set-products="{{ set_product.ids }}"
                                          data-product-set-category="{{ set_product.category.name }}">
                                         <span class="product-right__complect--span">
-                                            <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="product-right__complect--svg hover-svg-light-fill icon-svg-stroke"
+                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg#icon_plus"></use>
                                             </svg>
                                         </span>
@@ -350,7 +359,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="product-set__remove">
-                                                            <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                                            <svg class="product-set__remove--svg hover-svg-dark-fill"
+                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <use xlink:href="/sprite.svg#icon_cross"></use>
                                                             </svg>
                                                         </div>
@@ -407,7 +417,8 @@
                                         <div class="productSizeTable-item">155х205 (2шт)</div>
                                         <div class="productSizeTable-item">245х270</div>
                                     </div>
-                                    <a class="productSizeTable_link" data-forms="dontfind">Нет нужного размера?</a>
+                                    <a class="productSizeTable_link hover-dark" data-forms="dontfind">Нет нужного
+                                        размера</a>
                                 </div>
                             </div>
                         </div>
@@ -456,16 +467,21 @@
                     <div class="swiper">
                         <div class="swiper-wrapper" data-lightbox-parent>
                             {% for product in products %}
-                                <a class="products_grid-item product-similar__item" href="{{ product.href }}"
+                                <a class="products_grid-item product-similar__item zoom-trigger"
+                                   href="{{ product.href }}"
                                    data-fancybox="slider">
                                     <div class="products_grid-thumb">
                                         <div class="products_grid-block">
-                                            <picture>
-                                                <source srcset="{{ product.thumb.webp }}">
-                                                <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                     title="{{ product.name }}"
-                                                     src="{{ product.thumb.default }}" loading="lazy">
-                                            </picture>
+                                            <div class="zoom-container">
+                                                <div class="zoom-image">
+                                                    <picture>
+                                                        <source srcset="{{ product.thumb.webp }}">
+                                                        <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                             title="{{ product.name }}"
+                                                             src="{{ product.thumb.default }}" loading="lazy">
+                                                    </picture>
+                                                </div>
+                                            </div>
                                             <p class="products_grid-price">
                                                 {% if not product.special %}
                                                     <span
@@ -533,7 +549,7 @@
             <div class="container">
                 <div class="product-reviews__block">
                     <h2 class="section-title">Отзывы покупателей</h2>
-                    <a href="/reviews" class="product-reviews__watchAll">
+                    <a href="/reviews" class="product-reviews__watchAll see-more">
                         <span>Смотреть все</span>
                         <svg xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="/sprite.svg#icon_arrow_right"></use>
@@ -595,15 +611,21 @@
                 <div class="swiper">
                     <ul class="product-recentlyViewed__list swiper-wrapper" data-lightbox-parent>
                         {% for recently_viewed_product in recently_viewed_products %}
-                            <li class="product-recentlyViewed__item">
+                            <a class="product-recentlyViewed__item zoom-trigger" href="/">
                                 <div class="products_grid-thumb">
                                     <div class="products_grid-block">
-                                        <picture>
-                                            <source srcset="{{ recently_viewed_product.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ recently_viewed_product.name }}"
-                                                 title="{{ recently_viewed_product.name }}"
-                                                 src="{{ recently_viewed_product.thumb.default }}" loading="lazy">
-                                        </picture>
+                                        <div class="zoom-container">
+                                            <div class="zoom-image">
+                                                <picture>
+                                                    <source srcset="{{ recently_viewed_product.thumb.webp }}">
+                                                    <img class="catalog-inner_link-img"
+                                                         alt="{{ recently_viewed_product.name }}"
+                                                         title="{{ recently_viewed_product.name }}"
+                                                         src="{{ recently_viewed_product.thumb.default }}"
+                                                         loading="lazy">
+                                                </picture>
+                                            </div>
+                                        </div>
                                         <p class="products_grid-price">
                                             {% if not recently_viewed_product.special %}
                                                 <span
@@ -619,7 +641,7 @@
                                     </div>
                                     <h4 class="products_grid-title">{{ recently_viewed_product.name }}</h4>
                                 </div>
-                            </li>
+                            </a>
                         {% endfor %}
                     </ul>
                 </div>
@@ -634,13 +656,17 @@
                 <ul class="product-mayBeInterest__list">
                     {% for interest_category in may_be_interest_categories %}
                         <li>
-                            <a class="product-mayBeInterest__link" href="{{ interest_category.href }}">
-                                <picture>
-                                    <source srcset="{{ interest_category.image.webp }}">
-                                    <img class="catalog-inner_link-img" alt="{{ interest_category.name }}"
-                                         title="{{ interest_category.name }}"
-                                         src="{{ interest_category.image.default }}" loading="lazy">
-                                </picture>
+                            <a class="product-mayBeInterest__link zoom-trigger" href="{{ interest_category.href }}">
+                                <div class="zoom-container">
+                                    <div class="zoom-image">
+                                        <picture>
+                                            <source srcset="{{ interest_category.image.webp }}">
+                                            <img class="catalog-inner_link-img" alt="{{ interest_category.name }}"
+                                                 title="{{ interest_category.name }}"
+                                                 src="{{ interest_category.image.default }}" loading="lazy">
+                                        </picture>
+                                    </div>
+                                </div>
                                 <h4>{{ interest_category.name }}</h4>
                             </a>
                         </li>

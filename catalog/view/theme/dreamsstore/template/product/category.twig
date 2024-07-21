@@ -12,11 +12,11 @@
             <h1 class="page-title">{{ heading_title }}</h1>
         </div>
         <div class="container">
-            <div class="category_getFree">
+            <a class="category_getFree hover-background-superlight pointer" data-forms="bid">
                 <p class="category_getFree-text">Получите бесплатные образцы ткани, чтобы убедиться в цвете и качестве
                     материала.
-                    <a class="category_getFree-link">Оставить заявку</a></p>
-            </div>
+                <p class="category_getFree-link">Оставить заявку</p></p>
+            </a>
         </div>
         <div class="container">
             <div class="category_underCategories">
@@ -39,7 +39,7 @@
         <div class="container">
             <div id="content" class="category_block">
                 <div class="category_other">
-                    <a href="" class="category_other-choice">
+                    <a href="/buyers?content=choose" class="category_other-choice hover-light">
                         Как выбрать ткань?
                     </a>
                     {% if categories %}
@@ -150,15 +150,19 @@
                         <div class="category_main-products">
                             <div class="products_grid" data-items-identy>
                                 {% for product in products %}
-                                    <a class="products_grid-item" href="{{ product.href }}">
+                                    <a class="products_grid-item zoom-trigger" href="{{ product.href }}">
                                         <div class="products_grid-thumb">
                                             <div class="products_grid-block">
-                                                <picture>
-                                                    <source srcset="{{ product.thumb.webp }}">
-                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                         title="{{ product.name }}"
-                                                         src="{{ product.thumb.default }}" loading="lazy">
-                                                </picture>
+                                                <div class="zoom-container">
+                                                    <div class="zoom-image">
+                                                        <picture>
+                                                            <source srcset="{{ product.thumb.webp }}">
+                                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                                 title="{{ product.name }}"
+                                                                 src="{{ product.thumb.default }}" loading="lazy">
+                                                        </picture>
+                                                    </div>
+                                                </div>
                                                 <p class="products_grid-price">
                                                     {% if not product.special %}
                                                         <span

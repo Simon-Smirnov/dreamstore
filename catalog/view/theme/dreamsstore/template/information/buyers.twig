@@ -16,15 +16,15 @@
                 <div class="buyers-tabs">
                     <ul class="buyers-tabs__list">
                         <li class="buyers-tabs__item grow right">
-                            <a class="buyers-tabs__link {% if not is_guarantee and not is_choose %}active{% endif %}"
+                            <a class="buyers-tabs__link hover-dark pointer {% if not is_guarantee and not is_choose %}active{% endif %}"
                                href="{{ href }}">Оплата и доставка</a>
                         </li>
                         <li class="buyers-tabs__item middle">
-                            <a class="buyers-tabs__link {% if is_guarantee %}active{% endif %}"
+                            <a class="buyers-tabs__link hover-dark pointer {% if is_guarantee %}active{% endif %}"
                                href="{{ href_guarantee }}">Гарантия и возврат</a>
                         </li>
                         <li class="buyers-tabs__item grow left">
-                            <a class="buyers-tabs__link {% if is_choose %}active{% endif %}"
+                            <a class="buyers-tabs__link hover-dark pointer {% if is_choose %}active{% endif %}"
                                href="{{ href_choose }}">Как выбрать ткань</a>
                         </li>
                     </ul>

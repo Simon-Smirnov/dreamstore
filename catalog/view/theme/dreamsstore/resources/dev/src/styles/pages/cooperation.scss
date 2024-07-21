@@ -16,9 +16,7 @@
 
     &-about {
         &__title {
-            font-weight: 500;
             font-size: 1.3rem;
-            color: var(--color-4-dark);
             line-height: 1.4;
         }
 
@@ -27,7 +25,6 @@
         }
 
         &__item {
-            font-weight: 500;
             font-size: 1.1rem;
             color: var(--color-5-dark);
             line-height: 1.4;
@@ -50,7 +47,6 @@
             line-height: 1.4;
             margin-top: 1em;
             font-size: 1.1rem;
-            font-weight: 500;
         }
     }
 
@@ -58,18 +54,16 @@
         margin-top: 1em;
 
         &__title {
-            font-weight: 500;
             font-size: 1.5rem;
-            color: var(--color-4-dark);
             line-height: 1.4;
         }
 
         &__link {
-            font-weight: 500;
             font-size: 1.1rem;
             color: var(--color-5-dark);
             line-height: 1.4;
             display: block;
+            width: fit-content;
         }
     }
 

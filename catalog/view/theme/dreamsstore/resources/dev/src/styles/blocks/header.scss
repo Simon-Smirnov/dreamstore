@@ -8,7 +8,6 @@
 .header-top {
     background-color: var(--bg-light-60);
     color: var(--color-5-dark);
-    font-weight: 500;
     padding: 0.7em 0;
 }
 
@@ -26,7 +25,6 @@
 
 .header-top_info-email {
     color: var(--color-5-dark);
-    font-weight: 500;
 }
 
 .header-top_info-mode {
@@ -69,7 +67,6 @@
 
 .header-top_block-phone, .header-top_block-order {
     color: var(--color-5-dark);
-    font-weight: 500;
 }
 
 /* .header-top_block-order {
@@ -103,6 +100,10 @@
     width: 14em;
 }
 
+.header-bottom_block-logo img:hover {
+    transform: scale(1.01);
+}
+
 .header-bottom_block-catalog span {
     line-height: 1.4;
 }
@@ -114,7 +115,6 @@
     padding: 0.5em 1em;
     border-radius: 0.3em;
     color: var(--color-9);
-    cursor: pointer;
 }
 
 .header-bottom_block-catalog_btn svg {
@@ -137,14 +137,6 @@
     }
 }
 
-//.header-bottom_block-catalog_btn:hover .cross {
-//    display: block;
-//}
-//
-//.header-bottom_block-catalog_btn:hover .burger {
-//    display: none;
-//}
-
 .header-bottom_block {
     display: flex;
     align-items: center;
@@ -159,11 +151,6 @@
     list-style-type: none;
 }
 
-.header-bottom_navigation_list-item a {
-    color: var(--color-4-dark);
-    font-weight: 500;
-}
-
 .header-bottom_about-list {
     display: flex;
     gap: 1.6em;
@@ -173,10 +160,6 @@
 
 .header-bottom_about-list li {
     list-style-type: none;
-
-    > a {
-        cursor: pointer;
-    }
 }
 
 .icon-svg-stroke {
@@ -184,11 +167,6 @@
     height: 1.5em;
     fill: none;
     stroke: var(--color-4-dark);
-}
-
-.icon-svg-stroke:hover {
-    transition: ease 0.3s;
-    fill: var(--color-4-dark);
 }
 
 #cart > button {
@@ -263,9 +241,6 @@
     line-height: 1;
 }
 
-/*header end code*/
-
-/*main desktop menu start code*/
 .header-bottom_block-catalog_modal {
     display: none;
     background-color: var(--bg-alpha-48);
@@ -301,17 +276,12 @@
 }
 
 .header-bottom_block-catalog_categories .menu-item {
-    font-weight: 500;
     color: var(--color-6-dark);
     font-size: 1.2rem;
 }
 
 .header-bottom_block-catalog_categories .menu-item_link {
     cursor: pointer;
-}
-
-.header-bottom_block-catalog_categories .menu-item:hover {
-    color: var(--color-4-dark);
 }
 
 .header-bottom_block-catalog_categories .menu-item_link.active {
@@ -332,26 +302,23 @@
     overflow: hidden;
 
     h3 {
-        font-weight: 500;
-        color: var(--color-4-dark);
         font-size: 1.3rem;
     }
 
     p {
-        font-weight: 500;
         font-size: 1.1rem;
         color: var(--color-6-dark);
         line-height: 1.4;
         margin-top: 0.7em;
     }
 
-    img {
+    .zoom-container {
         display: block;
         margin-left: auto;
         position: relative;
         width: 10em;
         top: 2em;
-        right: -2em;
+        right: -3.1em;
         margin-top: -1em;
     }
 }
@@ -374,7 +341,6 @@
 
 .header-bottom_block-catalog_about-text {
     color: var(--color-6-dark);
-    font-weight: 500;
     font-size: 1.1rem;
 }
 
@@ -393,8 +359,6 @@
 }
 
 .dropdown-menu-title {
-    color: var(--color-4-dark);
-    font-weight: 500;
     font-size: 1.3rem;
 }
 
@@ -405,19 +369,11 @@
 .dropdown-menu-item {
     color: var(--color-5-dark);
     font-size: 1.1rem;
-    font-weight: 500;
 }
 
 .dropdown-menu-item + .dropdown-menu-item {
     margin-top: 1em;
 }
-
-//header {
-//    //position: fixed;
-//    //z-index: 10;
-//    //width: 100vw;
-//    //background-color: var(--color-8-dark);
-//}
 
 .header-search.open {
     position: absolute;
@@ -427,7 +383,6 @@
     background-color: rgba(0, 0, 0, 0.28);
 }
 
-/*main desktop menu end code*/
 .header-bottom_mobil {
     display: none;
     align-items: center;
@@ -453,12 +408,8 @@
     display: flex;
     align-items: center;
     gap: 0.5em;
-
-    span {
-        color: var(--color-6-dark);
-        font-weight: 500;
-        font-size: 1.1rem;
-    }
+    color: var(--color-6-dark);
+    font-size: 1.1rem;
 }
 
 .dropdown-menu-children__svg {
@@ -476,7 +427,6 @@
 }
 
 .dropdown-menu-children__link {
-    font-weight: 500;
     font-size: 1.3rem;
     color: var(--text);
     margin-bottom: 0.8em;
@@ -487,7 +437,6 @@
 }
 
 .dropdown-menu-grandChildren__link {
-    font-weight: 500;
     font-size: 1.1rem;
     color: var(--color-5-dark);
 }

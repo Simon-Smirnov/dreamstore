@@ -14,15 +14,15 @@
                 <div class="blogs-inner__tabs">
                     <ul class="blogs-inner__tabs--list">
                         <li class="blogs-inner__tabs--item grow right">
-                            <a class="blogs-inner__tabs--link {% if not category_id %}active{% endif %}"
+                            <a class="blogs-inner__tabs--link pointer hover-dark {% if not category_id %}active{% endif %}"
                                href="{{ href_all }}">Все</a>
                         </li>
                         <li class="blogs-inner__tabs--item middle">
-                            <a class="blogs-inner__tabs--link {% if category_id == '1' %}active{% endif %}"
+                            <a class="blogs-inner__tabs--link pointer hover-dark {% if category_id == '1' %}active{% endif %}"
                                href="{{ href_news }}">Новости</a>
                         </li>
                         <li class="blogs-inner__tabs--item grow left">
-                            <a class="blogs-inner__tabs--link {% if category_id == '2' %}active{% endif %}"
+                            <a class="blogs-inner__tabs--link pointer hover-dark {% if category_id == '2' %}active{% endif %}"
                                href="{{ href_useful }}">Полезное</a>
                         </li>
                     </ul>
@@ -31,14 +31,18 @@
                     <div class="blogs-site">
                         <div class="blogs-site__list products_grid">
                             {% for blog in blogs %}
-                                <a class="blogs-site__item" href="{{ blog.href }}">
+                                <a class="blogs-site__item zoom-trigger" href="{{ blog.href }}">
                                     <div class="blogs-site__image">
-                                        <picture>
-                                            <source srcset="{{ blog.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ blog.name }}"
-                                                 title="{{ blog.name }}"
-                                                 src="{{ blog.thumb.default }}" loading="lazy">
-                                        </picture>
+                                        <div class="zoom-container">
+                                            <div class="zoom-image">
+                                                <picture>
+                                                    <source srcset="{{ blog.thumb.webp }}">
+                                                    <img class="catalog-inner_link-img" alt="{{ blog.name }}"
+                                                         title="{{ blog.name }}"
+                                                         src="{{ blog.thumb.default }}" loading="lazy">
+                                                </picture>
+                                            </div>
+                                        </div>
                                         <h3 class="blogs-site__theme">{{ blog.theme }}</h3>
                                     </div>
                                     <p class="blogs-site__date">{{ blog.date }}</p>
@@ -133,7 +137,7 @@
                     <div>
                         <label class="agree">
                             <input class="input-checkbox" name="agree" type="checkbox">
-                            <span>Даю согласие на <a>обработку персональных данных</a></span>
+                            <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                         </label>
                         <div class="agree-error error"></div>
                     </div>

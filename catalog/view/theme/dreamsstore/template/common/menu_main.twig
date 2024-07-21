@@ -3,10 +3,10 @@
         {% for category in categories %}
             {% if category.children %}
                 <li class="menu-item dropdown">
-                    <p class="menu-item_link"
+                    <p class="menu-item_link hover-dark"
                        data-toggle="dropdown">{{ category.name }}</p>
                     <div class="dropdown-menu">
-                        <a class="dropdown-menu-children__all" href="{{ category.href }}">
+                        <a class="dropdown-menu-children__all see-more" href="{{ category.href }}">
                             <span>Все товары в категории</span>
                             <svg class="dropdown-menu-children__svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_arrow_right"></use>
@@ -24,7 +24,7 @@
                                             <ul class="dropdown-menu-grandChildren__list">
                                                 {% for grandChild in child.grandChildren %}
                                                     <li class="dropdown-menu-grandChildren__item">
-                                                        <a class="dropdown-menu-grandChildren__link"
+                                                        <a class="dropdown-menu-grandChildren__link hover-light"
                                                            href="{{ grandChild.href }}">
                                                             {{ grandChild.name }}
                                                         </a>
@@ -34,7 +34,7 @@
                                         </li>
                                     {% else %}
                                         <li class="dropdown-menu-children__item">
-                                            <a class="dropdown-menu-children__link"
+                                            <a class="dropdown-menu-children__link hover-light"
                                                href="{{ child.href }}">
                                                 {{ child.name }}
                                             </a>
@@ -47,7 +47,7 @@
                 </li>
             {% else %}
                 <li class="menu-item">
-                    <a class="menu-item_link" href="{{ category.href }}">{{ category.name }}</a>
+                    <a class="menu-item_link hover-dark" href="{{ category.href }}">{{ category.name }}</a>
                 </li>
             {% endif %}
         {% endfor %}

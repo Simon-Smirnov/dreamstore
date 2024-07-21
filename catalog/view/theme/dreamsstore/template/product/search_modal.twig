@@ -11,11 +11,12 @@
             <div class="search-modal__inlet">
                 <input class="search-modal__input" type="text" name="search" value="{{ search }}"
                        placeholder="Поиск среди товаров..."
-                       id="input-search" class="form-control"/>
+                       id="input-search" class="form-control" data-search-modal-input/>
                 <svg class="search-modal__svg" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="/sprite.svg#icon_search"></use>
                 </svg>
-                <svg class="search-modal__close" xmlns="http://www.w3.org/2000/svg">
+                <svg class="search-modal__close hover-svg-dark-fill" xmlns="http://www.w3.org/2000/svg"
+                     data-search-modal-input-reset>
                     <use xlink:href="/sprite.svg#icon_cross"></use>
                 </svg>
             </div>
@@ -28,13 +29,13 @@
                         <h3 class="search-modal__recomended--title section-title">Вам может быть интересно</h3>
                         <div class="search-modal__recomended--arrows">
                             <div class="search-modal__recomended--prev">
-                                <svg class="slider__arrow--prev"
+                                <svg class="slider__arrow--prev search-modal__recomended--svg hover-svg-light-stroke"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_arrow_right"></use>
                                 </svg>
                             </div>
                             <div class="search-modal__recomended--next">
-                                <svg class="slider__arrow--next"
+                                <svg class="slider__arrow--next  search-modal__recomended--svg hover-svg-light-stroke"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_arrow_right"></use>
                                 </svg>
@@ -45,15 +46,19 @@
                         <div class="swiper">
                             <ul class="swiper-wrapper" data-lightbox-parent>
                                 {% for product in products_recomended %}
-                                    <li class="product-recentlyViewed__item">
+                                    <a class="product-recentlyViewed__item zoom-trigger" href="{{ product.href }}">
                                         <div class="products_grid-thumb">
                                             <div class="products_grid-block">
-                                                <picture>
-                                                    <source srcset="{{ product.thumb.webp }}">
-                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                         title="{{ product.name }}"
-                                                         src="{{ product.thumb.default }}" loading="lazy">
-                                                </picture>
+                                                <div class="zoom-container">
+                                                    <div class="zoom-image">
+                                                        <picture>
+                                                            <source srcset="{{ product.thumb.webp }}">
+                                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                                 title="{{ product.name }}"
+                                                                 src="{{ product.thumb.default }}" loading="lazy">
+                                                        </picture>
+                                                    </div>
+                                                </div>
                                                 <p class="products_grid-price">
                                                     {% if not product.special %}
                                                         <span
@@ -69,7 +74,7 @@
                                             </div>
                                             <h4 class="products_grid-title">{{ product.name }}</h4>
                                         </div>
-                                    </li>
+                                    </a>
                                 {% endfor %}
                             </ul>
                         </div>

@@ -4,7 +4,7 @@
     &-dropDawn {
         display: none;
         position: absolute;
-        top: -40%;
+        top: 2.2em;
         right: 0;
         z-index: 5;
         float: left;
@@ -18,8 +18,8 @@
             margin: 2.2em 0 0;
             border-radius: 0.3em;
             background-color: var(--white);
-            margin-top: 3em;
-            box-shadow: 0px 0px 16px 0px #00000014;
+            margin-top: 0;
+            box-shadow: 0px 0px 1em 0px #00000014;
         }
 
     }
@@ -44,7 +44,6 @@
 
         &__name {
             a {
-                color: var(--color-4-dark);
                 line-height: 1.4;
                 font-size: 1.1rem;
             }
@@ -80,7 +79,6 @@
         }
 
         &__withDiscount {
-            color: var(--color-4-dark);
             font-weight: 600;
             font-size: 1.1rem;
 
@@ -89,8 +87,6 @@
         &__withOutDiscount {
             text-decoration: line-through;
             color: var(--color-6-dark);
-            font-weight: 500;
-            font-size: 1rem;
             margin-left: 0.5em;
             text-decoration-thickness: 1px;
         }
@@ -103,7 +99,7 @@
         &__input {
             width: 1.2em;
             text-align: center;
-            color: var(--color-4-dark);
+            cursor: default;
         }
 
         &__svg {
@@ -122,7 +118,7 @@
         }
 
         &__svg:hover {
-            fill: var(--color-6-dark);
+            stroke: var(--color-4-dark);
         }
     }
 
@@ -135,7 +131,6 @@
 
         &__total {
             h4, p {
-                color: var(--color-4-dark);
                 font-weight: 600;
             }
 
@@ -159,9 +154,7 @@
     &-empty {
         text-align: center;
         min-height: 20vh;
-        color: var(--color-4-dark);
         font-size: 1.3rem;
-        font-weight: 500;
         display: flex;
         align-items: center;
         justify-content: center;

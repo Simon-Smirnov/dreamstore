@@ -408,10 +408,16 @@ class ControllerProductProduct extends Controller
                             $price = false;
                         }
 
+                        $attention = false;
+                        if (isset($option_value['attention']) && $option_value['attention'] != '') {
+                            $attention = $option_value['attention'];
+                        }
+
                         $product_option_value_data[] = array(
                             'product_option_value_id' => $option_value['product_option_value_id'],
                             'option_value_id' => $option_value['option_value_id'],
                             'name' => $option_value['name'],
+                            'attention' => $attention,
                             'image' => $this->model_tool_image->resize($option_value['image'], 50, 50),
                             'price' => $price,
                             'price_prefix' => $option_value['price_prefix']

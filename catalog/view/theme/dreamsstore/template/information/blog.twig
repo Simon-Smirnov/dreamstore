@@ -9,8 +9,8 @@
     </div>
     <div class="container">
         <div class="blog">
-            <h1 class="page-title">{{ title }}</h1>
             <div class="blog-inner">
+                <h1 class="page-title">{{ title }}</h1>
                 <div class="blog-image">
                     <picture>
                         <source srcset="{{ thumb.webp }}">
@@ -25,7 +25,7 @@
                         {{ mon }}
                     </div>
                     <div class="blog-about__share share">
-                        <a data-modal="share">Поделиться</a>
+                        <a class="hover-dark" data-modal="share">Поделиться</a>
                     </div>
                 </div>
                 <section class="blog-main">
@@ -90,7 +90,13 @@
                 {% if title_video and video %}
                     <section class="blog-video">
                         <h3 class="blog-video__title">{{ title_video }}</h3>
-                        <h3 class="blog-video__content">{{ video }}</h3>
+                        <h3 class="blog-video__content">
+                            <video controls width="100%" height="auto">
+                                <source src="{{ image_reviews }}{{ video }}"
+                                        type="video/mp4">
+                                Ваш браузер не поддерживает воспроизведение видео.
+                            </video>
+                        </h3>
                     </section>
                 {% endif %}
             </div>
@@ -100,14 +106,18 @@
                     <div class="swiper blog-similar__slider">
                         <div class="swiper-wrapper">
                             {% for similar_article in similar_articles %}
-                                <a class="blogs-site__item" href="{{ similar_article.href }}">
+                                <a class="blogs-site__item zoom-trigger" href="{{ similar_article.href }}">
                                     <div class="blogs-site__image">
-                                        <picture>
-                                            <source srcset="{{ similar_article.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ similar_article.name }}"
-                                                 title="{{ similar_article.name }}"
-                                                 src="{{ similar_article.thumb.default }}" loading="lazy">
-                                        </picture>
+                                        <div class="zoom-container">
+                                            <div class="zoom-image">
+                                                <picture>
+                                                    <source srcset="{{ similar_article.thumb.webp }}">
+                                                    <img class="catalog-inner_link-img" alt="{{ similar_article.name }}"
+                                                         title="{{ similar_article.name }}"
+                                                         src="{{ similar_article.thumb.default }}" loading="lazy">
+                                                </picture>
+                                            </div>
+                                        </div>
                                         <h3 class="blogs-site__theme">{{ similar_article.theme }}</h3>
                                     </div>
                                     <p class="blogs-site__date">{{ similar_article.date }}</p>
@@ -138,7 +148,7 @@
                                 <div>
                                     <label class="agree">
                                         <input class="input-checkbox" name="agree" type="checkbox">
-                                        <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                        <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                                     </label>
                                     <div class="error error-agree text-danger"></div>
                                 </div>

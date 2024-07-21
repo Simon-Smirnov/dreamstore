@@ -142,7 +142,7 @@
             <label class="agree">
                 <input class="input-checkbox" name="agree" type="checkbox" data-checkout-agree="agree"
                        {% if agree %}checked{% endif %}>
-                <span>Даю согласие на <a>обработку персональных данных</a></span>
+                <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
             </label>
             {% if error %}
                 <p class="alert-input text-danger">{{ error }}</p>

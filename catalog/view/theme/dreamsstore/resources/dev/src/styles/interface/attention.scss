@@ -3,7 +3,6 @@
     fill: transparent;
     width: 1.1em;
     height: 1.1em;
-    transition: 0.3s ease;
 }
 
 .svg-attention:hover {
@@ -20,14 +19,14 @@
     position: absolute;
     background: #3D3833CC;
     color: var(--white);
-    font-size: 1rem;
-    font-weight: 500;
     line-height: 1.4;
     border-radius: 0.4em;
     padding: 0.8em;
     width: 17em;
     left: 2.5em;
     top: -1em;
+    min-height: 3.5em;
+    z-index: 1;
 }
 
 .attention-text-description::before {

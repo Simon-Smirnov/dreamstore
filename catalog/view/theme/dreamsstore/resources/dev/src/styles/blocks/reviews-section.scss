@@ -12,7 +12,6 @@
 
         &__link {
             flex-shrink: 0;
-            font-weight: 500;
             font-size: 1.2rem;
             color: var(--color-6-dark);
 
@@ -38,9 +37,7 @@
             padding: 1.5em;
 
             &--text {
-                font-weight: 500;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
                 margin-top: 1em;
             }
 
@@ -60,8 +57,6 @@
             gap: 1em;
 
             &--initial {
-                color: var(--color-4-dark);
-                font-weight: 500;
                 font-size: 1.2rem;
                 background-color: var(--bg-light-60);
                 display: -webkit-box;
@@ -77,9 +72,7 @@
 
             &--block {
                 &--name {
-                    font-weight: 500;
                     font-size: 1.1rem;
-                    color: var(--color-4-dark);
                 }
 
                 &--grade {
@@ -92,7 +85,6 @@
             &--date {
                 margin-left: auto;
                 color: var(--color-6-dark);
-                font-weight: 500;
             }
         }
     }
@@ -110,7 +102,6 @@
             justify-content: center;
 
             span {
-                font-weight: 500;
                 font-size: 1.2rem;
                 color: var(--color-6-dark);
             }

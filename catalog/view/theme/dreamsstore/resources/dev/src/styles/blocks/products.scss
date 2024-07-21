@@ -7,10 +7,10 @@
     &-item {
         position: relative;
         display: block;
-    }
 
-    &-item:hover {
-        transform: translateY(-1.5px);
+        .zoom-container {
+            border-radius: 0.4em;
+        }
     }
 
     &-wishlist {
@@ -30,20 +30,15 @@
         .price-new {
             font-weight: 600;
             font-size: 1.1rem;
-            color: var(--color-4-dark);
         }
 
         .price-old {
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
             text-decoration: line-through;
             text-decoration-thickness: 0.2px;
         }
 
         .price-percent {
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
             border-radius: 0.3em;
             border: 1px solid var(--libe);
@@ -56,7 +51,6 @@
     }
 
     &-title {
-        font-weight: 500;
         font-size: 1.1rem;
         color: var(--color-5-dark);
         line-height: 1.4;
@@ -76,8 +70,6 @@
 .product-mark {
     background-color: #3D38337A;
     color: var(--color-9);
-    font-weight: 500;
-    font-size: 1rem;
     padding: 0.2em 0.5em;
     border-radius: 0.3em;
 }

@@ -6,17 +6,14 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-weight: 500;
     }
 
     &_message {
         font-size: 1.2rem;
-        color: var(--color-4-dark);
     }
 
     &_number {
         font-size: 10rem;
-        color: var(--color-4-dark);
     }
 
     &_text {

@@ -1,8 +1,6 @@
 .select-link {
     position: relative;
     font-size: 0.9rem;
-    color: var(--color-4-dark);
-    font-weight: 500;
 
     &__base {
         background-color: var(--white);
@@ -33,8 +31,6 @@
         padding: 1em;
         border-radius: 0.4em;
         font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--color-4-dark);
         border: 1px solid var(--libe);
         max-width: 20em;
     }

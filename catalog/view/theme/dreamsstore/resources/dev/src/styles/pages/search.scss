@@ -14,8 +14,6 @@
             max-width: none;
             padding-left: 3em;
             background-color: var(--white);
-            color: var(--color-4-dark);
-            font-weight: 500;
             font-size: 1.1rem;
         }
 
@@ -31,7 +29,7 @@
 
         &__btn {
             position: absolute;
-            top: 0.9em;
+            top: 1.1em;
             right: 4.4em;
             fill: none;
             stroke: var(--color-6-dark);
@@ -52,7 +50,6 @@
 
         &__text {
             margin-top: 0.3em;
-            font-weight: 500;
             font-size: 1.1rem;
             color: var(--color-6-dark);
         }
@@ -72,14 +69,16 @@
         overflow-y: auto;
         height: 100%;
 
+        &__inner {
+            margin-bottom: 6em;
+        }
+
         &__block {
             display: none;
             margin-top: 1em;
 
             &--title {
-                font-weight: 500;
                 font-size: 1.5rem;
-                color: var(--color-4-dark);
             }
 
             &--cross {
@@ -101,17 +100,13 @@
 
         &__input {
             width: 100%;
-            font-size: 1rem;
             padding: 0.8em 2em;
             border-bottom: 1px solid var(--libe);
             font-family: var(--font-main);
-            color: var(--color-4-dark);
-            font-weight: 500;
+            font-size: 1rem;
         }
 
         &__input::placeholder {
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
         }
 
@@ -160,7 +155,7 @@
                 height: 1.5em;
             }
 
-            &--prev svg, &--next svg {
+            &--svg {
                 cursor: pointer;
                 width: 1.5em;
                 height: 1.5em;
@@ -176,13 +171,14 @@
             .search-modal__recomended--prev, .search-modal__recomended--next {
                 background-color: transparent;
             }
+
+            .zoom-container {
+                border-radius: 0.4em;
+            }
         }
     }
 
     &-quickTips {
-        &__product:hover {
-            transform: translateY(-1.5px);
-        }
 
         &__products {
             display: grid;
@@ -193,14 +189,11 @@
         &__price {
             font-weight: 600;
             font-size: 1.1rem;
-            color: var(--color-4-dark);
             margin-top: 0.3em;
         }
 
         &__title {
             margin-top: 0.3em;
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-5-dark);
             line-height: 1.4;
         }

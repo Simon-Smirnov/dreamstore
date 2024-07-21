@@ -137,6 +137,8 @@ class ControllerInformationContact extends Controller
             $data['enquiry'] = '';
         }
 
+        $data['requisites'] = $this->config->get('config_requisites');
+
         // Captcha
         if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
             $data['captcha'] = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha'), $this->error);

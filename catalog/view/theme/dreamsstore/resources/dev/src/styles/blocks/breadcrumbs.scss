@@ -1,8 +1,6 @@
 .breadcrumb {
     padding-top: 1.5em;
     padding-bottom: 1.5em;
-    font-size: 1rem;
-    font-weight: 500;
     color: var(--color-6-dark);
     text-align: center;
     display: flex;
@@ -21,12 +19,17 @@
         top: 0;
     }
 
+    li:hover a {
+        color: var(--color-4-dark);
+    }
+
     li:last-child::after {
         display: none;
     }
 
     li:last-child a {
         cursor: default;
+        color: var(--color-6-dark);
     }
 }
 
@@ -55,7 +58,6 @@
         transform: rotate(180deg) scale(0.7);
         width: 1em;
         height: 1em;
-        font-size: 1rem;
     }
 }
 

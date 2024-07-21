@@ -26,11 +26,12 @@
                     </div>
                     <div class="vacancy-inner_info-item">
                         <h4 class="vacancy-inner_info-item_title">Звоните по телефону:</h4>
-                        <a class="vacancy-inner_info-item_link" href="tel:{{ telephone_for_link }}">{{ telephone }}</a>
+                        <a class="vacancy-inner_info-item_link pointer hover-light"
+                           href="tel:{{ telephone_for_link }}">{{ telephone }}</a>
                     </div>
                     <div class="vacancy-inner_info-item">
                         <h4 class="vacancy-inner_info-item_title">Присылайте резюме на почту:</h4>
-                        <a class="vacancy-inner_info-item_link"
+                        <a class="vacancy-inner_info-item_link pointer hover-light hover-underline-dashed-light"
                            href="mailto:{{ email_for_store }}">{{ email_for_store }}</a>
                     </div>
                 </div>
@@ -40,22 +41,26 @@
                         <h3 class="vacancy-inner_form-title">Откликнуться <br>на вакансию</h3>
                         <form class="vacancy_form">
                             <input name="vacancy_id" type="hidden" value="{{ vacancy_id }}">
-                            <div class="vacancy_form-item">
+                            <div class="vacancy_form-item input-block required">
                                 <input class="input-text" name="name" type="text" placeholder="Ваше Имя">
-                                <div class="name-error error"></div>
+                                <label>Имя</label>
+                                <div class="name-error error text-danger"></div>
                             </div>
-                            <div class="vacancy_form-item">
+                            <div class="vacancy_form-item input-block required">
                                 <input class="input-text" name="phone" type="text" placeholder="Телефон">
-                                <div class="phone-error error"></div>
+                                <label>Телефон</label>
+                                <div class="phone-error error text-danger"></div>
                             </div>
-                            <div class="vacancy_form-item">
+                            <div class="vacancy_form-item input-block required">
                                 <input class="input-text" name="email" type="email" placeholder="E-mail">
-                                <div class="email-error error"></div>
+                                <label>E-mail</label>
+                                <div class="email-error error text-danger"></div>
                             </div>
-                            <div class="vacancy_form-item">
+                            <div class="vacancy_form-item input-block">
                                 <textarea class="input-text" name="message" type="text" cols="10"
                                           placeholder="Сообщение"></textarea>
-                                <div class="message-error error"></div>
+                                <label>Сообщение</label>
+                                <div class="message-error error text-danger"></div>
                             </div>
                             <label class="modal__attach">
                                 <div>
@@ -75,7 +80,7 @@
                             <div>
                                 <label class="agree">
                                     <input class="input-checkbox" name="agree" type="checkbox">
-                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                    <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                                 </label>
                                 <div class="agree-error error"></div>
                             </div>

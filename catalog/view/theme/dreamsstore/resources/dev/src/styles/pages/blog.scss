@@ -33,14 +33,9 @@
             }
 
             &--link {
-                color: var(--text-2);
+                color: var(--color-6-dark);
                 font-size: 1.1em;
-                font-weight: 500;
                 cursor: pointer;
-            }
-
-            &--link:hover {
-                color: var(--color-4-dark);
             }
 
             &--link.active {
@@ -52,10 +47,6 @@
     &-site {
         &__item {
             position: relative;
-        }
-
-        &__item:hover {
-            transform: translateY(-1.5px);
         }
 
         &__list {
@@ -76,21 +67,17 @@
             color: var(--color-9);
             background: #3D38333D;
             padding: 0.6em 0;
-            font-weight: 500;
             font-size: 1.5rem;
         }
 
         &__date {
-            font-weight: 500;
             font-size: 1rem;
             color: var(--color-6-dark);
             margin-top: 0.5em;
         }
 
         &__title {
-            font-weight: 500;
             font-size: 1.1rem;
-            color: var(--color-4-dark);
             margin-top: 0.5em;
             line-height: 1.4;
         }
@@ -111,13 +98,18 @@
         margin-right: auto;
     }
 
+    &-image {
+        img {
+            width: 100%;
+        }
+    }
+
     &-about {
         margin-top: 1em;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 1.1rem;
-        font-weight: 500;
         color: var(--color-6-dark);
     }
 
@@ -126,7 +118,6 @@
 
         &__title {
             font-size: 2.2rem;
-            font-weight: 500;
             color: var(--text);
         }
 
@@ -148,14 +139,12 @@
 
         &__title {
             font-size: 2rem;
-            font-weight: 500;
             color: var(--text);
         }
 
         &__text {
             margin-top: 1em;
             color: var(--color-6-dark);
-            font-weight: 500;
             font-size: 1.1rem;
             line-height: 1.4;
             font-style: italic;
@@ -167,8 +156,6 @@
             display: flex;
             gap: 0.7em;
             align-items: center;
-            color: var(--color-4-dark);
-            font-weight: 500;
             font-size: 1.1rem;
         }
 
@@ -196,8 +183,14 @@
 
         &__title {
             font-size: 2rem;
-            font-weight: 500;
-            color: var(--color-4-dark);
+        }
+
+        &__content {
+            margin-top: 1em;
+
+            video {
+                border-radius: 0.4em;
+            }
         }
     }
 

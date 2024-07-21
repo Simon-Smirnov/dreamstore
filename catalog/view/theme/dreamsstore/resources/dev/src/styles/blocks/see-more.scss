@@ -1,0 +1,16 @@
+.see-more {
+
+    color: var(--color-6-dark);
+
+    svg {
+        stroke: var(--color-6-dark);
+    }
+
+    &:hover {
+        color: var(--color-4-dark);
+
+        svg {
+            stroke: var(--color-4-dark);
+        }
+    }
+}

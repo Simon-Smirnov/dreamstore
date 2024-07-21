@@ -1,6 +1,6 @@
 <div id="cart" class="miniCart" data-dropdown-cart>
-    <a href="/cart" class="dropdownCartBtn">
-        <svg class="icon-svg-stroke" xmlns="http://www.w3.org/2000/svg">
+    <a class="dropdownCartBtn pointer" data-dropdown-cart-btn>
+        <svg class="icon-svg-stroke hover-svg-light-stroke" xmlns="http://www.w3.org/2000/svg">
             <use xlink:href="/sprite.svg#icon_basket"></use>
         </svg>
         <span id="cart-total">{{ text_items }}</span>
@@ -36,7 +36,7 @@
                                     <div class="miniCart-product__change">
                                         <div class="miniCart-product__set" data-change-minus="{{ product.cart_id }}"
                                              data-change-quantity="{{ product.quantity }}">
-                                            <svg class="miniCart-product__minus"
+                                            <svg class="miniCart-product__minus pointer hover-svg-light-fill"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg?v=1.0#icon_minus"></use>
                                             </svg>
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="miniCart-product__set" data-change-plus="{{ product.cart_id }}"
                                              data-change-quantity="{{ product.quantity }}">
-                                            <svg class="miniCart-product__plus"
+                                            <svg class="miniCart-product__plus pointer hover-svg-light-fill"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg?v=1.0#icon_plus"></use>
                                             </svg>

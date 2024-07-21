@@ -184,7 +184,7 @@ class ControllerInformationReviews extends Controller
                     }
                 }
 
-                $mime_allowed = ['image/png', 'image/jpeg', 'video/mp4'];
+                $mime_allowed = ['image/png', 'image/jpeg', 'image/jpg', 'video/mp4'];
 
                 foreach ($this->request->files['image']['type'] as $image_type) {
                     if (!in_array($image_type, $mime_allowed)) {
@@ -204,12 +204,13 @@ class ControllerInformationReviews extends Controller
                 //    }
                 //}
 
-                foreach ($this->request->files['image'] as $image) {
-                    if ($image['type'] == 'video/mp4') {
-                        if ($image['size'] > 20000000) {
+                foreach ($this->request->files['image']['size'] as $key => $image_size) {
+                    $image_type = $this->request->files['image']['type'][$key];
+                    if ($image_type == 'video/mp4') {
+                        if ($image_size > 20000000) {
                             $this->errors['image'] = 'Видео должно весить не более 20мб';
                         }
-                    } else if ($image['type'] == 'image/png' || $image['type'] == 'image/jpeg') {
+                    } else if ($image_type == 'image/png' || $image_type == 'image/jpeg' || $image_type == 'image/jpg') {
                         if ($image_size > 5000000) {
                             $this->errors['image'] = 'Картинка должна весить не более 5мб';
                         }
@@ -234,10 +235,20 @@ class ControllerInformationReviews extends Controller
 
                 foreach ($this->request->files['image']['name'] as $key => $image) {
                     $filename = basename(html_entity_decode($image, ENT_QUOTES, 'UTF-8'));
-                    if (utf8_strlen($filename) > 128) {
-                        $filename = mb_substr($filename, -128, 128, 'UTF-8');
-                    }
-                    $file = token(32) . '.' . $filename;
+
+                    // if (utf8_strlen($filename) > 32) {
+                    //     $filename = mb_substr($filename, -32, 32, 'UTF-8');
+                    // }
+                    // $file = token(32) . '.' . $filename;
+
+                    // if (utf8_strlen($filename) > 32) {
+                    //     $filename = mb_substr($filename, -32, 32, 'UTF-8');
+                    // }
+
+                    $uniqueString = base64_encode(random_bytes(16));
+                    $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
+                    $file = $uniqueString . '.' . $fileExtension;
+
                     $tmpName = $this->request->files['image']['tmp_name'][$key];
                     $fileType = $this->request->files['image']['type'][$key];
 
@@ -271,7 +282,7 @@ class ControllerInformationReviews extends Controller
             $this->errors['name'] = 'Поле Имя должно содержать от 2 до 64 символов';
         }
 
-        if ((utf8_strlen(trim($this->request->post['phone']))) < 9 || (utf8_strlen(trim($this->request->post['phone']))) > 15) {
+        if ((utf8_strlen(trim($this->request->post['phone']))) < 9 || (utf8_strlen(trim($this->request->post['phone']))) > 20) {
             $this->errors['phone'] = 'Поле Телефон должен содержать от 9 до 15 символов';
         }
 

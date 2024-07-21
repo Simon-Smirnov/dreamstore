@@ -7,16 +7,11 @@ export default class {
         this.block = document.querySelector(selector);
         this.checkoutCart = checkoutCart;
         if (this.block) {
-            this.block.addEventListener('mouseover', (e) => {
-                this.block.classList.add('open');
-            })
-
-            this.block.addEventListener('mouseleave', (e) => {
-                this.block.classList.remove('open');
-            })
-
             this.block.addEventListener('click', (e) => {
                 const target = e.target;
+                if (target.hasAttribute('data-dropdown-cart-btn') || target.closest('[data-dropdown-cart-btn]')) {
+                    this.block.classList.toggle('open');
+                }
                 if (target.hasAttribute('data-product-remove') || target.closest('[data-product-remove]')) {
                     const btn = target.closest('[data-product-remove]');
                     if (btn) {
@@ -79,6 +74,12 @@ export default class {
                     }
                 }
             })
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+                if (!this.block.contains(target) && this.block.classList.contains('open')) {
+                    this.block.classList.remove('open');
+                }
+            });
         }
     }
 

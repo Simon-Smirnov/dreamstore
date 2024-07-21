@@ -8,10 +8,19 @@
                     </a>
                     <ul class="footer-grid_item-list">
                         <li class="footer-grid_item-list_item">© {{ year }} Dreams Store</li>
-                        <li class="footer-grid_item-list_item"><a href="/sitemap">Карта сайта</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/privacy">Политика конфиденциальности</a></li>
-                        <li class="footer-grid_item-list_item vyiatka">Разработка сайта: <a><img class="img-vyiatka"
-                                                                                                 src="{{ assets }}/assets/images/vyiatka_it.webp"></a>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/sitemap">Карта
+                                сайта</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/privacy">Политика конфиденциальности</a>
+                        </li>
+                        <li class="footer-grid_item-list_item vyiatka">Разработка сайта:
+                            <a class="hover-light pointer" href="https://vyatka-it.ru/">
+                                <img
+                                        class="img-vyiatka"
+                                        src="{{ assets }}/assets/images/vyiatka_it.webp">
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -22,15 +31,30 @@
                         </svg>
                     </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a href="/buyers">Оплата и доставка</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/buyers?content=guarantee">Гарантия и
-                                возврат</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/buyers?content=choose">Как выбрать
-                                ткань</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/faq">Частые вопросы</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/advices">Советы по уходу</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/reviews">Отзывы</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/blogs">Блог</a></li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/buyers">Оплата и
+                                доставка</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/buyers?content=guarantee">Гарантия и
+                                возврат</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/buyers?content=choose">Как выбрать
+                                ткань</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/faq">Частые вопросы</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/advices">Советы по уходу</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/reviews">Отзывы</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/blogs">Блог</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="footer-grid_item" data-footer-item>
@@ -41,7 +65,8 @@
                     </h4>
                     <ul class="footer-grid_item-list">
                         {% for category in categories %}
-                            <li class="footer-grid_item-list_item"><a href="{{ category.href }}">{{ category.name }}</a>
+                            <li class="footer-grid_item-list_item">
+                                <a class="hover-light pointer" href="{{ category.href }}">{{ category.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -53,12 +78,24 @@
                         </svg>
                     </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a href="/atelier">Ателье</a></li>
-                        <li class="footer-grid_item-list_item"><a>Индивидуальная вышивка</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/homevisit">Выезд дизайнера на дом</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/giftcard">Подарочный сертификат</a></li>
-                        <li class="footer-grid_item-list_item"><a>Заказать образцы ткани</a></li>
-                        <li class="footer-grid_item-list_item"><a href="loyalty">Программа лояльности</a></li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/atelier">Ателье</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer">Индивидуальная вышивка</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/homevisit">Выезд дизайнера на дом</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/giftcard">Подарочный сертификат</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer">Заказать образцы ткани</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="loyalty">Программа лояльности</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="footer-grid_item" data-footer-item>
@@ -68,40 +105,63 @@
                         </svg>
                     </h4>
                     <ul class="footer-grid_item-list">
-                        <li class="footer-grid_item-list_item"><a href="/aboutcompany">О нас</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/vacancies">Вакансии</a></li>
-                        <li class="footer-grid_item-list_item"><a href="/cooperation">Сотрудничество</a></li>
-                        <li class="footer-grid_item-list_item"><a href="tel:+79956686050">+7 995 668 60 50</a></li>
-                        <li class="footer-grid_item-list_item"><a
-                                    href="mailto:dreamsstore@mail.ru">dreamsstore@mail.ru</a></li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/aboutcompany">О нас</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/vacancies">Вакансии</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="/cooperation">Сотрудничество</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer" href="tel:+79956686050">+7 995 668 60 50</a>
+                        </li>
+                        <li class="footer-grid_item-list_item">
+                            <a class="hover-light pointer"
+                               href="mailto:dreamsstore@mail.ru">dreamsstore@mail.ru</a>
+                        </li>
                         <li class="footer-grid_item-list_item footer-grid_item-list_item-social">
                             <ul>
                                 <li>
-                                    <a>
-                                        <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                    <a class="pointer" href="">
+                                        <svg class="icon-svg-footer hover-svg-light-fill"
+                                             xmlns="http://www.w3.org/2000/svg">
                                             <use xlink:href="/sprite.svg#icon_vk"></use>
                                         </svg>
                                     </a>
                                 </li>
                                 <li>
-                                    <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                        <use xlink:href="/sprite.svg#icon_telegram"></use>
-                                    </svg>
+                                    <a class="pointer" href="">
+                                        <svg class="icon-svg-footer hover-svg-light-fill"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_telegram"></use>
+                                        </svg>
+                                    </a>
                                 </li>
                                 <li>
-                                    <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                        <use xlink:href="/sprite.svg#icon_whatsapp"></use>
-                                    </svg>
+                                    <a class="pointer" href="">
+                                        <svg class="icon-svg-footer hover-svg-light-fill"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_whatsapp"></use>
+                                        </svg>
+                                    </a>
                                 </li>
                                 <li>
-                                    <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                        <use xlink:href="/sprite.svg#icon_viber"></use>
-                                    </svg>
+                                    <a class="pointer" href="">
+                                        <svg class="icon-svg-footer hover-svg-light-fill"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_viber"></use>
+                                        </svg>
+                                    </a>
                                 </li>
                                 <li>
-                                    <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                        <use xlink:href="/sprite.svg#icon_instagram"></use>
-                                    </svg>
+                                    <a class="pointer" href="">
+                                        <svg class="icon-svg-footer hover-svg-light-fill"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <use xlink:href="/sprite.svg#icon_instagram"></use>
+                                        </svg>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -122,7 +182,7 @@
                         <div>
                             <label class="agree">
                                 <input class="input-checkbox" name="agree" type="checkbox">
-                                <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                                <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку<br> персональных данных</a></span>
                             </label>
                             <div class="error error-agree text-danger"></div>
                         </div>

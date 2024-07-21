@@ -26,7 +26,7 @@ export default class {
                     }
 
                 }
-            } else if (!this.innerMenu.contains(target)) {
+            } else if (!this.innerMenu.contains(target) && this.modal.classList.contains('open')) {
                 this.closeMenu();
             }
             if (targetClassList.contains('menu-item_link') || target.closest('.menu-item_link')) {
@@ -68,7 +68,6 @@ export default class {
             document.querySelector('.header-bottom_block-catalog_btn').classList.remove('open');
             document.body.style.overflowY = 'auto';
         });
-        document.body.style.overflowY = 'auto';
     }
 
     openClientsList() {

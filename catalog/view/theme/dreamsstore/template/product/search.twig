@@ -11,14 +11,16 @@
         <div id="content" class="search">
             <h1 class="page-title">{{ heading_title }}</h1>
             <div class="search-input">
-                <input class="input-text search-input__input" type="text" name="search" value="{{ search }}"
+                <input class="input-text search-input__input" type="text" name="search" data-search-page-input
+                       value="{{ search }}"
                        placeholder="{{ text_keyword }}"
                        id="input-search" class="form-control"/>
                 <svg class="search-input__svg" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="/sprite.svg#icon_search"></use>
                 </svg>
-                <button class="btn btn-primary search-input__btn">Найти</button>
-                <svg class="search-input__close" xmlns="http://www.w3.org/2000/svg">
+                <button class="btn btn-primary search-input__btn" search-page-btn>Найти</button>
+                <svg class="search-input__close pointer hover-svg-dark-fill" xmlns="http://www.w3.org/2000/svg"
+                     data-search-page-input-reset>
                     <use xlink:href="/sprite.svg#icon_cross"></use>
                 </svg>
                 <p class="search-input__text">{{ total }} результат(ов) по запросу "{{ search }}"</p>
@@ -74,15 +76,19 @@
                     </div>
                     <div class="products_grid search-grid" data-items-identy>
                         {% for product in products %}
-                            <a class="products_grid-item" href="{{ product.href }}">
+                            <a class="products_grid-item zoom-trigger" href="{{ product.href }}">
                                 <div class="products_grid-thumb">
                                     <div class="products_grid-block">
-                                        <picture>
-                                            <source srcset="{{ product.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                 title="{{ product.name }}"
-                                                 src="{{ product.thumb.default }}" loading="lazy">
-                                        </picture>
+                                        <div class="zoom-container">
+                                            <div class="zoom-image">
+                                                <picture>
+                                                    <source srcset="{{ product.thumb.webp }}">
+                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                         title="{{ product.name }}"
+                                                         src="{{ product.thumb.default }}" loading="lazy">
+                                                </picture>
+                                            </div>
+                                        </div>
                                         <p class="products_grid-price">
                                             {% if not product.special %}
                                                 <span

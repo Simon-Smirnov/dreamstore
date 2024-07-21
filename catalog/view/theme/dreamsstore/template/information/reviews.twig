@@ -13,15 +13,23 @@
             <div class="reviews_inner" data-tabs-parent>
                 <div class="reviews_inner-tabs">
                     <ul class="reviews_inner-tabs_list">
-                        <li class="reviews_inner-tabs_item grow right"><a class="reviews_inner-tabs_item-link active"
-                                                                          data-content="site" data-tab-target="tab-1">С
-                                сайта</a></li>
-                        <li class="reviews_inner-tabs_item middle" data-content="yandex"><a
-                                    class="reviews_inner-tabs_item-link" data-content="yandex" data-tab-target="tab-2">С
-                                яндекса</a></li>
-                        <li class="reviews_inner-tabs_item grow left" data-content="social"><a
-                                    class="reviews_inner-tabs_item-link" data-content="social" data-tab-target="tab-3">Из
-                                соцсетей</a></li>
+                        <li class="reviews_inner-tabs_item grow right">
+                            <a class="reviews_inner-tabs_item-link active pointer hover-dark"
+                               data-content="site" data-tab-target="tab-1">С
+                                сайта</a>
+                        </li>
+                        <li class="reviews_inner-tabs_item middle" data-content="yandex">
+                            <a
+                                    class="reviews_inner-tabs_item-link pointer hover-dark" data-content="yandex"
+                                    data-tab-target="tab-2">С
+                                яндекса</a>
+                        </li>
+                        <li class="reviews_inner-tabs_item grow left" data-content="social">
+                            <a
+                                    class="reviews_inner-tabs_item-link pointer hover-dark" data-content="social"
+                                    data-tab-target="tab-3">Из
+                                соцсетей</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="reviews_inner-content">
@@ -114,21 +122,25 @@
                 <button class="modal__close modal__close--fixed"></button>
                 <h3 class="modal__title">Оставить отзыв</h3>
                 <form class="review_form">
-                    <div class="review_form-item">
+                    <div class="review_form-item input-block required">
                         <input class="input-text" name="name" type="text" placeholder="Имя">
-                        <div class="name-error error"></div>
+                        <label>Имя</label>
+                        <div class="name-error error text-danger"></div>
                     </div>
-                    <div class="review_form-item">
+                    <div class="review_form-item input-block required">
                         <input class="input-text" name="phone" type="text" placeholder="Телефон">
-                        <div class="phone-error error"></div>
+                        <label>Телефон</label>
+                        <div class="phone-error error text-danger"></div>
                     </div>
-                    <div class="review_form-item">
+                    <div class="review_form-item input-block required">
                         <input class="input-text" name="email" type="email" placeholder="Email">
-                        <div class="email-error error"></div>
+                        <label>Email</label>
+                        <div class="email-error error text-danger"></div>
                     </div>
-                    <div class="review_form-item">
+                    <div class="review_form-item input-block required">
                         <textarea class="input-text" name="review" type="text" placeholder="Текст отзыва"></textarea>
-                        <div class="review-error error"></div>
+                        <label>Текст отзыва</label>
+                        <div class="review-error error text-danger"></div>
                     </div>
                     <label class="modal__attach">
                         <div>
@@ -142,7 +154,7 @@
                     <div class="modal__size">
                         <span>Можно прикрепить до 3х фото (JPG, JPEG, PNG)<br> Весом до 5мб. А также 1 видео весом до 20 мб (MP4)</span>
                         <div class="modal__size-images"></div>
-                        <div class="image-error error"></div>
+                        <div class="image-error error text-danger"></div>
                     </div>
                     <div class="modal_grade">
                         <span class="modal_grade-title">Ваша оценка</span>
@@ -182,9 +194,9 @@
                     <div>
                         <label class="agree">
                             <input class="input-checkbox" name="agree" type="checkbox">
-                            <span>Даю согласие на <a>обработку персональных данных</a></span>
+                            <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                         </label>
-                        <div class="agree-error error"></div>
+                        <div class="agree-error error text-danger"></div>
                     </div>
                     <button class="modal__btn btn btn-primary">Отправить</button>
                 </form>

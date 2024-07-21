@@ -16,7 +16,7 @@
                         <ul class="faq-block_nav-list">
                             {% for faq in faqs %}
                                 <li class="faq-block_nav-list_item {% if faq.id == '0' %}active{% endif %}">
-                                    <a class="faq-block_nav-list_item-link">{{ faq.name }}</a>
+                                    <a class="faq-block_nav-list_item-link hover-dark">{{ faq.name }}</a>
                                     <div class="faq-content">
                                         <h2 class="faq-content_title"
                                         >{{ faq.name }}</h2>
@@ -51,7 +51,7 @@
                                     <h4 class="faq-content_list-item_title">
                                         <span>{{ child.title }}</span>
                                         <span class="faq-content_list-item_title-svg">
-                                            <svg class="faq-svg"
+                                            <svg class="faq-svg hover-svg-light-stroke"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg#icon_arrow_right"></use>
                                             </svg>

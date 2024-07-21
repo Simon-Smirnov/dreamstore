@@ -12,9 +12,25 @@
     }
 
     &_small-title {
-        font-weight: 500;
         font-size: 1.1rem;
         color: var(--color-6-dark);
+
+        .contact-inner_small-requisites {
+            display: none;
+        }
+    }
+
+    &_small-requisites {
+        h4 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
     }
 
     &_small-title.button {
@@ -25,9 +41,7 @@
 
     &_small-content {
         display: inline-block;
-        font-weight: 500;
         font-size: 1.3rem;
-        color: var(--color-4-dark);
         margin-top: 0.5em;
     }
 

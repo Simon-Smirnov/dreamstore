@@ -14,16 +14,20 @@
                 {% if products %}
                     <div class="wishlist-products products_grid" data-wishlist>
                         {% for product in products %}
-                            <a class="products_grid-item" href="{{ product.href }}"
+                            <a class="products_grid-item zoom-trigger" href="{{ product.href }}"
                                data-wishlist-quick="{{ product.product_id }}">
                                 <div class="products_grid-thumb">
                                     <div class="products_grid-block">
-                                        <picture>
-                                            <source srcset="{{ product.thumb.webp }}">
-                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                 title="{{ product.name }}"
-                                                 src="{{ product.thumb.default }}" loading="lazy">
-                                        </picture>
+                                        <div class="zoom-container">
+                                            <div class="zoom-image">
+                                                <picture>
+                                                    <source srcset="{{ product.thumb.webp }}">
+                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                                         title="{{ product.name }}"
+                                                         src="{{ product.thumb.default }}" loading="lazy">
+                                                </picture>
+                                            </div>
+                                        </div>
                                         <p class="products_grid-price">
                                             {% if not product.special %}
                                                 <span

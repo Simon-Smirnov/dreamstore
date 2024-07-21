@@ -517,6 +517,7 @@ class ControllerProductSearch extends Controller
                 'thumb' => $image,
                 'name' => $product['name'],
                 'price' => $this->currency->format($product['price'], $this->config->get('config_currency')),
+                'href' => $this->url->link('product/product', 'product_id=' . $product['product_id'])
             ];
         }
 

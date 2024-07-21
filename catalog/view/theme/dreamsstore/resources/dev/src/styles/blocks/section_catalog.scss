@@ -11,16 +11,20 @@
         }
 
         &_link {
-            &-img {
-                width: 100%;
+            .zoom-container {
+                border-radius: 0.4em;
             }
 
             &-title {
                 font-size: 1.3rem;
-                font-weight: 500;
-                color: var(--color-4-dark);
                 text-align: center;
                 margin-top: 0.5em;
+            }
+
+            &:hover {
+                h4 {
+                    color: var(--color-6-dark);
+                }
             }
         }
     }

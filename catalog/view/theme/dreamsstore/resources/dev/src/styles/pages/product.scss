@@ -20,8 +20,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
         }
 
@@ -30,13 +28,12 @@
         }
 
         &__sizeTable {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-4-dark);
             display: inline-block;
-            border-bottom: 1px dashed var(--color-4-dark);
+            color: var(--color-6-dark);
+            border-bottom: 1px dashed var(--color-6-dark);
             width: fit-content;
             cursor: pointer;
+            font-size: 1rem;
         }
 
         &__options {
@@ -80,15 +77,11 @@
 
             &-title {
                 width: 40%;
-                font-weight: 500;
                 font-size: 1.2rem;
-                color: var(--color-4-dark);
             }
 
             &-text {
-                color: var(--color-4-dark);
                 font-size: 1.1rem;
-                font-weight: 500;
             }
 
             &-check {
@@ -117,12 +110,10 @@
         &__newPrice {
             font-weight: 600;
             font-size: 2rem;
-            color: var(--color-4-dark);
+
         }
 
         &__oldPrice, &__percent {
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
         }
 
@@ -153,9 +144,7 @@
             padding: 1.5em;
 
             &--title {
-                font-weight: 500;
                 font-size: 1.2rem;
-                color: var(--color-4-dark);
                 margin-bottom: 1em;
             }
 
@@ -167,9 +156,7 @@
                 display: flex;
                 align-items: center;
                 gap: 0.5em;
-                font-weight: 500;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
                 cursor: pointer;
             }
 
@@ -177,7 +164,6 @@
             &--item + &--item {
                 margin-top: 0.5em;
             }
-
 
             &--span {
                 display: flex;
@@ -187,25 +173,21 @@
                 border: 1px solid var(--libe);
                 width: 1.5em;
                 height: 1.5em;
+            }
 
-                svg {
-                    width: 1em;
-                    height: 1em;
-                    fill: var(--color-4-dark);
-                    stroke: none;
-                }
+            &--svg {
+                width: 1em;
+                height: 1em;
+                fill: var(--color-4-dark);
+                stroke: none;
             }
 
             &--name {
-                font-weight: 500;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
             }
 
             &--number {
                 font-size: 0.7rem;
-                font-weight: 500;
-                color: var(--color-4-dark);
                 background-color: var(--bg-light);
                 border-radius: 50%;
                 display: flex;
@@ -234,7 +216,6 @@
 
                 .inCart {
                     background-color: var(--color-6-dark);
-                    font-weight: 500;
                     width: fit-content;
                     padding-left: 0.9em;
                     padding-right: 0.9em;
@@ -254,13 +235,11 @@
                 align-items: center;
 
                 h5 {
-                    font-weight: 500;
                     font-size: 1.1rem;
                     color: var(--color-8);
                 }
 
                 span {
-                    font-weight: 500;
                     font-size: 0.9rem;
                     color: var(--color-8);
                 }
@@ -296,7 +275,6 @@
 
         &__toggler {
             cursor: pointer;
-            font-weight: 500;
             font-size: 1.3rem;
             color: var(--color-6-dark);
             font-family: var(--font-main);
@@ -365,12 +343,8 @@
             gap: 0.7em;
             align-items: center;
             cursor: pointer;
-
-            span {
-                color: var(--color-6-dark);
-                font-size: 1.2rem;
-                font-weight: 500;
-            }
+            color: var(--color-6-dark);
+            font-size: 1.2rem;
 
             svg {
                 width: 1.2rem;
@@ -409,19 +383,23 @@
 
             h4 {
                 text-align: center;
-                font-weight: 500;
                 font-size: 1.3rem;
-                color: var(--color-4-dark);
                 margin-top: 0.5em;
             }
         }
 
         &__link {
             display: block;
+
+            &:hover {
+                h4 {
+                    color: var(--color-6-dark);
+                }
+            }
         }
 
-        &__link:hover {
-            transform: translateY(-1.5px);
+        .zoom-container {
+            border-radius: 0.4em;
         }
     }
 
@@ -430,6 +408,10 @@
 
         .section-title {
             margin-bottom: 1em;
+        }
+
+        .zoom-container {
+            border-radius: 0.4em;
         }
     }
 
@@ -448,7 +430,6 @@
 
         &__name {
             font-size: 1.1rem;
-            font-weight: 500;
             color: var(--color-5-dark);
         }
 
@@ -458,12 +439,9 @@
             .price-new {
                 font-weight: 600;
                 font-size: 1.1rem;
-                color: var(--color-4-dark);
             }
 
             .price-old {
-                font-weight: 500;
-                font-size: 1rem;
                 color: var(--color-6-dark);
                 margin-left: 0.1em;
                 text-decoration: line-through;
@@ -472,7 +450,7 @@
         }
 
         &__remove {
-            svg {
+            &--svg {
                 width: 1em;
                 height: 1em;
                 fill: var(--color-6-dark);
@@ -556,6 +534,15 @@
         font-size: 1rem;
     }
 
+    .btn-second {
+        padding: 1em 1.5em;
+        font-size: 1rem;
+        line-height: 1;
+        margin-top: 0;
+        text-align: center;
+        width: 100%;
+    }
+
     .sliderProductThumbs .product-images__item.swiper-slide-thumb-active {
         border: 0.15em solid var(--color-6-dark);
     }
@@ -578,6 +565,7 @@
 
     .product-right__delivery {
         width: 100%;
+        margin-top: 1em;
 
         .btn {
             max-width: none;
@@ -634,8 +622,6 @@
         }
 
         .price-old {
-            font-weight: 500;
-            font-size: 1rem;
             color: var(--color-6-dark);
             margin-left: 0.1em;
             text-decoration: line-through;
@@ -650,7 +636,6 @@
     }
 
     &_title {
-        font-weight: 500;
         font-size: 1.1rem;
         color: var(--color-5-dark);
         margin-top: 0.3em;
@@ -686,8 +671,6 @@
 
 
     &_input {
-        font-weight: 500;
-        font-size: 1rem;
         color: var(--color-5-dark);
         width: 1.5em;
         text-align: center;
@@ -737,14 +720,12 @@
 
     &_link {
         display: block;
+        color: var(--color-6-dark);
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
         margin-top: 1.5em;
         font-size: 1.1rem;
-        font-weight: 500;
-        color: var(--color-4-dark);
-        border-bottom: 1px dashed var(--color-4-dark);
         cursor: pointer;
     }
 }
@@ -762,7 +743,6 @@
     padding: 1.5em 0;
     font-size: 1.1rem;
     color: var(--color-6-dark);
-    font-weight: 500;
     gap: 0.8em;
     margin-top: 1.5em;
 

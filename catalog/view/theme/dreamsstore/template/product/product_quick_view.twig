@@ -119,7 +119,7 @@
     <div class="product-right" data-products-to-cart>
         <div class="product-right__info">
             <p>Артикул: {{ sku }}</p>
-            <a href="{{ share }}">Поделиться</a>
+            <a class="hover-dark" href="{{ share }}">Поделиться</a>
         </div>
         <h1 class="section-title">{{ heading_title }}</h1>
         <div class="product-right__color">
@@ -224,12 +224,13 @@
                 {% endif %}
             </div>
             <div class="product-right__click">
-                <button class="btn btn-second">Заказать в 1 клик</button>
+                <a class="btn btn-second" data-forms="quickorder" data-forms-product="{{ heading_title }}">Заказать в 1
+                    клик</a>
             </div>
         </div>
-        <div class="product-right__complect">
-            <h4>Добавить в комплект</h4>
-        </div>
+        {# <div class="product-right__complect"> #}
+        {#    <h4>Добавить в комплект</h4> #}
+        {# </div> #}
         <div class="product-right__delivery">
             <a class="btn btn-second" href="{{ href }}">Подробнее о товаре</a>
         </div>

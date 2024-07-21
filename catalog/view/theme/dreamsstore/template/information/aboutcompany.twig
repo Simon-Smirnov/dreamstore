@@ -116,12 +116,17 @@
                             <ul class="catalog-inner_grid">
                                 {% for category in categories %}
                                     <li class="catalog-inner_item">
-                                        <a class="catalog-inner_link" href="{{ category.href }}">
-                                            <picture>
-                                                <source srcset="{{ category.image.webp }}">
-                                                <img class="catalog-inner_link-img" src="{{ category.image.default }}"
-                                                     loading="lazy">
-                                            </picture>
+                                        <a class="catalog-inner_link zoom-trigger" href="{{ category.href }}">
+                                            <div class="zoom-container">
+                                                <div class="zoom-image">
+                                                    <picture>
+                                                        <source srcset="{{ category.image.webp }}">
+                                                        <img class="catalog-inner_link-img"
+                                                             src="{{ category.image.default }}"
+                                                             loading="lazy">
+                                                    </picture>
+                                                </div>
+                                            </div>
                                             <h4 class="catalog-inner_link-title">{{ category.name }}</h4>
                                         </a>
                                     </li>

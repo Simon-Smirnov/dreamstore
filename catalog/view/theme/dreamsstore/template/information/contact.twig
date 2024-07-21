@@ -14,7 +14,8 @@
                 <div class="contact-inner_info">
                     <div class="contact-inner_info-item">
                         <h4 class="contact-inner_small-title">Телефон:</h4>
-                        <a class="contact-inner_small-content" href="tel:{{ telephone_for_link }}">{{ telephone }}</a>
+                        <a class="contact-inner_small-content hover-light"
+                           href="tel:{{ telephone_for_link }}">{{ telephone }}</a>
                     </div>
                     <div class="contact-inner_info-item">
                         <h4 class="contact-inner_small-title">График работы:</h4>
@@ -22,8 +23,8 @@
                     </div>
                     <div class="contact-inner_info-item">
                         <h4 class="contact-inner_small-title">E-mail:</h4>
-                        <a class="contact-inner_small-content"
-                           href="tomail:{{ email_for_store }}">{{ email_for_store }}</a>
+                        <a class="contact-inner_small-content hover-light hover-underline-dashed-light"
+                           href="mailto:{{ email_for_store }}">{{ email_for_store }}</a>
                     </div>
                     <div class="contact-inner_info-item">
                         <h4 class="contact-inner_small-title">Адрес:</h4>
@@ -33,36 +34,56 @@
                         <h4 class="contact-inner_small-title">Мессенджеры:</h4>
                         <ul class="contact-inner_small-messengers">
                             <li class="contact-inner_small-messengers_link">
-                                <a>
-                                    <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
+                                <a class="pointer" href="/">
+                                    <svg class="icon-svg-footer hover-svg-light-fill"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <use xlink:href="/sprite.svg#icon_vk"></use>
                                     </svg>
                                 </a>
                             </li>
                             <li class="contact-inner_small-messengers_link">
-                                <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_telegram"></use>
-                                </svg>
+                                <a class="pointer" href="/">
+                                    <svg class="icon-svg-footer hover-svg-light-fill"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_telegram"></use>
+                                    </svg>
+                                </a>
                             </li>
                             <li class="contact-inner_small-messengers_link">
-                                <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_whatsapp"></use>
-                                </svg>
+                                <a class="pointer" href="/">
+                                    <svg class="icon-svg-footer hover-svg-light-fill"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_whatsapp"></use>
+                                    </svg>
+                                </a>
                             </li>
                             <li class="contact-inner_small-messengers_link">
-                                <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_viber"></use>
-                                </svg>
+                                <a class="pointer" href="/">
+                                    <svg class="icon-svg-footer hover-svg-light-fill"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_viber"></use>
+                                    </svg>
+                                </a>
                             </li>
                             <li class="contact-inner_small-messengers_link">
-                                <svg class="icon-svg-footer" xmlns="http://www.w3.org/2000/svg">
-                                    <use xlink:href="/sprite.svg#icon_instagram"></use>
-                                </svg>
+                                <a class="pointer" href="/">
+                                    <svg class="icon-svg-footer hover-svg-light-fill"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="/sprite.svg#icon_instagram"></use>
+                                    </svg>
+                                </a>
                             </li>
                         </ul>
                     </div>
                     <div class="contact-inner_info-item">
-                        <h4 class="contact-inner_small-title button">Наши реквизиты</h4>
+                        <h4 class="contact-inner_small-title button hover-dark hover-underline-dashed-dark pointer"
+                            data-contact-requisites>
+                            Наши реквизиты
+                            <div class="contact-inner_small-requisites" data-contact-requisites-content>
+                                <h4>Реквизиты:</h4>
+                                <p>{{ requisites }}</p>
+                            </div>
+                        </h4>
                         <p class="contact-inner_small-content button">
                             <a class="btn btn-primary" data-forms="writetous">Написать нам</a>
                         </p>
@@ -119,7 +140,8 @@
                         </div>
                         <form class="first-know-inner_form" data-forms-btn data-forms-static>
                             <div class="input-block required">
-                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail" value="">
+                                <input class="input-text" name="email" type="email" placeholder="Ваш E-mail"
+                                       value="">
                                 <label>Ваш E-mail</label>
                                 <div class="error error-email text-danger"></div>
                             </div>
@@ -129,7 +151,8 @@
                             <div>
                                 <label class="agree">
                                     <input class="input-checkbox" name="agree" type="checkbox">
-                                    <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                                    <span>Даю согласие на <a class="hover-dark pointer"
+                                                             href="/privacy">обработку<br> персональных данных</a></span>
                                 </label>
                                 <div class="error error-agree text-danger"></div>
                             </div>

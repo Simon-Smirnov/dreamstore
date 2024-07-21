@@ -40,6 +40,7 @@ import Forms from "./classes/Forms.js";
 import Quiz from "./classes/Quiz.js";
 import ContactMap from "./classes/ContactMap.js";
 import "./classes/Map.js";
+import "./classes/Contact.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     new DropdawnCart('[data-checkout-cart]', true);
     new Checkout('[data-checkout]');
     new Wishlist('[data-product-wishlist]', '[data-wishlist]');
-    new Search('[data-search-btn]');
+    new Search('data-search-btn');
     new GiftCard('[data-gift-card]');
     new BestOffers('[data-view-all-href]');
     new ShowMore('[data-show-more]');

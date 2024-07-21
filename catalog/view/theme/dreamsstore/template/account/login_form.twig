@@ -21,21 +21,23 @@
             <div class="login-inner__block">
                 <div class="login-inner__remember">
                     <input id="login-inner-remember" class="input-checkbox" type="checkbox"/>
-                    <label for="login-inner-remember">Запомнить меня</label>
+                    <label for="login-inner-remember" class="pointer hover-light">Запомнить меня</label>
                 </div>
                 <div class="login-inner__forgot">
-                    <a data-change-password-btn>Забыли пароль?</a>
+                    <a class="pointer hover-dark hover-underline-dashed-dark" data-change-password-btn>Забыли
+                        пароль?</a>
                 </div>
             </div>
             <button class="btn btn-primary login-inner__btn" type="submit">Войти</button>
             <label class="agree login-inner__agree">
                 <input class="input-checkbox" name="agree" type="checkbox">
-                <span>Даю согласие на <a>обработку персональных данных</a></span>
+                <span>Даю согласие на <a class="hover-dark pointer"
+                                         href="/privacy">обработку персональных данных</a></span>
             </label>
             <div class="error-agree text-danger"></div>
             <div class="login-inner__register">
                 <p class="login-inner__register--text">Еще нет аккаунта?</p>
-                <a class="login-inner__register--link" data-login-register>Регистрация</a>
+                <a class="login-inner__register--link hover-dark" data-login-register>Регистрация</a>
             </div>
         </form>
     </div>

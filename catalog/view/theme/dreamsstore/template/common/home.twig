@@ -80,12 +80,15 @@
                         <ul class="catalog-inner_grid">
                             {% for category in categories %}
                                 <li class="catalog-inner_item">
-                                    <a class="catalog-inner_link" href="{{ category.href }}">
-                                        <picture>
-                                            <source srcset="{{ category.image.webp }}">
-                                            <img class="catalog-inner_link-img" src="{{ category.image.default }}"
-                                                 loading="lazy">
-                                        </picture>
+                                    <a class="catalog-inner_link hover-light zoom-trigger" href="{{ category.href }}">
+                                        <div class="zoom-container">
+                                            <picture>
+                                                <source srcset="{{ category.image.webp }}">
+                                                <img class="catalog-inner_link-img zoom-image"
+                                                     src="{{ category.image.default }}"
+                                                     loading="lazy">
+                                            </picture>
+                                        </div>
                                         <h4 class="catalog-inner_link-title">{{ category.name }}</h4>
                                     </a>
                                 </li>
@@ -126,17 +129,18 @@
                 <div class="bestOffers-control">
                     <div class="bestOffers-togglers tabs__togglers">
                         {% if hits %}
-                            <a class="tabs__toggler" data-tab-target="tab-1" data-view-all-href="/hits">Хиты</a>
+                            <a class="tabs__toggler hover-dark" data-tab-target="tab-1"
+                               data-view-all-href="/hits">Хиты</a>
                         {% endif %}
                         {% if novelties %}
-                            <a class="tabs__toggler" data-tab-target="tab-2" data-view-all-href="/novelties">Новинки</a>
+                            <a class="tabs__toggler hover-dark" data-tab-target="tab-2" data-view-all-href="/novelties">Новинки</a>
                         {% endif %}
                         {% if stocks %}
-                            <a class="tabs__toggler" data-tab-target="tab-3" data-view-all-href="/stocks">Акции</a>
+                            <a class="tabs__toggler hover-dark" data-tab-target="tab-3" data-view-all-href="/stocks">Акции</a>
                         {% endif %}
                     </div>
                     <div class="bestOffers-link">
-                        <a href="/hits" data-view-all-link>
+                        <a class="see-more" href="/hits" data-view-all-link>
                             <span>Смотреть все</span>
                             <svg xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_arrow_right"></use>
@@ -151,15 +155,19 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         {% for hit in hits %}
-                                            <a class="products_grid-item" href="{{ hit.href }}" class="slider__item">
+                                            <a class="products_grid-item zoom-trigger slider__item"
+                                               href="{{ hit.href }}">
                                                 <div class="products_grid-thumb">
                                                     <div class="products_grid-block">
-                                                        <picture>
-                                                            <source srcset="{{ hit.thumb.webp }}">
-                                                            <img class="catalog-inner_link-img" alt="{{ hit.name }}"
-                                                                 title="{{ hit.name }}"
-                                                                 src="{{ hit.thumb.default }}" loading="lazy">
-                                                        </picture>
+                                                        <div class="zoom-container">
+                                                            <picture>
+                                                                <source srcset="{{ hit.thumb.webp }}">
+                                                                <img class="catalog-inner_link-img zoom-image"
+                                                                     alt="{{ hit.name }}"
+                                                                     title="{{ hit.name }}"
+                                                                     src="{{ hit.thumb.default }}" loading="lazy">
+                                                            </picture>
+                                                        </div>
                                                         <p class="products_grid-price">
                                                             {% if not hit.special %}
                                                                 <span
@@ -196,15 +204,18 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         {% for novelty in novelties %}
-                                            <a class="products_grid-item" href="{{ novelty.href }}">
+                                            <a class="products_grid-item zoom-trigger" href="{{ novelty.href }}">
                                                 <div class="products_grid-thumb">
                                                     <div class="products_grid-block">
-                                                        <picture>
-                                                            <source srcset="{{ novelty.thumb.webp }}">
-                                                            <img class="catalog-inner_link-img" alt="{{ novelty.name }}"
-                                                                 title="{{ novelty.name }}"
-                                                                 src="{{ novelty.thumb.default }}" loading="lazy">
-                                                        </picture>
+                                                        <div class="zoom-container">
+                                                            <picture>
+                                                                <source srcset="{{ novelty.thumb.webp }}">
+                                                                <img class="catalog-inner_link-img zoom-image"
+                                                                     alt="{{ novelty.name }}"
+                                                                     title="{{ novelty.name }}"
+                                                                     src="{{ novelty.thumb.default }}" loading="lazy">
+                                                            </picture>
+                                                        </div>
                                                         <p class="products_grid-price">
                                                             {% if not novelty.special %}
                                                                 <span
@@ -241,16 +252,18 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         {% for stock in stocks %}
-                                            <a class="products_grid-item" href="{{ stock.href }}">
+                                            <a class="products_grid-item zoom-trigger" href="{{ stock.href }}">
                                                 <div class="products_grid-thumb">
                                                     <div class="products_grid-block">
-                                                        <picture>
-                                                            <source srcset="{{ stock.thumb.webp }}">
-                                                            <img class="catalog-inner_link-img"
-                                                                 alt="{{ stock.name }}"
-                                                                 title="{{ stock.name }}"
-                                                                 src="{{ stock.thumb.default }}" loading="lazy">
-                                                        </picture>
+                                                        <div class="zoom-container">
+                                                            <picture>
+                                                                <source srcset="{{ stock.thumb.webp }}">
+                                                                <img class="catalog-inner_link-img zoom-image"
+                                                                     alt="{{ stock.name }}"
+                                                                     title="{{ stock.name }}"
+                                                                     src="{{ stock.thumb.default }}" loading="lazy">
+                                                            </picture>
+                                                        </div>
                                                         <p class="products_grid-price">
                                                             {% if not stock.special %}
                                                                 <span
@@ -328,7 +341,7 @@
                     <div class="usefulFromBlog-block">
                         <h2 class="section-title">Полезное из блога</h2>
                         <div class="usefulFromBlog-link">
-                            <a href="/blogs">
+                            <a class="see-more" href="/blogs">
                                 <span>Смотреть все</span>
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_arrow_right"></use>
@@ -341,14 +354,17 @@
                             <div class="swiper">
                                 <div class="swiper-wrapper">
                                     {% for blog in useful_from_blog %}
-                                        <a class="blogs-site__item" href="{{ blog.href }}">
+                                        <a class="blogs-site__item zoom-trigger" href="{{ blog.href }}">
                                             <div class="blogs-site__image">
-                                                <picture>
-                                                    <source srcset="{{ blog.thumb.webp }}">
-                                                    <img class="catalog-inner_link-img" alt="{{ blog.name }}"
-                                                         title="{{ blog.name }}"
-                                                         src="{{ blog.thumb.default }}" loading="lazy">
-                                                </picture>
+                                                <div class="zoom-container">
+                                                    <picture>
+                                                        <source srcset="{{ blog.thumb.webp }}">
+                                                        <img class="catalog-inner_link-img zoom-image"
+                                                             alt="{{ blog.name }}"
+                                                             title="{{ blog.name }}"
+                                                             src="{{ blog.thumb.default }}" loading="lazy">
+                                                    </picture>
+                                                </div>
                                                 <h3 class="blogs-site__theme">{{ blog.theme }}</h3>
                                             </div>
                                             <p class="blogs-site__date">{{ blog.date }}</p>
@@ -377,11 +393,11 @@
     <section class="choice">
         <div class="container">
             <div class="choice-inner">
-                <a class="choice-link">
+                <a class="choice-link hover-background-blackout" href="/atelier">
                     <img class="choice-link_img" src="{{ assets }}/assets/images/choice/choice_1.webp">
                     <p class="choice-link_title">Ателье</p>
                 </a>
-                <a class="choice-link">
+                <a class="choice-link hover-background-blackout" href="/">
                     <img class="choice-link_img" src="{{ assets }}/assets/images/choice/choice_2.webp">
                     <p class="choice-link_title">Персональная вышивка</p>
                 </a>
@@ -410,7 +426,7 @@
                     <div class="sectionReviews-block">
                         <h2 class="section-title">Отзывы покупателей</h2>
                         <div class="sectionReviews-block__link">
-                            <a href="/reviews">
+                            <a class="see-more" href="/reviews">
                                 <span>Смотреть все</span>
                                 <svg xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_arrow_right"></use>
@@ -539,7 +555,8 @@
                     <div>
                         <label class="agree">
                             <input class="input-checkbox" name="agree" type="checkbox">
-                            <span>Даю согласие на <a>обработку<br> персональных данных</a></span>
+                            <span>Даю согласие на <a class="hover-dark pointer"
+                                                     href="/privacy">обработку<br> персональных данных</a></span>
                         </label>
                         <div class="error error-agree text-danger"></div>
                     </div>

@@ -9,9 +9,7 @@
 
         .bestOffers-link {
             flex-shrink: 0;
-            font-weight: 500;
             font-size: 1.2rem;
-            color: var(--color-6-dark);
 
             a {
                 display: flex;
@@ -23,7 +21,6 @@
                 width: 1.2rem;
                 height: 1.2rem;
                 fill: none;
-                stroke: var(--color-6-dark);
             }
         }
 
@@ -38,29 +35,19 @@
 
         .tabs__toggler {
             font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--color-6-dark);
             margin-right: 1.2em;
             padding-bottom: 0;
             cursor: pointer;
-        }
-
-        .tabs__toggler:hover {
-            color: var(--color-4-dark);
-        }
-
-        .tabs__toggler.active {
-            color: var(--color-4-dark);
-        }
-
-        .tabs__toggler.active::before {
-            background: var(--color-4-dark);
         }
     }
 
     .bestOffers-content {
         margin-top: 1em;
     }
+}
+
+.bestOffers-control {
+    color: var(--color-6-dark);
 }
 
 .bestOffers-control__link {
@@ -89,7 +76,6 @@
         border: 1px solid var(--libe);
         padding: 1em;
         border-radius: 0.4em;
-        font-weight: 500;
         font-size: 1.2rem;
         color: var(--color-6-dark);
         margin-top: 1em;

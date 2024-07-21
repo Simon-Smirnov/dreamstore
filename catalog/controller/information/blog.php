@@ -58,6 +58,7 @@ class ControllerInformationBlog extends Controller
             $data['name_expert_first_spell'] = mb_substr($blog_info['name_expert'], 0, 1);
             $data['title_slider'] = $blog_info['title_slider'];
             $data['title_video'] = $blog_info['title_video'];
+            $data['video'] = $blog_info['video'];
 
             $this->load->model('tool/image');
 
@@ -106,6 +107,7 @@ class ControllerInformationBlog extends Controller
                 $data['similar_articles'][] = [
                     'blog_id' => $article['blog_id'],
                     'title' => $article['title'],
+                    'theme' => $article['theme'],
                     'thumb' => $image,
                     'date' => $formattedDate,
                     'category_name' => $article['name'],

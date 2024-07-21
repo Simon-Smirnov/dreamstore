@@ -174,10 +174,14 @@ class ControllerInformationVacancies extends Controller
             if (!isset($this->errors['file'])) {
                 foreach ($this->request->files['file']['name'] as $key => $fileMessage) {
                     $filename = basename(html_entity_decode($fileMessage, ENT_QUOTES, 'UTF-8'));
-                    if ((utf8_strlen($filename) > 128)) {
-                        $filename = mb_substr($filename, -128, 128, 'UTF-8');
-                    }
-                    $file = token(32) . '.' . $filename;
+                    // if ((utf8_strlen($filename) > 128)) {
+                    //     $filename = mb_substr($filename, -128, 128, 'UTF-8');
+                    // }
+                    // $file = token(32) . '.' . $filename;
+
+                    $uniqueString = base64_encode(random_bytes(16));
+                    $fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
+                    $file = $uniqueString . '.' . $fileExtension;
 
                     move_uploaded_file($this->request->files['file']['tmp_name'][$key], DIR_IMAGE . 'catalog/replies/' . $file);
                     $data['files'][] = 'catalog/replies/' . $file;

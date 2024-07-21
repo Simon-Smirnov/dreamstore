@@ -17,8 +17,6 @@ footer {
 
     &_item {
         &-title {
-            color: var(--color-4-dark);
-            font-weight: 500;
             font-size: 1.2rem;
             margin-bottom: 1em;
         }
@@ -146,6 +144,10 @@ footer {
     height: 1.5rem;
 }
 
+.scroll-to-top:hover, .footer-buttons_message:hover {
+    background-color: var(--color-4-dark);
+}
+
 .footer-grid_item.footer-grid_item-list_item-social {
     display: none;
     margin-top: 0.5em;
@@ -160,7 +162,7 @@ footer {
 }
 
 .footer-grid_item-title > svg {
-    //display: none;
+    display: none;
     width: 1.2rem;
     height: 1.2rem;
     stroke: var(--color-5-dark);
@@ -195,7 +197,6 @@ footer {
                     span {
                         font-size: 0.7rem;
                         font-weight: 600;
-                        color: var(--color-4-dark);
                     }
                 }
             }
@@ -272,5 +273,8 @@ footer {
         right: 2em;
         bottom: 5.5em;
         background-color: var(--color-4-dark);
+    }
+    .footer-grid_item-title > svg {
+        display: inline-block;
     }
 }

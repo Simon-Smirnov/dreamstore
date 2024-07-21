@@ -378,7 +378,7 @@
                                             <div>
                                                 <label class="agree">
                                                     <input class="input-checkbox" name="agree" type="checkbox">
-                                                    <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                                    <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                                                 </label>
                                                 <div class="text-danger error error-agree"></div>
                                             </div>
@@ -401,13 +401,17 @@
                     <h2 class="section-title">Описание моделей</h2>
                     <div class="atelier-models__grid">
                         {% for model in models %}
-                            <div class="atelier-models__item" data-atelier-model="{{ model.product_id }}">
-                                <picture>
-                                    <source srcset="{{ model.thumb.webp }}">
-                                    <img class="atelier-models__image" alt="{{ model.name }}"
-                                         title="{{ model.name }}"
-                                         src="{{ model.thumb.default }}" loading="lazy">
-                                </picture>
+                            <div class="atelier-models__item zoom-trigger" data-atelier-model="{{ model.product_id }}">
+                                <div class="zoom-container">
+                                    <div class="zoom-image">
+                                        <picture>
+                                            <source srcset="{{ model.thumb.webp }}">
+                                            <img class="atelier-models__image" alt="{{ model.name }}"
+                                                 title="{{ model.name }}"
+                                                 src="{{ model.thumb.default }}" loading="lazy">
+                                        </picture>
+                                    </div>
+                                </div>
                                 <h4 class="atelier-models__title">{{ model.name }}</h4>
                             </div>
                         {% endfor %}
@@ -455,7 +459,7 @@
                         <div class="atelier-form_form-agree">
                             <label class="agree">
                                 <input class="input-checkbox" name="agree" type="checkbox">
-                                <span>Даю согласие на <a>обработку персональных данных</a></span>
+                                <span>Даю согласие на <a class="hover-dark pointer" href="/privacy">обработку персональных данных</a></span>
                             </label>
                             <div class="error error-agree text-danger"></div>
                         </div>
