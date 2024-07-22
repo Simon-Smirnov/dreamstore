@@ -7,6 +7,7 @@ import Login from './classes/Login.js'
 import './classes/Select.js'
 import './classes/Fancybox.js'
 // import './classes/Checkout_old.js'
+import "./classes/Dadata.js";
 import './classes/Checkout.js'
 import Faq from './classes/Faq.js'
 import Reviews from './classes/Reviews.js'

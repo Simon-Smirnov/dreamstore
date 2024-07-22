@@ -1,4 +1,4 @@
-2024-07-21 14:52:07 - MOD: Modification Default
+2024-07-22 15:07:13 - MOD: Modification Default
 
 FILE: system/engine/action.php
 REGEX: ~(require|include)(_once)?\(([^)]+)~
@@ -29,13 +29,100 @@ LINE: 13
 CODE: $include[] = DIR_TEMPLATE;
 LINE: 46
 ----------------------------------------------------------------
-MOD: Localcopy OCMOD Install Fix
+MOD: Boxberry shipping
+
+FILE: admin/controller/sale/order.php
+CODE: // Vouchers
+LINE: 436
+
+FILE: admin/view/template/sale/order_form.twig
+CODE: // Currency
+LINE: 982
+CODE: <input type="text" name="address_2" value="{{ shipping_address_2 }}" id="input-shipping-address-2" class="form-control" />
+LINE: 665
+
+FILE: catalog/model/checkout/order.php
+CODE: public function addOrder($data) {
+NOT FOUND - OPERATIONS ABORTED!
+
+FILE: admin/controller/common/column_left.php
+CODE: $sale = array();
+LINE: 297
+
+FILE: admin/language/ru-ru/common/column_left.php
+CODE: $_['text_order']
+LINE: 51
+
+FILE: system/library/cart/cart.php
+CODE: $this->weight = $registry->get('weight');
+LINE: 17
+CODE: 'weight'          => ($product_query->row['weight'] + $option_weight) * $cart['quantity'],
+NOT FOUND - OPERATIONS ABORTED!
+
+FILE: catalog/view/theme/default/template/checkout/shipping_method.twig
+CODE: {{ quote.title }}
+LINE: 21
+
+FILE: catalog/language/ru-ru/checkout/checkout.php
+CODE: <?php
+LINE: 1
+
+FILE: catalog/controller/api/order.php
+CODE: $json['error'] = $this->language->get('error_stock');
+LINE: 421
+
+FILE: catalog/controller/api/cart.php
+CODE: $json['error']['stock'] = $this->language->get('error_stock');
+LINE: 136
+
+FILE: catalog/controller/checkout/shipping_method.php
+CODE: $this->session->data['comment'] = strip_tags($this->request->post['comment']);
+LINE: 176
+----------------------------------------------------------------
+MOD: CDEK opencart
+
+FILE: (sub modification) catalog/view/theme/default/template/checkout/shipping_method.twig
+CODE: {{ quote.text }}
+LINE: 17
+
+FILE: (sub modification) admin/controller/sale/order.php
+CODE: $order_info['shipping_method'];
+LINE: 366
+LINE: 727
+
+FILE: admin/model/sale/order.php
+CODE: $order_query->row['shipping_method'],
+LINE: 112
+
+FILE: admin/view/template/sale/order_info.twig
+CODE: {{ shipping_method }}
+LINE: 37
+
+FILE: (sub modification) admin/controller/common/column_left.php
+CODE: $catalog = array();
+LINE: 77
+----------------------------------------------------------------
+MOD: Installer Fix Allow All directories
 
 FILE: admin/controller/marketplace/install.php
 CODE: if ($safe) {
 LINE: 165
 CODE: if (is_dir($file) && !is_dir($path)) {
-LINE: 221
+LINE: 226
+----------------------------------------------------------------
+MOD: Localcopy OCMOD Install Fix
+
+FILE: (sub modification) admin/controller/marketplace/install.php
+CODE: if ($safe) {
+LINE: 168
+CODE: if (is_dir($file) && !is_dir($path)) {
+LINE: 237
+----------------------------------------------------------------
+MOD: Robokassa opencart
+
+FILE: (sub modification) catalog/controller/api/order.php
+CODE: $this->model_checkout_order->addOrderHistory($order_id, $this->request->post['order_status_id'], $this->request->post['comment'], $this->request->post['notify'], $this->request->post['override']);
+LINE: 779
 ----------------------------------------------------------------
 MOD: Show Subcategory products on category page
 

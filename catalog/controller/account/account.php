@@ -385,6 +385,9 @@ class ControllerAccountAccount extends Controller
 
                 $customer_info = $this->model_account_customer->getCustomerByToken($this->request->get['token']);
 
+                //setcookie('OCSESSIDLONG', 'true', time() + 2592000, '/');
+                //setcookie('OCSESSIDLONG', $this->session->getId(), time() + 2592000, ini_get('session.cookie_path'), ini_get('session.cookie_domain'));
+
                 if ($customer_info && $this->customer->login($customer_info['email'], '', true)) {
                     // Default Addresses
                     $this->load->model('account/address');
@@ -432,6 +435,12 @@ class ControllerAccountAccount extends Controller
 
                         unset($this->session->data['wishlist'][$key]);
                     }
+                }
+
+                if (isset($data['rememberme']) && $data['rememberme'] == 'on') {
+                    setcookie('OCSESSIDLONG', 'true', time() + 2592000, '/');
+                } else {
+                    setcookie('OCSESSIDLONG', '', time() - 2592000, '/');
                 }
 
                 // Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)

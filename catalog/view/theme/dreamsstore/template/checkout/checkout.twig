@@ -69,8 +69,12 @@
                                         {# <ul class="select__list"> #}
                                         {#    <li data-value="Значение" data-value-1="Кировская область" #}
                                         {#        selected="selected"> #}
-                                        <input value="Москва" data-checkout-input="zone">
-                                        <input value="2753" data-checkout-input="zone_id">
+                                        <input value="000000" data-checkout-input="payment_postcode"
+                                               data-checkout-dadata-input="postal_code">
+                                        <input value="2753" data-checkout-input="zone_id"
+                                               data-checkout-dadata-input="zone_id">
+                                        <input value="Москва" data-checkout-input="zone"
+                                               data-checkout-dadata-input="zone">
                                         {# Кировская область #}
                                         {#    </li> #}
                                         {# </ul> #}
@@ -79,7 +83,8 @@
                                     <div class="checkout-address__item">
                                         <div class="checkout-blocks__input input-block">
                                             <input class="input-text" type="text" name="city"
-                                                   data-checkout-input="city" placeholder="Город"
+                                                   data-checkout-input="city" data-checkout-dadata-input="city"
+                                                   placeholder="Город"
                                                    value="{{ fields.city ? fields.city : '' }}" placeholder=" ">
                                             <label>Город</label>
                                         </div>
@@ -120,7 +125,7 @@
                                     </div>
                                     <div class="checkout-blocks__input input-block required">
                                         <input class="input-text" type="text" name="street"
-                                               data-checkout-input="street"
+                                               data-checkout-input="street" data-checkout-dadata-input="street"
                                                value="{{ fields.street ? fields.street : '' }}"
                                                placeholder="Улица">
                                         <label>Улица</label>
@@ -128,14 +133,14 @@
                                     <div class="checkout-blocks__block">
                                         <div class="checkout-blocks__input input-block">
                                             <input class="input-text" type="text" name="house"
-                                                   data-checkout-input="house"
+                                                   data-checkout-input="house" data-checkout-dadata-input="house"
                                                    value="{{ fields.house ? fields.house : '' }}"
                                                    placeholder="Дом">
                                             <label>Дом</label>
                                         </div>
                                         <div class="checkout-blocks__input input-block required">
                                             <input class="input-text" type="text" name="appartment"
-                                                   data-checkout-input="appartment"
+                                                   data-checkout-input="appartment" data-checkout-dadata-input="flat"
                                                    value="{{ fields.appartment ? fields.appartment : '' }}"
                                                    placeholder="Кв-ра/офис">
                                             <label>Кв-ра/офис</label>

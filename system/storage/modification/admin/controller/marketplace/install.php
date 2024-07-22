@@ -161,6 +161,9 @@ class ControllerMarketplaceInstall extends Controller {
 					}
 					
 		
+		$safe = true;
+		
+		
 		    $safe = true;
 		    
 					if ($safe) {
@@ -211,6 +214,19 @@ class ControllerMarketplaceInstall extends Controller {
 							$path = DIR_SYSTEM . substr($destination, 7);
 						}
 	
+		
+						if ($path == '') {
+							// Get the ROOT
+							$app_root = explode('/',DIR_APPLICATION);
+							unset($app_root[count($app_root)-2]);
+							$app_root = implode('/',$app_root);
+							
+							//FIX this shit!
+							$path = $app_root . $destination;
+
+						}
+
+		
 		
 			  if ($path == '') {
   				$app_root = explode('/',DIR_APPLICATION);

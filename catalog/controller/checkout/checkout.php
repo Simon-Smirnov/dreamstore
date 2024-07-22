@@ -187,11 +187,19 @@ class ControllerCheckoutCheckout extends Controller
 
         $results = $this->model_setting_extension->getExtensions('shipping');
 
+        //echo "<pre>";
+        //var_dump($results);
+        //echo "</pre>";
+
         foreach ($results as $result) {
             if ($this->config->get('shipping_' . $result['code'] . '_status')) {
                 $this->load->model('extension/shipping/' . $result['code']);
 
                 $quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote('');
+
+                //echo "<pre>";
+                //var_dump($quote);
+                //echo "<pre>";
 
                 if ($quote) {
                     $method_data[$result['code']] = array(
@@ -215,6 +223,10 @@ class ControllerCheckoutCheckout extends Controller
         array_multisort($sort_order, SORT_ASC, $method_data);
 
         $this->session->data['shipping_methods'] = $method_data;
+
+        //echo "<pre>";
+        //var_dump($method_data);
+        //echo "</pre>";
 
         if (!$this->session->data['shipping_method'] || !$this->session->data['shipping_type']) {
             foreach ($method_data as $shipping_method_key => $shipping_method) {
