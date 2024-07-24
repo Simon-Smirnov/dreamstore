@@ -65,8 +65,7 @@ class ControllerExtensionPaymentRobokassa extends Controller
 
         // Расчет стоимости заказа с учетом бонусных баллов
         $total_order_cost = $order_info['total'] - $bonus_points;
-        $data['out_summ'] = (float) $this->currency->format($total_order_cost, $order_info['currency_code'], false, false);
-
+        $data['out_summ'] = (float)$this->currency->format($total_order_cost, $order_info['currency_code'], false, false);
 
 
         // $data['out_summ'] = (float) $this->currency->format($order_info['total'], $order_info['currency_code'], false, false);
@@ -170,9 +169,6 @@ class ControllerExtensionPaymentRobokassa extends Controller
             $data['robokassa_test'] = '0';
         }
 
-
-
-
         $ruIframeUrl = "https://auth.robokassa.ru/Merchant/bundle/robokassa_iframe.js";
         $kzIframeUrl = "https://auth.robokassa.kz/Merchant/bundle/robokassa_iframe.js";
 
@@ -204,7 +200,10 @@ class ControllerExtensionPaymentRobokassa extends Controller
 
         }
 
-        return $this->load->view('extension/payment/robokassa', $data);
+        $response['robokassa'] = $data;
+
+        return $response;
+        //return $this->load->view('extension/payment/robokassa', $data);
     }
 
     public function success()

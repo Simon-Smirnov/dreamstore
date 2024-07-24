@@ -16,10 +16,11 @@ export default class {
                     Slider.init();
                 });
             }
-            if (target.hasAttribute('data-modal-search-close') || target.closest('[data-modal-search-close]')) {
+            if ((target.hasAttribute('data-modal-search-close') || target.closest('[data-modal-search-close]')) && this.content.classList.contains('open')) {
                 e.preventDefault();
                 this.content.classList.remove('open');
-                // document.body.style.overflowY = 'auto';
+                this.content.innerHTML = "";
+                document.body.style.overflowY = 'auto';
             }
             if (target.hasAttribute('data-search-modal-input-reset') || target.closest('[data-search-modal-input-reset]')) {
                 this.content.querySelector('[data-search-modal-input]').value = '';

@@ -12,6 +12,7 @@ export default class {
         if (this.block) {
             this.content = this.block.querySelector('[data-set-content]');
             this.globalProductId = this.block.dataset.productIdGlobal;
+            this.updateProductPrice();
             this.block.addEventListener('click', (e) => {
                 const target = e.target;
                 if (target.dataset.productId) {
@@ -27,7 +28,8 @@ export default class {
                                 this.updateViewMiniCart();
                                 Alert.add(r.success);
                                 CartAsyncMethods.getQuantityCart().then(r => {
-                                    document.querySelector('#cart-total').textContent = r.quantity;
+                                    // document.querySelector('#cart-total').textContent = r.quantity;
+                                    document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
                                 })
                                 this.updateProductBtn(this.globalProductId);
                             }
@@ -74,6 +76,12 @@ export default class {
                             }
                         });
                     });
+                }
+            })
+            document.addEventListener('change', (e) => {
+                const target = e.target;
+                if (target.dataset.optionInputPrice) {
+                    this.updateProductPrice();
                 }
             })
         }
@@ -190,6 +198,24 @@ export default class {
                 // this.content.innerHTML = r;
             }
         });
+    }
+
+    updateProductPrice() {
+        this.baseProductPrice = this.block.querySelector('[data-product-price-base]');
+        if (this.baseProductPrice) {
+            this.baseProductPriceValue = this.baseProductPrice.dataset.productPriceBase;
+            this.newProductPrice = parseInt(this.baseProductPriceValue.replace(/\s/g, ''));
+
+            this.block.querySelectorAll('[data-option-input-price]').forEach(input => {
+                if (input.type == 'hidden') {
+                    this.newProductPrice += +input.dataset.optionInputPrice;
+                }
+                if (input.type == 'checkbox' && input.checked) {
+                    this.newProductPrice += +input.dataset.optionInputPrice;
+                }
+            })
+            this.block.querySelector('[data-product-price-base]').textContent = this.newProductPrice;
+        }
     }
 
     async calculatePrice() {

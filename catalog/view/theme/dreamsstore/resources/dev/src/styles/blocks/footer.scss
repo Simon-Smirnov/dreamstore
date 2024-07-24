@@ -216,6 +216,30 @@ footer {
     stroke: var(--color-4-dark);
 }
 
+.footer-icon {
+    &__parent {
+        position: relative;
+    }
+
+    &__child {
+        position: absolute;
+        top: 1.3em;
+        right: -0.7em;
+        color: var(--white);
+        background-color: var(--color-4-dark);
+        width: 1.5em;
+        height: 1.5em;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        line-height: 1;
+    }
+}
 
 @media screen and (max-width: 600px) {
     .footer-menu {
@@ -223,7 +247,7 @@ footer {
     }
     footer {
         padding-top: 1em;
-        padding-bottom: 0;
+        padding-bottom: 5.5em;
     }
     .footer-grid {
         grid-template-columns: 1fr;

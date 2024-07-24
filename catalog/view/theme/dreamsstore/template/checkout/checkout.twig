@@ -99,6 +99,7 @@
                                                    id="shipping_type_{{ _shipping_method_key }}"
                                                    value="{{ _shipping_method_key }}"
                                                    data-shipping-type-input
+                                                   {% if _shipping_method_key == 'cdek' %}data-shipping-type-sdek{% endif %}
                                                     {{ _shipping_method_key == shipping_type ? "checked" : "" }}>
                                             <div class="input-radio__outer">
                                                 <div class="input-radio__inner"></div>
@@ -107,6 +108,11 @@
                                                    for="shipping_type_{{ _shipping_method_key }}">
                                                 {{ _shipping_method.title }}
                                             </label>
+                                            {% if _shipping_method_key == 'cdek' and _shipping_method.quote['tariff_368_MRG'] is defined %}
+                                                <div class="checkout-delivery__description">
+                                                    {{ _shipping_method.quote['tariff_368_MRG'].description }}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     {% endfor %}
                                 </div>

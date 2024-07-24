@@ -103,6 +103,22 @@
             }
         }
 
+        &__radio {
+            align-items: start;
+
+            input {
+                flex-shrink: 0;
+            }
+
+            .payment_cod {
+                color: var(--color-6-dark);
+
+                &--small {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
         &__radio + &__radio {
             margin-top: 0.7em;
         }
@@ -351,6 +367,18 @@
         margin-right: auto;
         display: block;
         margin-top: 3.5em;
+        text-align: center;
+    }
+
+    .btn-second {
+        margin-top: 1em;
+    }
+
+    &-comment {
+        color: var(--color-5-dark);
+        margin-top: 3em;
+        line-height: 1.4;
+        font-size: 1.1rem;
     }
 
     &-item {
@@ -368,6 +396,10 @@
             border-bottom: 1px dashed var(--libe);
             position: relative;
             top: 0.1em;
+        }
+
+        .payment_cod--small, br {
+            display: none;
         }
     }
 

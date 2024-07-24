@@ -938,6 +938,7 @@ class ModelExtensionShippingCdek extends Model
         require_once(DIR_APPLICATION . "/controller/extension/shipping/cdek.php");
         $controller = new ControllerExtensionShippingCdek($this->registry);
         $tpl = $controller->renderTpl($data);
+
         return $tpl;
     }
 

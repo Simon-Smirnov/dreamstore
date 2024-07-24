@@ -1,6 +1,9 @@
 <?php
-class ModelExtensionPaymentRobokassaPodeli extends Model {
-    public function checkCurrency($alias) {
+
+class ModelExtensionPaymentRobokassaPodeli extends Model
+{
+    public function checkCurrency($alias)
+    {
         $url = 'https://auth.robokassa.ru/Merchant/WebService/Service.asmx/GetCurrencies?MerchantLogin=' . $this->config->get('payment_robokassa_login') . '&Language=ru';
         $xml = file_get_contents($url);
 
@@ -13,7 +16,7 @@ class ModelExtensionPaymentRobokassaPodeli extends Model {
                 if (isset($group->Items->Currency)) {
                     foreach ($group->Items->Currency as $currency) {
                         if (isset($currency->attributes()->Alias)) {
-                            $result = (string) $currency->attributes()->Alias;
+                            $result = (string)$currency->attributes()->Alias;
 
                             if ($result == $alias) {
                                 return true;
@@ -27,8 +30,15 @@ class ModelExtensionPaymentRobokassaPodeli extends Model {
         return false;
     }
 
-    public function getMethod($address, $total) {
+    public function getMethod($address, $total)
+    {
         $this->load->language('extension/payment/robokassa_podeli');
+
+        if (!isset($address['country_id']) && !isset($address['zone_id'])) {
+            $address = [];
+            $address['country_id'] = 176;
+            $address['zone_id'] = 2753;
+        }
 
         if ($this->config->get('payment_robokassa_status')) {
             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_robokassa_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
@@ -48,9 +58,9 @@ class ModelExtensionPaymentRobokassaPodeli extends Model {
 
         if ($status) {
             $method_data = array(
-                'code'       => 'robokassa_podeli',
-                'title'      => $this->language->get('text_title'),
-                'terms'      => '',
+                'code' => 'robokassa_podeli',
+                'title' => $this->language->get('text_title'),
+                'terms' => '',
                 'sort_order' => $this->config->get('payment_robokassa_podeli_sort_order')
             );
         }

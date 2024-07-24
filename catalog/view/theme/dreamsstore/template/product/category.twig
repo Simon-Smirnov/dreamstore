@@ -61,12 +61,12 @@
                         </div>
                     {% endif %}
                     <div class="category_other-filter">
-                        filter
+                        {{ filters }}
                         <button class="btn btn-second">Сбросить все</button>
                     </div>
                 </div>
                 <div class="category_main">
-                    {% if products %}
+                    {% if product_cards or categories %}
                         <div class="category_main-controls">
                             {% if categories %}
                                 <div class="category_main-controls__categories">
@@ -90,135 +90,164 @@
                                     </div>
                                 </div>
                             {% endif %}
+                            {# <div class="category_main-controls_sort"> #}
+                            {#    <label class="input-group-addon" for="input-sort">{{ text_sort }}</label> #}
+                            {#    <select id="input-sort" class="form-control" onchange="location = this.value;"> #}
+                            {#        {% for sorts in sorts %} #}
+                            {#            {% if sorts.value == '%s-%s'|format(sort, order) %} #}
+                            {#                <option value="{{ sorts.href }}" #}
+                            {#                        selected="selected">{{ sorts.text }}</option> #}
+                            {#            {% else %} #}
+                            {#                <option value="{{ sorts.href }}">{{ sorts.text }}</option> #}
+                            {#            {% endif %} #}
+                            {#        {% endfor %} #}
+                            {#    </select> #}
+                            {#    <p>{{ text_sort }}</p> #}
+                            {#    <div id="sorts" class="select select-1 open"> #}
+                            {#        <input type="hidden" name="select" #}
+                            {#               value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC"> #}
+                            {#        <div class="select__box-btn"> #}
+                            {#            <button class="select__button" type="button"> #}
+                            {#                По умолчанию #}
+                            {#            </button> #}
+                            {#            <svg xmlns="http://www.w3.org/2000/svg"> #}
+                            {#                <use xlink:href="/sprite.svg#icon_arrow_right"></use> #}
+                            {#            </svg> #}
+                            {#        </div> #}
+                            {#        <ul class="select__list"> #}
+                            {#            <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC" #}
+                            {#                selected="selected">По умолчанию #}
+                            {#            </li> #}
+                            {#            <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=ASC"> #}
+                            {#                Сначала недорогие #}
+                            {#            </li> #}
+                            {#            <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=DESC"> #}
+                            {#                Сначала дорогие #}
+                            {#            </li> #}
+                            {#            <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.viewed&amp;order=DESC"> #}
+                            {#                Популярные #}
+                            {#            </li> #}
+                            {#        </ul> #}
+                            {#    </div> #}
+                            {# </div> #}
                             <div class="category_main-controls_sort">
-                                {# <label class="input-group-addon" for="input-sort">{{ text_sort }}</label> #}
-                                {# <select id="input-sort" class="form-control" onchange="location = this.value;"> #}
-                                {#    {% for sorts in sorts %} #}
-                                {#        {% if sorts.value == '%s-%s'|format(sort, order) %} #}
-                                {#            <option value="{{ sorts.href }}" #}
-                                {#                    selected="selected">{{ sorts.text }}</option> #}
-                                {#        {% else %} #}
-                                {#            <option value="{{ sorts.href }}">{{ sorts.text }}</option> #}
-                                {#        {% endif %} #}
-                                {#    {% endfor %} #}
-                                {# </select> #}
-                                <p>{{ text_sort }}</p>
-                                <div id="sorts" class="select select-1 open">
-                                    <input type="hidden" name="select"
-                                           value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC">
-                                    <div class="select__box-btn">
-                                        <button class="select__button" type="button">
-                                            По умолчанию
-                                        </button>
-                                        <svg xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
-                                        </svg>
-                                    </div>
-                                    <ul class="select__list">
-                                        <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.sort_order&amp;order=ASC"
-                                            selected="selected">По умолчанию
-                                        </li>
-                                        <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=ASC">
-                                            Сначала недорогие
-                                        </li>
-                                        <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.price&amp;order=DESC">
-                                            Сначала дорогие
-                                        </li>
-                                        <li data-value="https://motochek-shop.ru/aksessuary/?sort=p.viewed&amp;order=DESC">
-                                            Популярные
-                                        </li>
-                                    </ul>
-                                </div>
+                                {{ sorts }}
                             </div>
                             <div class="category_main-controls_structure">
-                                <button type="button" id="grid-view"
-                                        data-toggle="tooltip"
-                                        title="{{ button_grid }}">
-                                    <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                <a title="{{ button_grid }}">
+                                    <svg class="{% if not is_line %}active{% endif %}" data-category-view-choose="grid"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <use xlink:href="/sprite.svg#icon_square"></use>
                                     </svg>
-                                </button>
-                                <button type="button" id="list-view"
-                                        data-toggle="tooltip"
-                                        title="{{ button_list }}">
-                                    <svg class="" xmlns="http://www.w3.org/2000/svg">
+                                </a>
+                                <a title="{{ button_list }}">
+                                    <svg class="{% if is_line %}active{% endif %}" data-category-view-choose="line"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <use xlink:href="/sprite.svg#icon_list"></use>
                                     </svg>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="category_main-products">
-                            <div class="products_grid" data-items-identy>
-                                {% for product in products %}
-                                    <a class="products_grid-item zoom-trigger" href="{{ product.href }}">
-                                        <div class="products_grid-thumb">
-                                            <div class="products_grid-block">
-                                                <div class="zoom-container">
-                                                    <div class="zoom-image">
-                                                        <picture>
-                                                            <source srcset="{{ product.thumb.webp }}">
-                                                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                                 title="{{ product.name }}"
-                                                                 src="{{ product.thumb.default }}" loading="lazy">
-                                                        </picture>
-                                                    </div>
-                                                </div>
-                                                <p class="products_grid-price">
-                                                    {% if not product.special %}
-                                                        <span
-                                                                class="price-new">{{ product.price }}</span>
-                                                    {% else %}
-                                                        <span
-                                                                class="price-new">{{ product.special }}</span>
-                                                        <span
-                                                                class="price-old">{{ product.price }}</span>
-                                                        <span class="price-percent">{{ product.percent }}</span>
-                                                    {% endif %}
-                                                </p>
-                                            </div>
-                                            <h4 class="products_grid-title">{{ product.name }}</h4>
-                                            <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}"
-                                                    title="{{ button_wishlist }}"
-                                                    data-product-wishlist="{{ product.product_id }}">
-                                                <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
-                                                    <use xlink:href="/sprite.svg#icon_heart"></use>
-                                                </svg>
-                                            </button>
-                                            {# <div class=""> #}
-                                            {#    <div class="caption"> #}
+                            <div class="products_grid" data-items-identy data-category-view>
+                                {{ product_cards }}
+                                {#                                {% for product in products %} #}
+                                {#                                    <a class="products_grid-item zoom-trigger" href="{{ product.href }}"> #}
+                                {#                                        <div class="products_grid-thumb"> #}
+                                {#                                            <div class="products_grid-block"> #}
+                                {#                                                <div class="zoom-container"> #}
+                                {#                                                    <div class="zoom-image"> #}
+                                {#                                                        <picture> #}
+                                {#                                                            <source srcset="{{ product.thumb.webp }}"> #}
+                                {#                                                            <img class="catalog-inner_link-img" alt="{{ product.name }}" #}
+                                {#                                                                 title="{{ product.name }}" #}
+                                {#                                                                 src="{{ product.thumb.default }}" loading="lazy"> #}
+                                {#                                                        </picture> #}
+                                {#                                                    </div> #}
+                                {#                                                    {% if product.colors or product.current_color %} #}
+                                {#                                                        <ul class="products_grid__colors"> #}
+                                {#                                                            {% if product.current_color %} #}
+                                {#                                                                <li> #}
+                                {#                                                                    <p class="colorPoint-outer active"> #}
+                                {#                                                                                            <span class="colorPoint-inner" #}
+                                {#                                                                                                  style="background-color: {{ product.current_color }}"></span> #}
+                                {#                                                                    </p> #}
+                                {#                                                                </li> #}
+                                {#                                                            {% endif %} #}
+                                {#                                                            {% if product.colors %} #}
+                                {#                                                                {% for color in product.colors %} #}
+                                {#                                                                    <li> #}
+                                {#                                                                        <p class="colorPoint-outer"> #}
+                                {#                                                                                                <span class="colorPoint-inner" #}
+                                {#                                                                                                      style="background-color: {{ color.hex }}"></span> #}
+                                {#                                                                        </p> #}
+                                {#                                                                    </li> #}
+                                {#                                                                {% endfor %} #}
+                                {#                                                            {% endif %} #}
+                                {#                                                            {% if product.colors_add %} #}
+                                {#                                                                <li class="products_grid__colors--add"> #}
+                                {#                                                                    +{{ product.colors_add }} #}
+                                {#                                                                </li> #}
+                                {#                                                            {% endif %} #}
+                                {#                                                        </ul> #}
+                                {#                                                    {% endif %} #}
+                                {#                                                </div> #}
+                                {#                                                <p class="products_grid-price"> #}
+                                {#                                                    {% if not product.special %} #}
+                                {#                                                        <span #}
+                                {#                                                                class="price-new">{{ product.price }}</span> #}
+                                {#                                                    {% else %} #}
+                                {#                                                        <span #}
+                                {#                                                                class="price-new">{{ product.special }}</span> #}
+                                {#                                                        <span #}
+                                {#                                                                class="price-old">{{ product.price }}</span> #}
+                                {#                                                        <span class="price-percent">{{ product.percent }}</span> #}
+                                {#                                                    {% endif %} #}
+                                {#                                                </p> #}
+                                {#                                            </div> #}
+                                {#                                            <h4 class="products_grid-title">{{ product.name }}</h4> #}
+                                {#                                            <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}" #}
+                                {#                                                    title="{{ button_wishlist }}" #}
+                                {#                                                    data-product-wishlist="{{ product.product_id }}"> #}
+                                {#                                                <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg"> #}
+                                {#                                                    <use xlink:href="/sprite.svg#icon_heart"></use> #}
+                                {#                                                </svg> #}
+                                {#                                            </button> #}
+                                {#                                            <div class=""> #}
+                                {#                                                <div class="caption"> #}
 
-                                            {#        <p>{{ product.description }}</p> #}
-                                            {#        {% if product.price %} #}
-                                            {#            <p class="price"> {% if not product.special %} #}
-                                            {#                    {{ product.price }} #}
-                                            {#                {% else %} <span #}
-                                            {#                        class="price-new">{{ product.special }}</span> #}
-                                            {#                    <span #}
-                                            {#                            class="price-old">{{ product.price }}</span> {% endif %} #}
-                                            {#                {% if product.tax %} <span #}
-                                            {#                        class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
-                                            {#            </p> #}
-                                            {#        {% endif %} #}
-                                            {#    </div> #}
-                                            {#    <div class="button-group"> #}
-                                            {#        <button type="button" #}
-                                            {#                onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
-                                            {#            <i class="fa fa-shopping-cart"></i> <span #}
-                                            {#                    class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
-                                            {#        </button> #}
-                                            {#        <button type="button" data-toggle="tooltip" #}
-                                            {#                title="{{ button_wishlist }}" #}
-                                            {#                onclick="wishlist.add('{{ product.product_id }}');"><i #}
-                                            {#                    class="fa fa-heart"></i></button> #}
-                                            {#        <button type="button" data-toggle="tooltip" #}
-                                            {#                title="{{ button_compare }}" #}
-                                            {#                onclick="compare.add('{{ product.product_id }}');"><i #}
-                                            {#                    class="fa fa-exchange"></i></button> #}
-                                            {#    </div> #}
-                                            {# </div> #}
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                                {#                                                    <p>{{ product.description }}</p> #}
+                                {#                                                    {% if product.price %} #}
+                                {#                                                        <p class="price"> {% if not product.special %} #}
+                                {#                                                                {{ product.price }} #}
+                                {#                                                            {% else %} <span #}
+                                {#                                                                    class="price-new">{{ product.special }}</span> #}
+                                {#                                                                <span #}
+                                {#                                                                        class="price-old">{{ product.price }}</span> {% endif %} #}
+                                {#                                                            {% if product.tax %} <span #}
+                                {#                                                                    class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} #}
+                                {#                                                        </p> #}
+                                {#                                                    {% endif %} #}
+                                {#                                                </div> #}
+                                {#                                                <div class="button-group"> #}
+                                {#                                                    <button type="button" #}
+                                {#                                                            onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"> #}
+                                {#                                                        <i class="fa fa-shopping-cart"></i> <span #}
+                                {#                                                                class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> #}
+                                {#                                                    </button> #}
+                                {#                                                    <button type="button" data-toggle="tooltip" #}
+                                {#                                                            title="{{ button_wishlist }}" #}
+                                {#                                                            onclick="wishlist.add('{{ product.product_id }}');"><i #}
+                                {#                                                                class="fa fa-heart"></i></button> #}
+                                {#                                                    <button type="button" data-toggle="tooltip" #}
+                                {#                                                            title="{{ button_compare }}" #}
+                                {#                                                            onclick="compare.add('{{ product.product_id }}');"><i #}
+                                {#                                                                class="fa fa-exchange"></i></button> #}
+                                {#                                                </div> #}
+                                {#                                            </div> #}
+                                {#                                        </div> #}
+                                {#                                    </a> #}
+                                {#                                {% endfor %} #}
                             </div>
                         </div>
                     {% endif %}
@@ -235,7 +264,7 @@
                         </div>
                     {% endif %}
                 </div>
-                {% if not categories and not products %}
+                {% if not categories and not product_cards %}
                     <p>{{ text_empty }}</p>
                     <div class="buttons">
                         <div class="pull-right">

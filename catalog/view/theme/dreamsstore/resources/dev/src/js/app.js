@@ -42,6 +42,8 @@ import Quiz from "./classes/Quiz.js";
 import ContactMap from "./classes/ContactMap.js";
 import "./classes/Map.js";
 import "./classes/Contact.js";
+import "./classes/ProductsLayout.js";
+import "./classes/Sdek.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 

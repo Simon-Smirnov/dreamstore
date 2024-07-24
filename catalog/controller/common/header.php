@@ -91,6 +91,57 @@ class ControllerCommonHeader extends Controller
         $data['menu_main'] = $this->load->controller('common/menu_main');
         $data['menu_mobil'] = $this->load->controller('common/menu_mobil');
 
+        $current_url = $this->request->server['REQUEST_URI'];
+
+        $data['menu_pages'] = [
+            [
+                'title' => 'Ателье',
+                'href' => '/atelier',
+                'active' => $current_url == '/atelier' ? 'active' : '',
+            ],
+            [
+                'title' => 'В подарок',
+                'href' => '/giftcard',
+                'active' => $current_url == '/giftcard' ? 'active' : '',
+            ],
+            [
+                'title' => 'О нас',
+                'href' => '/aboutcompany',
+                'active' => $current_url == '/aboutcompany' ? 'active' : '',
+            ],
+            [
+                'title' => 'Блог',
+                'href' => '/blogs',
+                'active' => $current_url == '/blogs' ? 'active' : '',
+            ],
+            [
+                'title' => 'Оплата и доставка',
+                'href' => '/buyers',
+                'active' => $current_url == '/buyers' ? 'active' : '',
+            ],
+            [
+                'title' => 'Сотрудничество',
+                'href' => '/cooperation',
+                'active' => $current_url == '/cooperation' ? 'active' : '',
+            ],
+            [
+                'title' => 'Контакты',
+                'href' => '/contact',
+                'active' => $current_url == '/contact' ? 'active' : '',
+            ],
+        ];
+
+        $data['first_order_discount'] = false;
+        $is_show_first_order_discount = false;
+        if (!$this->customer->isLogged() || ($this->customer->isLogged() && !$this->customer->hasJustOneOrder())) {
+            $is_show_first_order_discount = true;
+        }
+
+        if ($is_show_first_order_discount && !isset($this->session->data['first_order_discount'])) {
+            $data['first_order_discount'] = true;
+            $this->session->data['first_order_discount'] = true;
+        }
+
         return $this->load->view('common/header', $data);
     }
 }

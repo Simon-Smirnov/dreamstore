@@ -176,7 +176,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class=" product-right__options">
+                <div class="product-right__options">
                     {% if options %}
                         {% for option in options %}
                             {% if option.type == 'select' %}
@@ -190,7 +190,8 @@
                                     </span>
                                     <div class="select select-product product-right__options-block">
                                         <input type="hidden" name="option[{{ option.product_option_id }}]"
-                                               value="{{ option.product_option_value.0.product_option_value_id }}">
+                                               value="{{ option.product_option_value.0.product_option_value_id }}"
+                                               data-option-input-price="{{ option.product_option_value.0.price_naked }}">
                                         <div class="select__box-btn">
                                             <button class="select__button" type="button">По умолчанию<br></button>
                                             <svg xmlns="http://www.w3.org/2000/svg">
@@ -200,6 +201,7 @@
                                         <ul class="select__list">
                                             {% for option_value in option.product_option_value %}
                                                 <li data-value="{{ option_value.product_option_value_id }}"
+                                                    data-price="{{ option_value.price_naked }}"
                                                     selected="selected">{{ option_value.name }}
                                                 </li>
                                             {% endfor %}
@@ -223,7 +225,8 @@
                                                                 {# name="option[{{ option.product_option_id }}][]" #}
                                                                name="option[{{ option.product_option_id }}]"
                                                                value="{{ option_value.product_option_value_id }}"
-                                                               data-option-input-product-id="{{ product_id }}"/>
+                                                               data-option-input-product-id="{{ product_id }}"
+                                                               data-option-input-price="{{ option_value.price_naked }}"/>
                                                         <span class="product-right__options-text">{{ option_value.name }}</span>
                                                     </label>
                                                     {% if option_value.attention %}
@@ -264,13 +267,29 @@
                         </div>
                     {% endif %}
                 </div>
+                {% if attribute_groups %}
+                    <div class="product-right__attributes">
+                        {% for attribute_group in attribute_groups %}
+                            {% for attribute in attribute_group.attribute %}
+                                <div class="product-right__attributes--item">
+                                    <div class="product-right__attributes--title">{{ attribute.name }}:</div>
+                                    <div class="product-right__attributes--description">{{ attribute.text }}</div>
+                                </div>
+                            {% endfor %}
+                            </tbody>
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="product-right__price">
                     {% if price %}
                         {% if not special %}
-                            <h2 class="product-right__newPrice">{{ price }}</h2>
+                            <h2 class="product-right__newPrice"><span
+                                        data-product-price-base="{{ price }}">{{ price }}</span> руб.
+                            </h2>
                         {% else %}
-                            <h2 class="product-right__newPrice">{{ special }}</h2>
-                            <span class="product-right__oldPrice">{{ price }}</span>
+                            <h2 class="product-right__newPrice"><span
+                                        data-product-price-base="{{ special }}">{{ special }}</span> руб.</h2>
+                            <span class="product-right__oldPrice">{{ price }} руб.</span>
                             <span class="product-right__percent">{{ percent }}</span>
                         {% endif %}
                     {% endif %}

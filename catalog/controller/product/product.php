@@ -363,13 +363,15 @@ class ControllerProductProduct extends Controller
             }
 
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-                $data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                //$data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']); //old realization
+                $data['price'] = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), ''); //new realization
             } else {
                 $data['price'] = false;
             }
 
             if (!is_null($product_info['special']) && (float)$product_info['special'] >= 0) {
-                $data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                //$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                $data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), '');
                 $data['percent'] = '-' . round((((float)$product_info['price'] - (float)$product_info['special']) / (float)$product_info['price']), 2) * 100 . '%';
                 $tax_price = (float)$product_info['special'];
             } else {
@@ -420,6 +422,7 @@ class ControllerProductProduct extends Controller
                             'attention' => $attention,
                             'image' => $this->model_tool_image->resize($option_value['image'], 50, 50),
                             'price' => $price,
+                            'price_naked' => $option_value['price'],
                             'price_prefix' => $option_value['price_prefix']
                         );
                     }

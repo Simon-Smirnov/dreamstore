@@ -27,7 +27,8 @@ class ControllerCommonHome extends Controller
                     'description' => $main_banners['description'],
                     'is_button' => $main_banners['is_button'],
                     'link' => $main_banners['link'],
-                    'image' => $this->model_tool_image->resize($main_banners['image'], $setting['width'], $setting['height'])
+                    //'image' => $this->model_tool_image->resize($main_banners['image'], $setting['width'], $setting['height']) //old
+                    'image' => $this->model_tool_image->resize($main_banners['image'])
                 );
             }
         }

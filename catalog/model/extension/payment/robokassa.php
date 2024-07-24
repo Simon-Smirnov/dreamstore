@@ -1,7 +1,16 @@
 <?php
-class ModelExtensionPaymentRobokassa extends Model {
-    public function getMethod($address, $total) {
+
+class ModelExtensionPaymentRobokassa extends Model
+{
+    public function getMethod($address, $total)
+    {
         $this->load->language('extension/payment/robokassa');
+
+        if (!isset($address['country_id']) && !isset($address['zone_id'])) {
+            $address = [];
+            $address['country_id'] = 176;
+            $address['zone_id'] = 2753;
+        }
 
         if ($this->config->get('payment_robokassa_status')) {
             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_robokassa_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
@@ -21,9 +30,9 @@ class ModelExtensionPaymentRobokassa extends Model {
 
         if ($status) {
             $method_data = array(
-                'code'       => 'robokassa',
-                'title'      => $this->language->get('text_title'),
-                'terms'      => '',
+                'code' => 'robokassa',
+                'title' => $this->language->get('text_title'),
+                'terms' => '',
                 'sort_order' => $this->config->get('payment_robokassa_sort_order')
             );
         }
@@ -49,21 +58,24 @@ class ModelExtensionPaymentRobokassa extends Model {
     }
 
     // Товары заказа
-    public function getOrderProducts($order_id) {
+    public function getOrderProducts($order_id)
+    {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 
         return $query->rows;
     }
 
     // UPC
-    public function getUPCProduct($product_id) {
+    public function getUPCProduct($product_id)
+    {
         $query = $this->db->query("SELECT upc FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
 
         return $query->row['upc'];
     }
 
     // shipping
-    public function getTotalShipping($order_id, $code = 'shipping') {
+    public function getTotalShipping($order_id, $code = 'shipping')
+    {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' AND code = '" . $code . "'");
 
         return $query->row;
@@ -120,8 +132,7 @@ class ModelExtensionPaymentRobokassa extends Model {
 
                 $fields['items'][] = $products_items;
 
-                switch ($this->config->get('payment_robokassa_tax'))
-                {
+                switch ($this->config->get('payment_robokassa_tax')) {
                     case "vat0":
                         $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => 0];
                     case "none":
@@ -133,19 +144,18 @@ class ModelExtensionPaymentRobokassa extends Model {
                         break;
 
                     case "vat10":
-                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*10];
+                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 10];
                     case "vat18":
-                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*18];
+                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 18];
                     case "vat20":
-                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*20];
+                        $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 20];
                         break;
                 }
 
             }
         }
 
-        foreach ($products as $product)
-        {
+        foreach ($products as $product) {
             $price = $this->currency->format(($product['price']) * $product['quantity'], 'RUB', false, false);
 
             $products_items = [
@@ -159,14 +169,13 @@ class ModelExtensionPaymentRobokassa extends Model {
 
             $UPC = $this->getUPCProduct($product['product_id']);
 
-            if(!empty($UPC)){
+            if (!empty($UPC)) {
                 $products_items['nomenclature_code'] = mb_convert_encoding($UPC, 'UTF-8');
             }
 
             $fields['items'][] = $products_items;
 
-            switch ($this->config->get('payment_robokassa_tax'))
-            {
+            switch ($this->config->get('payment_robokassa_tax')) {
                 case "vat0":
                     $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => 0];
                 case "none":
@@ -178,11 +187,11 @@ class ModelExtensionPaymentRobokassa extends Model {
                     break;
 
                 case "vat10":
-                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*18];
+                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 18];
                 case "vat18":
-                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*18];
+                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 18];
                 case "vat20":
-                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price/100)*20];
+                    $fields['vats'][] = ['type' => $this->config->get('payment_robokassa_tax'), 'sum' => ($price / 100) * 20];
                     break;
             }
         }

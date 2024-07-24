@@ -143,7 +143,11 @@ class Customer
     {
         $query = $this->db->query("SELECT points FROM " . DB_PREFIX . "customer_total_reward WHERE customer_id = '" . (int)$this->customer_id . "'");
 
-        return $query->row['points'];
+        if (isset($query->row['points'])) {
+            return $query->row['points'];
+        } else {
+            return 0;
+        }
     }
 
     public function setRewardPoints($points)
@@ -156,5 +160,11 @@ class Customer
         }
 
         return $query->row['points'];
+    }
+
+    public function hasJustOneOrder()
+    {
+        $query = $this->db->query("SELECT EXISTS(SELECT 1 FROM " . DB_PREFIX . "order WHERE customer_id = '" . (int)$this->customer_id . "')  AS exists_result");
+        return $query->row['exists_result'];
     }
 }

@@ -117,6 +117,12 @@ class ControllerInformationReviews extends Controller
         $data['annual_grade'] = round($summ_grades / $data['count_reviews'], 1);
         $data['general_grades'] = $general_grades;
 
+        //$vk = $this->load->controller('information/vk/getReview');
+        //
+        //echo "<pre>";
+        //var_dump($vk);
+        //echo "</pre>";
+
         //$data['faqs'] = [];
         //$id = 0;
         //foreach ($faqsGroup as $faq) {

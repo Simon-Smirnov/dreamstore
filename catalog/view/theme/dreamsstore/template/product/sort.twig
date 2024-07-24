@@ -1,0 +1,11 @@
+<div class="sort">
+    <div class="select select-type-radio select-rtl select-2">
+        <input type="hidden" name="sort">
+        <button class="select__button" data-placeholder="Сортировка"></button>
+        <ul class="select__list">
+            {% for key, sort in sorts %}
+                <li data-value="{{ key }}" {{ key == sort_select ? "selected='selected'" : '' }}>{{ sort }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

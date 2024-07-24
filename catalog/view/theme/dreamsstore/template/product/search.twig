@@ -3,7 +3,9 @@
     <div class="container">
         <ul class="breadcrumb">
             {% for breadcrumb in breadcrumbs %}
-                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                <li>
+                    <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -58,61 +60,60 @@
                             </div>
                         </div>
                         <div class="category_main-controls_structure">
-                            <button type="button" id="grid-view"
-                                    data-toggle="tooltip"
-                                    title="{{ button_grid }}">
-                                <svg class="" xmlns="http://www.w3.org/2000/svg">
+                            <a title="{{ button_grid }}">
+                                <svg class="{% if not is_line %}active{% endif %}" data-category-view-choose="grid"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_square"></use>
                                 </svg>
-                            </button>
-                            <button type="button" id="list-view"
-                                    data-toggle="tooltip"
-                                    title="{{ button_list }}">
-                                <svg class="" xmlns="http://www.w3.org/2000/svg">
+                            </a>
+                            <a title="{{ button_list }}">
+                                <svg class="{% if is_line %}active{% endif %}" data-category-view-choose="line"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <use xlink:href="/sprite.svg#icon_list"></use>
                                 </svg>
-                            </button>
+                            </a>
                         </div>
                     </div>
-                    <div class="products_grid search-grid" data-items-identy>
-                        {% for product in products %}
-                            <a class="products_grid-item zoom-trigger" href="{{ product.href }}">
-                                <div class="products_grid-thumb">
-                                    <div class="products_grid-block">
-                                        <div class="zoom-container">
-                                            <div class="zoom-image">
-                                                <picture>
-                                                    <source srcset="{{ product.thumb.webp }}">
-                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}"
-                                                         title="{{ product.name }}"
-                                                         src="{{ product.thumb.default }}" loading="lazy">
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <p class="products_grid-price">
-                                            {% if not product.special %}
-                                                <span
-                                                        class="price-new">{{ product.price }}</span>
-                                            {% else %}
-                                                <span
-                                                        class="price-new">{{ product.special }}</span>
-                                                <span
-                                                        class="price-old">{{ product.price }}</span>
-                                                <span class="price-percent">{{ product.percent }}</span>
-                                            {% endif %}
-                                        </p>
-                                    </div>
-                                    <h4 class="products_grid-title">{{ product.name }}</h4>
-                                    <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}"
-                                            title="{{ button_wishlist }}"
-                                            data-product-wishlist="{{ product.product_id }}">
-                                        <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
-                                            <use xlink:href="/sprite.svg#icon_heart"></use>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </a>
-                        {% endfor %}
+                    <div class="products_grid search-grid" data-items-identy data-category-view>
+                        {{ product_cards }}
+                        {#                        {% for product in products %} #}
+                        {#                            <a class="products_grid-item zoom-trigger" href="{{ product.href }}"> #}
+                        {#                                <div class="products_grid-thumb"> #}
+                        {#                                    <div class="products_grid-block"> #}
+                        {#                                        <div class="zoom-container"> #}
+                        {#                                            <div class="zoom-image"> #}
+                        {#                                                <picture> #}
+                        {#                                                    <source srcset="{{ product.thumb.webp }}"> #}
+                        {#                                                    <img class="catalog-inner_link-img" alt="{{ product.name }}" #}
+                        {#                                                         title="{{ product.name }}" #}
+                        {#                                                         src="{{ product.thumb.default }}" loading="lazy"> #}
+                        {#                                                </picture> #}
+                        {#                                            </div> #}
+                        {#                                        </div> #}
+                        {#                                        <p class="products_grid-price"> #}
+                        {#                                            {% if not product.special %} #}
+                        {#                                                <span #}
+                        {#                                                        class="price-new">{{ product.price }}</span> #}
+                        {#                                            {% else %} #}
+                        {#                                                <span #}
+                        {#                                                        class="price-new">{{ product.special }}</span> #}
+                        {#                                                <span #}
+                        {#                                                        class="price-old">{{ product.price }}</span> #}
+                        {#                                                <span class="price-percent">{{ product.percent }}</span> #}
+                        {#                                            {% endif %} #}
+                        {#                                        </p> #}
+                        {#                                    </div> #}
+                        {#                                    <h4 class="products_grid-title">{{ product.name }}</h4> #}
+                        {#                                    <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}" #}
+                        {#                                            title="{{ button_wishlist }}" #}
+                        {#                                            data-product-wishlist="{{ product.product_id }}"> #}
+                        {#                                        <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg"> #}
+                        {#                                            <use xlink:href="/sprite.svg#icon_heart"></use> #}
+                        {#                                        </svg> #}
+                        {#                                    </button> #}
+                        {#                                </div> #}
+                        {#                            </a> #}
+                        {#                        {% endfor %} #}
                     </div>
                     {% if pagination %}
                         <div class="category_more category-page__more">

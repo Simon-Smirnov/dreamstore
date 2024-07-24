@@ -23,11 +23,8 @@ class ModelToolImage extends Model
             $extension = 'webp';
         }
 
-
-
         list($width_orig, $height_orig, $image_type) = getimagesize(DIR_IMAGE . $image_old);
-
-
+        
         //        if (!$width&&!$height){
         //            $width=$width_orig;
         //            $height=$height_orig;
@@ -67,7 +64,6 @@ class ModelToolImage extends Model
 
         $image_new = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
 
-
         if (!is_file(DIR_IMAGE . $image_new) || (filemtime(DIR_IMAGE . $image_old) > filemtime(DIR_IMAGE . $image_new))) {
             if (!in_array($image_type, array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF))) {
                 return DIR_IMAGE . $image_old;
@@ -84,7 +80,6 @@ class ModelToolImage extends Model
                     @mkdir(DIR_IMAGE . $path, 0777);
                 }
             }
-
 
             //            if ($width_orig != $width || $height_orig != $height) {
             $image = new Image(DIR_IMAGE . $image_old);
@@ -109,7 +104,8 @@ class ModelToolImage extends Model
         }
     }
 
-    public function placeholder() {
+    public function placeholder()
+    {
         return [
             'webp' => $this->resize('/placeholder.png', 512, 512, ['webp' => true]),
             'default' => $this->resize('/placeholder.png', 512, 512),

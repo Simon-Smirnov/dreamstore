@@ -116,7 +116,8 @@ export default class {
     }
 
     updateQuantityIconMiniCart(quantity) {
-        document.querySelector('#cart-total').textContent = quantity;
+        // document.querySelector('#cart-total').textContent = quantity;
+        document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
     }
 }
 

@@ -41,6 +41,10 @@ class ControllerCheckoutCheckout extends Controller
         $data['shipping_method'] = $this->session->data['shipping_method'];
         $data['shipping_type'] = $this->session->data['shipping_type'];
 
+        echo "<pre>";
+        var_dump($data['shipping_methods']);
+        echo "</pre>";
+
         # Способы оплаты
         $this->setPaymentMethods();
         $data['payment_methods'] = $this->session->data['payment_methods'];
@@ -200,6 +204,10 @@ class ControllerCheckoutCheckout extends Controller
                 //echo "<pre>";
                 //var_dump($quote);
                 //echo "<pre>";
+
+                if (!isset($quote['cost'])) {
+                    $quote['cost'] = 0;
+                }
 
                 if ($quote) {
                     $method_data[$result['code']] = array(

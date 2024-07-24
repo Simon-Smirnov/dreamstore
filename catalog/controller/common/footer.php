@@ -31,8 +31,23 @@ class ControllerCommonFooter extends Controller
         $data['year'] = date("Y");
         $data['logged'] = $this->customer->isLogged();
         $data['categories'] = $this->load->controller('common/catalog');
+        $data['wishlist'] = $this->url->link('account/wishlist', '', true);
+        $data['total_products'] = $this->cart->countProducts();
 
         $data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+
+        // Wishlist
+        if ($this->customer->isLogged()) {
+            $this->load->model('account/wishlist');
+
+            $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+            $data['points'] = $this->customer->getRewardPoints();
+            if (!$data['points']) {
+                $data['points'] = '0';
+            }
+        } else {
+            $data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
+        }
 
         // Whos Online
         if ($this->config->get('config_customer_online')) {

@@ -16,7 +16,8 @@ export default class {
                                 this.updateViewMiniCart();
                                 Alert.add(r.success);
                                 CartAsyncMethods.getQuantityCart().then(r => {
-                                    document.querySelector('#cart-total').textContent = r.quantity;
+                                    // document.querySelector('#cart-total').textContent = r.quantity;
+                                    document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
                                 })
                             }
                         })

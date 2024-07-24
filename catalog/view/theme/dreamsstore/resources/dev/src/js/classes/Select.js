@@ -3,7 +3,7 @@ import Controls from "./Controls.js"
 export default class Select extends Controls {
     constructor(select) {
         super(select)
-        
+
         this.select = select
         this.input = this.select.querySelector('input')
         this.is_open = true
@@ -26,7 +26,9 @@ export default class Select extends Controls {
             this.values = this.list.querySelectorAll('li')
 
             if (this.values.length) {
-                this.values.forEach(value => value.addEventListener('click', this.set_value_handled))
+                this.values.forEach(value => {
+                    value.addEventListener('click', this.set_value_handled)
+                })
             }
 
             // Значение по умолчанию
@@ -74,7 +76,12 @@ export default class Select extends Controls {
             const text = item.innerText
             const value = item.dataset.value
 
-            this.setValue(text, value)
+            if (item.dataset.price) {
+                const price = item.dataset.price
+                this.setValue(text, value, price)
+            } else {
+                this.setValue(text, value)
+            }
             this.close()
         }
     }
@@ -107,9 +114,17 @@ export default class Select extends Controls {
         }
     }
 
-    setValue(text, value) {
+    setValue(text, value, price = false) {
         this.button.innerText = text
         this.input.value = value
+
+        if (price) {
+            this.input.dataset.optionInputPrice = price
+        }
+
+        //генерируем новое событие
+        let event = new Event('change', {bubbles: true, cancelable: false});
+        this.input.dispatchEvent(event);
     }
 
     static init() {

@@ -9,6 +9,17 @@ class ControllerCheckoutOrderCart extends Controller
             $data['error'] = $errors['agree'];
         }
 
+        $totals = array();
+        $taxes = $this->cart->getTaxes();
+        $total = 0;
+
+        // Because __call can not keep var references so we put them into an array.
+        $total_data = array(
+            'totals' => &$totals,
+            'taxes' => &$taxes,
+            'total' => &$total
+        );
+
         $this->load->language('checkout/order_cart');
 
         if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {

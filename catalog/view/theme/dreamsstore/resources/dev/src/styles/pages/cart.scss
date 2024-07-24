@@ -47,6 +47,7 @@
             color: var(--color-6-dark);
             text-decoration: line-through;
             text-decoration-thickness: 1px;
+            font-size: 1rem;
         }
 
         &__options {
@@ -54,6 +55,7 @@
 
             li {
                 color: var(--color-6-dark);
+                font-size: 1rem;
             }
 
             li + li {

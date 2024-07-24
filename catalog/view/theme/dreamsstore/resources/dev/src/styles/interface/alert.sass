@@ -8,6 +8,7 @@
   grid-gap: 10px
   pointer-events: none
   z-index: 11
+  opacity: 0.97
 
   &__box
     width: max-content
@@ -15,12 +16,14 @@
     // border-radius: 5px
     background: #333
     color: #fff
-    font-size: 14px
+    font-size: 0.95rem
     line-height: 16px
-    padding: 10px 17px
+    padding: 0.8em 1.2em
     text-align: center
     margin: 0 auto
     animation: alert-fadein 0.2s ease-in-out forwards
+    border-radius: 0.3em
+    overflow: hidden
 
     &::before
       content: ""
@@ -31,12 +34,16 @@
       width: 100%
       background: #1f1f1f
       animation: lifetime var(--lifetime) linear forwards
+      border-radius: 0.3em
 
     &.success
-      background: var(--success)
+      //background: var(--success)
+      background: var(--color-4-dark)
+      color: var(--white)
 
       &::before
-        background: var(--success-dark)
+        //background: var(--success-dark)
+        background: var(--color-5-dark)
 
     &.error
       background: var(--error)

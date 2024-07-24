@@ -67,34 +67,41 @@ export default class {
                     if (agree.checked) {
                         body.append(agree.dataset.checkoutAgree, '1');
                     }
-                    this.updateViewCheckOut(body);
-                    setTimeout(() => {
-                        this.validate(body).then(data => {
-                            if (data) {
+                    this.updateViewCheckOut(body).then(data => {
+                        this.validate(body).then(r => {
+                            if (r) {
+                                console.log(r);
                                 let parser = new DOMParser();
-                                let doc = parser.parseFromString(data, 'text/html');
-                                let item = doc.querySelector('.checkout-inner');
-                                let cartUl = document.querySelector('.checkout-content');
-                                cartUl.innerHTML = '';  // Очистим текущие элементы
+                                let doc = parser.parseFromString(r, 'text/html');
+                                let item = doc.querySelector('.checkout-content');
+                                let cartUl = document.querySelector('.checkout-inner');
+                                cartUl.innerHTML = '';
                                 cartUl.appendChild(item);
+                                // const body = new FormData;
+                                // this.updateViewCheckOut(body);
                             } else {
                                 fetch('index.php?route=checkout/confirm', {
                                     method: 'POST',
                                     body: body
                                 })
-                                    .then(response => response.text())
+                                    .then(response => response.json())
                                     .then(data => {
-                                        let parser = new DOMParser();
-                                        let doc = parser.parseFromString(data, 'text/html');
-                                        let item = doc.querySelector('.checkoutConfirm');
-                                        let cartUl = document.querySelector('.checkout-content');
-                                        cartUl.innerHTML = '';
-                                        cartUl.appendChild(item);
+                                        if (data.success) {
+                                            // let parser = new DOMParser();
+                                            // let doc = parser.parseFromString(data, 'text/html');
+                                            // let item = doc.querySelector('.checkoutConfirm');
+                                            // let cartUl = document.querySelector('.checkout-content');
+                                            // cartUl.innerHTML = '';
+                                            // cartUl.appendChild(item);
+                                            let baseUrl = document.location.protocol + '//' + document.location.hostname + '/';
+                                            const newUrl = new URL(baseUrl + 'index.php?route=checkout/success');
+                                            window.location.href = newUrl.toString();
+                                        }
                                     })
                                     .catch(error => console.error('Error:', error));
                             }
                         })
-                    }, 500)
+                    });
 
                     // console.log(r);
                     // if (!r) {
@@ -293,23 +300,44 @@ export default class {
         }
     }
 
-    async updateViewCheckOut(body) {
-        fetch('index.php?route=checkout/checkout/info', {
-            method: 'POST',
-            body: body
-        })
-            .then(response => response.text())
-            .then(data => {
-                let parser = new DOMParser();
-                let doc = parser.parseFromString(data, 'text/html');
-                let items = doc.querySelectorAll('.checkout-content');
-                let cartUl = document.querySelector('.checkout-inner');
-                cartUl.innerHTML = '';  // Очистим текущие элементы
-                items.forEach(item => {
-                    cartUl.appendChild(item);
-                });
+    async updateViewCheckOut(body, returnPromise = false) {
+
+        // fetch('index.php?route=checkout/checkout/info', {
+        //     method: 'POST',
+        //     body: body
+        // })
+        //     .then(response => response.text())
+        //     .then(data => {
+        //         let parser = new DOMParser();
+        //         let doc = parser.parseFromString(data, 'text/html');
+        //         let items = doc.querySelectorAll('.checkout-content');
+        //         let cartUl = document.querySelector('.checkout-inner');
+        //         cartUl.innerHTML = '';  // Очистим текущие элементы
+        //         items.forEach(item => {
+        //             cartUl.appendChild(item);
+        //         });
+        //     })
+        //     .catch(error => console.error('Error:', error));
+
+        return new Promise(async resolve => {
+            // Запрос
+            let result = await fetch('/index.php?route=checkout/checkout/info', {
+                method: 'POST',
+                body: body
             })
-            .catch(error => console.error('Error:', error));
+
+            // Результат
+            let data = await result.text();
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(data, 'text/html');
+            let items = doc.querySelectorAll('.checkout-content');
+            let cartUl = document.querySelector('.checkout-inner');
+            cartUl.innerHTML = '';  // Очистим текущие элементы
+            items.forEach(item => {
+                cartUl.appendChild(item);
+            });
+            resolve(data);
+        })
     }
 
     async updateViewMiniCart() {
@@ -343,7 +371,8 @@ export default class {
     }
 
     updateQuantityIconMiniCart(quantity) {
-        document.querySelector('#cart-total').textContent = quantity;
+        // document.querySelector('#cart-total').textContent = quantity;
+        document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
     }
 
     createSelectElement(data, parentElement) {

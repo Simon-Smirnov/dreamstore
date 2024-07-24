@@ -1,0 +1,179 @@
+{{ header }}
+ {% if robokassa_podeli %}
+     {# <script type="text/javascript" #}
+     {#        src="https://auth.robokassa.ru/Merchant/PaymentForm/DirectPayment.js"></script> #}
+     <script type="text/javascript">
+
+         var Robo = Robo || {};
+         Robo.directPayment = function () {
+             async function r(r) {
+                 t = 0;
+                 let f = new FormData;
+                 for (let n in r) f.append(n, r[n]);
+                 let e = new URLSearchParams(f), u = await fetch(`${n}Payment/CreateInvoiceAndStartOp`, {
+                     method: "POST",
+                     headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                     body: e
+                 }).then(n => n.json());
+                 if (u.success !== !0) throw new Error(u);
+                 await i(u.opKey)
+             }
+
+             async function u(n) {
+                 let r = this;
+                 r.getOpStateCounter = t;
+                 r.getOpStateCounter++;
+                 let u = f(r.getOpStateCounter);
+                 setTimeout(async () => {
+                     await i(n)
+                 }, u)
+             }
+
+             async function i(t) {
+                 let i = await fetch(`${n}Payment/GetOpState?opKey=${t}`).then(n => n.json());
+                 if (i.success === !0) i.status === "Redirect" && i.redirectTo ? location.href = i.redirectTo.url : i.status === "Processing" && await u(t); else throw new Error(i);
+             }
+
+             function f(n) {
+                 let t = this;
+                 t.requestDelayMilliseconds = 6e4;
+                 let i = Number(n);
+                 return i <= 5 && (t.requestDelayMilliseconds = 2e3), i > 5 && i <= 15 && (t.requestDelayMilliseconds = 5e3), i > 15 && (t.requestDelayMilliseconds = 6500), t.requestDelayMilliseconds
+             }
+
+             const n = "https://auth.robokassa.ru/Merchant/";
+             let t = 0;
+             return {
+                 startOp: function (n) {
+                     try {
+                         return r(n)
+                     } catch (t) {
+                         console.log(t);
+                         throw t;
+                     }
+                 }
+             }
+         }()
+         console.log(Robo);
+     </script>
+ {% endif %}
+<div id="common-success">
+    <div class=container"">
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li>
+                    <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div class="common-success">
+            <div class="checkoutConfirm">
+                <div class="container">
+                    <div class="checkoutConfirm-inner">
+                        <div class="checkoutConfirm-image">
+                            <img src="{{ assets }}/assets/images/checkout/confirm.webp">
+                        </div>
+                        <h1 class="page-title">Заказ оформлен</h1>
+                        <p class="checkoutConfirm-text">Спасибо, {{ firstname }}! В ближайшее время наш менеджер
+                            свяжется с Вами для
+                            подтверждения
+                            заказа</p>
+                        <ul class="checkoutConfirm-list">
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">№ Заказа:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ order_id }}</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Получатель:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ firstname }}</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Телефон получателя:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ telephone }}</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">E-mail:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ email }}</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Доставка:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ shipping_method }}</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Пункт получения:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">Адрес пункта</p>
+                            </li>
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Оплата:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ payment_method }}</p>
+                            </li>
+                            {% if weight %}
+                                <li class="checkoutConfirm-item">
+                                    <p class="checkoutConfirm-item__title">Общий вес:</p>
+                                    <span class="checkoutConfirm-item__border"></span>
+                                    <p class="checkoutConfirm-item__value">{{ weight }} кг</p>
+                                </li>
+                            {% endif %}
+                            {% if reward %}
+                                <li class="checkoutConfirm-item">
+                                    <p class="checkoutConfirm-item__title">Бонусов за заказ:</p>
+                                    <span class="checkoutConfirm-item__border"></span>
+                                    <p class="checkoutConfirm-item__value">+{{ reward }}</p>
+                                </li>
+                            {% endif %}
+                            <li class="checkoutConfirm-item">
+                                <p class="checkoutConfirm-item__title">Итоговая стоимость:</p>
+                                <span class="checkoutConfirm-item__border"></span>
+                                <p class="checkoutConfirm-item__value">{{ total|number_format(0, '.', ' ') }}
+                                    руб.</p>
+                            </li>
+                        </ul>
+                        {% if robokassa or robokassa_podeli %}
+                            {% if robokassa %}
+                                <a class="checkoutConfirm-btn btn btn-primary"
+                                   onclick="Robokassa.StartPayment({MerchantLogin: '{{ robokassa.robokassa_login }}',    OutSum: '{{ robokassa.out_summ }}', InvId: '{{ robokassa.inv_id }}', Description: '{{ robokassa.order_desc }}', Email: '{{ robokassa.email }}', {% if robokassa.out_summ_currency %} OutSumCurrency: '{{ robokassa.out_summ_currency }}', {% endif %} {% if robokassa.robokassa_fiscal %} Receipt: '{{ robokassa.receipt }}', {% endif %} SignatureValue: '{{ robokassa.crc }}', Shp_item: '1', Shp_label: 'official_opencart', Culture: '{{ robokassa.culture }}'})">Оплатить</a>
+                            {% endif %}
+                            {% if robokassa_podeli %}
+                                <a class="checkoutConfirm-btn btn btn-primary"
+                                   onclick="Robo.directPayment.startOp({MerchantLogin: '{{ robokassa_login }}',    OutSum: '{{ out_summ }}', InvId: '{{ inv_id }}', Description: '{{ order_desc }}', Email: '{{ email }}', {% if out_summ_currency %} OutSumCurrency: '{{ out_summ_currency }}', {% endif %} {% if robokassa_fiscal %} Receipt: '{{ receipt }}', {% endif %} IncCurrLabel: 'Podeli', SignatureValue: '{{ crc }}', Shp_item: '1', Shp_label: 'official_opencart', Culture: '{{ culture }}'})">Оплатить</a>
+                            {% endif %}
+                            <a class="checkoutConfirm-btn btn btn-second" href="/">Вернуться на главную</a>
+                        {% else %}
+                            <a class="checkoutConfirm-btn btn btn-primary" href="/">Вернуться на главную</a>
+                        {% endif %}
+                        {% if comment %}
+                            <div class="checkoutConfirm-comment">
+                                {{ comment }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if robokassa %}
+            <script type="text/javascript" src="{{ robokassa.iframeUrl }}"></script>
+        {% endif %}
+
+        {#        {% if robokassa_podeli %} #}
+        {#            <script type="text/javascript" #}
+        {#                    src="https://auth.robokassa.ru/Merchant/PaymentForm/DirectPayment.js"></script> #}
+        {#            <script type="text/javascript"> #}
+        {#                console.log(Robo); #}
+        {#            </script> #}
+        {#        {% endif %} #}
+    </div>
+    {#    {{ column_right }} #}
+    {#    {{ content_bottom }} #}
+    {#    {{ column_left }} #}
+    {#    {{ content_top }} #}
+</div>
+{{ footer }}

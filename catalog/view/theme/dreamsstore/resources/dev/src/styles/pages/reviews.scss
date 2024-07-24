@@ -155,6 +155,16 @@
 
         &-content {
             margin-top: 2.5em;
+
+            &_item {
+                &--yandex {
+                    width: 100%;
+                    max-width: 47em;
+                    height: 63em;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
         }
     }
 

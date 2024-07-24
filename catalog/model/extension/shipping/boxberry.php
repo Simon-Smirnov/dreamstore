@@ -135,6 +135,10 @@ class ModelExtensionShippingBoxberry extends Model
                     $deliveryPeriodText = '';
                 }
 
+                if (!isset($address['zone'])) {
+                    $address['zone'] = '';
+                }
+
                 $htmlLink = '<a id="boxberry-issue_point-link' . ($prepaid === '1' ? '-prepaid' : '') . '" 
                                          href = "#"
                                          data-boxberry-open="true"
@@ -287,6 +291,10 @@ class ModelExtensionShippingBoxberry extends Model
                 ]);
             }
             $this->model_boxberry_expired->addExpired(['table' => DB_PREFIX . 'boxberry_cities']);
+        }
+
+        if (!isset($address['zone'])) {
+            $address['zone'] = '';
         }
 
         return $this->model_boxberry_city->getCityByName($address['city'], $address['zone']);

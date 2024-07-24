@@ -1,0 +1,529 @@
+<div class="filter">
+    <div class="filter__content" data-filter>
+        <div class="filter-mini__blocks">
+            {% if filter_options.size %}
+                <div class="filter-mini__block">
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent data-filter-checkbox>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_options.size.name }}</button>
+
+                            {% if filter_options.size.parts %}
+                                <div class="dropdown__body no-hidden" data-applyed-parent>
+                                    <div class="filter-mini__selects">
+                                        <div class="filter-mini__select" data-applyed-ws>
+                                            <div class="select select-3" data-applyed-type="w">
+                                                <input type="text"
+                                                       name="option[{{ option.product_option_id }}][width]" value=""
+                                                       hidden>
+                                                <button class="select__button" data-placeholder="Ширина">
+                                                    <span class="select__value" data-value-target-1></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for width in filter_options.size.parts.width %}
+                                                        <li data-value="{{ width.value }}"
+                                                            data-applyed-elements='{{ width.applyed }}'
+                                                                {{ width.default ? "selected='selected'" }}
+                                                        >{{ width.value }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <span>x</span>
+                                        <div class="filter-mini__select" data-applyed-ls>
+                                            <div class="select select-3" data-applyed-type="h">
+                                                <input type="text"
+                                                       name="option[{{ option.product_option_id }}][length]"
+                                                       value="" hidden>
+                                                <button class="select__button" data-placeholder="Длина">
+                                                     <span class="select__value" data-value-target-1></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for length in filter_options.size.parts.length %}
+                                                        <li data-value="{{ length.value }}"
+                                                            data-applyed-elements='{{ length.applyed }}'
+                                                                {{ length.default ? "selected='selected'" }}
+                                                        >{{ length.value }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-page__option"
+                                         hidden
+                                         data-applyed-target data-filter-select>
+                                        <span class="product-page__option-name">{{ option.name }}</span>
+                                        <div class="product-page__select">
+                                            <div class="select select-3">
+                                                <input type="text" name="filter_option[{{ filter_options.size.option_id }}]"
+                                                       value="" data-option-id="{{ option.option_id }}"
+                                                       data-option-related-relationship hidden>
+                                                <button class="select__button">
+                                                    <span class="select__value" data-value-target-1></span>
+                                                    <span class="select__label" data-value-target-2></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for option_value in filter_options.size.values %}
+                                                        <li data-value="{{ option_value.option_value_id }}"
+                                                            data-value-1="{{ option_value.name }}"
+                                                            data-value-2="{{ option_value.label }}">
+                                                            <span>{{ option_value.name }}</span>
+
+                                                            {% if option_value.label %}
+                                                                <span class="select__label">{{ option_value.label }}</span>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                                </div>
+                            {% else %}
+                                <div class="dropdown__body no-hidden">
+                                    <div class="filter-mini__checkboxes">
+                                        {% for key, value in filter_options.size.values %}
+                                            <div class="filter-mini__checkbox">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="filter_option[{{ filter_options.size.option_id }}]" value="{{ value.option_value_id }}" id="mini_{{ filter_options.size.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                    <label for="mini_{{ filter_options.size.option_id }}_{{ key }}">{{ value.name }}</label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="filter-mini__block" data-filter-range>
+                <div class="filter-mini__dropdown">
+                    <div class="dropdown" data-toggler-parent>
+                        <button type="button" class="dropdown__button" data-toggler>Цена, руб</button>
+                        <div class="dropdown__body">
+                            <div class="filter-mini__range" data-range data-min="{{ price.min.limit }}" data-start="{{ price.min.target }}" data-max="{{ price.max.limit }}" data-end="{{ price.max.target }}">
+                                <div class="filter-mini__range-slider">
+                                    <div class="noui-slider"></div>
+                                </div>
+                                <div class="filter-mini__range-inputs">
+                                    <div class="filter-mini__range-input">
+                                        <div class="input input-white input-text input-border input-with-fix-label">
+                                            <input type="text" name="filter[price][from]" data-from data-filter-min placeholder=" ">
+                                            <label>от</label>
+                                        </div>
+                                    </div>
+                                    <div class="filter-mini__range-input">
+                                        <div class="input input-white input-text input-border input-with-fix-label">
+                                            <input type="text" name="filter[price][to]" data-to data-filter-max placeholder=" ">
+                                            <label>до</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if filter_options.foundation %}
+                <div class="filter-mini__block" data-filter-checkbox>
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_options.foundation.name }}</button>
+                            <div class="dropdown__body">
+                                <div class="filter-mini__checkboxes">
+                                    {% for key, value in filter_options.foundation.values %}
+                                        <div class="filter-mini__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_option[{{ filter_options.foundation.option_id }}]" value="{{ value.option_value_id }}" id="mini_{{ filter_options.foundation.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="mini_{{ filter_options.foundation.option_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if filter_attributes.type %}
+                <div class="filter-mini__block" data-filter-checkbox>
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_attributes.type.name }}</button>
+                            <div class="dropdown__body">
+                                <div class="filter-mini__checkboxes">
+                                    {% for key, value in filter_attributes.type.values %}
+                                        <div class="filter-mini__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.type.attribute_id }}]" value="{{ value.name }}" id="mini_{{ filter_attributes.type.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="mini_{{ filter_attributes.type.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if filter_options.filling %}
+                <div class="filter-mini__block" data-filter-checkbox>
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_options.filling.name }}</button>
+                            <div class="dropdown__body">
+                                <div class="filter-mini__checkboxes">
+                                    {% for key, value in filter_options.filling.values %}
+                                        <div class="filter-mini__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_option[{{ filter_options.filling.option_id }}]" value="{{ value.option_value_id }}" id="mini_{{ filter_options.filling.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="mini_{{ filter_options.filling.option_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if filter_attributes.softness %}
+                <div class="filter-mini__block" data-filter-checkbox>
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_attributes.softness.name }}</button>
+                            <div class="dropdown__body">
+                                <div class="filter-mini__checkboxes">
+                                    {% for key, value in filter_attributes.softness.values %}
+                                        <div class="filter-mini__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.softness.attribute_id }}]" value="{{ value.name }}" id="mini_{{ filter_attributes.softness.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="mini_{{ filter_attributes.softness.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if filter_attributes.spring %}
+                <div class="filter-mini__block" data-filter-checkbox>
+                    <div class="filter-mini__dropdown">
+                        <div class="dropdown" data-toggler-parent>
+                            <button type="button" class="dropdown__button" data-toggler>{{ filter_attributes.spring.name }}</button>
+                            <div class="dropdown__body">
+                                <div class="filter-mini__checkboxes">
+                                    {% for key, value in filter_attributes.spring.values %}
+                                        <div class="filter-mini__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.spring.attribute_id }}]" value="{{ value.name }}" id="mini_{{ filter_attributes.spring.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="mini_{{ filter_attributes.spring.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <button class="btn btn-1 filter-mini__apply" data-filter-apply>Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <button class="filter__all filter__open" data-filter-open>
+                <span class="filter__all-desktop">Все фильтры</span>
+                <span class="filter__all-mobile">Фильтры</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="filter-popup" data-filter data-filter-is-popup="true" hidden>
+        <div class="filter-popup__content">
+            <div class="filter-popup__box">
+                <div class="filter-popup__header">
+                    <span class="filter-popup__title">Все фильтры</span>
+                    <button class="filter-popup__close filter-popup__close--static filter__close" data-filter-close></button>
+                </div>
+                <div class="filter-popup__blocks">
+                    {% if filter_options.size %}
+                        <div class="filter-popup__block" data-filter-select data-toggler-parent data-applyed-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_options.size.name }}</button>
+                            <div class="filter-popup__body">
+                                {% if filter_options.size.parts %}
+                                    <div class="filter-popup__selects">
+                                        <div class="filter-popup__select" data-applyed-ws>
+                                            <div class="select select-3" data-applyed-type="w">
+                                                <input type="text"
+                                                       name="option[{{ option.product_option_id }}][width]" value=""
+                                                       hidden>
+                                                <button class="select__button" data-placeholder="Ширина">
+                                                    <span class="select__value" data-value-target-1></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for width in filter_options.size.parts.width %}
+                                                        <li data-value="{{ width.value }}"
+                                                            data-applyed-elements='{{ width.applyed }}'
+                                                                {{ width.default ? "selected='selected'" }}
+                                                        >{{ width.value }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <span>x</span>
+                                        <div class="filter-mini__select" data-applyed-ls>
+                                            <div class="select select-3" data-applyed-type="h">
+                                                <input type="text"
+                                                       name="option[{{ option.product_option_id }}][length]"
+                                                       value="" hidden>
+                                                <button class="select__button" data-placeholder="Длина">
+                                                    <span class="select__value" data-value-target-1></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for length in filter_options.size.parts.length %}
+                                                        <li data-value="{{ length.value }}"
+                                                            data-applyed-elements='{{ length.applyed }}'
+                                                                {{ length.default ? "selected='selected'" }}
+                                                        >{{ length.value }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-page__option"
+                                         hidden
+                                         data-applyed-target data-filter-select>
+                                        <span class="product-page__option-name">{{ option.name }}</span>
+                                        <div class="product-page__select">
+                                            <div class="select select-3">
+                                                <input type="text" name="filter_option[{{ filter_options.size.option_id }}]"
+                                                       value="" data-option-id="{{ option.option_id }}"
+                                                       data-option-related-relationship hidden>
+                                                <button class="select__button">
+                                                    <span class="select__value" data-value-target-1></span>
+                                                    <span class="select__label" data-value-target-2></span>
+                                                </button>
+                                                <ul class="select__list">
+                                                    {% for option_value in filter_options.size.values %}
+                                                        <li data-value="{{ option_value.option_value_id }}"
+                                                            data-value-1="{{ option_value.name }}"
+                                                            data-value-2="{{ option_value.label }}">
+                                                            <span>{{ option_value.name }}</span>
+
+                                                            {% if option_value.label %}
+                                                                <span class="select__label">{{ option_value.label }}</span>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="filter-popup__checkboxes filter-popup__checkboxes--2col" >
+                                        {% for key, value in filter_options.size.values %}
+                                            <div class="filter-popup__checkbox">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="filter_option[{{ filter_options.size.option_id }}]" value="{{ value.option_value_id }}" id="popup_{{ filter_options.size.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                    <label for="popup_{{ filter_options.size.option_id }}_{{ key }}">{{ value.name }}</label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="filter-popup__block" data-filter-range data-toggler-parent>
+                        <button class="filter-popup__toggler" data-toggler="">Цена, руб</button>
+                        <div class="filter-popup__body">
+                            <div class="filter-popup__range" data-range data-min="{{ price.min.limit }}" data-start="{{ price.min.target }}" data-max="{{ price.max.limit }}" data-end="{{ price.max.target }}">
+                                <div class="filter-popup__range-slider">
+                                    <div class="noui-slider"></div>
+                                </div>
+                                <div class="filter-popup__range-inputs">
+                                    <div class="filter-popup__range-input">
+                                        <div class="input input-white input-text input-with-fix-label">
+                                            <input type="text" name="filter[price][from]" data-from data-filter-min placeholder=" ">
+                                            <label>от</label>
+                                        </div>
+                                    </div>
+                                    <div class="filter-popup__range-input">
+                                        <div class="input input-white input-text input-with-fix-label">
+                                            <input type="text" name="filter[price][to]" data-to data-filter-max placeholder=" ">
+                                            <label>до</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if filter_attributes.type %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_attributes.type.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_attributes.type.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.type.attribute_id }}]" value="{{ value.name }}" id="popup_{{ filter_attributes.type.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_attributes.type.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_options.filling %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_options.filling.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_options.filling.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_option[{{ filter_options.filling.option_id }}]" value="{{ value.option_value_id }}" id="popup_{{ filter_options.filling.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_options.filling.option_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_attributes.height %}
+                        <div class="filter-popup__block" data-filter-range data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler="">{{ filter_attributes.height.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__range" data-range data-min="{{ filter_attributes.height.min.limit }}" data-start="{{ filter_attributes.height.min.target }}" data-max="{{ filter_attributes.height.max.limit }}" data-end="{{ filter_attributes.height.max.target }}">
+                                    <div class="filter-popup__range-slider">
+                                        <div class="noui-slider"></div>
+                                    </div>
+                                    <div class="filter-popup__range-inputs">
+                                        <div class="filter-popup__range-input">
+                                            <div class="input input-white input-text input-with-fix-label">
+                                                <input type="text" name="filter_attribute[{{ filter_attributes.height.attribute_id }}][from]" data-from data-filter-min placeholder=" ">
+                                                <label>от</label>
+                                            </div>
+                                        </div>
+                                        <div class="filter-popup__range-input">
+                                            <div class="input input-white input-text input-with-fix-label">
+                                                <input type="text" name="filter_attribute[{{ filter_attributes.height.attribute_id }}][to]" data-to data-filter-max placeholder=" ">
+                                                <label>до</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_attributes.softness %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_attributes.softness.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_attributes.softness.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.softness.attribute_id }}]" value="{{ value.name }}" id="popup_{{ filter_attributes.softness.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_attributes.softness.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_attributes.spring %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_attributes.spring.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_attributes.spring.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.spring.attribute_id }}]" value="{{ value.value ? value.value : value.name }}" id="popup_{{ filter_attributes.spring.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_attributes.spring.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_attributes.load %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_attributes.load.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_attributes.load.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_attribute[{{ filter_attributes.load.attribute_id }}]" value="{{ value.value ? value.value : value.name }}" id="popup_{{ filter_attributes.load.attribute_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_attributes.load.attribute_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if filter_options.materials %}
+                        <div class="filter-popup__block" data-filter-checkbox data-toggler-parent>
+                            <button class="filter-popup__toggler" data-toggler>{{ filter_options.materials.name }}</button>
+                            <div class="filter-popup__body">
+                                <div class="filter-popup__checkboxes">
+                                    {% for key, value in filter_options.materials.values %}
+                                        <div class="filter-popup__checkbox">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="filter_option[{{ filter_options.materials.option_id }}]" value="{{ value.option_value_id }}" id="popup_{{ filter_options.materials.option_id }}_{{ key }}" {{ value.active ? 'checked' : "" }}>
+                                                <label for="popup_{{ filter_options.materials.option_id }}_{{ key }}">{{ value.name }}</label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="filter-popup__controls">
+                    <button class="btn btn-1 filter__apply filter-popup__apply" data-filter-apply>Применить</button>
+                    <button class="btn btn-6 filter__reset filter-popup__reset" data-filter-reset>
+                        Сбросить
+                        <span class="btn-icon" style="--url: url(./images/icons/close.svg)"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

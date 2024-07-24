@@ -55,8 +55,8 @@
     <link rel="stylesheet" href="{{ assets }}/assets/app.min.css">
 </head>
 <body class="{{ class }} custom-scroll custom-scroll--y">
-{# {% if not logged %} #}
-{#    <div data-first-order data-forms="firstorder"></div>{% endif %} #}
+{% if first_order_discount %}
+    <div data-first-order data-forms="firstorder"></div>{% endif %}
 <div class="body">
     <header>
         <div class="header-top">
@@ -152,30 +152,36 @@
                     </div>
                     <div class="header-bottom_navigation">
                         <ul class="header-bottom_navigation_list">
-                            <li class="header-bottom_navigation_list-item">
-                                <a class="hover-light"
-                                   href="/atelier">Ателье</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class
-                                   ="hover-light" href="/giftcard">В подарок</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class="hover-light" href="/aboutcompany">О нас</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class="hover-light" href="/blogs">Блог</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class
-                                   ="hover-light" href="/buyers">Оплата и доставка</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class="hover-light" href="/cooperation">Сотрудничество</a>
-                            </li>
-                            <li class="header-bottom_navigation_list-item">
-                                <a class="hover-light" href="/contact">Контакты</a>
-                            </li>
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class="hover-light" #}
+                            {#       href="/atelier">Ателье</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class #}
+                            {#       ="hover-light" href="/giftcard">В подарок</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class="hover-light" href="/aboutcompany">О нас</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class="hover-light" href="/blogs">Блог</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class #}
+                            {#       ="hover-light" href="/buyers">Оплата и доставка</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class="hover-light" href="/cooperation">Сотрудничество</a> #}
+                            {# </li> #}
+                            {# <li class="header-bottom_navigation_list-item"> #}
+                            {#    <a class="hover-light" href="/contact">Контакты</a> #}
+                            {# </li> #}
+                            {% for menu_page in menu_pages %}
+                                <li class="header-bottom_navigation_list-item">
+                                    <a class="hover-light {{ menu_page.active }}"
+                                       href="{{ menu_page.href }}">{{ menu_page.title }}</a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="header-bottom_about">
@@ -209,7 +215,7 @@
                                          xmlns="http://www.w3.org/2000/svg">
                                         <use xlink:href="/sprite.svg#icon_wishlist"></use>
                                     </svg>
-                                    <span data-wishlist-total>{{ text_wishlist }}</span>
+                                    {% if logged %}<span data-wishlist-total>{{ text_wishlist }}</span>{% endif %}
                                 </a>
                             </li>
                             <li>{{ cart }}</li>

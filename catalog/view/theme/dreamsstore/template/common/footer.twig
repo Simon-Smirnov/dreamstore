@@ -227,7 +227,7 @@
             <nav class="footer-menu__nav">
                 <ul>
                     <li>
-                        <a href="">
+                        <a data-menu-modal-catalog-footer-btn-open>
                             <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
                                 <use xlink:href="/sprite.svg#icon_tiles"></use>
                             </svg>
@@ -244,27 +244,41 @@
                     </li>
                     <li>
                         <a href="/cart">
-                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_basket"></use>
-                            </svg>
+                            <div class="footer-icon__parent">
+                                <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_basket"></use>
+                                </svg>
+                                <span class="footer-icon__child" data-mini-cart-total>{{ total_products }}</span>
+                            </div>
                             <span>Корзина</span>
                         </a>
                     </li>
                     <li>
                         <a {% if logged %}href="{{ wishlist }}"{% else %}
                         data-login-btn{% endif %}>
-                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_wishlist"></use>
-                            </svg>
+                            <div class="footer-icon__parent">
+                                <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_wishlist"></use>
+                                </svg>
+                                {% if logged %}
+                                    <span class="footer-icon__child"
+                                          data-wishlist-total>{{ text_wishlist }}</span>
+                                {% endif %}
+                            </div>
                             <span>Избранное</span>
                         </a>
                     </li>
                     <li>
                         <a {% if logged %}
                             href="/account" {% else %}data-login-btn{% endif %}>
-                            <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="/sprite.svg#icon_login"></use>
-                            </svg>
+                            <div class="footer-icon__parent">
+                                <svg class="icon-footer-svg" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="/sprite.svg#icon_login"></use>
+                                </svg>
+                                {% if logged %}
+                                    <span class="footer-icon__child">{{ points }}</span>
+                                {% endif %}
+                            </div>
                             <span>Профиль</span>
                         </a>
                     </li>

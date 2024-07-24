@@ -1,0 +1,86 @@
+{% for product in products %}
+    <a class="products_grid-item zoom-trigger" href="{{ product.href }}">
+        <div class="products_grid-thumb">
+            <div class="products_grid-block">
+                <div class="zoom-container">
+                    <div class="zoom-image">
+                        <picture>
+                            <source srcset="{{ product.thumb.webp }}">
+                            <img class="catalog-inner_link-img" alt="{{ product.name }}"
+                                 title="{{ product.name }}"
+                                 src="{{ product.thumb.default }}" loading="lazy">
+                        </picture>
+                    </div>
+                    {% if product.hit or product.novelty or product.stock %}
+                        <div class="products_grid-bages">
+                            {% if product.hit %}
+                                <div class="products_grid-bages--item">
+                                    {{ product.hit }}
+                                </div>
+                            {% endif %}
+                            {% if product.novelty %}
+                                <div class="products_grid-bages--item">
+                                    {{ product.novelty }}
+                                </div>
+                            {% endif %}
+                            {% if product.stock %}
+                                <div class="products_grid-bages--item">
+                                    {{ product.stock }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if product.colors or product.current_color %}
+                        <ul class="products_grid__colors">
+                            {% if product.current_color %}
+                                <li>
+                                    <p class="colorPoint-outer active">
+                                                                        <span class="colorPoint-inner"
+                                                                              style="background-color: {{ product.current_color }}"></span>
+                                    </p>
+                                </li>
+                            {% endif %}
+                            {% if product.colors %}
+                                {% for color in product.colors %}
+                                    <li>
+                                        <p class="colorPoint-outer">
+                                                                            <span class="colorPoint-inner"
+                                                                                  style="background-color: {{ color.hex }}"></span>
+                                        </p>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                            {% if product.colors_add %}
+                                <li class="products_grid__colors--add">
+                                    +{{ product.colors_add }}
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <p class="products_grid-price">
+                    {% if not product.special %}
+                        <span
+                                class="price-new">{{ product.price }}</span>
+                    {% else %}
+                        <span
+                                class="price-new">{{ product.special }}</span>
+                        <span
+                                class="price-old">{{ product.price }}</span>
+                        <span class="price-percent">{{ product.percent }}</span>
+                    {% endif %}
+                </p>
+                <h4 class="products_grid-title">{{ product.name }}</h4>
+            </div>
+            <button class="products_grid-wishlist {% if product.in_wishlist %}inWishlist{% endif %}"
+                    title="{{ button_wishlist }}"
+                    data-product-wishlist="{{ product.product_id }}">
+                <svg class="icon-svg-whishlist" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="/sprite.svg#icon_heart"></use>
+                </svg>
+            </button>
+        </div>
+    </a>
+{% endfor %}

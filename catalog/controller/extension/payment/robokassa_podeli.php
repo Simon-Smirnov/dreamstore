@@ -57,8 +57,7 @@ class ControllerExtensionPaymentRobokassaPodeli extends Controller
 
         // Расчет стоимости заказа с учетом бонусных баллов
         $total_order_cost = $order_info['total'] - $bonus_points;
-        $data['out_summ'] = (float) $this->currency->format($total_order_cost, $order_info['currency_code'], false, false);
-
+        $data['out_summ'] = (float)$this->currency->format($total_order_cost, $order_info['currency_code'], false, false);
 
 
         // $data['out_summ'] = (float) $this->currency->format($order_info['total'], $order_info['currency_code'], false, false);
@@ -168,7 +167,11 @@ class ControllerExtensionPaymentRobokassaPodeli extends Controller
                     $data['robokassa_status_iframe'] = 0;
                 }*/
 
-        return $this->load->view('extension/payment/robokassa_podeli', $data);
+        $response['robokassa_podeli'] = $data;
+
+        return $response;
+
+        //return $this->load->view('extension/payment/robokassa_podeli', $data);
     }
 
 }

@@ -398,27 +398,31 @@ class ControllerCheckoutConfirm extends Controller
                 }
             }
 
-            echo "<pre>";
-            var_dump($order_data['totals']);
-            echo "</pre>";
+            //$data['firstname'] = $order_data['firstname'];
+            //$data['telephone'] = $order_data['telephone'];
+            //$data['email'] = $order_data['email'];
+            //$data['payment_method'] = $order_data['payment_method'];
+            //$data['shipping_method'] = $order_data['shipping_method'];
+            //$data['weight'] = $order_data['weight'];
+            //$data['total'] = $order_data['total'];
 
-            exit();
+            $this->session->data['payment_info'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
 
-            $data['firstname'] = $order_data['firstname'];
-            $data['telephone'] = $order_data['telephone'];
-            $data['email'] = $order_data['email'];
-            $data['payment_method'] = $order_data['payment_method'];
-            $data['shipping_method'] = $order_data['shipping_method'];
-            $data['weight'] = $order_data['weight'];
-            $data['total'] = $order_data['total'];
+            $this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_' . $this->session->data['payment_method']['code'] . '_order_status_id'));
 
-            $data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
+            $data['success'] = 'Успешно';
 
-            //$this->response->setOutput($this->load->view('checkout/confirm', $data));
+            $this->response->addHeader('Content-Type: application/json');
+            $this->response->setOutput(json_encode($data));
+
+            //$this->response->setOutput($this->load->view('checkout/success', $data));
         } else {
             $data['redirect'] = $redirect;
         }
 
-        $this->response->setOutput($this->load->view('checkout/confirm', $data));
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($data));
+
+        //$this->response->setOutput($this->load->view('checkout/confirm', $data));
     }
 }

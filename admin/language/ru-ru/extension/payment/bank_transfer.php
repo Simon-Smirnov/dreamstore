@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']      = 'Банковский перевод';
+$_['heading_title']      = 'Оплата по счёту';
 
 // Text
 $_['text_extension']     = 'Дополнения';

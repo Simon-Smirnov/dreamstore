@@ -79,7 +79,7 @@ class ControllerCheckoutCart extends Controller
                         'default' => $this->model_tool_image->resize($product['image'], 256 * 2, null),
                     ];
                 } else {
-                    $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)] ;
+                    $image[] = ['default' => $this->model_tool_image->resize('placeholder.png', 256 * 2)];
                 }
 
                 $option_data = array();
@@ -261,7 +261,8 @@ class ControllerCheckoutCart extends Controller
             $category_id_for_product = $this->model_catalog_product->getCategoryIdForProduct($data['products']['0']['product_id']);
 
             if (isset($category_id_for_product) && $category_id_for_product != '0') {
-                $results = $this->model_catalog_product->getProductRelatedByCategory($category_id_for_product, $this->request->get['product_id']);
+                //$results = $this->model_catalog_product->getProductRelatedByCategory($category_id_for_product, $this->request->get['product_id']);//old
+                $results = $this->model_catalog_product->getProductRelatedByCategory($category_id_for_product, $data['products']['0']['product_id']);
 
                 foreach ($results as $result) {
                     if ($result['image']) {

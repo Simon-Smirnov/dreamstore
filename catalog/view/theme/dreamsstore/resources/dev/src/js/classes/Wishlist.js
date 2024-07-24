@@ -19,6 +19,7 @@ export default class {
                         if (r.success) {
                             Alert.add(r.success);
                             product.classList.add('inWishlist');
+                            this.updateWishlistTotal();
                         }
                         if (r.warning) {
                             Alert.add(r.warning, 'notify');
@@ -51,7 +52,7 @@ export default class {
                         }
                     })
                 }
-                if (target.closest(['[data-wishlist-quick]']) || target.hasAttribute('[data-wishlist-quick]')) {
+                if ((target.closest(['[data-wishlist-quick]']) || target.hasAttribute('[data-wishlist-quick]')) && !(target.closest(['[data-wishlist-remove]']) || target.hasAttribute('[data-wishlist-remove]'))) {
                     const productId = target.closest('[data-wishlist-quick]').dataset.wishlistQuick;
                     const body = new FormData;
                     body.append('product_id', productId);
@@ -72,9 +73,8 @@ export default class {
     updateWishlistTotal() {
         this.getTotalWishlist().then(data => {
             if (data.total) {
-                const wishlistTotal = document.querySelector('[data-wishlist-total]');
-                if (wishlistTotal) {
-                    wishlistTotal.textContent = data.total;
+                if (document.querySelectorAll('[data-wishlist-total]').length > 0) {
+                    document.querySelectorAll('[data-wishlist-total]').forEach(el => el.textContent = data.total);
                 }
             }
         })

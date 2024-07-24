@@ -58,10 +58,11 @@
                     <li class="checkoutConfirm-item">
                         <p class="checkoutConfirm-item__title">Итоговая стоимость:</p>
                         <span class="checkoutConfirm-item__border"></span>
-                        <p class="checkoutConfirm-item__value">{{ total }} руб.</p>
+                        <p class="checkoutConfirm-item__value">{{ total.reward.value|number_format(0, '.', ' ') }}
+                            руб.</p>
                     </li>
                 </ul>
-                <button class="checkoutConfirm-btn btn btn-primary" href="/">Вернуться на главную</button>
+                {# <button class="checkoutConfirm-btn btn btn-primary" href="/">Вернуться на главную</button> #}
                 {{ payment }}
             </div>
         </div>
