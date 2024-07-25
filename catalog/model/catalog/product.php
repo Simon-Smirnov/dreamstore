@@ -394,14 +394,14 @@ class ModelCatalogProduct extends Model
                     $target_str = $is_range ? $str_atr_range : $str_atr;
 
                     if (count($data['filters']['attributes']) == 1) {
-                        $sql_filter_attributes .= " (SELECT product_id FROM oc_product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ";
+                        $sql_filter_attributes .= " (SELECT product_id FROM " . DB_PREFIX . "product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ";
                     } else {
                         if ($main_index == 0) {
-                            $sql_filter_attributes .= " (SELECT product_id FROM oc_product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ";
+                            $sql_filter_attributes .= " (SELECT product_id FROM " . DB_PREFIX . "product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ";
                         } else {
                             $prev_index = $main_index - 1;
 
-                            $sql_filter_attributes .= " INNER JOIN (SELECT product_id FROM oc_product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ON at{$prev_index}.product_id = at{$main_index}.product_id";
+                            $sql_filter_attributes .= " INNER JOIN (SELECT product_id FROM " . DB_PREFIX . "product_attribute WHERE ({$target_str} AND attribute_id = {$attribute_id})) AS at{$main_index} ON at{$prev_index}.product_id = at{$main_index}.product_id";
                         }
                     }
 
@@ -436,14 +436,14 @@ class ModelCatalogProduct extends Model
                     $option_id = $key;
 
                     if (count($data['filters']['attributes']) == 1) {
-                        $sql_filter_options .= " (SELECT product_id FROM oc_product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ";
+                        $sql_filter_options .= " (SELECT product_id FROM " . DB_PREFIX . "product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ";
                     } else {
                         if ($main_index == 0) {
-                            $sql_filter_options .= " (SELECT product_id FROM oc_product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ";
+                            $sql_filter_options .= " (SELECT product_id FROM " . DB_PREFIX . "product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ";
                         } else {
                             $prev_index = $main_index - 1;
 
-                            $sql_filter_options .= " INNER JOIN (SELECT product_id FROM oc_product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ON ov{$prev_index}.product_id = ov{$main_index}.product_id";
+                            $sql_filter_options .= " INNER JOIN (SELECT product_id FROM " . DB_PREFIX . "product_option_value WHERE ({$str_option} AND option_id = {$option_id})) AS ov{$main_index} ON ov{$prev_index}.product_id = ov{$main_index}.product_id";
                         }
                     }
 

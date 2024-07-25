@@ -24,7 +24,7 @@ class ModelToolImage extends Model
         }
 
         list($width_orig, $height_orig, $image_type) = getimagesize(DIR_IMAGE . $image_old);
-        
+
         //        if (!$width&&!$height){
         //            $width=$width_orig;
         //            $height=$height_orig;

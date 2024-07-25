@@ -1,4 +1,4 @@
-2024-07-24 18:00:08 - MOD: Modification Default
+2024-07-25 9:58:42 - MOD: Modification Default
 
 FILE: system/engine/action.php
 REGEX: ~(require|include)(_once)?\(([^)]+)~
@@ -128,6 +128,5 @@ MOD: Show Subcategory products on category page
 
 FILE: catalog/controller/product/category.php
 CODE: $filter_data = array(
-LINE: 180
-LINE: 206
+LINE: 199
 ----------------------------------------------------------------

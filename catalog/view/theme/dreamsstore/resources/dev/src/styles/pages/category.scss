@@ -116,15 +116,15 @@
         &-filter {
             margin-top: 1em;
             background-color: var(--white);
-            padding: 1.5em 1.2em;
+            padding: 1.2em 1.2em;
             border-radius: 0.3em;
 
-            button {
-                display: block;
-                max-width: 100%;
-                width: 100%;
-                margin-top: 1em;
-            }
+            //button {
+            //    display: block;
+            //    max-width: 100%;
+            //    width: 100%;
+            //    margin-top: 1em;
+            //}
         }
     }
 
@@ -169,7 +169,20 @@
                     stroke: var(--color-4-dark);
                 }
             }
+
+            &__categories {
+                display: none;
+            }
+
+            &__filter {
+                display: none;
+                background-color: var(--white);
+                padding: 0.5em;
+                border-radius: 0.4em;
+            }
+
         }
+
 
         &-products {
             margin-top: 1.5em;
@@ -201,10 +214,12 @@
         border: 1px dashed var(--libe);
         padding-left: 1em;
         padding-right: 1em;
+        flex-direction: column;
     }
     .category_getFree-link {
         display: block;
-        margin-top: 0.8em;
+        margin-top: 0;
+        margin-bottom: -0.5em;
         text-align: center;
         width: fit-content;
         margin-left: auto;
@@ -247,14 +262,13 @@
     .category_other-underCategories {
         display: none;
     }
-    .category_other-filter {
-        display: none;
-    }
     .category_main-controls_structure {
         display: none;
     }
     .category_main-controls {
         margin-top: 1em;
+        justify-content: start;
+        gap: 1em;
     }
     .category_main-controls_sort {
         p {
@@ -281,5 +295,18 @@
         .catalog-inner_link-img {
             border-radius: 0.4em;
         }
+    }
+    .category_main-controls__categories {
+        display: block;
+    }
+    .category_main-controls__filter {
+        display: block;
+    }
+    .category_other-filter {
+        padding: 0;
+        background: transparent;
+    }
+    .category_main-controls_sort .select__list {
+        display: none;
     }
 }

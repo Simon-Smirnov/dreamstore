@@ -188,12 +188,15 @@
                                                   data-modal="size_table">Таблица размеров</span>
                                         {% endif %}
                                     </span>
-                                    <div class="select select-product product-right__options-block">
+                                    <div class="select select-product product-right__options-block" select-mobile-base
+                                         data-dropdown-mobile>
                                         <input type="hidden" name="option[{{ option.product_option_id }}]"
                                                value="{{ option.product_option_value.0.product_option_value_id }}"
-                                               data-option-input-price="{{ option.product_option_value.0.price_naked }}">
-                                        <div class="select__box-btn">
-                                            <button class="select__button" type="button">По умолчанию<br></button>
+                                               data-option-input-price="{{ option.product_option_value.0.price_naked }}"
+                                               select-mobile-input>
+                                        <div class="select__box-btn" data-dropdown-mobile-btn>
+                                            <button class="select__button" type="button" select-mobile-button>По
+                                                умолчанию<br></button>
                                             <svg xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg#icon_arrow_right"></use>
                                             </svg>
@@ -206,6 +209,25 @@
                                                 </li>
                                             {% endfor %}
                                         </ul>
+                                        <div class="dropdown-mobile__modal" data-dropdown-mobile-modal>
+                                            <div class="dropdown-mobile__content">
+                                                <div class="dropdown-mobile__topLine"></div>
+                                                <svg class="filter-inner__mobile--close"
+                                                     xmlns="http://www.w3.org/2000/svg" data-dropdown-mobile-close>
+                                                    <use xlink:href="/sprite.svg#icon_cross"></use>
+                                                </svg>
+                                                <h4 class="dropdown-mobile__title">{{ option.name }}</h4>
+                                                <ul class="dropdown-mobile__select">
+                                                    {% for option_value in option.product_option_value %}
+                                                        <li class="dropdown-mobile__elem"
+                                                            data-value="{{ option_value.product_option_value_id }}"
+                                                            data-price="{{ option_value.price_naked }}"
+                                                            select-mobile-item>{{ option_value.name }}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             {% endif %}

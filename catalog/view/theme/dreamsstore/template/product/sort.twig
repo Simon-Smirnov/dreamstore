@@ -1,11 +1,45 @@
-<div class="sort">
-    <div class="select select-type-radio select-rtl select-2">
-        <input type="hidden" name="sort">
-        <button class="select__button" data-placeholder="Сортировка"></button>
-        <ul class="select__list">
-            {% for key, sort in sorts %}
-                <li data-value="{{ key }}" {{ key == sort_select ? "selected='selected'" : '' }}>{{ sort }}</li>
-            {% endfor %}
-        </ul>
+{# <div class="sort"> #}
+{#    <div class="select select-type-radio select-rtl select-2"> #}
+{#        <input type="hidden" name="sort"> #}
+{#        <button class="select__button" data-placeholder="Сортировка"></button> #}
+{#        <ul class="select__list"> #}
+{#            {% for key, sort in sorts %} #}
+{#                <li data-value="{{ key }}" {{ key == sort_select ? "selected='selected'" : '' }}>{{ sort }}</li> #}
+{#            {% endfor %} #}
+{#        </ul> #}
+{#    </div> #}
+{# </div> #}
+
+<p>{{ text_sort }}</p>
+<div id="sorts" class="sort select select-1 open" select-mobile-base>
+    <input type="hidden" name="sort" select-mobile-input>
+    <div class="select__box-btn" data-dropdown-mobile-btn>
+        <button class="select__button" type="button">
+            По умолчанию
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="/sprite.svg#icon_arrow_right"></use>
+        </svg>
+    </div>
+    <ul class="select__list">
+        {% for key, sort in sorts %}
+            <li data-value="{{ key }}" {{ key == sort_select ? "selected='selected'" : '' }}>{{ sort }}</li>
+        {% endfor %}
+    </ul>
+    <div class="dropdown-mobile__modal" data-dropdown-mobile-modal>
+        <div class="dropdown-mobile__content">
+            <div class="dropdown-mobile__topLine"></div>
+            <svg class="filter-inner__mobile--close"
+                 xmlns="http://www.w3.org/2000/svg" data-dropdown-mobile-close>
+                <use xlink:href="/sprite.svg#icon_cross"></use>
+            </svg>
+            <h4 class="dropdown-mobile__title">Сортировка</h4>
+            <ul class="dropdown-mobile__select">
+                {% for key, sort in sorts %}
+                    <li class="dropdown-mobile__elem" data-value="{{ key }}"
+                        select-mobile-item {{ key == sort_select ? "selected='selected'" : '' }}>{{ sort }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>

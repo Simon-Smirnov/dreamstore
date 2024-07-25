@@ -62,36 +62,43 @@
                     {% endif %}
                     <div class="category_other-filter">
                         {{ filters }}
-                        <button class="btn btn-second">Сбросить все</button>
                     </div>
                 </div>
                 <div class="category_main">
                     {% if product_cards or categories %}
                         <div class="category_main-controls">
                             {% if categories %}
-                                <div class="category_main-controls__categories">
-                                    <div class="select-link" data-select-link>
-                                        <div class="select-link__base" data-select-link-base>
+                                <div class="category_main-controls__categories" data-dropdown-mobile>
+                                    <div class="select-link">
+                                        <div class="select-link__base" data-dropdown-mobile-btn>
                                             <span>Категории</span>
                                             <svg xmlns="http://www.w3.org/2000/svg">
                                                 <use xlink:href="/sprite.svg#icon_arrow_right"></use>
                                             </svg>
                                         </div>
-                                        <div class="select-link__dropdown" data-select-link-dropdown>
-                                            <ul>
-                                                {% for category in categories %}
-                                                    <li class="select-link__item">
-                                                        <a class="select-link__link"
-                                                           href="{{ category.href }}">{{ category.name }}</a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
+                                        <div class="dropdown-mobile__modal" data-dropdown-mobile-modal>
+                                            <div class="dropdown-mobile__content">
+                                                <div class="dropdown-mobile__topLine"></div>
+                                                <svg class="filter-inner__mobile--close"
+                                                     xmlns="http://www.w3.org/2000/svg" data-dropdown-mobile-close>
+                                                    <use xlink:href="/sprite.svg#icon_cross"></use>
+                                                </svg>
+                                                <h4 class="dropdown-mobile__title">Категории</h4>
+                                                <ul class="dropdown-mobile__list">
+                                                    {% for category in categories %}
+                                                        <li class="dropdown-mobile__item">
+                                                            <a class="dropdown-mobile__link"
+                                                               href="{{ category.href }}">{{ category.name }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             {% endif %}
                             {# <div class="category_main-controls_sort"> #}
-                            {#    <label class="input-group-addon" for="input-sort">{{ text_sort }}</label> #}
+                            {#    #}{# <label class="input-group-addon" for="input-sort">{{ text_sort }}</label> #}
                             {#    <select id="input-sort" class="form-control" onchange="location = this.value;"> #}
                             {#        {% for sorts in sorts %} #}
                             {#            {% if sorts.value == '%s-%s'|format(sort, order) %} #}
@@ -130,7 +137,7 @@
                             {#        </ul> #}
                             {#    </div> #}
                             {# </div> #}
-                            <div class="category_main-controls_sort">
+                            <div class="category_main-controls_sort" data-dropdown-mobile>
                                 {{ sorts }}
                             </div>
                             <div class="category_main-controls_structure">
@@ -146,6 +153,9 @@
                                         <use xlink:href="/sprite.svg#icon_list"></use>
                                     </svg>
                                 </a>
+                            </div>
+                            <div class="category_main-controls__filter" data-filter-modal-btn>
+                                <img src="{{ assets }}/assets/images/icons/filter.webp">
                             </div>
                         </div>
                         <div class="category_main-products">

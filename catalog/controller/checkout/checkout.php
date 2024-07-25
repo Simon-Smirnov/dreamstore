@@ -41,9 +41,9 @@ class ControllerCheckoutCheckout extends Controller
         $data['shipping_method'] = $this->session->data['shipping_method'];
         $data['shipping_type'] = $this->session->data['shipping_type'];
 
-        echo "<pre>";
-        var_dump($data['shipping_methods']);
-        echo "</pre>";
+        //echo "<pre>";
+        //var_dump($data['shipping_methods']);
+        //echo "</pre>";
 
         # Способы оплаты
         $this->setPaymentMethods();

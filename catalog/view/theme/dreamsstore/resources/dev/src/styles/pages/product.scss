@@ -868,4 +868,9 @@
     .product-reviews .dotted {
         display: flex;
     }
+    .product-right__options-item {
+        .select__list {
+            display: none;
+        }
+    }
 }

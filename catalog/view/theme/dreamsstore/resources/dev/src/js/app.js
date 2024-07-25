@@ -1,9 +1,11 @@
 import "./classes/StaticFunctions.js";
 import "./classes/Attentions.js";
+import "./classes/Toggler.js";
 import InputPassword from './classes/InputPassword.js'
 import './classes/Modal.js'
 import Account from './classes/Account.js'
 import Login from './classes/Login.js'
+import "./classes/Sort.js";
 import './classes/Select.js'
 import './classes/Fancybox.js'
 // import './classes/Checkout_old.js'
@@ -44,6 +46,10 @@ import "./classes/Map.js";
 import "./classes/Contact.js";
 import "./classes/ProductsLayout.js";
 import "./classes/Sdek.js";
+import "./classes/Range.js";
+import "./classes/Filter.js";
+import "./classes/DropdownMobile.js";
+import "./classes/SelectMobile.js";
 // import './classes/Hover3D.js'
 // import './classes/Inputer.js'
 

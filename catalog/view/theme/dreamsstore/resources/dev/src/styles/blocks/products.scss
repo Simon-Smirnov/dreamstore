@@ -13,6 +13,14 @@
         }
     }
 
+    &-block {
+        img {
+            aspect-ratio: 392 / 295;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     &-bages {
         position: absolute;
         top: 1em;

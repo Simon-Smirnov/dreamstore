@@ -211,5 +211,30 @@
             transform: translateX(1.5em);
         }
     }
+
+    &-text-price {
+        position: relative;
+
+        input {
+            color: var(--color-6-dark);
+            padding-top: 0.7em;
+            padding-bottom: 0.7em;
+        }
+
+        input::placeholder {
+            color: var(--color-6-dark);
+            opacity: 1;
+        }
+    }
+
+    &-text-price__currency {
+        position: absolute;
+        top: 0.8em;
+        right: 0.8em;
+        font-size: 1.1rem;
+        color: var(--color-6-dark);
+        font-weight: 400;
+    }
+
 }
 
