@@ -2,58 +2,67 @@ export default class Sdek {
 
     constructor(selector) {
         this.sdek = document.querySelector(selector);
-        if (this.sdek) {
-            console.log(this.sdek);
+        this.pickuppoint = document.querySelector('[data-checkout-pickuppoint]');
+        this.sdekInput = document.querySelector('[data-sdek-need]');
+        if (this.sdek && this.pickuppoint) {
             this.tariff = this.sdek.dataset.sdekInfoCode;
             this.tariff_type = this.sdek.dataset.sdekInfoPvztype;
             if (this.tariff && this.tariff_type) {
-                console.log(this.tariff);
-                console.log(this.tariff_type);
                 this.cdekPvzClick(this.tariff, this.tariff_type);
             }
         }
     }
 
     cdekPvzClick(tariff, tariff_type) {
-        // var selectedTarif = $('input[type=radio][name=shipping_method]:checked').val();
-        //
-        // if (selectedTarif != 'cdek.' + tariff) {
-        //     var inputVal = 'cdek.' + tariff;
-        //     $("input[value='" + inputVal + "']").click();
-        //     //return 0;
-        // }
-
-        this.getPvzList(tariff_type);
-
-        selected_tariff = tariff;
-
-        cdekymap.ready(initMap(tariff_type));
+        this.getPvzList(tariff_type).then(data => {
+            if (data.status) {
+                this.pvzlist = data.data;
+                console.log(this.pvzlist[0].Code);
+                console.log(this.pvzlist[0].Code);
+                this.selectPvz(this.pvzlist[0].Code);
+                this.selected_tariff = tariff;
+                cdekymap.ready(() => {
+                    this.initMap(this.selected_tariff);
+                });
+            }
+        });
     }
 
     initMap(pvzType) {
-        if (!pvzlist) {
+        if (!this.pvzlist) {
             return false;
         }
 
-        mapShow(0);
-        mapShow(1);
+        this.mapShow(0);
+        this.mapShow(1);
 
-        var mapcenter = [pvzlist[0].coordY, pvzlist[0].coordX];
-        myMap = new cdekymap.Map('cdek_map', {
-            center: mapcenter,
-            zoom: 10,
+        this.mapcenter = [this.pvzlist[0].coordY, this.pvzlist[0].coordX];
+
+        this.myMap = new cdekymap.Map('cdek_map', {
+            center: this.mapcenter,
+            zoom: 12,
             controls: ['zoomControl', 'fullscreenControl']
         }, {
             searchControlProvider: 'yandex#search'
         });
 
-        var iname = 1;
-        pvzlist.forEach(function (item, i, arr) {
-            var description = '';
-            var description = description + item.Address + '<BR>';
-            var description = description + item.Phone + '<BR>';
-            var description = description + item.WorkTime + '<BR>';
-            var myGeoObject = new cdekymap.GeoObject({
+        this.iname = 1;
+        this.clusterer = new cdekymap.Clusterer({
+            preset: 'islands#invertedRedClusterIcons',
+            groupByCoordinates: false,
+            clusterHideIconOnBalloonOpen: false,
+            openBalloonOnClick: false,
+            clusterDisableClickZoom: false,
+            geoObjectHideIconOnBalloonOpen: false
+        });
+        this.pvzlist.forEach((item, i, arr) => {
+            this.description = '';
+            this.description = this.description + item.Address + '<BR>';
+            this.description = this.description + item.Phone + '<BR>';
+            this.description = this.description + item.WorkTime + '<BR>';
+
+
+            const myGeoObject = new cdekymap.GeoObject({
                 // Описание геометрии.
                 geometry: {
                     type: "Point",
@@ -62,86 +71,84 @@ export default class Sdek {
                 // Свойства.
                 properties: {
                     // Контент метки.
-                    iconContent: iname,
-                    hintContent: description
+                    // iconContent: this.iname,
+                    hintContent: this.description,
+                    iconLayout: 'default#imageWithContent',
                 }
             }, {
-                // Опции.
-                // Иконка метки будет растягиваться под размер ее содержимого.
+                iconLayout: 'default#imageWithContent',
+                iconImageHref: window.assets + '/assets/images/icons/point.svg',
+                iconImageSize: [20, 20],
+                iconOffset: [0, -40],
                 preset: 'islands#blueIcon',
-                // Метку можно перемещать.
-                draggable: false
+                draggable: false,
             });
-            iname = iname + 1;
-            myGeoObject.events.add('click', function () {
-                selectPvz(item.Code);
-            });
-            myMap.geoObjects.add(myGeoObject);
+            this.iname = this.iname + 1;
+            myGeoObject.events.add('click', () => {
+                this.selectPvz(item.Code);
+                console.log(this.pvzlist[i].Address);
+                this.pickuppoint.value = this.pvzlist[i].Address;
+            })
+            this.clusterer.add(myGeoObject);
+            this.myMap.geoObjects.add(this.clusterer);
         });
-        myMap.geoObjects.options.set("openBalloonOnClick", false);
+        this.myMap.geoObjects.options.set("openBalloonOnClick", false);
     }
 
     mapShow(status) {
-        if (!$('#cdek_map').length) {
-            var mapBlock_html = '<div class="cdek_map_container" id="cdek_map_contaner" style="dispaly:none">';
-            mapBlock_html += '<div class="cdek_map_container_map" id="cdek_map"></div>';
-            mapBlock_html += '<div class="cdek_map_container_map_control"><a href="javascript:mapShow(0)" class="control_button">Закрыть</a></div>';
-            mapBlock_html += '</div>';
-            $('body').append(mapBlock_html);
-        }
+        const maps = document.querySelectorAll('#cdek_map');
+        // if (maps.length > 0) {
+        //     var mapBlock_html = '<div class="cdek_map_container" id="cdek_map_contaner" style="dispaly:none">';
+        //     mapBlock_html += '<div class="cdek_map_container_map" id="cdek_map"></div>';
+        //     mapBlock_html += '<div class="cdek_map_container_map_control"><a href="javascript:mapShow(0)" class="control_button">Закрыть</a></div>';
+        //     mapBlock_html += '</div>';
+        //     document.querySelector('body').append(mapBlock_html);
+        // }
 
         if (status == 1) {
-            $('#cdek_map_contaner').show();
+            if (document.querySelector('#cdek_map_contaner')) {
+                document.querySelector('#cdek_map_contaner').style.display = 'block';
+            }
         } else {
-            $('#cdek_map_contaner').hide();
-            $('#cdek_map').html('');
+            if (document.querySelector('#cdek_map_contaner')) {
+                document.querySelector('#cdek_map_contaner').style.display = 'none';
+                document.querySelector('#cdek_map_contaner').innerHTML = '';
+            }
         }
     }
 
-    selectPvz(pvz_code) {
-        mapShow(0);
+    async selectPvz(pvz_code) {
+        console.log(pvz_code);
+        return new Promise(async resolve => {
+            let body = new FormData();
+            body.append('pvz_code', encodeURIComponent(pvz_code));
+            body.append('tariff', encodeURIComponent(this.selected_tariff));
 
-        $.ajax({
-            async: false,
-            url: 'index.php?route=extension/shipping/cdek/selectPvz',
-            type: 'POST',
-            dataType: 'json',
-            data: ({
-                pvz_code: pvz_code,
-                tariff: selected_tariff
-            }),
-            success: function (json) {
-                if (json.status) {
-                    $('.cdek_selectedPvzInfo').html('');
-                    $('#cdek_selectedPvzInfo_' + selected_tariff).html(json.data.address);
-                }
-            },
-            error: function (data) {
-                console.log('selectPvz error', data);
-            }
-        });
+            let result = await fetch('/index.php?route=extension/shipping/cdek/selectPvz', {
+                method: 'POST',
+                body: body
+            })
+
+            // Результат
+            let data = await result.json();
+            resolve(data);
+        })
     }
 
-    getPvzList(tariff_type) {
-        $.ajax({
-            async: false,
-            url: 'index.php?route=extension/shipping/cdek/getPvzList',
-            type: 'POST',
-            dataType: 'json',
-            data: ({
-                tariff_type: tariff_type
-            }),
-            success: function (json) {
-                if (json.status) {
-                    pvzlist = json.data;
-                } else {
-                    alertMessage(json.message, false);
-                }
-            },
-            error: function (data) {
-                console.log('getPvzList error', data);
-            }
-        });
+    async getPvzList() {
+        return new Promise(async resolve => {
+            let body = new FormData();
+            body.append('tariff_type', encodeURIComponent(this.tariff_type));
+
+            let result = await fetch('/index.php?route=extension/shipping/cdek/getPvzList', {
+                method: 'POST',
+                body: body
+            })
+
+            // Результат
+            let data = await result.json();
+            resolve(data);
+        })
     }
 
     checkTariffPvz() {

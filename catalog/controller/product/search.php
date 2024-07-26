@@ -187,7 +187,9 @@ class ControllerProductSearch extends Controller
                 'limit' => $limit
             );
 
-            $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            //$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            $product_total = $this->model_catalog_product->getTotalProductsByFilter($filter_data);
+
             $data['total'] = $product_total;
 
             $data['product_cards'] = $this->load->controller('product/product_cards', $filter_data);
@@ -538,7 +540,7 @@ class ControllerProductSearch extends Controller
             );
 
             $this->load->model('catalog/product');
-            $results = $this->model_catalog_product->getProducts($filter_data);
+            $results = $this->model_catalog_product->getProductsByFilter($filter_data);
 
             $this->load->model('tool/image');
             $data['products'] = [];

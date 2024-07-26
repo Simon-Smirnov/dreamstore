@@ -17,7 +17,6 @@ export default class {
                     if (btn) {
                         this.cartId = btn.dataset.productRemove;
                         CartAsyncMethods.remove(this.cartId, this.quantity).then(r => {
-                            console.log(r);
                             if (r.success) {
                                 this.updateViewMiniCart();
                                 Alert.add(r.success);
@@ -117,7 +116,7 @@ export default class {
 
     updateQuantityIconMiniCart(quantity) {
         // document.querySelector('#cart-total').textContent = quantity;
-        document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
+        document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = quantity);
     }
 }
 

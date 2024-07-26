@@ -43,8 +43,9 @@
                                 {#                            {% endif %} #}
                                 {% if thumb %}
                                     <li class="product-images__item">
-                                        <a class="product-images__link" href="{{ thumb.popup }}"
-                                           title="{{ heading_title }}">
+                                        <a class="product-images__link"
+                                           title="{{ heading_title }}" href="{{ thumb.webp }}"
+                                           data-fancybox="productMain">
                                             <picture>
                                                 <source srcset="{{ thumb.webp }}">
                                                 <img class="product-images__image"
@@ -58,8 +59,9 @@
                                 {% if images %}
                                     {% for image in images %}
                                         <li class="product-images__item">
-                                            <a class="product-images__link" href="{{ image.popup }}"
-                                               title="{{ heading_title }}">
+                                            <a class="product-images__link"
+                                               title="{{ heading_title }}" href="{{ image.webp }}"
+                                               data-fancybox="productMain">
                                                 <picture>
                                                     <source srcset="{{ image.webp }}">
                                                     <img class="product-images__image"
@@ -401,6 +403,7 @@
                                                         </div>
                                                         <div class="product-set__remove">
                                                             <svg class="product-set__remove--svg hover-svg-dark-fill"
+                                                                 data-product-set-btn-remove="{{ set_prod.is_show }}"
                                                                  xmlns="http://www.w3.org/2000/svg">
                                                                 <use xlink:href="/sprite.svg#icon_cross"></use>
                                                             </svg>
@@ -509,8 +512,7 @@
                         <div class="swiper-wrapper" data-lightbox-parent>
                             {% for product in products %}
                                 <a class="products_grid-item product-similar__item zoom-trigger"
-                                   href="{{ product.href }}"
-                                   data-fancybox="slider">
+                                   href="{{ product.href }}">
                                     <div class="products_grid-thumb">
                                         <div class="products_grid-block">
                                             <div class="zoom-container">

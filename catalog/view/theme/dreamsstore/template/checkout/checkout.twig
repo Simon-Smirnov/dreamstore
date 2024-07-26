@@ -1,4 +1,6 @@
 {{ header }}
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ns=cdekymap"
+        type="text/javascript"></script>
 <div id="checkout-checkout">
     <div class="container">
         <ul class="breadcrumb">
@@ -43,7 +45,8 @@
                                                 <p class="alert-input text-danger">{{ error_warning.phone }}</p>
                                             {% endif %}
                                         </div>
-                                        <div class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
+                                        <div
+                                                class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
                                             <input class="input-text" type="text" name="email"
                                                    data-checkout-input="email"
                                                    value="{{ fields.email ? fields.email : '' }}"
@@ -117,7 +120,8 @@
                                     {% endfor %}
                                 </div>
                                 <div class="checkout-blocks__inputs checkout-blocks__inputs--address">
-                                    <div class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
+                                    <div
+                                            class="checkout-blocks__input input-block required {% if logged %}disabled{% endif %}">
                                         <input class="input-text" type="text" name="name"
                                                data-checkout-input="name"
                                                value="{{ fields.name ? fields.name : '' }}"
@@ -136,6 +140,15 @@
                                                placeholder="Улица">
                                         <label>Улица</label>
                                     </div>
+                                    <div class="checkout-blocks__input input-block required">
+                                        <input class="input-text" type="text" name="street"
+                                               data-checkout-input="pickuppoint" data-checkout-pickuppoint
+                                               data-checkout-dadata-input="pickuppoint"
+                                               value="{{ fields.pickuppoint ? fields.pickuppoint : '' }}"
+                                               placeholder="Пункт Получения">
+                                        <label>Пункт Получения</label>
+                                    </div>
+                                    <div id="cdek_map"></div>
                                     <div class="checkout-blocks__block">
                                         <div class="checkout-blocks__input input-block">
                                             <input class="input-text" type="text" name="house"
@@ -146,7 +159,8 @@
                                         </div>
                                         <div class="checkout-blocks__input input-block required">
                                             <input class="input-text" type="text" name="appartment"
-                                                   data-checkout-input="appartment" data-checkout-dadata-input="flat"
+                                                   data-checkout-input="appartment"
+                                                   data-checkout-dadata-input="flat"
                                                    value="{{ fields.appartment ? fields.appartment : '' }}"
                                                    placeholder="Кв-ра/офис">
                                             <label>Кв-ра/офис</label>

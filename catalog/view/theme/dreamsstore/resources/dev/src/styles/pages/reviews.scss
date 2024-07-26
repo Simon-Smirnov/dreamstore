@@ -228,6 +228,12 @@
 
                     img {
                         border-radius: 0.6em;
+                        aspect-ratio: 120 / 90;
+                        object-fit: cover;
+                        object-position: center;
+                        width: 100%;
+                        max-width: 10em;
+                        height: auto;
                     }
 
                     video {

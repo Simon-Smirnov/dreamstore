@@ -205,11 +205,8 @@ class ControllerProductCategory extends Controller
                 'limit' => $limit
             );
 
-            echo "<pre>";
-            var_dump($filter_data);
-            echo "</pre>";
-
-            $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            //$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            $product_total = $this->model_catalog_product->getTotalProductsByFilter($filter_data);
 
             $data['product_cards'] = $this->load->controller('product/product_cards', $filter_data);
 

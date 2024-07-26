@@ -547,7 +547,7 @@ class ControllerProductProduct extends Controller
                     $is_show = false;
                     if (array_key_exists($product_id, $cart_products)) {
                         $category_total_products += (int)$cart_products[$product_id]['quantity'];
-                        $is_show = true;
+                        $is_show = $cart_products[$product_id]['cart_id'];
                     }
 
                     $result = $this->model_catalog_product->getProduct($product_id);

@@ -216,6 +216,9 @@
                 img {
                     width: 100%;
                     border-radius: 0.4em;
+                    aspect-ratio: 392 / 295;
+                    object-fit: cover;
+                    object-position: center;
                 }
             }
 
@@ -432,6 +435,13 @@
             overflow: hidden;
             border-radius: 0.4em;
             cursor: pointer;
+
+            img {
+                border-radius: 0.4em;
+                aspect-ratio: 120 / 90;
+                object-fit: cover;
+                object-position: center;
+            }
         }
 
         &__title {
@@ -525,6 +535,22 @@
         width: 40%;
     }
 
+    .sliderModelsMain {
+        img {
+            aspect-ratio: 448 / 337;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    .sliderModelsThumbs {
+        img {
+            aspect-ratio: 76 / 57;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     &-info {
         width: 60%;
 
@@ -560,6 +586,14 @@
     .product-images__item.swiper-slide-thumb-active {
         border: 0.2em solid var(--color-6-dark);
     }
+}
+
+#embroidery:before {
+    display: block;
+    content: " ";
+    margin-top: -4.5em;
+    height: 4.5em;
+    visibility: hidden;
 }
 
 @media screen and (max-width: 600px) {
@@ -635,5 +669,13 @@
     }
     .atelier-quiz__inputs .text-danger {
         margin-top: 0.3em;
+    }
+
+    #embroidery:before {
+        display: block;
+        content: " ";
+        margin-top: -3em;
+        height: 3em;
+        visibility: hidden;
     }
 }

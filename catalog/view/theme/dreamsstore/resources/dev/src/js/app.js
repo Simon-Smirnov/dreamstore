@@ -26,8 +26,8 @@ import './classes/Tabs.js'
 import './classes/SetSizes.js'
 import './classes/CookieAccept.js'
 import './classes/ToTop.js'
-import Product from './classes/Product.js'
 import DropdawnCart from './classes/DropdawnCart.js'
+import Product from './classes/Product.js'
 import Checkout from "./classes/Checkout.js";
 import Wishlist from "./classes/Wishlist.js";
 import Search from "./classes/Search.js";
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
     new Replies('.vacancy_form');
     new List('.dropdown-list');
     new Moremodels('.atelier-models');
-    new Product('[data-products-to-cart]');
     new DropdawnCart('[data-dropdown-cart]', false);
+    new Product('[data-products-to-cart]');
     new DropdawnCart('[data-checkout-cart]', true);
     new Checkout('[data-checkout]');
     new Wishlist('[data-product-wishlist]', '[data-wishlist]');
@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     new SelectLink('[data-select-link]');
     new Forms();
     // new ContactMap();
-
 
     // let input = document.querySelector('#modal__attach_input');
     // const fileList = document.getElementById('fileList');

@@ -31,9 +31,19 @@
                 </div>
                 <div class="buyers-content">
                     {% if is_guarantee %}
-                        Гарантия и возврат
+                        <div class="buyers-inner">
+                            <h2 class="section-title">{{ guarantee_title }}</h2>
+                            <div class="styles-important">
+                                {{ guarantee_description }}
+                            </div>
+                        </div>
                     {% elseif is_choose %}
-                        Как выбрать ткань
+                        <div class="buyers-inner">
+                            <h2 class="section-title">{{ choose_title }}</h2>
+                            <div class="styles-important">
+                                {{ choose_description }}
+                            </div>
+                        </div>
                     {% else %}
                         <div class="buyers-item">
                             <div class="buyers-item__title">

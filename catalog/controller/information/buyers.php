@@ -5,6 +5,7 @@ class ControllerInformationBuyers extends Controller
     public function index()
     {
         $this->load->language('information/buyers');
+        $this->load->model('catalog/information');
 
         $this->document->setTitle($this->language->get('heading_title'));
         $this->document->setDescription($this->language->get('heading_title'));
@@ -39,6 +40,17 @@ class ControllerInformationBuyers extends Controller
                 $data['is_choose'] = true;
             }
         }
+
+        $id_guarantee = 10;
+        $guarantee = $this->model_catalog_information->getInformation($id_guarantee);
+        $data['guarantee_title'] = $guarantee['title'];
+        $data['guarantee_description'] = html_entity_decode($guarantee['description'], ENT_QUOTES, 'UTF-8');
+
+        $id_choose = 11;
+        $choose = $this->model_catalog_information->getInformation($id_choose);
+        $data['choose_title'] = $choose['title'];
+        $data['choose_description'] = html_entity_decode($choose['description'], ENT_QUOTES, 'UTF-8');
+
 
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['column_right'] = $this->load->controller('common/column_right');

@@ -49,6 +49,15 @@
                 img, video {
                     border-radius: 0.5em;
                 }
+
+                img {
+                    aspect-ratio: 120 / 90;
+                    object-fit: cover;
+                    object-position: center;
+                    width: 100%;
+                    max-width: 10em;
+                    height: auto;
+                }
             }
         }
 

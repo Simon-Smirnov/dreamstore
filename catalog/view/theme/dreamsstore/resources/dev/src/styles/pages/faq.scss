@@ -81,6 +81,13 @@
                     display: block;
                 }
             }
+
+            img {
+                aspect-ratio: 256 / 144;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 0.4em;
+            }
         }
     }
 

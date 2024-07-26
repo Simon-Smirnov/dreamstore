@@ -2,6 +2,7 @@ import CartAsyncMethods from "./CartAsyncMethods.js";
 import Alert from "./Alert.js";
 import StaticFunctions from "./StaticFunctions.js";
 import Dadata from "./Dadata.js";
+import Sdek from "./Sdek.js";
 
 export default class {
 
@@ -127,36 +128,46 @@ export default class {
                         parent.classList.toggle('active');
                     }
                 }
-                if (target.hasAttribute('[data-dadata-key]') || target.closest('[data-dadata-key]')) {
-                    const element = target.closest('[data-dadata-key]');
-                    const key = element.dataset.dadataKey;
-                    if (this.dadataResponse[key]) {
-                        this.address = this.dadataResponse[key].data;
-                        console.log(this.address);
-                        this.checkout.querySelectorAll('[data-checkout-dadata-input]').forEach(input => {
-                            const inputType = input.dataset.checkoutDadataInput;
-                            if (inputType == 'zone_id' || inputType == 'zone') {
-                                const zone = this.getOpencartRegion(this.address['region_iso_code']);
-                                if (zone) {
-                                    if (inputType == 'zone_id') {
-                                        input.value = zone.id;
-                                    } else if (inputType == 'zone') {
-                                        input.value = zone.name;
-                                    }
-                                }
-                            } else {
-                                if (this.address[inputType] && this.address[inputType] != null) {
-                                    input.value = this.address[inputType];
-                                } else {
-                                    input.value = '';
-                                }
-                            }
-                        });
-                        this.container.remove();
-                    }
-                }
+                // if (target.hasAttribute('[data-dadata-key]') || target.closest('[data-dadata-key]')) {
+                //     const element = target.closest('[data-dadata-key]');
+                //     const key = element.dataset.dadataKey;
+                //     if (this.dadataResponse[key]) {
+                //         this.address = this.dadataResponse[key].data;
+                //         console.log(this.address);
+                //         this.checkout.querySelectorAll('[data-checkout-dadata-input]').forEach(input => {
+                //             const inputType = input.dataset.checkoutDadataInput;
+                //             if (inputType == 'zone_id' || inputType == 'zone') {
+                //                 const zone = this.getOpencartRegion(this.address['region_iso_code']);
+                //                 if (zone) {
+                //                     if (inputType == 'zone_id') {
+                //                         input.value = zone.id;
+                //                     } else if (inputType == 'zone') {
+                //                         input.value = zone.name;
+                //                     }
+                //                 }
+                //             } else {
+                //                 if (this.address[inputType] && this.address[inputType] != null) {
+                //                     input.value = this.address[inputType];
+                //                 } else {
+                //                     input.value = '';
+                //                 }
+                //             }
+                //         });
+                //         this.container.remove();
+                //     }
+                // }
                 if (this.container && !this.container.contains(target)) {
                     this.container.remove();
+                }
+                if (target.hasAttribute('[data-shipping-type-sdek]') || target.closest('[data-shipping-type-sdek]')) {
+                    this.sdek = document.querySelector([data - sdek - info]);
+                    if (this.sdek) {
+                        this.tariff = this.sdek.dataset.sdekInfoCode;
+                        this.tariff_type = this.sdek.dataset.sdekInfoPvztype;
+                        if (this.tariff && this.tariff_type) {
+                            Sdek.cdekPvzClick(this.tariff, this.tariff_type);
+                        }
+                    }
                 }
             })
             this.checkout.addEventListener('focusout', (e) => {
@@ -193,108 +204,108 @@ export default class {
                 const target = e.target;
                 if (StaticFunctions.checkTarget(target, 'data-checkout-input')) {
                     const input = StaticFunctions.checkTarget(target, 'data-checkout-input');
-                    if (input.dataset.checkoutInput) {
-                        const inputs = document.querySelectorAll('[data-checkout-dadata-input]');
-                        let dataInput = {
-                            'country': 'Россия',
-                            'city': '',
-                            'street': '',
-                            // 'house': '',
-                            // 'flat': '',
-                        };
-                        inputs.forEach(input => {
-                            const inputType = input.dataset.checkoutDadataInput.trim();
-                            if (dataInput.hasOwnProperty(inputType)) {
-                                dataInput[inputType] = input.value;
-                            }
-                        });
-                        let values = Object.values(dataInput);
-                        let filteredValues = values.filter(value => value !== '');
-                        let queryString = filteredValues.join(', ');
-                        let data = {
-                            query: queryString
-                        }
-                        const parentElement = input.parentElement;
-                        Dadata.getData(data).then(r => {
-                            this.dadataResponse = r.suggestions;
-                            let restrictResponse = this.dadataResponse.slice(0, 5);
-                            this.createSelectElement(restrictResponse, parentElement);
-                        })
-
-                        // if (input.dataset.checkoutInput == 'city') {
-                        //     let data = {
-                        //         query: input.value
-                        //     }
-                        //
-                        //     const parentElement = input.parentElement;
-                        //     Dadata.getData(data).then(r => {
-                        //         this.dadataResponse = r.suggestions;
-                        //         let restrictResponse = this.dadataResponse.slice(0, 5);
-                        //         this.createSelectElement(restrictResponse, parentElement);
-                        //     })
-                        //     this.dadataResponse = [
-                        //         {
-                        //             data: {
-                        //                 postal_code: "610000",
-                        //                 region_iso_code: "RU-KIR",
-                        //                 city: "Киров",
-                        //                 street: "Примерная",
-                        //                 house: "1",
-                        //                 flat: "2"
-                        //             },
-                        //             unrestricted_value: "Кировская обл",
-                        //         },
-                        //         {
-                        //             data: {
-                        //                 postal_code: "650000",
-                        //                 region_iso_code: "RU-ARK",
-                        //                 city: "Москва",
-                        //                 street: "Топорная",
-                        //                 house: "2",
-                        //                 flat: null
-                        //             },
-                        //             unrestricted_value: "610000, Кировская обл, г Киров",
-                        //         },
-                        //         {
-                        //             data: {
-                        //                 postal_code: "810000",
-                        //                 region_iso_code: "RU-IVA",
-                        //                 city: "Вологда",
-                        //                 street: "Заборная",
-                        //                 house: null,
-                        //                 flat: null
-                        //             },
-                        //             unrestricted_value: "613040, Кировская обл, г Кирово-Чепецк",
-                        //         },
-                        //         {
-                        //             data: {
-                        //                 postal_code: "970000",
-                        //                 region_iso_code: "RU-KIR",
-                        //                 city: "Пермь",
-                        //                 street: null,
-                        //                 house: null,
-                        //                 flat: null
-                        //             },
-                        //             unrestricted_value: "187350, Ленинградская обл, Кировский р-н | 187350, Ленинградская обл, Кировский р-н",
-                        //         },
-                        //         {
-                        //             data: {
-                        //                 postal_code: "320000",
-                        //                 region_iso_code: "RU-KIR",
-                        //                 city: null,
-                        //                 street: null,
-                        //                 house: null,
-                        //                 flat: null
-                        //             },
-                        //             unrestricted_value: "Ставропольский край, Кировский р-н",
-                        //         },
-                        //         {
-                        //             unrestricted_value: "Луганская Народная респ, г Кировск",
-                        //         },
-                        //     ];
-                        //     let restrictResponse = this.dadataResponse.slice(0, 5);
-                        //     this.createSelectElement(restrictResponse, parentElement);
-                    }
+                    // if (input.dataset.checkoutInput) {
+                    //     const inputs = document.querySelectorAll('[data-checkout-dadata-input]');
+                    //     let dataInput = {
+                    //         'country': 'Россия',
+                    //         'city': '',
+                    //         'street': '',
+                    //         // 'house': '',
+                    //         // 'flat': '',
+                    //     };
+                    //     inputs.forEach(input => {
+                    //         const inputType = input.dataset.checkoutDadataInput.trim();
+                    //         if (dataInput.hasOwnProperty(inputType)) {
+                    //             dataInput[inputType] = input.value;
+                    //         }
+                    //     });
+                    //     let values = Object.values(dataInput);
+                    //     let filteredValues = values.filter(value => value !== '');
+                    //     let queryString = filteredValues.join(', ');
+                    //     let data = {
+                    //         query: queryString
+                    //     }
+                    //     const parentElement = input.parentElement;
+                    //     Dadata.getData(data).then(r => {
+                    //         this.dadataResponse = r.suggestions;
+                    //         let restrictResponse = this.dadataResponse.slice(0, 5);
+                    //         this.createSelectElement(restrictResponse, parentElement);
+                    //     })
+                    //
+                    //     // if (input.dataset.checkoutInput == 'city') {
+                    //     //     let data = {
+                    //     //         query: input.value
+                    //     //     }
+                    //     //
+                    //     //     const parentElement = input.parentElement;
+                    //     //     Dadata.getData(data).then(r => {
+                    //     //         this.dadataResponse = r.suggestions;
+                    //     //         let restrictResponse = this.dadataResponse.slice(0, 5);
+                    //     //         this.createSelectElement(restrictResponse, parentElement);
+                    //     //     })
+                    //     //     this.dadataResponse = [
+                    //     //         {
+                    //     //             data: {
+                    //     //                 postal_code: "610000",
+                    //     //                 region_iso_code: "RU-KIR",
+                    //     //                 city: "Киров",
+                    //     //                 street: "Примерная",
+                    //     //                 house: "1",
+                    //     //                 flat: "2"
+                    //     //             },
+                    //     //             unrestricted_value: "Кировская обл",
+                    //     //         },
+                    //     //         {
+                    //     //             data: {
+                    //     //                 postal_code: "650000",
+                    //     //                 region_iso_code: "RU-ARK",
+                    //     //                 city: "Москва",
+                    //     //                 street: "Топорная",
+                    //     //                 house: "2",
+                    //     //                 flat: null
+                    //     //             },
+                    //     //             unrestricted_value: "610000, Кировская обл, г Киров",
+                    //     //         },
+                    //     //         {
+                    //     //             data: {
+                    //     //                 postal_code: "810000",
+                    //     //                 region_iso_code: "RU-IVA",
+                    //     //                 city: "Вологда",
+                    //     //                 street: "Заборная",
+                    //     //                 house: null,
+                    //     //                 flat: null
+                    //     //             },
+                    //     //             unrestricted_value: "613040, Кировская обл, г Кирово-Чепецк",
+                    //     //         },
+                    //     //         {
+                    //     //             data: {
+                    //     //                 postal_code: "970000",
+                    //     //                 region_iso_code: "RU-KIR",
+                    //     //                 city: "Пермь",
+                    //     //                 street: null,
+                    //     //                 house: null,
+                    //     //                 flat: null
+                    //     //             },
+                    //     //             unrestricted_value: "187350, Ленинградская обл, Кировский р-н | 187350, Ленинградская обл, Кировский р-н",
+                    //     //         },
+                    //     //         {
+                    //     //             data: {
+                    //     //                 postal_code: "320000",
+                    //     //                 region_iso_code: "RU-KIR",
+                    //     //                 city: null,
+                    //     //                 street: null,
+                    //     //                 house: null,
+                    //     //                 flat: null
+                    //     //             },
+                    //     //             unrestricted_value: "Ставропольский край, Кировский р-н",
+                    //     //         },
+                    //     //         {
+                    //     //             unrestricted_value: "Луганская Народная респ, г Кировск",
+                    //     //         },
+                    //     //     ];
+                    //     //     let restrictResponse = this.dadataResponse.slice(0, 5);
+                    //     //     this.createSelectElement(restrictResponse, parentElement);
+                    // }
                 }
             });
         }

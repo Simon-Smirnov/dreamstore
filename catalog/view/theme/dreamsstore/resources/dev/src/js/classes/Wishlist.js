@@ -63,7 +63,7 @@ export default class {
                         Modal.openTarget('wishlist-quick');
                         Slider.init()
                         Select.init();
-                        new Product('[data-products-to-cart]');
+                        // new Product('[data-products-to-cart]');
                     })
                 }
             });

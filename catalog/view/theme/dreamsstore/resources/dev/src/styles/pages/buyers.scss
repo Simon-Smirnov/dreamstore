@@ -48,6 +48,14 @@
         margin-right: auto;
     }
 
+    &-inner {
+        margin-top: 2em;
+
+        .section-title {
+            margin-bottom: 0.5em;
+        }
+    }
+
     &-item {
         padding: 2.5em 0;
 

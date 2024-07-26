@@ -25,6 +25,9 @@
         &__img img {
             width: 100%;
             border-radius: 0.4em;
+            aspect-ratio: 140 / 105;
+            object-fit: cover;
+            object-position: center;
         }
 
         &__name {

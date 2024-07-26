@@ -747,14 +747,14 @@ class ModelCatalogProduct extends Model
     {
         $product_data = array();
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_set  WHERE set_id = '" . (int)$product_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_set  WHERE product_id = '" . (int)$product_id . "'");
 
         $products_id = '';
         foreach ($query->rows as $result) {
             if ($products_id == '') {
-                $products_id .= $result['product_id'];
+                $products_id .= $result['set_id'];
             } else {
-                $products_id .= ',' . $result['product_id'];
+                $products_id .= ',' . $result['set_id'];
             }
         }
 

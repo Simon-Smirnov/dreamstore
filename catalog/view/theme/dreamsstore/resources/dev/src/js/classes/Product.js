@@ -1,6 +1,7 @@
 import CartAsyncMethods from "./CartAsyncMethods.js";
 import Alert from "./Alert.js";
 import Modal from "./Modal.js";
+import DropdawnCart from "./DropdawnCart.js";
 import Product from "./Product.js";
 import Slider from "./Slider.js";
 import Select from "./Select.js";
@@ -62,19 +63,56 @@ export default class {
                     const blockProduct = target.closest('[data-change-product]');
                     blockProduct.querySelector('[data-product-input]').value = +blockProduct.querySelector('[data-product-input]').value + 1;
                 }
+                // if (target.dataset.datasetProductSetBtn || target.closest('[data-product-set-btn]')) {
+                //     const products_id = this.block.querySelectorAll('[data-product-input]');
+                //     products_id.forEach(product => {
+                //         CartAsyncMethods.add(product.dataset.productId, product.value).then(r => {
+                //             if (r.success) {
+                //                 this.updateViewMiniCart();
+                //                 Alert.add(r.success);
+                //                 CartAsyncMethods.getQuantityCart().then(r => {
+                //                     document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
+                //                 })
+                //                 this.updateSetContent(this.globalProductId);
+                //             }
+                //         });
+                //     });
+                // }
+                if (target.dataset.datasetProductSetBtnRemove || target.closest('[data-product-set-btn-remove]')) {
+                    const cartId = target.closest('[data-product-set-btn-remove]').dataset.productSetBtnRemove;
+                    CartAsyncMethods.remove(cartId).then(r => {
+                        if (r.success) {
+                            Alert.add(r.success);
+                            CartAsyncMethods.getQuantityCart().then(r => {
+                                document.querySelectorAll('[data-mini-cart-total]').forEach(el => el.textContent = r.quantity);
+                            })
+                            document.querySelectorAll('[data-product-set-btn-remove]').forEach(el => {
+                                if (el.dataset.productSetBtnRemove == cartId) {
+                                    const parent = el.closest('.product-set');
+                                    if (parent) {
+                                        parent.remove();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
                 if (target.dataset.datasetProductSetBtn || target.closest('[data-product-set-btn]')) {
                     const products_id = this.block.querySelectorAll('[data-product-input]');
                     products_id.forEach(product => {
-                        CartAsyncMethods.add(product.dataset.productId, product.value).then(r => {
-                            if (r.success) {
-                                this.updateViewMiniCart();
-                                Alert.add(r.success);
-                                CartAsyncMethods.getQuantityCart().then(r => {
-                                    document.querySelector('#cart-total').textContent = r.quantity;
-                                })
-                                this.updateSetContent(this.globalProductId);
-                            }
-                        });
+                        const quantity = product.value;
+                        if (quantity > 0) {
+                            CartAsyncMethods.add(product.dataset.productId, product.value).then(r => {
+                                if (r.success) {
+                                    this.updateViewMiniCart();
+                                    Alert.add(r.success);
+                                    CartAsyncMethods.getQuantityCart().then(r => {
+                                        document.querySelector('#cart-total').textContent = r.quantity;
+                                    })
+                                    this.updateSetContent(this.globalProductId);
+                                }
+                            });
+                        }
                     });
                 }
             })
@@ -175,7 +213,6 @@ export default class {
             if (data) {
                 let parser = new DOMParser();
                 let doc = parser.parseFromString(data, 'text/html');
-                console.log(doc);
                 let item = doc.querySelector('.product-right__complect--inner');
                 let product_content = document.querySelector('.product-right__complect');
                 product_content.innerHTML = '';  // Очистим текущие элементы
@@ -190,7 +227,6 @@ export default class {
             if (data) {
                 let parser = new DOMParser();
                 let doc = parser.parseFromString(data, 'text/html');
-                console.log(doc);
                 let item = doc.querySelector('.product-right__add--block');
                 let product_content = document.querySelector('.product-right__add');
                 product_content.innerHTML = '';  // Очистим текущие элементы

@@ -150,6 +150,9 @@
 
             &--image img {
                 border-radius: 0.4em;
+                aspect-ratio: 108 / 80;
+                object-fit: cover;
+                object-position: center;
             }
 
             &--title {

@@ -132,6 +132,13 @@
 
         &__tips {
             margin-top: 1em;
+
+            img {
+                border-radius: 0.4em;
+                aspect-ratio: 256 / 192;
+                object-fit: cover;
+                object-position: center;
+            }
         }
 
         &__recomended {

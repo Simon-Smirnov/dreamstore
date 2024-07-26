@@ -26,6 +26,12 @@
                     color: var(--color-6-dark);
                 }
             }
+
+            img {
+                aspect-ratio: 256 / 194;
+                object-fit: cover;
+                object-position: center;
+            }
         }
     }
 }

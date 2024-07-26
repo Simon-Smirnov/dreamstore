@@ -1,4 +1,7 @@
 export default class FooterList {
+
+    is_catalog = false;
+
     constructor(selectorBtnOpen, selectorBtnClose, selectorMenu) {
         this.btnOpen = document.querySelector(selectorBtnOpen);
         this.btnClose = document.querySelector(selectorBtnClose);
@@ -26,9 +29,18 @@ export default class FooterList {
             this.catalogBtnFooterOpen.addEventListener('click', (e) => {
                 this.openMenu();
                 this.openCatalog();
+                this.is_catalog = true;
             });
             this.catalogBtnClose.addEventListener('click', (e) => {
                 this.catalog.classList.remove('active');
+                if (this.is_catalog) {
+                    this.menu.classList.remove('active');
+                    this.menu.style.top = '';
+                    this.btnOpen.style.display = 'block';
+                    this.btnClose.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    this.is_catalog = false;
+                }
             });
             this.menu.addEventListener('click', (e) => {
                 const target = e.target;

@@ -40,6 +40,9 @@
             width: 100%;
             min-width: 5em;
             border-radius: 0.4em;
+            aspect-ratio: 80 / 60;
+            object-fit: cover;
+            object-position: center;
         }
 
         &__name {

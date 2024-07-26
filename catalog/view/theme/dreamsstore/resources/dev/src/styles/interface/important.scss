@@ -1,0 +1,21 @@
+.styles-important {
+    * {
+        color: var(--color-4-dark) !important;
+        font-size: 1.1rem !important;
+        font-family: var(--font-main) !important;
+        font-weight: 500 !important;
+        line-height: 1.4 !important;
+    }
+
+    h3 {
+        font-size: 1.6rem !important;
+    }
+
+    h4 {
+        font-size: 1.4rem !important;
+    }
+
+    h5 {
+        font-size: 1.2rem !important;
+    }
+}

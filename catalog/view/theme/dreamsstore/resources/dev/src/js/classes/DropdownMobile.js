@@ -5,7 +5,8 @@ export default class DropdownMobile {
     constructor(selector) {
         document.addEventListener('click', e => {
             const target = e.target;
-            if (StaticFunctions.checkTarget(target, selector)) {
+            const width = window.innerWidth;
+            if (width <= 600 && StaticFunctions.checkTarget(target, selector)) {
                 const btnOpen = StaticFunctions.checkTarget(target, selector);
                 const parent = btnOpen.closest('[data-dropdown-mobile]');
                 if (parent) {

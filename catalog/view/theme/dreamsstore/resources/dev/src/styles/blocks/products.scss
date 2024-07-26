@@ -18,6 +18,7 @@
             aspect-ratio: 392 / 295;
             object-fit: cover;
             object-position: center;
+            //max-width: 20em;
         }
     }
 
@@ -62,6 +63,7 @@
             color: var(--color-6-dark);
             text-decoration: line-through;
             text-decoration-thickness: 0.2px;
+            font-size: 1rem;
         }
 
         .price-percent {
@@ -145,4 +147,12 @@
     color: var(--color-9);
     padding: 0.2em 0.5em;
     border-radius: 0.3em;
+}
+
+.category_main {
+    .products_grid-block {
+        img {
+            max-width: 20em;
+        }
+    }
 }
