@@ -1,5 +1,5 @@
 <?php
-$_['text_title']                                = 'Служба доставки Boxberry';
+$_['text_title']                                = 'Пункты выдачи Боксберри';//Служба доставки Boxberry
 $_['text_courier_delivery_description']         = 'Boxberry - Курьерская доставка';
 $_['text_courier_delivery_prepaid_description'] = 'Boxberry - Курьерская доставка (без н. платежа)';
 $_['text_pickup_description']                   = 'Boxberry - До пункта выдачи';

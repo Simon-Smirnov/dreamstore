@@ -3,6 +3,7 @@ import Alert from "./Alert.js";
 import StaticFunctions from "./StaticFunctions.js";
 import Dadata from "./Dadata.js";
 import Sdek from "./Sdek.js";
+import Boxberry from "./Boxberry.js";
 
 export default class {
 
@@ -19,7 +20,10 @@ export default class {
                     this.updateViewCheckOut(body);
                 }
                 if (e.target.hasAttribute('[data-shipping-type-input]') || e.target.closest('[data-shipping-type-input]')) {
-                    body.append('shipping_method', e.target.value)
+                    body.append('shipping_method', e.target.value);
+                    document.querySelectorAll('[data-checkout-input]').forEach(input => {
+                        body.append(input.dataset.checkoutInput, input.value);
+                    });
                     this.updateViewCheckOut(body);
                 }
                 if (e.target.hasAttribute('[data-bonuses-switch]') || e.target.closest('[data-bonuses-switch]')) {
@@ -159,16 +163,16 @@ export default class {
                 if (this.container && !this.container.contains(target)) {
                     this.container.remove();
                 }
-                if (target.hasAttribute('[data-shipping-type-sdek]') || target.closest('[data-shipping-type-sdek]')) {
-                    this.sdek = document.querySelector([data - sdek - info]);
-                    if (this.sdek) {
-                        this.tariff = this.sdek.dataset.sdekInfoCode;
-                        this.tariff_type = this.sdek.dataset.sdekInfoPvztype;
-                        if (this.tariff && this.tariff_type) {
-                            Sdek.cdekPvzClick(this.tariff, this.tariff_type);
-                        }
-                    }
-                }
+                // if (target.hasAttribute('[data-shipping-type-sdek]') || target.closest('[data-shipping-type-sdek]')) {
+                //     this.sdek = document.querySelector('[data-sdek-info]');
+                //     if (this.sdek) {
+                //         this.tariff = this.sdek.dataset.sdekInfoCode;
+                //         this.tariff_type = this.sdek.dataset.sdekInfoPvztype;
+                //         if (this.tariff && this.tariff_type) {
+                //             Sdek.cdekPvzClick(this.tariff, this.tariff_type);
+                //         }
+                //     }
+                // }
             })
             this.checkout.addEventListener('focusout', (e) => {
                 const target = e.target;
@@ -341,12 +345,13 @@ export default class {
             let data = await result.text();
             let parser = new DOMParser();
             let doc = parser.parseFromString(data, 'text/html');
-            let items = doc.querySelectorAll('.checkout-content');
-            let cartUl = document.querySelector('.checkout-inner');
-            cartUl.innerHTML = '';  // Очистим текущие элементы
-            items.forEach(item => {
-                cartUl.appendChild(item);
-            });
+            let base = document.querySelector('.checkout-content');
+            let content = doc.querySelector('.checkout-inner');
+            base.innerHTML = '';
+            base.append(content);
+            Sdek.init();
+            Boxberry.init();
+
             resolve(data);
         })
     }

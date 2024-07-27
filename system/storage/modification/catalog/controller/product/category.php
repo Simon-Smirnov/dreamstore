@@ -196,8 +196,8 @@ class ControllerProductCategory extends Controller
 
             $filter_data = array(
 
-                'filter_sub_category' => true,
-
+			'filter_sub_category' => true,
+			
                 'filter_category_id' => $category_id,
                 'filter_sub_category' => true,
                 'filter_filter' => [],
@@ -208,7 +208,8 @@ class ControllerProductCategory extends Controller
                 'limit' => $limit
             );
 
-            $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            //$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+            $product_total = $this->model_catalog_product->getTotalProductsByFilter($filter_data);
 
             $data['product_cards'] = $this->load->controller('product/product_cards', $filter_data);
 

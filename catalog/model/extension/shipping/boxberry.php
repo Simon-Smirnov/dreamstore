@@ -20,6 +20,31 @@ class ModelExtensionShippingBoxberry extends Model
             ];
         }
 
+        $address1 = '';
+        if (isset($this->session->data['city'])) {
+            $address['city'] = $this->session->data['city'];
+
+            if (isset($this->session->data['street'])) {
+                $address1 .= $this->session->data['city'];
+                $address['address_1'] = $address1;
+
+                if (isset($this->session->data['house'])) {
+                    $address1 .= ', д. ' . $this->session->data['house'];
+                    $address['address_1'] = $address1;
+                }
+
+                if (isset($this->session->data['appartment'])) {
+                    $address1 .= ', кв. ' . $this->session->data['appartment'];
+                    $address['address_1'] = $address1;
+                }
+            }
+        }
+
+        //echo "<pre>";
+        //var_dump($address['city']);
+        //var_dump($address['address_1']);
+        //echo "</pre>";
+
         $quoteData = [];
         $methodData = [];
         if ($this->config->get('shipping_boxberry_status')) {
@@ -75,6 +100,22 @@ class ModelExtensionShippingBoxberry extends Model
             }
         }
 
+        //echo "<pre>";
+        //var_dump($quoteData);
+        //echo "</pre>";
+        //
+        //$current_courier_cost = 0;
+        //$add_courier = false;
+        //if (isset($this->session->data['courier_cost'])) {
+        //    $current_courier_cost = (float)$this->session->data['courier_cost'];
+        //}
+        //
+        //if (isset($quoteData['courier_delivery_prepaid'])) {
+        //    if ((float)$quoteData['courier_delivery_prepaid']['cost'] < $current_courier_cost) {
+        //        $add_courier = true;
+        //    }
+        //}
+
         if ($quoteData) {
             $methodData = [
                 'code' => 'boxberry',
@@ -83,7 +124,18 @@ class ModelExtensionShippingBoxberry extends Model
                 'sort_order' => $this->config->get('shipping_boxberry_sort_order'),
                 'error' => false,
             ];
+
+            //if ($add_courier) {
+            //    $this->session->data['courier_method'] = [
+            //        'code' => $quoteData['courier_delivery_prepaid']['code'],
+            //        'title' => 'Курьерская доставка',
+            //        'quote' => $quoteData['courier_delivery_prepaid']['text'],
+            //        'sort_order' => '2',
+            //        'error' => false,
+            //    ];
+            //}
         }
+
 
         return $methodData;
     }
@@ -153,23 +205,25 @@ class ModelExtensionShippingBoxberry extends Model
                                          data-boxberry-length="' . $dimensions['depth'] . '"
                                          data-ordersum="' . $this->currency->convert($this->cart->getTotal(), $this->config->get('config_currency'), 'RUB') . '"
                                          data-class="boxberryDeliverySelf' . ($prepaid === '1' ? 'Prepaid' : '') . '"
-                                         data-order-id="">' . ($sessionPoint ? 'Выбрать другой пункт выдачи' : 'Выбрать пункт выдачи на карте') . '</a>';
+                                         data-order-id=""></a>';
                 if ($sessionPoint && ($point = $this->getIssuePointById($sessionPoint, $prepaid))) {
-                    $htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block" style="margin: 9px;">
-                                              <b><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-name">' . $point['CityName'] . '</span></b>
-                                              <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-addr-short">
-                                              <a href="https://boxberry.ru/find_an_office/' . $sessionPoint . '" target="_blank">' . $point['AddressReduce'] . '</a></span>
-                                              <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-phone">Телефон: ' . $point['Phone'] . ', </span>
-                                              <span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-work">часы работы: ' . $point['WorkShedule'] . '</span>
-                                              </div>';
+                    //$htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block" style="margin: 9px;">
+                    //                          <b><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-name">' . $point['CityName'] . '</span></b>
+                    //                          <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-addr-short">
+                    //                          <a href="https://boxberry.ru/find_an_office/' . $sessionPoint . '" target="_blank">' . $point['AddressReduce'] . '</a></span>
+                    //                          <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-phone">Телефон: ' . $point['Phone'] . ', </span>
+                    //                          <span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-work">часы работы: ' . $point['WorkShedule'] . '</span>
+                    //                          </div>';
+                    $htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block"></div>';
                 } else {
-                    $htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block" style="display: none; margin: 9px;">
-                                              <b><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-name"></span></b>
-                                              <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-addr-short">
-                                              <a href="#" target="_blank"></a></span>
-                                              <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-phone"></span>
-                                              <span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-work"></span>
-                                              </div>';
+                    //$htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block" style="display: none; margin: 9px;">
+                    //                          <b><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-name"></span></b>
+                    //                          <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-addr-short">
+                    //                          <a href="#" target="_blank"></a></span>
+                    //                          <br><span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-phone"></span>
+                    //                          <span id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-work"></span>
+                    //                          </div>';
+                    $htmlBlock = '<div id="boxberry-issue_point' . ($prepaid === '1' ? '-prepaid' : '') . '-block"></div>';
                 }
 
                 return $this->getCostArray($deliveryType, $costData, $deliveryPeriodText, $htmlBlock, $htmlLink);

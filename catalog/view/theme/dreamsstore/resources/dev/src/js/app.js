@@ -46,6 +46,7 @@ import "./classes/Map.js";
 import "./classes/Contact.js";
 import "./classes/ProductsLayout.js";
 import "./classes/Sdek.js";
+import "./classes/Boxberry.js";
 import "./classes/Range.js";
 import "./classes/Filter.js";
 import "./classes/DropdownMobile.js";

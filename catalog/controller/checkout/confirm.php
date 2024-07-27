@@ -113,7 +113,7 @@ class ControllerCheckoutConfirm extends Controller
             $order_data['payment_street'] = $this->session->data['street'];
             $order_data['payment_house'] = $this->session->data['house'];
             $order_data['payment_appartment'] = $this->session->data['appartment'];
-            $order_data['payment_address_1'] = 'г. ' . $this->session->data['city'] . ', ул. ' . $this->session->data['street'] . ', д.' . $this->session->data['house'] . ', кв. ' . $this->session->data['appartment'];
+            $order_data['payment_address_1'] = $this->session->data['payment_address_1'] . 'г. ' . $this->session->data['city'] . ', ул. ' . $this->session->data['street'] . ', д.' . $this->session->data['house'] . ', кв. ' . $this->session->data['appartment'];
             $order_data['payment_zone'] = $this->session->data['zone'];
             $order_data['payment_zone_id'] = $this->session->data['zone_id'];
             $order_data['payment_country'] = 'Россия';

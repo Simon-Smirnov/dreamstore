@@ -155,14 +155,15 @@ class ControllerSaleBoxberry extends Controller
             $urlGetParams .= '&order=ASC';
         }
 
-        $data['sort_order_id']          = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=order_id' . $urlGetParams, true);
-        $data['sort_im_id']             = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=im_id' . $urlGetParams, true);
-        $data['sort_label']             = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=label' . $urlGetParams, true);
-        $data['sort_error']             = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=error' . $urlGetParams, true);
+        $data['sort_order_id'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=order_id' . $urlGetParams, true);
+        $data['sort_im_id'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=im_id' . $urlGetParams, true);
+        $data['sort_label'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=label' . $urlGetParams, true);
+        $data['sort_error'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=error' . $urlGetParams, true);
         $data['sort_boxberry_to_point'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=boxberry_to_point' . $urlGetParams, true);
-        $data['sort_address']           = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=address' . $urlGetParams, true);
+        $data['sort_address'] = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . '&sort=address' . $urlGetParams, true);
 
         $urlPaginationParam = '';
+
 
         if (isset($this->request->get['sort'])) {
             $urlPaginationParam .= '&sort=' . $this->request->get['sort'];
@@ -181,7 +182,7 @@ class ControllerSaleBoxberry extends Controller
         $pagination->url = $this->url->link('sale/boxberry', $userTokenParam . '=' . $sessionToken . $urlPaginationParam . '&page={page}', true);
 
         $data['pagination'] = $pagination->render();
-        $data['results'] = sprintf($this->language->get('text_pagination'),($total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($total - $this->config->get('config_limit_admin'))) ? $total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $total, ceil($total / $this->config->get('config_limit_admin')));
+        $data['results'] = sprintf($this->language->get('text_pagination'), ($total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($total - $this->config->get('config_limit_admin'))) ? $total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $total, ceil($total / $this->config->get('config_limit_admin')));
         $data['filter_order_id'] = $filterOrderId;
         $data['sort'] = $sort;
         $data['order'] = $order;

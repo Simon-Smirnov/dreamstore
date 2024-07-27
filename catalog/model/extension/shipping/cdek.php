@@ -26,6 +26,7 @@ class ModelExtensionShippingCdek extends Model
 
     function getQuote($address)
     {
+
         if ($address == '') {
             $address = [
                 'city' => 'Москва',
@@ -52,7 +53,26 @@ class ModelExtensionShippingCdek extends Model
             $address['address_1'] = '';
         }
 
+        $address1 = '';
+        if (isset($this->session->data['city'])) {
+            $address['city'] = $this->session->data['city'];
 
+            if (isset($this->session->data['street'])) {
+                $address1 .= $this->session->data['city'];
+                $address['address_1'] = $address1;
+
+                if (isset($this->session->data['house'])) {
+                    $address1 .= ', д. ' . $this->session->data['house'];
+                    $address['address_1'] = $address1;
+                }
+
+                if (isset($this->session->data['appartment'])) {
+                    $address1 .= ', кв. ' . $this->session->data['appartment'];
+                    $address['address_1'] = $address1;
+                }
+            }
+        }
+        
         $this->load->language('extension/shipping/cdek');
 
         $quote_data = array();

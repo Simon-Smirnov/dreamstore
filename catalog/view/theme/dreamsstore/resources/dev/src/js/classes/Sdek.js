@@ -4,7 +4,8 @@ export default class Sdek {
         this.sdek = document.querySelector(selector);
         this.pickuppoint = document.querySelector('[data-checkout-pickuppoint]');
         this.sdekInput = document.querySelector('[data-sdek-need]');
-        if (this.sdek && this.pickuppoint) {
+        this.btnChoose = document.querySelector('[data-shipping-type-sdek]');
+        if (this.btnChoose && this.btnChoose.checked && this.sdek && this.pickuppoint) {
             this.tariff = this.sdek.dataset.sdekInfoCode;
             this.tariff_type = this.sdek.dataset.sdekInfoPvztype;
             if (this.tariff && this.tariff_type) {
@@ -17,8 +18,6 @@ export default class Sdek {
         this.getPvzList(tariff_type).then(data => {
             if (data.status) {
                 this.pvzlist = data.data;
-                console.log(this.pvzlist[0].Code);
-                console.log(this.pvzlist[0].Code);
                 this.selectPvz(this.pvzlist[0].Code);
                 this.selected_tariff = tariff;
                 cdekymap.ready(() => {
@@ -76,18 +75,23 @@ export default class Sdek {
                     iconLayout: 'default#imageWithContent',
                 }
             }, {
-                iconLayout: 'default#imageWithContent',
-                iconImageHref: window.assets + '/assets/images/icons/point.svg',
-                iconImageSize: [20, 20],
-                iconOffset: [0, -40],
+                // iconLayout: 'default#imageWithContent',
+                // iconImageHref: window.assets + '/assets/images/icons/point.svg',
+                // iconImageSize: [20, 20],
+                // iconOffset: [0, -40],
                 preset: 'islands#blueIcon',
                 draggable: false,
             });
             this.iname = this.iname + 1;
             myGeoObject.events.add('click', () => {
                 this.selectPvz(item.Code);
-                console.log(this.pvzlist[i].Address);
+                document.querySelector('[data-checkout-address]').value = ' ';
                 this.pickuppoint.value = this.pvzlist[i].Address;
+                let newEvent = new Event('change', {
+                    bubbles: true,
+                    cancelable: false
+                });
+                this.btnChoose.dispatchEvent(newEvent);
             })
             this.clusterer.add(myGeoObject);
             this.myMap.geoObjects.add(this.clusterer);
@@ -187,9 +191,9 @@ export default class Sdek {
         }
     }
 
-    static init(selector) {
-        new Sdek(selector);
+    static init() {
+        new Sdek('[data-sdek-info]');
     }
 }
 
-Sdek.init('[data-sdek-info]');
+Sdek.init();

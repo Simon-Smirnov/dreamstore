@@ -6,7 +6,7 @@ class ControllerCheckoutCheckout extends Controller
     {
 
         //echo "<pre>";
-        //var_dump($this->session->data['phone']);
+        //var_dump($this->session->data);
         //echo "</pre>";
 
         // Validate cart has products and has stock.
@@ -100,6 +100,11 @@ class ControllerCheckoutCheckout extends Controller
             $data['fields']['zone_id'] = $this->session->data['zone_id'];
         } else {
             $data['fields']['zone_id'] = '';
+        }
+        if (isset($this->session->data['payment_address_1'])) {
+            $data['fields']['payment_address_1'] = $this->session->data['payment_address_1'];
+        } else {
+            $data['fields']['payment_address_1'] = '';
         }
         if (isset($this->session->data['city'])) {
             $data['fields']['city'] = $this->session->data['city'];
@@ -795,7 +800,11 @@ class ControllerCheckoutCheckout extends Controller
             if (isset($this->request->post['shipping_method'])) {
                 $this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$this->request->post['shipping_method']];
                 $this->session->data['shipping_type'] = $this->request->post['shipping_method'];
-                //$this->session->data['shipping_method']['cost'] = $this->session->data['payment_methods'][$this->session->data['shipping_type']][$this->request->post['shipping_method']];
+
+                $first = reset($this->session->data['shipping_method']['quote']);
+
+                $this->session->data['shipping_method']['cost'] = $first['cost'];
+                $this->session->data['shipping_method']['code'] = $first['code'];
             }
             if (isset($this->request->post['phone'])) {
                 $this->session->data['phone'] = $this->request->post['phone'];
@@ -808,6 +817,9 @@ class ControllerCheckoutCheckout extends Controller
             }
             if (isset($this->request->post['zone_id'])) {
                 $this->session->data['zone_id'] = $this->request->post['zone_id'];
+            }
+            if (isset($this->request->post['payment_address_1'])) {
+                $this->session->data['payment_address_1'] = $this->request->post['payment_address_1'];
             }
             if (isset($this->request->post['city'])) {
                 $this->session->data['city'] = $this->request->post['city'];

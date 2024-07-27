@@ -1,6 +1,10 @@
 {{ header }}
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ns=cdekymap"
         type="text/javascript"></script>
+<script src="https://points.boxberry.de/js/boxberry.js"
+        type="text/javascript"></script>
+{# <script src="{{ assets }}/assets/BoxberryApi.js" #}
+{#        type="text/javascript"></script> #}
 <div id="checkout-checkout">
     <div class="container">
         <ul class="breadcrumb">
@@ -78,6 +82,10 @@
                                                data-checkout-dadata-input="zone_id">
                                         <input value="Москва" data-checkout-input="zone"
                                                data-checkout-dadata-input="zone">
+                                        <input value="{{ fields.payment_address_1 ? fields.payment_address_1 : '' }}"
+                                               data-checkout-input="payment_address_1"
+                                               data-checkout-address>
+
                                         {# Кировская область #}
                                         {#    </li> #}
                                         {# </ul> #}
@@ -103,6 +111,7 @@
                                                    value="{{ _shipping_method_key }}"
                                                    data-shipping-type-input
                                                    {% if _shipping_method_key == 'cdek' %}data-shipping-type-sdek{% endif %}
+                                                    {% if _shipping_method_key == 'boxberry' %}data-shipping-type-boxberry{% endif %}
                                                     {{ _shipping_method_key == shipping_type ? "checked" : "" }}>
                                             <div class="input-radio__outer">
                                                 <div class="input-radio__inner"></div>
@@ -114,6 +123,11 @@
                                             {% if _shipping_method_key == 'cdek' and _shipping_method.quote['tariff_368_MRG'] is defined %}
                                                 <div class="checkout-delivery__description">
                                                     {{ _shipping_method.quote['tariff_368_MRG'].description }}
+                                                </div>
+                                            {% endif %}
+                                            {% if _shipping_method_key == 'boxberry' and _shipping_method.quote['pickup_prepaid'] is defined %}
+                                                <div class="checkout-delivery__description">
+                                                    {{ _shipping_method.quote['pickup_prepaid'].boxberry_description }}
                                                 </div>
                                             {% endif %}
                                         </div>
@@ -136,18 +150,19 @@
                                     <div class="checkout-blocks__input input-block required">
                                         <input class="input-text" type="text" name="street"
                                                data-checkout-input="street" data-checkout-dadata-input="street"
+                                               data-checkout-pickuppoint
                                                value="{{ fields.street ? fields.street : '' }}"
                                                placeholder="Улица">
                                         <label>Улица</label>
                                     </div>
-                                    <div class="checkout-blocks__input input-block required">
-                                        <input class="input-text" type="text" name="street"
-                                               data-checkout-input="pickuppoint" data-checkout-pickuppoint
-                                               data-checkout-dadata-input="pickuppoint"
-                                               value="{{ fields.pickuppoint ? fields.pickuppoint : '' }}"
-                                               placeholder="Пункт Получения">
-                                        <label>Пункт Получения</label>
-                                    </div>
+                                    {# <div class="checkout-blocks__input input-block required"> #}
+                                    {#    <input class="input-text" type="text" name="street" #}
+                                    {#           data-checkout-input="pickuppoint" data-checkout-pickuppoint #}
+                                    {#           data-checkout-dadata-input="pickuppoint" #}
+                                    {#           value="{{ fields.pickuppoint ? fields.pickuppoint : '' }}" #}
+                                    {#           placeholder="Пункт Получения"> #}
+                                    {#    <label>Пункт Получения</label> #}
+                                    {# </div> #}
                                     <div id="cdek_map"></div>
                                     <div class="checkout-blocks__block">
                                         <div class="checkout-blocks__input input-block">

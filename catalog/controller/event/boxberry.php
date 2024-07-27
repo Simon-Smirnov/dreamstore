@@ -36,7 +36,8 @@ class ControllerEventBoxberry extends Controller
             $city = $orderInfo['shipping_city'];
             $index = $orderInfo['shipping_postcode'];
             $region = $orderInfo['shipping_zone'];
-            $address = $orderInfo['shipping_address_1'];
+            // $address = $orderInfo['shipping_address_1'];
+            $address = $orderInfo['payment_address_1'];
             $email = $orderInfo['email'];
             $phone = $orderInfo['telephone'];
             $receiver = $orderInfo['lastname'] . ' ' . $orderInfo['firstname'];
@@ -87,7 +88,7 @@ class ControllerEventBoxberry extends Controller
                 if ($boxberryDelivery) {
                     $parsel->setTrack($boxberryDelivery['im_id']);
                 }
-                $parsel->setOrderId($orderInfo['order_id']);
+                $parsel->setOrderId('32132' . $orderInfo['order_id']);
 
                 $parsel->setPrice($orderInfo['total']);
                 $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . $orderId . "' ORDER BY sort_order ASC");
