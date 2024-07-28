@@ -95,7 +95,33 @@ class ModelExtensionShippingBoxberry extends Model
                         continue;
                     }
 
+                    //echo "<pre>";
+                    //var_dump($deliveryType);
+                    //echo "</pre>";
+
                     $quoteData[$deliveryType] = $data;
+                }
+            }
+
+            if ($quoteData === []) {
+                $address = [
+                    'city' => 'Москва',
+                    'postcode' => '101000'
+                ];
+
+                foreach ($shippingMethods as $deliveryType => $configStatusName) {
+                    if ($this->config->get($configStatusName)) {
+                        $data = $this->getQuoteData($deliveryType, $address, $dimensions, $hideDeliveryDay);
+                        if ($data === []) {
+                            echo "<pre>";
+                            var_dump($data);
+                            echo "</pre>";
+
+                            continue;
+                        }
+
+                        $quoteData[$deliveryType] = $data;
+                    }
                 }
             }
         }
@@ -103,37 +129,42 @@ class ModelExtensionShippingBoxberry extends Model
         //echo "<pre>";
         //var_dump($quoteData);
         //echo "</pre>";
-        //
-        //$current_courier_cost = 0;
-        //$add_courier = false;
-        //if (isset($this->session->data['courier_cost'])) {
-        //    $current_courier_cost = (float)$this->session->data['courier_cost'];
-        //}
-        //
-        //if (isset($quoteData['courier_delivery_prepaid'])) {
-        //    if ((float)$quoteData['courier_delivery_prepaid']['cost'] < $current_courier_cost) {
-        //        $add_courier = true;
-        //    }
-        //}
+
+        $current_courier_cost = 0;
+        $add_courier = false;
+        if (isset($this->session->data['courier_cost'])) {
+            $current_courier_cost = (float)$this->session->data['courier_cost'];
+        }
+
+        if (isset($quoteData['courier_delivery_prepaid'])) {
+            if ($current_courier_cost === 0 || (float)$quoteData['courier_delivery_prepaid']['cost'] < $current_courier_cost) {
+                $add_courier = true;
+                $this->session->data['courier_cost'] = (float)$quoteData['courier_delivery_prepaid']['cost'];
+            }
+        }
 
         if ($quoteData) {
             $methodData = [
-                'code' => 'boxberry',
-                'title' => $this->language->get('text_title'),
+                'code' => $quoteData['pickup_prepaid']['code'],
+                'title' => $quoteData['pickup_prepaid']['title'],
                 'quote' => $quoteData,
                 'sort_order' => $this->config->get('shipping_boxberry_sort_order'),
+                'cost' => $quoteData['pickup_prepaid']['cost'],
+                'text' => $quoteData['pickup_prepaid']['text'],
                 'error' => false,
             ];
 
-            //if ($add_courier) {
-            //    $this->session->data['courier_method'] = [
-            //        'code' => $quoteData['courier_delivery_prepaid']['code'],
-            //        'title' => 'Курьерская доставка',
-            //        'quote' => $quoteData['courier_delivery_prepaid']['text'],
-            //        'sort_order' => '2',
-            //        'error' => false,
-            //    ];
-            //}
+            if ($add_courier) {
+                $this->session->data['courier_delivery'] = [
+                    'code' => $quoteData['courier_delivery_prepaid']['code'],
+                    'title' => 'Курьерская доставка',
+                    'quote' => 'Курьерская доставка Boxberry',
+                    'text' => $quoteData['courier_delivery_prepaid']['text'],
+                    'cost' => $quoteData['courier_delivery_prepaid']['cost'],
+                    'sort_order' => '2',
+                    'error' => false,
+                ];
+            }
         }
 
 

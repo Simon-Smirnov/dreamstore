@@ -11,10 +11,6 @@ class ModelExtensionTotalReward extends Model
                 $points = (int)$this->customer->getRewardPoints();
 
                 $products_sum = $this->cart->getSubTotal();
-                //echo "<pre>";
-                //var_dump($points);
-                //var_dump($products_sum);
-                //echo "</pre>";
                 $max_sum_for_discount = (int)$products_sum / 2;
 
                 $discount_total = $points;
@@ -23,15 +19,16 @@ class ModelExtensionTotalReward extends Model
                     $discount_total = $max_sum_for_discount;
                 }
 
-                $total['totals'][] = array(
-                    'code' => 'reward',
-                    'title' => "Списано бонусов",
-                    'value' => $discount_total,
-                    'sort_order' => $this->config->get('total_reward_sort_order')
-                );
+                if ($discount_total > 0) {
+                    $total['totals'][] = array(
+                        'code' => 'reward',
+                        'title' => "Списано бонусов",
+                        'value' => $discount_total,
+                        'sort_order' => $this->config->get('total_reward_sort_order')
+                    );
 
-                $total['total'] -= $discount_total;
-
+                    $total['total'] -= $discount_total;
+                }
 
                 //if ($this->session->data['reward'] <= $points) {
                 //    $discount_total = 0;

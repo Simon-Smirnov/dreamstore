@@ -74,7 +74,7 @@ export default class Boxberry {
                 .then(data => {
                     this.pickuppoint.value = addressSplit.slice(2);
                     document.querySelector('[data-checkout-address]').value = insertAddress;
-                    let newEvent = new Event('change', {
+                    let newEvent = new Event('custom_change', {
                         bubbles: true,
                         cancelable: false
                     });

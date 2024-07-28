@@ -33,8 +33,10 @@ class ControllerEventBoxberry extends Controller
             $orderId = (int)$args[0];
             $boxberryDelivery = $this->model_boxberry_delivery->getDelivery($orderInfo['order_id']);
 
-            $city = $orderInfo['shipping_city'];
-            $index = $orderInfo['shipping_postcode'];
+            //$city = $orderInfo['shipping_city'];
+            $city = $orderInfo['payment_city'];
+            // $index = $orderInfo['shipping_postcode'];
+            $index = $orderInfo['payment_postcode'];
             $region = $orderInfo['shipping_zone'];
             // $address = $orderInfo['shipping_address_1'];
             $address = $orderInfo['payment_address_1'];
@@ -208,7 +210,8 @@ class ControllerEventBoxberry extends Controller
     {
         try {
             $dadataSuggestions = $client->getDadataSuggestions();
-            $dadataSuggestions->setQuery($orderInfo['shipping_city'] . ' ' . $orderInfo['shipping_address_1']);
+            // $dadataSuggestions->setQuery($orderInfo['shipping_city'] . ' ' . $orderInfo['shipping_address_1']);
+            $dadataSuggestions->setQuery($orderInfo['payment_city'] . ' ' . $orderInfo['payment_address_1']);
             $dadataSuggestions->setLocations();
             $dadataSuggestions->fixCityName();
             $dadataRequestResult = $client->execute($dadataSuggestions);
@@ -219,7 +222,8 @@ class ControllerEventBoxberry extends Controller
 
         $this->load->model('boxberry/city');
 
-        if (!$cityInfo = $this->model_boxberry_city->getCityByName($orderInfo['shipping_city'], $orderInfo['shipping_zone'])) {
+        //if (!$cityInfo = $this->model_boxberry_city->getCityByName($orderInfo['shipping_city'], $orderInfo['shipping_zone'])) {
+        if (!$cityInfo = $this->model_boxberry_city->getCityByName($orderInfo['payment_city'], $orderInfo['payment_zone'])) {
             $this->error = 'Не удалось найти город в базе.';
             return;
         }

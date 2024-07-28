@@ -87,7 +87,7 @@ export default class Sdek {
                 this.selectPvz(item.Code);
                 document.querySelector('[data-checkout-address]').value = ' ';
                 this.pickuppoint.value = this.pvzlist[i].Address;
-                let newEvent = new Event('change', {
+                let newEvent = new Event('custom_change', {
                     bubbles: true,
                     cancelable: false
                 });

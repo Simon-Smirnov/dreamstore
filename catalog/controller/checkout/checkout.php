@@ -42,6 +42,16 @@ class ControllerCheckoutCheckout extends Controller
         $data['shipping_type'] = $this->session->data['shipping_type'];
 
         //echo "<pre>";
+        ////var_dump($data['shipping_methods']);
+        //var_dump($data['shipping_method']);
+        ////var_dump($this->session->data['courier_delivery']);
+        //echo "</pre>";
+
+        //if (isset($this->session->data['courier_delivery'])) {
+        //    $data['shipping_methods'][] = $this->session->data['courier_delivery'];
+        //}
+
+        //echo "<pre>";
         //var_dump($data['shipping_methods']);
         //echo "</pre>";
 
@@ -94,18 +104,24 @@ class ControllerCheckoutCheckout extends Controller
         if (isset($this->session->data['zone'])) {
             $data['fields']['zone'] = $this->session->data['zone'];
         } else {
-            $data['fields']['zone'] = '';
+            $data['fields']['zone'] = 'Москва';
         }
         if (isset($this->session->data['zone_id'])) {
             $data['fields']['zone_id'] = $this->session->data['zone_id'];
         } else {
-            $data['fields']['zone_id'] = '';
+            $data['fields']['zone_id'] = '2753';
         }
         if (isset($this->session->data['payment_address_1'])) {
             $data['fields']['payment_address_1'] = $this->session->data['payment_address_1'];
         } else {
             $data['fields']['payment_address_1'] = '';
         }
+        if (isset($this->session->data['payment_postcode'])) {
+            $data['fields']['payment_postcode'] = $this->session->data['payment_postcode'];
+        } else {
+            $data['fields']['payment_postcode'] = '101000';
+        }
+
         if (isset($this->session->data['city'])) {
             $data['fields']['city'] = $this->session->data['city'];
         } else {
@@ -206,10 +222,6 @@ class ControllerCheckoutCheckout extends Controller
 
                 $quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote('');
 
-                //echo "<pre>";
-                //var_dump($quote);
-                //echo "<pre>";
-
                 if (!isset($quote['cost'])) {
                     $quote['cost'] = 0;
                 }
@@ -221,10 +233,30 @@ class ControllerCheckoutCheckout extends Controller
                         'sort_order' => $quote['sort_order'],
                         'cost' => $quote['cost'],
                         'code' => $quote['code'],
+                        'text' => $quote['text'],
                         'error' => $quote['error']
                     );
                 }
             }
+        }
+
+        $this->load->model('extension/shipping/courier');
+        $quote = $this->{'model_extension_shipping_courier'}->getQuote('');
+
+        if (!isset($quote['cost'])) {
+            $quote['cost'] = 0;
+        }
+
+        if ($quote) {
+            $method_data['courier'] = array(
+                'title' => $quote['title'],
+                'quote' => $quote['quote'],
+                'sort_order' => $quote['sort_order'],
+                'cost' => $quote['cost'],
+                'code' => $quote['code'],
+                'text' => $quote['text'],
+                'error' => $quote['error']
+            );
         }
 
         $sort_order = array();
@@ -798,13 +830,19 @@ class ControllerCheckoutCheckout extends Controller
                 $this->session->data['payment_type'] = $this->request->post['payment_method'];
             }
             if (isset($this->request->post['shipping_method'])) {
-                $this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$this->request->post['shipping_method']];
-                $this->session->data['shipping_type'] = $this->request->post['shipping_method'];
+                if ($this->request->post['shipping_method'] == 'courier') {
+                    $this->session->data['shipping_method'] = $this->session->data['shipping_methods']['courier'];
+                    $this->session->data['shipping_method']['title'] = $this->session->data['shipping_methods']['courier']['quote'];
+                    $this->session->data['shipping_type'] = 'courier';
+                } else {
+                    $this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$this->request->post['shipping_method']];
+                    $this->session->data['shipping_type'] = $this->request->post['shipping_method'];
+                }
 
-                $first = reset($this->session->data['shipping_method']['quote']);
-
-                $this->session->data['shipping_method']['cost'] = $first['cost'];
-                $this->session->data['shipping_method']['code'] = $first['code'];
+                //$first = reset($this->session->data['shipping_method']['quote']);
+                //
+                //$this->session->data['shipping_method']['cost'] = $first['cost'];
+                //$this->session->data['shipping_method']['code'] = $first['code'];
             }
             if (isset($this->request->post['phone'])) {
                 $this->session->data['phone'] = $this->request->post['phone'];
@@ -820,6 +858,9 @@ class ControllerCheckoutCheckout extends Controller
             }
             if (isset($this->request->post['payment_address_1'])) {
                 $this->session->data['payment_address_1'] = $this->request->post['payment_address_1'];
+            }
+            if (isset($this->request->post['payment_postcode'])) {
+                $this->session->data['payment_postcode'] = $this->request->post['payment_postcode'];
             }
             if (isset($this->request->post['city'])) {
                 $this->session->data['city'] = $this->request->post['city'];
@@ -841,6 +882,8 @@ class ControllerCheckoutCheckout extends Controller
             }
             if (isset($this->request->post['agree'])) {
                 $this->session->data['agree'] = $this->request->post['agree'];
+            } else {
+                unset($this->session->data['agree']);
             }
             if (isset($this->request->post['coupon'])) {
                 $this->session->data['coupon'] = $this->request->post['coupon'];

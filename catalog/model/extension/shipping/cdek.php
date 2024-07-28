@@ -24,55 +24,56 @@ class ModelExtensionShippingCdek extends Model
         $this->api = new cdek_integrator($api_account, $api_secure);
     }
 
-    function getQuote($address)
+    function getQuote($address, $recursion = false)
     {
+        if (!$recursion) {
+            if ($address == '') {
+                $address = [
+                    'city' => 'Москва',
+                    'postcode' => '101000'
+                ];
+            }
 
-        if ($address == '') {
-            $address = [
-                'city' => 'Москва',
-                'postcode' => '115201'
-            ];
-        }
+            if (!isset($address['zone_id'])) {
+                $address['zone_id'] = '';
+            }
+            if (!isset($address['country_id'])) {
+                $address['country_id'] = '';
+            }
+            if (!isset($address['city'])) {
+                $address['city'] = '';
+            }
+            if (!isset($address['zone'])) {
+                $address['zone'] = '';
+            }
+            if (!isset($address['postcode'])) {
+                $address['postcode'] = '';
+            }
+            if (!isset($address['address_1'])) {
+                $address['address_1'] = '';
+            }
 
-        if (!isset($address['zone_id'])) {
-            $address['zone_id'] = '';
-        }
-        if (!isset($address['country_id'])) {
-            $address['country_id'] = '';
-        }
-        if (!isset($address['city'])) {
-            $address['city'] = '';
-        }
-        if (!isset($address['zone'])) {
-            $address['zone'] = '';
-        }
-        if (!isset($address['postcode'])) {
-            $address['postcode'] = '';
-        }
-        if (!isset($address['address_1'])) {
-            $address['address_1'] = '';
-        }
+            $address1 = '';
+            if (isset($this->session->data['city'])) {
+                $address['city'] = $this->session->data['city'];
 
-        $address1 = '';
-        if (isset($this->session->data['city'])) {
-            $address['city'] = $this->session->data['city'];
-
-            if (isset($this->session->data['street'])) {
-                $address1 .= $this->session->data['city'];
-                $address['address_1'] = $address1;
-
-                if (isset($this->session->data['house'])) {
-                    $address1 .= ', д. ' . $this->session->data['house'];
+                if (isset($this->session->data['street'])) {
+                    $address1 .= $this->session->data['city'];
                     $address['address_1'] = $address1;
-                }
 
-                if (isset($this->session->data['appartment'])) {
-                    $address1 .= ', кв. ' . $this->session->data['appartment'];
-                    $address['address_1'] = $address1;
+                    if (isset($this->session->data['house'])) {
+                        $address1 .= ', д. ' . $this->session->data['house'];
+                        $address['address_1'] = $address1;
+                    }
+
+                    if (isset($this->session->data['appartment'])) {
+                        $address1 .= ', кв. ' . $this->session->data['appartment'];
+                        $address['address_1'] = $address1;
+                    }
                 }
             }
         }
-        
+
         $this->load->language('extension/shipping/cdek');
 
         $quote_data = array();
@@ -924,6 +925,28 @@ class ModelExtensionShippingCdek extends Model
             );
         }
 
+        $current_courier_cost = 0;
+        $add_courier = false;
+        if (isset($this->session->data['courier_cost'])) {
+            $current_courier_cost = (float)$this->session->data['courier_cost'];
+        }
+
+        //if ($quote_data && isset($quote_data['tariff_137_0'])) {
+        //    if ($current_courier_cost === 0 || (float)$quote_data['tariff_137_0']['cost'] <= $current_courier_cost) {
+        //        $add_courier = true;
+        //        $this->session->data['courier_cost'] = (float)$quote_data['tariff_137_0']['cost'];
+        //    }
+        //}
+
+        if ($quote_data === [] && !$recursion) {
+            $address = [
+                'city' => 'Москва',
+                'postcode' => '101000'
+            ];
+
+            return $this->getQuote($address, $recursion = true);
+        }
+
         if ($quote_data) {
 
             $title_info = $this->config->get('shipping_cdek_title');
@@ -934,13 +957,29 @@ class ModelExtensionShippingCdek extends Model
                 $title = $this->language->get('text_title');
             }
 
-            $method_data = array(
-                'code' => 'cdek',
-                'title' => $title,
+            $method_data = [
+                'code' => $quote_data['tariff_368_MRG']['code'],
+                'title' => $quote_data['tariff_368_MRG']['title'],
                 'quote' => $quote_data,
-                'sort_order' => (int)$this->config->get('shipping_cdek_sort_order'),
-                'error' => false
-            );
+                'sort_order' => $this->config->get('shipping_cdek_sort_order'),
+                'cost' => $quote_data['tariff_368_MRG']['cost'],
+                'text' => $quote_data['tariff_368_MRG']['text'],
+                'error' => false,
+            ];
+
+            if ($add_courier) {
+
+                $this->session->data['courier_delivery'] = [
+                    'code' => $quote_data['tariff_137_0']['code'],
+                    'title' => 'Курьерская доставка',
+                    'quote' => 'Курьерская доставка СДЭК',
+                    'text' => $quote_data['tariff_137_0']['text'],
+                    'cost' => $quote_data['tariff_137_0']['cost'],
+                    'sort_order' => '2',
+                    'error' => false,
+                ];
+            }
+
         }
 
         return $method_data;

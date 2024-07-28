@@ -93,6 +93,10 @@
             }
         }
 
+        &__block.close {
+            display: none;
+        }
+
         &__input--comment {
             margin-top: 0.8em;
 
@@ -156,6 +160,27 @@
 
         .input-radio + .input-radio {
             margin-top: 0.7em;
+        }
+
+        .input-radio {
+            align-items: start;
+
+            input {
+                flex-shrink: 0;
+            }
+        }
+
+        label {
+            span {
+                margin-top: 0.3em;
+                font-size: 1rem;
+                color: var(--color-6-dark);
+                display: block;
+
+                i {
+                    font-style: normal;
+                }
+            }
         }
     }
 
@@ -347,6 +372,12 @@
         height: 100%;
         padding: 0.5em;
     }
+}
+
+#cdek_map.collapse {
+    margin-top: 0;
+    height: 0;
+    width: 0;
 }
 
 .checkoutConfirm {

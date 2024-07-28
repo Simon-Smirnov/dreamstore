@@ -42,6 +42,7 @@ class ControllerCheckoutSuccess extends Controller
         $data['email'] = $order_data['email'];
         $data['payment_method'] = $order_data['payment_method'];
         $data['shipping_method'] = $order_data['shipping_method'];
+        $data['payment_address'] = $order_data['payment_address_1'];
         $data['weight'] = $order_data['weight'];
         $data['reward'] = $order_data['reward'];
         $data['total'] = $order_data['total'];

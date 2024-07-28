@@ -14,46 +14,28 @@ export default class {
         this.checkout = document.querySelector(selector);
         if (this.checkout) {
             this.checkout.addEventListener('change', (e) => {
-                const body = new FormData
-                if (e.target.hasAttribute('[data-payment-method-input]') || e.target.closest('[data-payment-method-input]')) {
-                    body.append('payment_method', e.target.value)
-                    this.updateViewCheckOut(body);
+                const target = e.target;
+                if (StaticFunctions.checkTarget(target, 'data-shipping-type-boxberry') || StaticFunctions.checkTarget(target, 'data-shipping-type-sdek')) {
+                    document.querySelector('[data-checkout-pickuppoint]').value = '';
                 }
-                if (e.target.hasAttribute('[data-shipping-type-input]') || e.target.closest('[data-shipping-type-input]')) {
-                    body.append('shipping_method', e.target.value);
-                    document.querySelectorAll('[data-checkout-input]').forEach(input => {
-                        body.append(input.dataset.checkoutInput, input.value);
-                    });
-                    this.updateViewCheckOut(body);
+                if (StaticFunctions.checkTarget(target, 'data-payment-method-input') || StaticFunctions.checkTarget(target, 'data-shipping-type-input') || StaticFunctions.checkTarget(target, 'data-bonuses-switch') || StaticFunctions.checkTarget(target, 'data-checkout-agree')) {
+                    this.updateViewCheckOut(this.aggregateAllValues());
                 }
-                if (e.target.hasAttribute('[data-bonuses-switch]') || e.target.closest('[data-bonuses-switch]')) {
-                    if (e.target.checked) {
-                        body.append('bonuses', e.target.value);
-                    } else {
-                        body.append('bonuses', '');
-                    }
-                    this.updateViewCheckOut(body);
-                }
-                if (e.target.hasAttribute('[data-checkout-agree]') || e.target.closest('[data-checkout-agree]')) {
-                    if (e.target.checked) {
-                        body.append(e.target.dataset.checkoutAgree, '1');
-                    } else {
-                        body.append(e.target.dataset.checkoutAgree, '');
-                    }
-                    this.updateViewCheckOut(body);
-                }
+            });
+            this.checkout.addEventListener('custom_change', () => {
+                this.updateViewCheckOut(this.aggregateAllValues());
             });
             this.checkout.addEventListener('click', (e) => {
                 const target = e.target;
-                if (target.hasAttribute('[data-product-remove]') || target.closest('[data-product-remove]')) {
-                    const btn = target.closest('[data-product-remove]');
+                if (StaticFunctions.checkTarget(target, 'data-product-remove')) {
+                    const btn = StaticFunctions.checkTarget(target, 'data-product-remove');
                     if (btn) {
                         this.cartId = btn.dataset.productRemove;
                         CartAsyncMethods.remove(this.cartId).then(r => {
                             if (r.success) {
                                 this.updateViewMiniCart();
                                 Alert.add(r.success);
-                                this.updateViewCheckOut();
+                                this.updateViewCheckOut(this.aggregateAllValues());
                                 CartAsyncMethods.getQuantityCart().then(r => {
                                     this.updateQuantityIconMiniCart(r.quantity);
                                 })
@@ -61,43 +43,24 @@ export default class {
                         });
                     }
                 }
-                if (target.hasAttribute('[data-checkout-confirm]') || target.closest('[data-checkout-confirm]')) {
-
-                    const inputs = document.querySelectorAll('[data-checkout-input]');
-                    const agree = document.querySelector('[data-checkout-agree]');
-                    const body = new FormData;
-                    inputs.forEach(input => {
-                        body.append(input.dataset.checkoutInput, input.value);
-                    });
-                    if (agree.checked) {
-                        body.append(agree.dataset.checkoutAgree, '1');
-                    }
-                    this.updateViewCheckOut(body).then(data => {
-                        this.validate(body).then(r => {
+                if (StaticFunctions.checkTarget(target, 'data-checkout-confirm')) {
+                    this.updateViewCheckOut(this.aggregateAllValues()).then(data => {
+                        this.validate(this.aggregateAllValues()).then(r => {
                             if (r) {
-                                console.log(r);
                                 let parser = new DOMParser();
                                 let doc = parser.parseFromString(r, 'text/html');
                                 let item = doc.querySelector('.checkout-content');
                                 let cartUl = document.querySelector('.checkout-inner');
                                 cartUl.innerHTML = '';
                                 cartUl.appendChild(item);
-                                // const body = new FormData;
-                                // this.updateViewCheckOut(body);
                             } else {
                                 fetch('index.php?route=checkout/confirm', {
                                     method: 'POST',
-                                    body: body
+                                    body: this.aggregateAllValues(),
                                 })
                                     .then(response => response.json())
                                     .then(data => {
                                         if (data.success) {
-                                            // let parser = new DOMParser();
-                                            // let doc = parser.parseFromString(data, 'text/html');
-                                            // let item = doc.querySelector('.checkoutConfirm');
-                                            // let cartUl = document.querySelector('.checkout-content');
-                                            // cartUl.innerHTML = '';
-                                            // cartUl.appendChild(item);
                                             let baseUrl = document.location.protocol + '//' + document.location.hostname + '/';
                                             const newUrl = new URL(baseUrl + 'index.php?route=checkout/success');
                                             window.location.href = newUrl.toString();
@@ -125,41 +88,46 @@ export default class {
                     // }
                     // });
                 }
-                if (target.hasAttribute('[data-checkout-cart-consist-btn]') || target.closest('[data-checkout-cart-consist-btn]')) {
-                    const target = e.target.closest('[data-checkout-cart-consist-btn]');
+                if (StaticFunctions.checkTarget(target, 'data-checkout-cart-consist-btn')) {
+                    const target = StaticFunctions.checkTarget(target, 'data-checkout-cart-consist-btn');
                     const parent = target.closest('[data-checkout-cart-consist]');
                     if (parent) {
                         parent.classList.toggle('active');
                     }
                 }
-                // if (target.hasAttribute('[data-dadata-key]') || target.closest('[data-dadata-key]')) {
-                //     const element = target.closest('[data-dadata-key]');
-                //     const key = element.dataset.dadataKey;
-                //     if (this.dadataResponse[key]) {
-                //         this.address = this.dadataResponse[key].data;
-                //         console.log(this.address);
-                //         this.checkout.querySelectorAll('[data-checkout-dadata-input]').forEach(input => {
-                //             const inputType = input.dataset.checkoutDadataInput;
-                //             if (inputType == 'zone_id' || inputType == 'zone') {
-                //                 const zone = this.getOpencartRegion(this.address['region_iso_code']);
-                //                 if (zone) {
-                //                     if (inputType == 'zone_id') {
-                //                         input.value = zone.id;
-                //                     } else if (inputType == 'zone') {
-                //                         input.value = zone.name;
-                //                     }
-                //                 }
-                //             } else {
-                //                 if (this.address[inputType] && this.address[inputType] != null) {
-                //                     input.value = this.address[inputType];
-                //                 } else {
-                //                     input.value = '';
-                //                 }
-                //             }
-                //         });
-                //         this.container.remove();
-                //     }
-                // }
+                if (StaticFunctions.checkTarget(target, 'data-dadata-key')) {
+                    const element = StaticFunctions.checkTarget(target, 'data-dadata-key');
+                    const key = element.dataset.dadataKey;
+                    if (this.dadataResponse[key]) {
+                        this.address = this.dadataResponse[key].data;
+                        console.log(this.address);
+                        this.checkout.querySelectorAll('[data-checkout-dadata-input]').forEach(input => {
+                            const inputType = input.dataset.checkoutDadataInput;
+                            if (inputType == 'zone_id' || inputType == 'zone') {
+                                const zone = this.getOpencartRegion(this.address['region_iso_code']);
+                                if (zone) {
+                                    if (inputType == 'zone_id') {
+                                        input.value = zone.id;
+                                    } else if (inputType == 'zone') {
+                                        input.value = zone.name;
+                                    }
+                                }
+                            } else {
+                                if (this.address[inputType] && this.address[inputType] != null) {
+                                    input.value = this.address[inputType];
+                                } else {
+                                    input.value = '';
+                                }
+                            }
+                        });
+                        this.container.remove();
+                        let newEvent = new Event('focusout', {
+                            bubbles: true,
+                            cancelable: false
+                        });
+                        document.querySelector('[data-checkout-pickuppoint]').dispatchEvent(newEvent);
+                    }
+                }
                 if (this.container && !this.container.contains(target)) {
                     this.container.remove();
                 }
@@ -179,14 +147,8 @@ export default class {
                 if (target.hasAttribute('data-checkout-input')) {
                     let focusOutTimeout;
                     focusOutTimeout = setTimeout(() => {
-                        const inputs = document.querySelectorAll('[data-checkout-input]');
-                        const body = new FormData;
-                        inputs.forEach(input => {
-                            body.append(input.dataset.checkoutInput, input.value);
-                        });
-                        // body.append(target.dataset.checkoutInput, target.value);
-                        this.updateViewCheckOut(body);
-                    }, 200);
+                        this.updateViewCheckOut(this.aggregateAllValues());
+                    }, 1000);
 
                     this.checkout.addEventListener('focusin', () => {
                         clearTimeout(focusOutTimeout);
@@ -208,110 +170,123 @@ export default class {
                 const target = e.target;
                 if (StaticFunctions.checkTarget(target, 'data-checkout-input')) {
                     const input = StaticFunctions.checkTarget(target, 'data-checkout-input');
-                    // if (input.dataset.checkoutInput) {
-                    //     const inputs = document.querySelectorAll('[data-checkout-dadata-input]');
-                    //     let dataInput = {
-                    //         'country': 'Россия',
-                    //         'city': '',
-                    //         'street': '',
-                    //         // 'house': '',
-                    //         // 'flat': '',
-                    //     };
-                    //     inputs.forEach(input => {
-                    //         const inputType = input.dataset.checkoutDadataInput.trim();
-                    //         if (dataInput.hasOwnProperty(inputType)) {
-                    //             dataInput[inputType] = input.value;
-                    //         }
-                    //     });
-                    //     let values = Object.values(dataInput);
-                    //     let filteredValues = values.filter(value => value !== '');
-                    //     let queryString = filteredValues.join(', ');
-                    //     let data = {
-                    //         query: queryString
-                    //     }
-                    //     const parentElement = input.parentElement;
-                    //     Dadata.getData(data).then(r => {
-                    //         this.dadataResponse = r.suggestions;
-                    //         let restrictResponse = this.dadataResponse.slice(0, 5);
-                    //         this.createSelectElement(restrictResponse, parentElement);
-                    //     })
-                    //
-                    //     // if (input.dataset.checkoutInput == 'city') {
-                    //     //     let data = {
-                    //     //         query: input.value
-                    //     //     }
-                    //     //
-                    //     //     const parentElement = input.parentElement;
-                    //     //     Dadata.getData(data).then(r => {
-                    //     //         this.dadataResponse = r.suggestions;
-                    //     //         let restrictResponse = this.dadataResponse.slice(0, 5);
-                    //     //         this.createSelectElement(restrictResponse, parentElement);
-                    //     //     })
-                    //     //     this.dadataResponse = [
-                    //     //         {
-                    //     //             data: {
-                    //     //                 postal_code: "610000",
-                    //     //                 region_iso_code: "RU-KIR",
-                    //     //                 city: "Киров",
-                    //     //                 street: "Примерная",
-                    //     //                 house: "1",
-                    //     //                 flat: "2"
-                    //     //             },
-                    //     //             unrestricted_value: "Кировская обл",
-                    //     //         },
-                    //     //         {
-                    //     //             data: {
-                    //     //                 postal_code: "650000",
-                    //     //                 region_iso_code: "RU-ARK",
-                    //     //                 city: "Москва",
-                    //     //                 street: "Топорная",
-                    //     //                 house: "2",
-                    //     //                 flat: null
-                    //     //             },
-                    //     //             unrestricted_value: "610000, Кировская обл, г Киров",
-                    //     //         },
-                    //     //         {
-                    //     //             data: {
-                    //     //                 postal_code: "810000",
-                    //     //                 region_iso_code: "RU-IVA",
-                    //     //                 city: "Вологда",
-                    //     //                 street: "Заборная",
-                    //     //                 house: null,
-                    //     //                 flat: null
-                    //     //             },
-                    //     //             unrestricted_value: "613040, Кировская обл, г Кирово-Чепецк",
-                    //     //         },
-                    //     //         {
-                    //     //             data: {
-                    //     //                 postal_code: "970000",
-                    //     //                 region_iso_code: "RU-KIR",
-                    //     //                 city: "Пермь",
-                    //     //                 street: null,
-                    //     //                 house: null,
-                    //     //                 flat: null
-                    //     //             },
-                    //     //             unrestricted_value: "187350, Ленинградская обл, Кировский р-н | 187350, Ленинградская обл, Кировский р-н",
-                    //     //         },
-                    //     //         {
-                    //     //             data: {
-                    //     //                 postal_code: "320000",
-                    //     //                 region_iso_code: "RU-KIR",
-                    //     //                 city: null,
-                    //     //                 street: null,
-                    //     //                 house: null,
-                    //     //                 flat: null
-                    //     //             },
-                    //     //             unrestricted_value: "Ставропольский край, Кировский р-н",
-                    //     //         },
-                    //     //         {
-                    //     //             unrestricted_value: "Луганская Народная респ, г Кировск",
-                    //     //         },
-                    //     //     ];
-                    //     //     let restrictResponse = this.dadataResponse.slice(0, 5);
-                    //     //     this.createSelectElement(restrictResponse, parentElement);
-                    // }
+                    if (input.dataset.checkoutInput && (input.dataset.checkoutInput == 'city' || input.dataset.checkoutInput == 'street')) {
+                        const inputs = document.querySelectorAll('[data-checkout-dadata-input]');
+                        let dataInput = {};
+                        if (input.dataset.checkoutInput == 'city') {
+                            dataInput = {
+                                'country': 'Россия',
+                                'city': '',
+                                // 'street': '',
+                                // 'house': '',
+                                // 'flat': '',
+                            };
+                        } else if (input.dataset.checkoutInput == 'street') {
+                            dataInput = {
+                                'country': 'Россия',
+                                'city': '',
+                                'street': '',
+                                // 'house': '',
+                                // 'flat': '',
+                            };
+                        }
+                        inputs.forEach(input => {
+                            const inputType = input.dataset.checkoutDadataInput.trim();
+                            if (dataInput.hasOwnProperty(inputType)) {
+                                dataInput[inputType] = input.value;
+                            }
+                        });
+                        let values = Object.values(dataInput);
+                        let filteredValues = values.filter(value => value !== '');
+                        let queryString = filteredValues.join(', ');
+                        let data = {
+                            query: queryString
+                        }
+                        console.log(data);
+                        const parentElement = input.parentElement;
+                        Dadata.getData(data).then(r => {
+                            this.dadataResponse = r.suggestions;
+                            let restrictResponse = this.dadataResponse.slice(0, 5);
+                            this.createSelectElement(restrictResponse, parentElement);
+                        })
+
+                        // if (input.dataset.checkoutInput == 'city') {
+                        //     let data = {
+                        //         query: input.value
+                        //     }
+                        //
+                        //     const parentElement = input.parentElement;
+                        //     Dadata.getData(data).then(r => {
+                        //         this.dadataResponse = r.suggestions;
+                        //         let restrictResponse = this.dadataResponse.slice(0, 5);
+                        //         this.createSelectElement(restrictResponse, parentElement);
+                        //     })
+                        //     this.dadataResponse = [
+                        //         {
+                        //             data: {
+                        //                 postal_code: "610000",
+                        //                 region_iso_code: "RU-KIR",
+                        //                 city: "Киров",
+                        //                 street: "Примерная",
+                        //                 house: "1",
+                        //                 flat: "2"
+                        //             },
+                        //             unrestricted_value: "Кировская обл",
+                        //         },
+                        //         {
+                        //             data: {
+                        //                 postal_code: "650000",
+                        //                 region_iso_code: "RU-ARK",
+                        //                 city: "Москва",
+                        //                 street: "Топорная",
+                        //                 house: "2",
+                        //                 flat: null
+                        //             },
+                        //             unrestricted_value: "610000, Кировская обл, г Киров",
+                        //         },
+                        //         {
+                        //             data: {
+                        //                 postal_code: "810000",
+                        //                 region_iso_code: "RU-IVA",
+                        //                 city: "Вологда",
+                        //                 street: "Заборная",
+                        //                 house: null,
+                        //                 flat: null
+                        //             },
+                        //             unrestricted_value: "613040, Кировская обл, г Кирово-Чепецк",
+                        //         },
+                        //         {
+                        //             data: {
+                        //                 postal_code: "970000",
+                        //                 region_iso_code: "RU-KIR",
+                        //                 city: "Пермь",
+                        //                 street: null,
+                        //                 house: null,
+                        //                 flat: null
+                        //             },
+                        //             unrestricted_value: "187350, Ленинградская обл, Кировский р-н | 187350, Ленинградская обл, Кировский р-н",
+                        //         },
+                        //         {
+                        //             data: {
+                        //                 postal_code: "320000",
+                        //                 region_iso_code: "RU-KIR",
+                        //                 city: null,
+                        //                 street: null,
+                        //                 house: null,
+                        //                 flat: null
+                        //             },
+                        //             unrestricted_value: "Ставропольский край, Кировский р-н",
+                        //         },
+                        //         {
+                        //             unrestricted_value: "Луганская Народная респ, г Кировск",
+                        //         },
+                        //     ];
+                        //     let restrictResponse = this.dadataResponse.slice(0, 5);
+                        //     this.createSelectElement(restrictResponse, parentElement);
+                    }
                 }
             });
+            this.changeFieldsDeliveris();
         }
     }
 
@@ -351,7 +326,7 @@ export default class {
             base.append(content);
             Sdek.init();
             Boxberry.init();
-
+            this.changeFieldsDeliveris();
             resolve(data);
         })
     }
@@ -493,5 +468,55 @@ export default class {
         };
 
         return regions.hasOwnProperty(isoCode) ? regions[isoCode] : false;
+    }
+
+    changeFieldsDeliveris() {
+        this.methodCourier = this.checkout.querySelector('[data-shipping-type-courier]');
+        this.map = this.checkout.querySelector('#cdek_map');
+        this.inputsHouseAndAppartment = this.checkout.querySelector('[data-checkout-inputs-block]');
+        this.address = this.checkout.querySelector('[data-checkout-pickuppoint]');
+        if (this.methodCourier && this.methodCourier.checked) {
+            if (this.map) {
+                this.map.classList.add('collapse');
+            }
+            if (this.inputsHouseAndAppartment) {
+                this.inputsHouseAndAppartment.classList.remove('close');
+            }
+            if (this.address) {
+                this.address.placeholder = "Улица";
+                this.address.removeAttribute('disabled');
+                if (this.checkout.querySelector('[data-checkout-pickuppoint-label]')) {
+                    this.checkout.querySelector('[data-checkout-pickuppoint-label]').textContent = "Улица";
+                }
+            }
+        }
+    }
+
+    aggregateAllValues() {
+        let body = new FormData;
+        document.querySelectorAll('[data-checkout-input]').forEach(input => {
+            body.append(input.dataset.checkoutInput, input.value);
+        });
+        document.querySelectorAll('[data-payment-method-input]').forEach(input => {
+            if (input.checked) {
+                body.append('payment_method', input.value);
+            }
+        });
+        document.querySelectorAll('[data-shipping-type-input]').forEach(input => {
+            if (input.checked) {
+                body.append('shipping_method', input.value);
+            }
+        });
+        let bonuses = document.querySelector('[data-bonuses-switch]');
+        if (bonuses && bonuses.checked) {
+            body.append('bonuses', bonuses.value);
+        }
+        let agree = document.querySelector('[data-checkout-agree]');
+        console.log('agreee 0');
+        if (agree && agree.checked) {
+            console.log('agreee 1');
+            body.append('agree', '1');
+        }
+        return body;
     }
 }

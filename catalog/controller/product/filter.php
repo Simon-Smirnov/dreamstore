@@ -15,6 +15,8 @@ class ControllerProductFilter extends Controller
         'density' => [17],
     ];
 
+    private $colors_list = [];
+
     public function filter($category_id)
     {
         $data = [];
@@ -56,6 +58,32 @@ class ControllerProductFilter extends Controller
                         foreach ($parts as $part) {
                             if (!empty($part)) {
                                 $filter_options[$key][] = $part;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        # Фильтры по цветам
+        $this->load->model('catalog/color');
+        $results = $this->model_catalog_color->getColors();
+        foreach ($results as $result) {
+            $this->colors_list[] = $result['color_id'];
+        }
+
+        $filter_colors = [];
+
+        if (isset($this->request->get['filter_colors'])) {
+            foreach ($this->request->get['filter_colors'] as $key => $value) {
+                foreach ($this->color_list as $color_item) {
+                    if (in_array($key, $color_item)) {
+                        $parts = explode('|', $value);
+
+                        foreach ($parts as $part) {
+                            if (!empty($part)) {
+                                $filter_colors[$key][] = $part;
                             }
                         }
                         break;

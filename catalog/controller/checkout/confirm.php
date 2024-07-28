@@ -99,7 +99,7 @@ class ControllerCheckoutConfirm extends Controller
                 $order_data['customer_group_id'] = $customer_info['customer_group_id'];
                 $order_data['firstname'] = $customer_info['firstname'];
                 $order_data['email'] = $customer_info['email'];
-                $order_data['telephone'] = $customer_info['telephone'];
+                //$order_data['telephone'] = $customer_info['telephone'];
             } elseif (isset($this->session->data)) {
                 $order_data['customer_id'] = 0;
                 $order_data['customer_group_id'] = 1;
@@ -108,16 +108,31 @@ class ControllerCheckoutConfirm extends Controller
                 $order_data['telephone'] = $this->session->data['phone'];
             }
 
+            $order_data['telephone'] = $this->session->data['phone'];
             $order_data['payment_firstname'] = $this->session->data['name'];
             $order_data['payment_city'] = $this->session->data['city'];
             $order_data['payment_street'] = $this->session->data['street'];
             $order_data['payment_house'] = $this->session->data['house'];
             $order_data['payment_appartment'] = $this->session->data['appartment'];
-            $order_data['payment_address_1'] = $this->session->data['payment_address_1'] . 'г. ' . $this->session->data['city'] . ', ул. ' . $this->session->data['street'] . ', д.' . $this->session->data['house'] . ', кв. ' . $this->session->data['appartment'];
+            $full_address = $this->session->data['payment_address_1'];
+            if ($this->session->data['city'] != "") {
+                $full_address .= 'г. ' . $this->session->data['city'];
+            }
+            if ($this->session->data['street'] != "") {
+                $full_address .= ', ул. ' . $this->session->data['street'];
+            }
+            if ($this->session->data['house'] != "") {
+                $full_address .= ', д.' . $this->session->data['house'];
+            }
+            if ($this->session->data['appartment'] != "") {
+                $full_address .= ', кв. ' . $this->session->data['appartment'];
+            }
+            $order_data['payment_address_1'] = $full_address;
             $order_data['payment_zone'] = $this->session->data['zone'];
             $order_data['payment_zone_id'] = $this->session->data['zone_id'];
             $order_data['payment_country'] = 'Россия';
             $order_data['payment_country_id'] = '176';
+            $order_data['payment_postcode'] = $this->session->data['payment_postcode'];
 
             if (isset($this->session->data['payment_method']['title'])) {
                 $order_data['payment_method'] = $this->session->data['payment_method']['title'];
